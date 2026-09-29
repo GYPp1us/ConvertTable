@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "CAC",
+    "BXB",
+    "CSC"
+  ],
+  "key": {
+    "C": "minecraft:calcite",
+    "A": "minecraft:amethyst_block",
+    "B": "minecraft:budding_amethyst",
+    "X": "minecraft:end_crystal",
+    "S": "minecraft:smooth_basalt"
+  },
+  "result": {
+    "id": "convert_table:crystal_table",
+    "count": 1
+  }
+}

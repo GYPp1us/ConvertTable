@@ -1,0 +1,30 @@
+# Normalize text files to LF in the repository.
+* text=auto eol=lf
+
+# Windows scripts keep CRLF.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Binary assets must never be line-ending converted or diffed as text.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.gif binary
+*.ico binary
+*.jar binary
+*.zip binary
+*.7z binary
+*.blend binary
+*.blend1 binary
+*.bbmodel binary
+*.xlsx binary
+*.nbt binary
+*.dat binary
+*.bin binary
+
+# Keep generated/derived files out of diffs and language stats.
+*.log linguist-generated
+outputs/** linguist-generated
+assets/**/renders/** linguist-generated

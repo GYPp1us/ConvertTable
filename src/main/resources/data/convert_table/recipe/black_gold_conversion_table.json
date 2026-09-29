@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "GTG",
+    "BAB",
+    "BCB"
+  ],
+  "key": {
+    "G": "minecraft:gold_ingot",
+    "T": "minecraft:snout_armor_trim_smithing_template",
+    "B": "minecraft:polished_blackstone",
+    "A": "minecraft:amethyst_shard",
+    "C": "minecraft:chiseled_polished_blackstone"
+  },
+  "result": {
+    "id": "convert_table:black_gold_conversion_table",
+    "count": 1
+  }
+}

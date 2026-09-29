@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "DKD",
+    "SCS",
+    "DED"
+  ],
+  "key": {
+    "D": "minecraft:polished_deepslate",
+    "K": "minecraft:sculk_shrieker",
+    "S": "minecraft:sculk",
+    "C": "minecraft:sculk_catalyst",
+    "E": "minecraft:echo_shard"
+  },
+  "result": {
+    "id": "convert_table:sculk_conversion_table",
+    "count": 1
+  }
+}

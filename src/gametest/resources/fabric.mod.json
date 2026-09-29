@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "id": "convert_table_test",
+  "version": "1.0.0",
+  "name": "Conversion Table client tests",
+  "environment": "client",
+  "mixins": ["convert_table_test.mixins.json"],
+  "entrypoints": {
+    "fabric-client-gametest": ["com.example.converttable.ConversionTableClientGameTest"]
+  }
+}

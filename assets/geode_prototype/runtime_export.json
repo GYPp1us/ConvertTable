@@ -1,0 +1,7 @@
+{
+  "block_model": "convert_table:block/crystal_table",
+  "materials": 16,
+  "surface_quads": 558,
+  "runtime_quads": 648,
+  "voxel_count": 2323
+}

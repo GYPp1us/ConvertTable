@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "convert_table:black_gold_conversion_table",
+    "convert_table:end_conversion_table",
+    "convert_table:sculk_conversion_table",
+    "convert_table:crystal_table",
+    "convert_table:catalyst_pedestal"
+  ]
+}

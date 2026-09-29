@@ -1,0 +1,8 @@
+TBBmalloc: skip allocation functions replacement in ucrtbase.dll: unknown prologue for function _msize
+Blender 3.2.1 (hash a2d59b2dac9e built 2022-07-06 07:45:50)
+Info: Total files 72 | Changed 72 | Failed 0
+Info: Saved "mother_rock_geode_16px.blend"
+Info: Saved "mother_rock_geode_16px.blend"
+GEODE_BUILD_OK {"voxel_count": 2601, "editable_cuboids": 831, "pixel_bounds": {"min": [0, 0, 0], "max": [16, 16, 16]}, "material_voxels": {"basalt": 149, "calcite": 1273, "calcite_light": 365, "calcite_shadow": 190, "basalt_light": 20, "basalt_dark": 15, "lining": 412, "lining_light": 64, "vein": 24, "bud_silver": 19, "bud_lilac": 55, "bud_pink": 15}, "named_groups": ["01_basalt_foundation", "02_calcite_lower_shell", "03_basalt_corner_spines", "04_geode_inner_lining", "05_calcite_wall_mass", "06_recessed_side_panels", "07_crystal_seams", "08_calcite_panel_frames", "09_calcite_crown_rim", "10_calcite_corner_shoulders", "11_corner_crystal_buds", "12_geode_growth_core"]}
+
+Blender quit

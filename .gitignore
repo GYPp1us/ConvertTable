@@ -1,0 +1,37 @@
+# Gradle
+.gradle/
+build/
+out/
+
+# Minecraft development runtime
+run/
+
+# IDEs
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.vscode/
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+*.swp
+
+# Local secrets/configuration
+.env
+*.local
+
+# Asset authoring Python cache
+__pycache__/
+*.pyc
+
+# Node (planning/UI tooling)
+node_modules/
+
+# Local run logs
+logs/
+
+# Agent/tooling scratch
+.codex-remote-attachments/

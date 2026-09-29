@@ -1,0 +1,162 @@
+plugins {
+	id 'net.fabricmc.fabric-loom' version "${loom_version}"
+	id 'maven-publish'
+}
+
+group = project.group
+version = project.version
+
+base {
+	archivesName = 'convert-table'
+}
+
+loom {
+	splitEnvironmentSourceSets()
+
+	mods {
+		"convert_table" {
+			sourceSet sourceSets.main
+			sourceSet sourceSets.client
+		}
+	}
+}
+
+repositories {
+	// Loom already adds the repositories required for Minecraft and Fabric.
+	// Add another repository here only when a third-party dependency requires it.
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+}
+
+fabricApi {
+	configureTests {
+		createSourceSet = true
+		modId = 'convert_table_test'
+		enableGameTests = false
+		enableClientGameTests = true
+	}
+}
+
+// Optional local renderer compatibility profile. Never bundles third-party mods.
+if (providers.gradleProperty('compatInstance').isPresent()) {
+	def instance = file(providers.gradleProperty('compatInstance').get())
+	def compatMods = file(providers.gradleProperty('compatMods').getOrElse(new File(instance, 'mods').path))
+	dependencies {
+		gametestRuntimeOnly fileTree(dir: compatMods, include: '*.jar',
+			exclude: ['convert-table-*.jar', 'fabric-api-*.jar'])
+	}
+	tasks.named('runClientGameTest') {
+		doFirst {
+			copy { from new File(instance, 'config'); into layout.buildDirectory.dir('run/clientGameTest/config') }
+            if (providers.gradleProperty('uiTest').isPresent()) {
+                def recipes = layout.buildDirectory.file('run/clientGameTest/config/convert_table/recipes.json').get().asFile
+                recipes.parentFile.mkdirs()
+                recipes.setText(file('src/main/resources/convert_table/default_recipes.json').getText('UTF-8'),'UTF-8')
+            }
+			copy { from new File(instance, 'shaderpacks'); include '*.zip', '*.zip.txt'; into layout.buildDirectory.dir('run/clientGameTest/shaderpacks') }
+		}
+	}
+}
+
+loom.runs.clientGameTest { vmArg '-Djava.awt.headless=true' }
+if (providers.gradleProperty('testBackend').isPresent()) {
+	loom.runs.clientGameTest { vmArg '-Dconvert_table.testBackend=' + providers.gradleProperty('testBackend').get() }
+	tasks.named('runClientGameTest') {
+		doFirst {
+			def backend = providers.gradleProperty('testBackend').get()
+			if (!(backend in ['opengl', 'vulkan'])) throw new GradleException('testBackend must be opengl or vulkan')
+			def options = layout.buildDirectory.file('run/clientGameTest/options.txt').get().asFile
+			options.parentFile.mkdirs()
+			options.text = 'preferredGraphicsBackend:"' + backend + '"\n'
+		}
+	}
+}
+
+// Reuse a launcher's complete asset cache without changing it or downloading again.
+if (providers.gradleProperty('testAssets').isPresent()) {
+	loom.runs.clientGameTest {
+		programArgs '--assetsDir', file(providers.gradleProperty('testAssets').get()).absolutePath,
+			'--assetIndex', providers.gradleProperty('testAssetIndex').getOrElse('32')
+	}
+}
+
+processResources {
+	def modVersion = project.version
+	inputs.property "version", modVersion
+
+	filesMatching("fabric.mod.json") {
+		expand "version": modVersion
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	options.release = 25
+	options.encoding = 'UTF-8'
+}
+
+java {
+	withSourcesJar()
+	sourceCompatibility = JavaVersion.VERSION_25
+	targetCompatibility = JavaVersion.VERSION_25
+}
+
+jar {
+	inputs.property "archivesName", project.base.archivesName
+
+	from("README.md") {
+		rename { "${it}_convert-table" }
+	}
+}
+
+publishing {
+	publications {
+		create("mavenJava", MavenPublication) {
+			from components.java
+		}
+	}
+
+	// Add a publishing repository here when you are ready to publish artifacts.
+	// Do not commit credentials; use Gradle properties or environment variables.
+}
+
+// Validate the exported JSON with Minecraft's parser, rather than JSON syntax alone.
+tasks.register('compileAssetModelCheck', JavaCompile) {
+	dependsOn 'clientClasses'
+	source = fileTree('assets/tools/java') { include '*.java' }
+	classpath = sourceSets.client.compileClasspath + sourceSets.client.output
+	destinationDirectory = layout.buildDirectory.dir('asset-model-check')
+}
+
+tasks.register('verifyAssetModels', JavaExec) {
+	dependsOn 'compileAssetModelCheck', 'clientClasses'
+	classpath = files(layout.buildDirectory.dir('asset-model-check')) + sourceSets.client.compileClasspath + sourceSets.client.output
+	mainClass = 'AssetModelCheck'
+	workingDir = projectDir
+}
+
+tasks.named('check') { dependsOn 'verifyAssetModels' }
+
+if (providers.gradleProperty('uiTest').isPresent()) { loom.runs.clientGameTest { vmArg '-Dconvert_table.uiTest=true' } }
+if (providers.gradleProperty('growthTest').isPresent()) { loom.runs.clientGameTest { vmArg '-Dconvert_table.growthTest=true' } }
+
+// Optional viewer APIs. Neither viewer is bundled or required at runtime.
+repositories { maven { url = 'https://api.modrinth.com/maven'; content { includeGroup 'maven.modrinth' } } }
+dependencies {
+    if (providers.gradleProperty('viewerDeps').isPresent()) {
+        clientCompileOnly fileTree(dir: providers.gradleProperty('viewerDeps').get(), include: '*.jar')
+        gametestCompileOnly fileTree(dir: providers.gradleProperty('viewerDeps').get(), include: '*.jar')
+    } else {
+        clientCompileOnly 'me.shedaniel.cloth:basic-math:0.6.1'
+        clientCompileOnly('maven.modrinth:architectury-api:1yQC4VvP') { transitive = false }
+        clientCompileOnly('maven.modrinth:jei:GSZT3dIm') { transitive = false }
+        clientCompileOnly('maven.modrinth:rei:4o0NSIMj') { transitive = false }
+    }
+}
+
+repositories { maven { url = 'https://maven.shedaniel.me'; content { includeGroup 'me.shedaniel.cloth' } } }
+
+configurations.gametestCompileOnly.extendsFrom(configurations.clientCompileOnly)

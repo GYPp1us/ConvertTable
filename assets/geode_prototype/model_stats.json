@@ -1,0 +1,102 @@
+{
+  "voxel_count": 2323,
+  "editable_cuboids": 191,
+  "pixel_bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "material_voxels": {
+    "geode_basalt_dark": 400,
+    "geode_calcite": 352,
+    "geode_calcite_light": 144,
+    "geode_calcite_shadow": 200,
+    "geode_basalt": 160,
+    "side_backing": 426,
+    "engraved_amethyst": 133,
+    "engraved_glint": 36,
+    "geode_lining": 320,
+    "geode_lining_light": 64,
+    "side_relief": 11,
+    "bud_lilac": 55,
+    "bud_pink": 15,
+    "bud_silver": 7
+  },
+  "named_groups": [
+    "01_basalt_corner_guards",
+    "01_basalt_foundation",
+    "02_calcite_lower_shell",
+    "03_black_wrapped_corner_pillars",
+    "04_geode_inner_lining",
+    "05_layer_3_mineral_backing",
+    "06_layer_3_stone_ground_pattern",
+    "07_layer_2_crystal_relief",
+    "08_layer_2_lower_rail",
+    "09_calcite_crown_rim",
+    "09_layer_2_crown_rim",
+    "10_black_corner_shoulders",
+    "11_corner_crystal_buds",
+    "12_geode_growth_core"
+  ],
+  "side_layers": {
+    "1_corner_guards": 0,
+    "2_horizontal_rails_and_crystal_relief": 1,
+    "3_mineral_backing_and_ground_pattern": 2
+  },
+  "carving_pattern": [
+    "........G...",
+    "...G...rgg..",
+    "..ggG..ggg..",
+    ".rggg..ggr..",
+    ".Ggg.....r..",
+    "..ggr.G.....",
+    "...g..gG...."
+  ],
+  "carving_patterns": [
+    [
+      "........G...",
+      "...G...rgg..",
+      "..ggG..ggg..",
+      ".rggg..ggr..",
+      ".Ggg.....r..",
+      "..ggr.G.....",
+      "...g..gG...."
+    ],
+    [
+      "..G.........",
+      "..gg....G...",
+      "..ggg..rgg..",
+      "...gg..ggG..",
+      ".G....ggg...",
+      ".gg...rg....",
+      "..gr........"
+    ],
+    [
+      ".....G......",
+      "..G..gg.....",
+      "..gg.ggG....",
+      "..ggg.gg....",
+      "...gr.....G.",
+      "........rgg.",
+      ".Gg......gr."
+    ],
+    [
+      ".G..........",
+      ".gg.....G...",
+      "..gg...ggg..",
+      "..r....Ggg..",
+      ".....G..gg..",
+      "...rgg......",
+      "....ggG....."
+    ]
+  ],
+  "wrapped_corner_pillars": true,
+  "crystal_projection_from_backing": 1
+}

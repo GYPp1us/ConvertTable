@@ -1,0 +1,395 @@
+TBBmalloc: skip allocation functions replacement in ucrtbase.dll: unknown prologue for function _msize
+Blender 3.2.1 (hash a2d59b2dac9e built 2022-07-06 07:45:50)
+Info: Total files 60 | Changed 60 | Failed 0
+Info: Saved "end_16x_refined.blend"
+Fra:1 Mem:12.36M (Peak 12.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | side_0_three_layers
+Fra:1 Mem:12.36M (Peak 12.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | side_foot_closure
+Fra:1 Mem:12.39M (Peak 12.39M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | base
+Fra:1 Mem:12.42M (Peak 12.42M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | corner_crystals
+Fra:1 Mem:12.48M (Peak 12.48M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Studio floor
+Fra:1 Mem:12.91M (Peak 12.93M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:11.35M (Peak 12.93M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:11.36M (Peak 12.93M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:11.36M (Peak 12.93M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:11.36M (Peak 12.93M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:11.87M (Peak 12.93M) | Time:00:00.09 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:11.87M (Peak 12.93M) | Time:00:00.09 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:11.87M (Peak 12.93M) | Time:00:00.09 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:11.87M (Peak 12.93M) | Time:00:00.09 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:11.87M (Peak 12.93M) | Time:00:00.09 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:11.87M (Peak 12.93M) | Time:00:00.09 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:11.87M (Peak 12.93M) | Time:00:00.09 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:11.87M (Peak 12.93M) | Time:00:00.09 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:11.87M (Peak 12.93M) | Time:00:00.09 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:11.87M (Peak 12.93M) | Time:00:00.09 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:11.91M (Peak 12.93M) | Time:00:00.09 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:12.16M (Peak 12.93M) | Time:00:00.09 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:12.16M (Peak 12.93M) | Time:00:00.09 | Mem:0.26M, Peak:0.26M | Scene, ViewLayer | Updating Geometry BVH crystal_collars 11/11 | Building BVH
+Fra:1 Mem:12.16M (Peak 12.93M) | Time:00:00.09 | Mem:0.26M, Peak:0.26M | Scene, ViewLayer | Updating Geometry BVH side_2_three_layers 3/11 | Building BVH
+Fra:1 Mem:12.16M (Peak 12.93M) | Time:00:00.09 | Mem:0.38M, Peak:0.38M | Scene, ViewLayer | Updating Geometry BVH side_2_three_layers 3/11 | Building BVH 0%
+Fra:1 Mem:12.16M (Peak 12.93M) | Time:00:00.09 | Mem:0.40M, Peak:0.40M | Scene, ViewLayer | Updating Geometry BVH side_2_three_layers 3/11 | Building BVH
+Fra:1 Mem:12.16M (Peak 12.93M) | Time:00:00.09 | Mem:0.46M, Peak:0.48M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:12.16M (Peak 12.93M) | Time:00:00.09 | Mem:0.46M, Peak:0.48M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:12.16M (Peak 12.93M) | Time:00:00.09 | Mem:0.46M, Peak:0.48M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:12.16M (Peak 12.93M) | Time:00:00.09 | Mem:0.46M, Peak:0.48M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:12.42M (Peak 12.93M) | Time:00:00.09 | Mem:0.46M, Peak:0.48M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:12.42M (Peak 12.93M) | Time:00:00.09 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:12.42M (Peak 12.93M) | Time:00:00.09 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:12.42M (Peak 12.93M) | Time:00:00.09 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:12.42M (Peak 12.93M) | Time:00:00.09 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading crystal.png
+Fra:1 Mem:12.42M (Peak 12.93M) | Time:00:00.09 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading purpur_emission.png
+Fra:1 Mem:12.44M (Peak 12.93M) | Time:00:00.10 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading obsidian_emission.png
+Fra:1 Mem:12.44M (Peak 12.93M) | Time:00:00.10 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading pool_emission.png
+Fra:1 Mem:12.44M (Peak 12.93M) | Time:00:00.10 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading top_frame_emission.png
+Fra:1 Mem:12.44M (Peak 12.93M) | Time:00:00.10 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading crystal_emission.png
+Fra:1 Mem:12.44M (Peak 12.93M) | Time:00:00.10 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_inset_front_emission.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.10 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_midframe_metal.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.10 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading end_stone_metal.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.10 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_inset_side_metal.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.10 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_purpur_guards_metal.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.10 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading obsidian_metal.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.10 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading pool_metal.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.10 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading crystal_metal.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.10 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading purpur_metal.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.10 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_inset_front_metal.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.11 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_midframe_sss.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.11 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_inset_side_sss.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.11 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading end_stone_sss.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.11 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_purpur_guards_sss.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.11 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading obsidian_sss.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.11 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading purpur_sss.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.11 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading crystal_sss.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.11 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading top_frame_sss.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.11 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading pool_sss.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.11 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_inset_front_sss.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.11 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading side_midframe_roughness.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.11 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading end_stone_roughness.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.11 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading side_inset_side_roughness.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.11 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading crystal_normal_preview.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.11 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading obsidian_roughness.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.11 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading purpur_roughness.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.12 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading top_frame_roughness.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.12 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading side_inset_front_roughness.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.12 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading pool_roughness.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.12 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading side_purpur_guards_roughness.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.12 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading crystal_roughness.png
+Fra:1 Mem:12.45M (Peak 12.93M) | Time:00:00.12 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading side_midframe_normal_preview.png
+Fra:1 Mem:12.46M (Peak 12.93M) | Time:00:00.12 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading side_inset_side_normal_preview.png
+Fra:1 Mem:12.46M (Peak 12.93M) | Time:00:00.12 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading end_stone_normal_preview.png
+Fra:1 Mem:12.46M (Peak 12.93M) | Time:00:00.12 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading obsidian_normal_preview.png
+Fra:1 Mem:12.46M (Peak 12.93M) | Time:00:00.12 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading purpur_normal_preview.png
+Fra:1 Mem:12.46M (Peak 12.93M) | Time:00:00.12 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading pool_normal_preview.png
+Fra:1 Mem:12.46M (Peak 12.93M) | Time:00:00.12 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading top_frame_normal_preview.png
+Fra:1 Mem:12.46M (Peak 12.93M) | Time:00:00.13 | Mem:0.75M, Peak:0.75M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:12.46M (Peak 12.93M) | Time:00:00.13 | Mem:0.75M, Peak:0.75M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:12.46M (Peak 12.93M) | Time:00:00.13 | Mem:1.00M, Peak:1.00M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:12.46M (Peak 12.93M) | Time:00:00.13 | Mem:1.00M, Peak:1.00M | Scene, ViewLayer | Updating Lights | Computing distribution
+Fra:1 Mem:12.50M (Peak 12.93M) | Time:00:00.13 | Mem:1.04M, Peak:1.04M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:12.51M (Peak 12.93M) | Time:00:00.13 | Mem:1.05M, Peak:1.05M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:12.51M (Peak 12.93M) | Time:00:00.13 | Mem:0.80M, Peak:1.05M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:12.51M (Peak 12.93M) | Time:00:00.13 | Mem:1.05M, Peak:1.05M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:12.51M (Peak 12.93M) | Time:00:00.13 | Mem:1.05M, Peak:1.05M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:12.52M (Peak 12.93M) | Time:00:00.13 | Mem:1.05M, Peak:1.05M | Scene, ViewLayer | Sample 0/48
+Fra:1 Mem:175.64M (Peak 175.64M) | Time:00:00.92 | Remaining:00:37.21 | Mem:164.14M, Peak:164.14M | Scene, ViewLayer | Sample 1/48
+Fra:1 Mem:175.64M (Peak 175.64M) | Time:00:25.14 | Remaining:00:11.36 | Mem:164.14M, Peak:164.14M | Scene, ViewLayer | Sample 33/48
+Fra:1 Mem:244.31M (Peak 347.30M) | Time:00:39.94 | Mem:164.14M, Peak:164.14M | Scene, ViewLayer | Sample 48/48
+Fra:1 Mem:244.31M (Peak 347.30M) | Time:00:39.94 | Mem:164.14M, Peak:164.14M | Scene, ViewLayer | Finished
+Saved: 'D:\Desktop\Document\Coding\FULL STACK\ConvertTable\assets\end_refinement\renders\end_hero.png'
+ Time: 00:40.65 (Saving: 00:00.71)
+
+Fra:1 Mem:12.61M (Peak 12.61M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | side_0_three_layers
+Fra:1 Mem:12.61M (Peak 12.61M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | side_foot_closure
+Fra:1 Mem:12.63M (Peak 12.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | cavity_floor
+Fra:1 Mem:12.64M (Peak 12.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | base
+Fra:1 Mem:12.68M (Peak 12.68M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | rotor
+Fra:1 Mem:12.70M (Peak 12.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | corner_crystals
+Fra:1 Mem:12.73M (Peak 12.73M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Studio floor
+Fra:1 Mem:12.77M (Peak 12.77M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | crystal_collars
+Fra:1 Mem:13.16M (Peak 13.19M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:11.60M (Peak 13.19M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:11.61M (Peak 13.19M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:11.61M (Peak 13.19M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:11.61M (Peak 13.19M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:11.87M (Peak 13.19M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:11.87M (Peak 13.19M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:11.87M (Peak 13.19M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:11.87M (Peak 13.19M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:11.87M (Peak 13.19M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:11.87M (Peak 13.19M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:11.87M (Peak 13.19M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:11.87M (Peak 13.19M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:11.87M (Peak 13.19M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:11.87M (Peak 13.19M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:11.91M (Peak 13.19M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:12.16M (Peak 13.19M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:12.16M (Peak 13.19M) | Time:00:00.04 | Mem:0.26M, Peak:0.26M | Scene, ViewLayer | Updating Geometry BVH crystal_collars 11/11 | Building BVH
+Fra:1 Mem:12.16M (Peak 13.19M) | Time:00:00.04 | Mem:0.26M, Peak:0.26M | Scene, ViewLayer | Updating Geometry BVH side_2_three_layers 3/11 | Building BVH
+Fra:1 Mem:12.16M (Peak 13.19M) | Time:00:00.04 | Mem:0.27M, Peak:0.27M | Scene, ViewLayer | Updating Geometry BVH side_0_three_layers 1/11 | Building BVH
+Fra:1 Mem:12.16M (Peak 13.19M) | Time:00:00.04 | Mem:0.31M, Peak:0.31M | Scene, ViewLayer | Updating Geometry BVH side_0_three_layers 1/11 | Building BVH 0%
+Fra:1 Mem:12.16M (Peak 13.19M) | Time:00:00.04 | Mem:0.31M, Peak:0.31M | Scene, ViewLayer | Updating Geometry BVH side_0_three_layers 1/11 | Building BVH
+Fra:1 Mem:12.16M (Peak 13.19M) | Time:00:00.04 | Mem:0.46M, Peak:0.48M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:12.16M (Peak 13.19M) | Time:00:00.04 | Mem:0.46M, Peak:0.48M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:12.16M (Peak 13.19M) | Time:00:00.04 | Mem:0.46M, Peak:0.48M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:12.16M (Peak 13.19M) | Time:00:00.04 | Mem:0.46M, Peak:0.48M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:12.42M (Peak 13.19M) | Time:00:00.04 | Mem:0.46M, Peak:0.48M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:12.42M (Peak 13.19M) | Time:00:00.04 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:12.42M (Peak 13.19M) | Time:00:00.04 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:12.42M (Peak 13.19M) | Time:00:00.04 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:12.42M (Peak 13.19M) | Time:00:00.04 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading crystal.png
+Fra:1 Mem:12.42M (Peak 13.19M) | Time:00:00.04 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading end_stone.png
+Fra:1 Mem:12.42M (Peak 13.19M) | Time:00:00.04 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading side_inset_side_emission.png
+Fra:1 Mem:12.42M (Peak 13.19M) | Time:00:00.04 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading side_purpur_guards_emission.png
+Fra:1 Mem:12.44M (Peak 13.19M) | Time:00:00.05 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading purpur_emission.png
+Fra:1 Mem:12.44M (Peak 13.19M) | Time:00:00.05 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading end_stone_emission.png
+Fra:1 Mem:12.44M (Peak 13.19M) | Time:00:00.05 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading top_frame_normal_preview.png
+Fra:1 Mem:12.45M (Peak 13.19M) | Time:00:00.05 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading pool_emission.png
+Fra:1 Mem:12.45M (Peak 13.19M) | Time:00:00.05 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading crystal_emission.png
+Fra:1 Mem:12.45M (Peak 13.19M) | Time:00:00.05 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading top_frame_emission.png
+Fra:1 Mem:12.45M (Peak 13.19M) | Time:00:00.05 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_midframe_metal.png
+Fra:1 Mem:12.45M (Peak 13.19M) | Time:00:00.05 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_inset_front_metal.png
+Fra:1 Mem:12.45M (Peak 13.19M) | Time:00:00.05 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading obsidian_metal.png
+Fra:1 Mem:12.45M (Peak 13.19M) | Time:00:00.05 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_inset_side_metal.png
+Fra:1 Mem:12.45M (Peak 13.19M) | Time:00:00.05 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_purpur_guards_metal.png
+Fra:1 Mem:12.45M (Peak 13.19M) | Time:00:00.05 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading end_stone_metal.png
+Fra:1 Mem:12.45M (Peak 13.19M) | Time:00:00.05 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading purpur_metal.png
+Fra:1 Mem:12.45M (Peak 13.19M) | Time:00:00.05 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading top_frame_metal.png
+Fra:1 Mem:12.45M (Peak 13.19M) | Time:00:00.05 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading pool_metal.png
+Fra:1 Mem:12.45M (Peak 13.19M) | Time:00:00.05 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading crystal_metal.png
+Fra:1 Mem:12.45M (Peak 13.19M) | Time:00:00.06 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_midframe_sss.png
+Fra:1 Mem:12.45M (Peak 13.19M) | Time:00:00.06 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_inset_front_sss.png
+Fra:1 Mem:12.45M (Peak 13.19M) | Time:00:00.06 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading obsidian_sss.png
+Fra:1 Mem:12.45M (Peak 13.19M) | Time:00:00.06 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_inset_side_sss.png
+Fra:1 Mem:12.45M (Peak 13.19M) | Time:00:00.06 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_purpur_guards_sss.png
+Fra:1 Mem:12.45M (Peak 13.19M) | Time:00:00.06 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading end_stone_sss.png
+Fra:1 Mem:12.45M (Peak 13.19M) | Time:00:00.06 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading purpur_sss.png
+Fra:1 Mem:12.45M (Peak 13.19M) | Time:00:00.06 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading pool_sss.png
+Fra:1 Mem:12.45M (Peak 13.19M) | Time:00:00.06 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading crystal_sss.png
+Fra:1 Mem:12.45M (Peak 13.19M) | Time:00:00.06 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading top_frame_sss.png
+Fra:1 Mem:12.45M (Peak 13.19M) | Time:00:00.06 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading side_midframe_roughness.png
+Fra:1 Mem:12.45M (Peak 13.19M) | Time:00:00.06 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading side_inset_front_roughness.png
+Fra:1 Mem:12.45M (Peak 13.19M) | Time:00:00.06 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading side_inset_side_roughness.png
+Fra:1 Mem:12.45M (Peak 13.19M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading end_stone_roughness.png
+Fra:1 Mem:12.45M (Peak 13.19M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading purpur_roughness.png
+Fra:1 Mem:12.45M (Peak 13.19M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading purpur_normal_preview.png
+Fra:1 Mem:12.45M (Peak 13.19M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading crystal_roughness.png
+Fra:1 Mem:12.46M (Peak 13.19M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading top_frame_roughness.png
+Fra:1 Mem:12.46M (Peak 13.19M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading pool_roughness.png
+Fra:1 Mem:12.46M (Peak 13.19M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading side_midframe_normal_preview.png
+Fra:1 Mem:12.46M (Peak 13.19M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading obsidian_normal_preview.png
+Fra:1 Mem:12.46M (Peak 13.19M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading side_inset_front_normal_preview.png
+Fra:1 Mem:12.46M (Peak 13.19M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading side_inset_side_normal_preview.png
+Fra:1 Mem:12.46M (Peak 13.19M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading end_stone_normal_preview.png
+Fra:1 Mem:12.46M (Peak 13.19M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading side_purpur_guards_normal_preview.png
+Fra:1 Mem:12.46M (Peak 13.19M) | Time:00:00.08 | Mem:0.75M, Peak:0.75M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:12.46M (Peak 13.19M) | Time:00:00.08 | Mem:0.75M, Peak:0.75M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:12.46M (Peak 13.19M) | Time:00:00.08 | Mem:1.00M, Peak:1.00M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:12.46M (Peak 13.19M) | Time:00:00.08 | Mem:1.00M, Peak:1.00M | Scene, ViewLayer | Updating Lights | Computing distribution
+Fra:1 Mem:12.50M (Peak 13.19M) | Time:00:00.08 | Mem:1.04M, Peak:1.04M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:12.51M (Peak 13.19M) | Time:00:00.08 | Mem:1.05M, Peak:1.05M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:12.52M (Peak 13.19M) | Time:00:00.08 | Mem:0.80M, Peak:1.05M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:12.52M (Peak 13.19M) | Time:00:00.08 | Mem:1.05M, Peak:1.05M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:12.52M (Peak 13.19M) | Time:00:00.08 | Mem:1.05M, Peak:1.05M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:12.52M (Peak 13.19M) | Time:00:00.08 | Mem:1.05M, Peak:1.05M | Scene, ViewLayer | Sample 0/32
+Fra:1 Mem:50.14M (Peak 50.14M) | Time:00:00.22 | Remaining:00:04.22 | Mem:38.64M, Peak:38.64M | Scene, ViewLayer | Sample 1/32
+Fra:1 Mem:65.96M (Peak 89.69M) | Time:00:04.16 | Mem:38.64M, Peak:38.64M | Scene, ViewLayer | Sample 32/32
+Fra:1 Mem:65.96M (Peak 89.69M) | Time:00:04.16 | Mem:38.64M, Peak:38.64M | Scene, ViewLayer | Finished
+Saved: 'D:\Desktop\Document\Coding\FULL STACK\ConvertTable\assets\end_refinement\renders\end_front.png'
+ Time: 00:04.22 (Saving: 00:00.05)
+
+Fra:1 Mem:12.61M (Peak 12.61M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | side_0_three_layers
+Fra:1 Mem:12.61M (Peak 12.61M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | side_1_three_layers
+Fra:1 Mem:12.61M (Peak 12.61M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | side_3_three_layers
+Fra:1 Mem:12.67M (Peak 12.67M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | side_foot_closure
+Fra:1 Mem:12.74M (Peak 12.74M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | deck
+Fra:1 Mem:12.77M (Peak 12.77M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | rotor
+Fra:1 Mem:12.81M (Peak 12.81M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Studio floor
+Fra:1 Mem:13.16M (Peak 13.18M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:11.60M (Peak 13.18M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:11.61M (Peak 13.18M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:11.61M (Peak 13.18M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:11.61M (Peak 13.18M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:11.87M (Peak 13.18M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:11.87M (Peak 13.18M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:11.87M (Peak 13.18M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:11.87M (Peak 13.18M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:11.87M (Peak 13.18M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:11.87M (Peak 13.18M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:11.87M (Peak 13.18M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:11.87M (Peak 13.18M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:11.87M (Peak 13.18M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:11.87M (Peak 13.18M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:11.91M (Peak 13.18M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:12.16M (Peak 13.18M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:12.16M (Peak 13.18M) | Time:00:00.04 | Mem:0.26M, Peak:0.26M | Scene, ViewLayer | Updating Geometry BVH crystal_collars 11/11 | Building BVH
+Fra:1 Mem:12.16M (Peak 13.18M) | Time:00:00.04 | Mem:0.26M, Peak:0.26M | Scene, ViewLayer | Updating Geometry BVH side_0_three_layers 1/11 | Building BVH
+Fra:1 Mem:12.16M (Peak 13.18M) | Time:00:00.04 | Mem:0.28M, Peak:0.28M | Scene, ViewLayer | Updating Geometry BVH base 7/11 | Building BVH
+Fra:1 Mem:12.16M (Peak 13.18M) | Time:00:00.04 | Mem:0.31M, Peak:0.31M | Scene, ViewLayer | Updating Geometry BVH base 7/11 | Building BVH 0%
+Fra:1 Mem:12.16M (Peak 13.18M) | Time:00:00.04 | Mem:0.34M, Peak:0.34M | Scene, ViewLayer | Updating Geometry BVH base 7/11 | Building BVH
+Fra:1 Mem:12.16M (Peak 13.18M) | Time:00:00.04 | Mem:0.46M, Peak:0.49M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:12.16M (Peak 13.18M) | Time:00:00.04 | Mem:0.46M, Peak:0.49M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:12.16M (Peak 13.18M) | Time:00:00.04 | Mem:0.46M, Peak:0.49M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:12.16M (Peak 13.18M) | Time:00:00.04 | Mem:0.46M, Peak:0.49M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:12.42M (Peak 13.18M) | Time:00:00.04 | Mem:0.46M, Peak:0.49M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:12.42M (Peak 13.18M) | Time:00:00.04 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:12.42M (Peak 13.18M) | Time:00:00.04 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:12.42M (Peak 13.18M) | Time:00:00.04 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:12.42M (Peak 13.18M) | Time:00:00.04 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading side_purpur_guards_normal_preview.png
+Fra:1 Mem:12.42M (Peak 13.18M) | Time:00:00.04 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading crystal_emission.png
+Fra:1 Mem:12.44M (Peak 13.18M) | Time:00:00.05 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading crystal_normal_preview.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.05 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading top_frame_emission.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.05 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading side_purpur_guards_emission.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.05 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_inset_side_emission.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.05 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_inset_front_metal.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.05 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading pool_metal.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.05 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_midframe_metal.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.05 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading obsidian_metal.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.05 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading end_stone_metal.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.05 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading crystal_metal.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.05 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_inset_side_metal.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.05 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_purpur_guards_metal.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.05 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading purpur_metal.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.06 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading top_frame_normal_preview.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.06 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_inset_front_sss.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.06 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_midframe_sss.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.06 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading obsidian_sss.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.06 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading end_stone_sss.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.06 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_inset_side_sss.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.06 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading crystal_sss.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.06 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading side_purpur_guards_sss.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.06 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading purpur_sss.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.06 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading top_frame_sss.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.06 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading side_inset_front_roughness.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.06 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading pool_roughness.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.06 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading side_midframe_roughness.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.06 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading obsidian_roughness.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.06 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading end_stone_roughness.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading side_purpur_guards_roughness.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading purpur_normal_preview.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading purpur_roughness.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading side_inset_side_roughness.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading top_frame_roughness.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading side_inset_front_normal_preview.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading pool_normal_preview.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading side_midframe_normal_preview.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading end_stone_normal_preview.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading obsidian_normal_preview.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading side_inset_side_normal_preview.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.08 | Mem:0.75M, Peak:0.75M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.08 | Mem:0.75M, Peak:0.75M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.08 | Mem:1.00M, Peak:1.00M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.08 | Mem:1.00M, Peak:1.00M | Scene, ViewLayer | Updating Lights | Computing distribution
+Fra:1 Mem:12.50M (Peak 13.18M) | Time:00:00.08 | Mem:1.04M, Peak:1.04M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:12.51M (Peak 13.18M) | Time:00:00.08 | Mem:1.05M, Peak:1.05M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:12.52M (Peak 13.18M) | Time:00:00.08 | Mem:0.80M, Peak:1.05M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:12.52M (Peak 13.18M) | Time:00:00.08 | Mem:1.05M, Peak:1.05M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:12.52M (Peak 13.18M) | Time:00:00.08 | Mem:1.05M, Peak:1.05M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:12.52M (Peak 13.18M) | Time:00:00.08 | Mem:1.05M, Peak:1.05M | Scene, ViewLayer | Sample 0/32
+Fra:1 Mem:50.14M (Peak 50.14M) | Time:00:00.19 | Remaining:00:03.34 | Mem:38.64M, Peak:38.64M | Scene, ViewLayer | Sample 1/32
+Fra:1 Mem:65.96M (Peak 89.69M) | Time:00:04.14 | Mem:38.64M, Peak:38.64M | Scene, ViewLayer | Sample 32/32
+Fra:1 Mem:65.96M (Peak 89.69M) | Time:00:04.14 | Mem:38.64M, Peak:38.64M | Scene, ViewLayer | Finished
+Saved: 'D:\Desktop\Document\Coding\FULL STACK\ConvertTable\assets\end_refinement\renders\end_side.png'
+ Time: 00:04.20 (Saving: 00:00.05)
+
+Fra:1 Mem:12.61M (Peak 12.61M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | side_0_three_layers
+Fra:1 Mem:12.61M (Peak 12.61M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | side_3_three_layers
+Fra:1 Mem:12.63M (Peak 12.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | base
+Fra:1 Mem:12.66M (Peak 12.66M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | rotor
+Fra:1 Mem:12.68M (Peak 12.68M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | corner_crystals
+Fra:1 Mem:12.72M (Peak 12.72M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Studio floor
+Fra:1 Mem:13.16M (Peak 13.18M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:11.60M (Peak 13.18M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:11.61M (Peak 13.18M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:11.61M (Peak 13.18M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:11.61M (Peak 13.18M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:11.87M (Peak 13.18M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:11.87M (Peak 13.18M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:11.87M (Peak 13.18M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:11.87M (Peak 13.18M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:11.87M (Peak 13.18M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:11.87M (Peak 13.18M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:11.87M (Peak 13.18M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:11.87M (Peak 13.18M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:11.87M (Peak 13.18M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:11.87M (Peak 13.18M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:11.91M (Peak 13.18M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:12.16M (Peak 13.18M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:12.16M (Peak 13.18M) | Time:00:00.04 | Mem:0.26M, Peak:0.26M | Scene, ViewLayer | Updating Geometry BVH crystal_collars 11/11 | Building BVH
+Fra:1 Mem:12.16M (Peak 13.18M) | Time:00:00.04 | Mem:0.26M, Peak:0.26M | Scene, ViewLayer | Updating Geometry BVH side_2_three_layers 3/11 | Building BVH
+Fra:1 Mem:12.16M (Peak 13.18M) | Time:00:00.04 | Mem:0.26M, Peak:0.26M | Scene, ViewLayer | Updating Geometry BVH base 7/11 | Building BVH
+Fra:1 Mem:12.16M (Peak 13.18M) | Time:00:00.04 | Mem:0.26M, Peak:0.26M | Scene, ViewLayer | Updating Geometry BVH rotor 9/11 | Building BVH
+Fra:1 Mem:12.16M (Peak 13.18M) | Time:00:00.04 | Mem:0.26M, Peak:0.26M | Scene, ViewLayer | Updating Geometry BVH corner_crystals 10/11 | Building BVH
+Fra:1 Mem:12.16M (Peak 13.18M) | Time:00:00.04 | Mem:0.29M, Peak:0.29M | Scene, ViewLayer | Updating Geometry BVH corner_crystals 10/11 | Building BVH 0%
+Fra:1 Mem:12.16M (Peak 13.18M) | Time:00:00.04 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Geometry BVH corner_crystals 10/11 | Building BVH
+Fra:1 Mem:12.16M (Peak 13.18M) | Time:00:00.04 | Mem:0.46M, Peak:0.47M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:12.16M (Peak 13.18M) | Time:00:00.04 | Mem:0.46M, Peak:0.47M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:12.16M (Peak 13.18M) | Time:00:00.04 | Mem:0.46M, Peak:0.47M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:12.16M (Peak 13.18M) | Time:00:00.04 | Mem:0.46M, Peak:0.47M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:12.42M (Peak 13.18M) | Time:00:00.04 | Mem:0.46M, Peak:0.47M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:12.42M (Peak 13.18M) | Time:00:00.04 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:12.42M (Peak 13.18M) | Time:00:00.04 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:12.42M (Peak 13.18M) | Time:00:00.04 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:12.42M (Peak 13.18M) | Time:00:00.04 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading crystal.png
+Fra:1 Mem:12.42M (Peak 13.18M) | Time:00:00.04 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading obsidian_emission.png
+Fra:1 Mem:12.42M (Peak 13.18M) | Time:00:00.04 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading pool_emission.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.05 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading end_stone_normal_preview.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.05 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading end_stone_emission.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.05 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading side_inset_front_emission.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.05 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading top_frame_emission.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.05 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading purpur_emission.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.05 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading side_purpur_guards_emission.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.05 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_midframe_metal.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.06 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_inset_side_metal.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.06 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading crystal_metal.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.06 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading pool_metal.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.06 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_inset_front_metal.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.06 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading top_frame_metal.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.06 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading end_stone_metal.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.06 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading purpur_metal.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.06 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_purpur_guards_metal.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.07 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading purpur_normal_preview.png
+Fra:1 Mem:12.45M (Peak 13.18M) | Time:00:00.07 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_midframe_sss.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.07 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading side_inset_side_sss.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.07 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading crystal_sss.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.07 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading obsidian_sss.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.07 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading pool_sss.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading side_inset_front_sss.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading top_frame_sss.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading purpur_sss.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading side_purpur_guards_sss.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading end_stone_sss.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading side_inset_side_roughness.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading crystal_roughness.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading obsidian_roughness.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.07 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading pool_roughness.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.08 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading top_frame_normal_preview.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.08 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading side_inset_front_roughness.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.08 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading top_frame_roughness.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.08 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading purpur_roughness.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.08 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading side_purpur_guards_roughness.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.08 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading end_stone_roughness.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.08 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading side_midframe_normal_preview.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.08 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading side_inset_side_normal_preview.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.08 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading obsidian_normal_preview.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.08 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading crystal_normal_preview.png
+Fra:1 Mem:12.46M (Peak 13.18M) | Time:00:00.08 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading side_inset_front_normal_preview.png
+Fra:1 Mem:12.47M (Peak 13.18M) | Time:00:00.08 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading pool_normal_preview.png
+Fra:1 Mem:12.47M (Peak 13.18M) | Time:00:00.09 | Mem:0.75M, Peak:0.75M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:12.47M (Peak 13.18M) | Time:00:00.09 | Mem:0.75M, Peak:0.75M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:12.47M (Peak 13.18M) | Time:00:00.09 | Mem:1.00M, Peak:1.00M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:12.47M (Peak 13.18M) | Time:00:00.09 | Mem:1.00M, Peak:1.00M | Scene, ViewLayer | Updating Lights | Computing distribution
+Fra:1 Mem:12.51M (Peak 13.18M) | Time:00:00.09 | Mem:1.04M, Peak:1.04M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:12.52M (Peak 13.18M) | Time:00:00.09 | Mem:1.05M, Peak:1.05M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:12.52M (Peak 13.18M) | Time:00:00.09 | Mem:0.80M, Peak:1.05M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:12.52M (Peak 13.18M) | Time:00:00.09 | Mem:1.05M, Peak:1.05M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:12.52M (Peak 13.18M) | Time:00:00.09 | Mem:1.05M, Peak:1.05M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:12.52M (Peak 13.18M) | Time:00:00.09 | Mem:1.05M, Peak:1.05M | Scene, ViewLayer | Sample 0/32
+Fra:1 Mem:50.14M (Peak 50.14M) | Time:00:00.34 | Remaining:00:07.87 | Mem:38.64M, Peak:38.64M | Scene, ViewLayer | Sample 1/32
+Fra:1 Mem:65.96M (Peak 89.69M) | Time:00:07.71 | Mem:38.64M, Peak:38.64M | Scene, ViewLayer | Sample 32/32
+Fra:1 Mem:65.96M (Peak 89.69M) | Time:00:07.71 | Mem:38.64M, Peak:38.64M | Scene, ViewLayer | Finished
+Saved: 'D:\Desktop\Document\Coding\FULL STACK\ConvertTable\assets\end_refinement\renders\end_top.png'
+ Time: 00:07.77 (Saving: 00:00.05)
+
+Info: Saved "end_16x_refined.blend"
+Rendered End revision: hero + front / side / top.
+
+Blender quit

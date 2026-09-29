@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "PHP",
+    "OAO",
+    "PEP"
+  ],
+  "key": {
+    "P": "minecraft:purpur_block",
+    "H": "minecraft:dragon_head",
+    "O": "minecraft:obsidian",
+    "A": "minecraft:amethyst_shard",
+    "E": "minecraft:end_stone"
+  },
+  "result": {
+    "id": "convert_table:end_conversion_table",
+    "count": 1
+  }
+}

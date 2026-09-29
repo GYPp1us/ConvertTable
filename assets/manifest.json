@@ -1,0 +1,52 @@
+{
+  "format": "labPBR 1.3",
+  "atlas_size": [
+    1024,
+    512
+  ],
+  "material_tiles": [
+    "stone",
+    "trim",
+    "band",
+    "inset",
+    "crystal",
+    "rune",
+    "accent",
+    "pool"
+  ],
+  "variants": {
+    "black_gold": {
+      "cuboids": 205,
+      "dynamic_quads": 258,
+      "period_seconds": 16,
+      "pivot": [
+        8,
+        13.6,
+        8
+      ],
+      "float_amplitude_units": 0
+    },
+    "end": {
+      "cuboids": 205,
+      "dynamic_quads": 258,
+      "period_seconds": 12,
+      "pivot": [
+        8,
+        13.6,
+        8
+      ],
+      "float_amplitude_units": 0
+    },
+    "sculk": {
+      "cuboids": 241,
+      "dynamic_quads": 72,
+      "period_seconds": 4,
+      "pivot": [
+        8,
+        13.6,
+        8
+      ],
+      "float_amplitude_units": 0.45
+    }
+  }
+}

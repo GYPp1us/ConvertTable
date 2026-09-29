@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="740" viewBox="0 0 1280 740">
+<defs><linearGradient id="bg" x2="0" y2="1"><stop stop-color="#121526"/><stop offset="1" stop-color="#222038"/></linearGradient><pattern id="stone" width="16" height="16" patternUnits="userSpaceOnUse"><path d="M0 15H16M15 0V16" stroke="#ffffff" stroke-opacity=".05"/></pattern></defs>
+<rect width="1280" height="740" fill="url(#bg)"/><rect width="1280" height="740" fill="url(#stone)"/>
+<text x="64" y="64" font-size="36" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-weight="700" fill="#f6f1ff">晶洞阵法 · 可照摆的俯视图</text>
+<text x="65" y="90" font-size="19" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#c9bfd7">同一高度的一层。每格代表 Minecraft 的一个方块位置。</text>
+<rect x="65" y="113" width="568" height="568" rx="18" fill="#2e3145" stroke="#82769c" stroke-width="2"/>
+<rect x="83" y="125" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="159" y="125" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="235" y="125" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="311" y="125" width="76" height="76" fill="#464654" stroke="#77748c" stroke-width="1.4"/>
+<text x="349" y="150.5" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#ffffff">平滑</text>
+<text x="349" y="171.5" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#ffffff">玄武岩</text>
+<rect x="387" y="125" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="463" y="125" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="539" y="125" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="83" y="201" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="159" y="201" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="235" y="201" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="311" y="201" width="76" height="76" fill="#ece9df" stroke="#77748c" stroke-width="1.4"/>
+<text x="349" y="237" text-anchor="middle" dominant-baseline="middle" font-size="17" font-weight="700" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#36343a">方解石</text>
+<rect x="387" y="201" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="463" y="201" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="539" y="201" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="83" y="277" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="159" y="277" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="235" y="277" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="311" y="277" width="76" height="76" fill="#343044" stroke="#77748c" stroke-width="1.4"/>
+<path d="M349 294 l10 19 -10 24 -10 -24z" fill="#b77ee5" stroke="#e8ccff" stroke-width="2"/>
+<text x="349" y="348" text-anchor="middle" font-size="14" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#f1e5ff">留空</text>
+<rect x="387" y="277" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="463" y="277" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="539" y="277" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="83" y="353" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="159" y="353" width="76" height="76" fill="#e5dfd8" stroke="#77748c" stroke-width="1.4"/>
+<text x="197" y="389" text-anchor="middle" dominant-baseline="middle" font-size="17" font-weight="700" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#352d43">水晶台</text>
+<rect x="235" y="353" width="76" height="76" fill="#ad7cd7" stroke="#77748c" stroke-width="1.4"/>
+<text x="273" y="378.5" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#251235">紫水</text>
+<text x="273" y="399.5" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#251235">晶块</text>
+<rect x="311" y="353" width="76" height="76" fill="#7842ad" stroke="#77748c" stroke-width="1.4"/>
+<text x="349" y="389" text-anchor="middle" dominant-baseline="middle" font-size="17" font-weight="700" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#ffffff">母岩</text>
+<rect x="387" y="353" width="76" height="76" fill="#343044" stroke="#77748c" stroke-width="1.4"/>
+<path d="M425 370 l10 19 -10 24 -10 -24z" fill="#b77ee5" stroke="#e8ccff" stroke-width="2"/>
+<text x="425" y="424" text-anchor="middle" font-size="14" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#f1e5ff">留空</text>
+<rect x="463" y="353" width="76" height="76" fill="#ece9df" stroke="#77748c" stroke-width="1.4"/>
+<text x="501" y="389" text-anchor="middle" dominant-baseline="middle" font-size="17" font-weight="700" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#36343a">方解石</text>
+<rect x="539" y="353" width="76" height="76" fill="#464654" stroke="#77748c" stroke-width="1.4"/>
+<text x="577" y="378.5" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#ffffff">平滑</text>
+<text x="577" y="399.5" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#ffffff">玄武岩</text>
+<rect x="83" y="429" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="159" y="429" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="235" y="429" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="311" y="429" width="76" height="76" fill="#343044" stroke="#77748c" stroke-width="1.4"/>
+<path d="M349 446 l10 19 -10 24 -10 -24z" fill="#b77ee5" stroke="#e8ccff" stroke-width="2"/>
+<text x="349" y="500" text-anchor="middle" font-size="14" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#f1e5ff">留空</text>
+<rect x="387" y="429" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="463" y="429" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="539" y="429" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="83" y="505" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="159" y="505" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="235" y="505" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="311" y="505" width="76" height="76" fill="#ece9df" stroke="#77748c" stroke-width="1.4"/>
+<text x="349" y="541" text-anchor="middle" dominant-baseline="middle" font-size="17" font-weight="700" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#36343a">方解石</text>
+<rect x="387" y="505" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="463" y="505" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="539" y="505" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="83" y="581" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="159" y="581" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="235" y="581" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="311" y="581" width="76" height="76" fill="#464654" stroke="#77748c" stroke-width="1.4"/>
+<text x="349" y="606.5" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#ffffff">平滑</text>
+<text x="349" y="627.5" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#ffffff">玄武岩</text>
+<rect x="387" y="581" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="463" y="581" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<rect x="539" y="581" width="76" height="76" fill="#333649" stroke="#77748c" stroke-width="1.4"/>
+<text x="342" y="711" text-anchor="middle" font-size="19" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#bdb3d0">← 西　　　　　　　　　东 →</text>
+<text x="648" y="401" text-anchor="middle" font-size="18" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#bdb3d0" transform="rotate(90 648 401)">北 ↑　　　　　　　　↓ 南</text>
+<rect x="696" y="129" width="523" height="530" rx="20" fill="#2e293e" stroke="#8f7caa" stroke-width="2"/>
+<text x="727" y="178" font-size="29" font-weight="700" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#f4ebff">摆放顺序</text>
+<text x="727" y="225" font-size="22" font-weight="700" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#dab6ff">① 连线</text>
+<text x="727" y="259" font-size="20" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#f2eef5">水晶台 → 紫水晶块 → 母岩</text>
+<text x="727" y="319" font-size="22" font-weight="700" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#dab6ff">② 每条生长臂</text>
+<text x="727" y="353" font-size="20" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#f2eef5">母岩 → 留空 → 方解石 → 平滑玄武岩</text>
+<text x="727" y="413" font-size="22" font-weight="700" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#dab6ff">③ 留空格</text>
+<text x="727" y="447" font-size="20" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#f2eef5">不放方块；晶芽由母岩自然长出来</text>
+<text x="727" y="507" font-size="22" font-weight="700" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#dab6ff">④ 本例贡献</text>
+<text x="727" y="541" font-size="20" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#f2eef5">北、东、南各 4；本层可见贡献共 12</text>
+<path d="M724 592H1190" stroke="#827190" stroke-width="1"/>
+<text x="727" y="622" font-size="17" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#c9bfd7">上下两个生长面未在俯视图中显示。</text>
+<text x="727" y="647" font-size="17" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" fill="#c9bfd7">这是机制策划示例，尚未加入游戏。</text>
+</svg>

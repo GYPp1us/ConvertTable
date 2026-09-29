@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "convert_table:block/end",
+      "y": 0
+    },
+    "facing=east": {
+      "model": "convert_table:block/end",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "convert_table:block/end",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "convert_table:block/end",
+      "y": 270
+    }
+  }
+}

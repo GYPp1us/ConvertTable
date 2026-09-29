@@ -1,0 +1,101 @@
+package com.example.converttable;
+
+import com.google.gson.JsonParser;
+import java.util.*;
+import net.fabricmc.fabric.api.client.gametest.v1.context.ClientGameTestContext;
+import net.fabricmc.fabric.api.client.gametest.v1.screenshot.TestScreenshotOptions;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.world.item.Items;
+
+/** Uses the isolated UI test's server; no user config or world is edited. */
+final class ConversionRecipeGameTest {
+    static void check(boolean condition,String message) {if(!condition)throw new AssertionError(message);}
+    static void verifyConfig() {
+        var raw=JsonParser.parseString(RecipeConfig.defaults()).getAsJsonObject();
+        check(raw.getAsJsonArray("groups").size()==99,"Expected all 99 planned groups");
+        check(raw.getAsJsonArray("advanced").size()==52,"Coral templates must expand 40 plans into 52 concrete recipes");
+        var catalog=RecipeCatalog.parse(raw.toString());
+        check(catalog.groups().size()>80 && catalog.advanced().size()>40,"Too many recipes unexpectedly lost");
+        var coral=catalog.advanced().stream().filter(r->r.source().matches("ADV-0(09|10|11)")).toList();
+        check(coral.size()==15,"Missing coral variants");
+        for(var r:coral) {
+            var from=net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(r.input().getItem()).getPath();
+            var to=net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(r.output().getItem()).getPath();
+            check(from.equals("dead_"+to),"Cross-species coral mapping");
+            check(r.returns().size()==1 && r.returns().getFirst().is(Items.BUCKET),"Water bucket remainder missing");
+        }
+        var duplicate=raw.deepCopy();duplicate.getAsJsonArray("groups").add(duplicate.getAsJsonArray("groups").get(0).deepCopy());
+        rejected(duplicate.toString(),"duplicate group");
+        var negative=raw.deepCopy();negative.getAsJsonArray("advanced").get(0).getAsJsonObject().addProperty("deaths",-1);
+        rejected(negative.toString(),"negative death cost");
+        var xp=raw.deepCopy();xp.getAsJsonObject("settings").getAsJsonObject("sculk").addProperty("consume_player_xp",true);
+        rejected(xp.toString(),"experience cost");
+        var unknown=raw.deepCopy();unknown.getAsJsonArray("groups").get(0).getAsJsonObject().getAsJsonArray("items").add("minecraft:missing_test_item");
+        check(RecipeCatalog.parse(unknown.toString()).unavailable().contains("minecraft:missing_test_item"),"Unknown items not reported");
+        var disabled=raw.deepCopy();disabled.getAsJsonArray("groups").get(0).getAsJsonObject().addProperty("enabled",false);
+        check(RecipeCatalog.parse(disabled.toString()).groups().size()==catalog.groups().size()-1,"Disabled group still available");
+        ConvertTable.LOGGER.info("RECIPE_CONFIG_TEST_PASS: 99 groups, 52 concrete plans, validation, unknown IDs, coral mapping/remainders");
+    }
+    private static void rejected(String json,String reason) {
+        try {RecipeCatalog.parse(json);}catch(IllegalArgumentException expected){return;}
+        throw new AssertionError("Accepted invalid "+reason);
+    }
+    static void verifyClient(ClientGameTestContext context) {
+        context.waitFor(mc->!ClientRecipeCatalog.current().groups().isEmpty(),100);
+        context.runOnClient(mc-> {
+            check(ClientRecipeCatalog.current().groups().size()==RecipeConfig.server().groups().size(),"Server catalogue not synchronized");
+            check(ClientRecipeCatalog.current().advanced().size()==RecipeConfig.server().advanced().size(),"Advanced catalogue not synchronized");
+            var all=ViewerRecipe.all();Set<String> ids=new HashSet<>();
+            for(var r:all) {
+                check(ids.add(r.id()),"Duplicate viewer recipe");
+                if(r.category()<3)check(r.outputs().stream().noneMatch(s->s.is(r.input().getItem())),"Ordinary conversion includes unchanged output");
+                if(r.category()==0)check(r.reagent().is(Items.GOLD_NUGGET),"Piglin cost missing");
+            }
+            check(all.stream().anyMatch(r->r.category()==3 && r.deaths()>0),"Death-cost recipes missing");
+            ConvertTable.LOGGER.info("RECIPE_SYNC_TEST_PASS: {} viewer recipes; {} unavailable IDs",all.size(),ClientRecipeCatalog.current().unavailable().size());
+        });
+    }
+    static void viewers(ClientGameTestContext context) {
+        if(FabricLoader.getInstance().isModLoaded("jei"))JeiTest.run(context);
+        if(FabricLoader.getInstance().isModLoaded("roughlyenoughitems"))ReiTest.run(context);
+    }
+    private static final class JeiTest {
+        static void run(ClientGameTestContext context) {
+            context.waitFor(mc->com.example.converttable.compat.ConversionJeiPlugin.activeRuntime()!=null,600);
+            context.runOnClient(mc->{
+                var runtime=com.example.converttable.compat.ConversionJeiPlugin.activeRuntime();
+                for(int c=0;c<4;c++) {
+                    final int category=c;
+                    long expected=ViewerRecipe.all().stream().filter(r->r.category()==category).count();
+                    long actual=runtime.getRecipeManager().createRecipeLookup(com.example.converttable.compat.ConversionJeiPlugin.TYPES.get(c)).get().count();
+                    check(actual==expected,"JEI recipe count mismatch: "+c+" / "+actual+" != "+expected);
+                }
+                runtime.getRecipesGui().showTypes(List.of(com.example.converttable.compat.ConversionJeiPlugin.TYPES.get(3)));
+            });
+            context.waitTicks(15);
+            context.takeScreenshot(TestScreenshotOptions.of("jei-sculk-recipes"));
+            ConvertTable.LOGGER.info("JEI_RECIPE_TEST_PASS: four categories and indexed server catalogue");
+        }
+    }
+    private static final class ReiTest {
+        static void run(ClientGameTestContext context) {
+            context.waitTicks(60);
+            context.runOnClient(mc-> {
+                var registry=me.shedaniel.rei.api.client.registry.category.CategoryRegistry.getInstance();
+                for(var type:com.example.converttable.compat.ConversionReiPlugin.TYPES)
+                    check(registry.tryGet(type).isPresent(),"REI category missing");
+                var generators=me.shedaniel.rei.api.client.registry.display.DisplayRegistry.getInstance()
+                    .getCategoryDisplayGenerators(com.example.converttable.compat.ConversionReiPlugin.TYPES.get(3));
+                long eggs=generators.stream().mapToLong(g->g.getUsageFor(me.shedaniel.rei.api.common.util.EntryStacks.of(Items.EGG))
+                    .map(List::size).orElse(0)).sum();
+                check(eggs==24,"REI egg usage index must contain 24 spawn egg plans, got "+eggs);
+                check(me.shedaniel.rei.api.client.view.ViewSearchBuilder.builder()
+                    .addCategory(com.example.converttable.compat.ConversionReiPlugin.TYPES.get(3))
+                    .setPreferredOpenedCategory(com.example.converttable.compat.ConversionReiPlugin.TYPES.get(3)).open(),"REI failed to open custom recipes");
+            });
+            context.waitTicks(15);
+            context.takeScreenshot(TestScreenshotOptions.of("rei-sculk-recipes"));
+            ConvertTable.LOGGER.info("REI_RECIPE_TEST_PASS: four categories, dynamic server catalogue and recipe screen");
+        }
+    }
+}

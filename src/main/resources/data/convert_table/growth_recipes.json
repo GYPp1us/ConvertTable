@@ -1,0 +1,1355 @@
+{
+  "schema_version": 1,
+  "recipes": [
+    {
+      "id": "convert_table:growth/wood/oak/log",
+      "catalyst": "minecraft:oak_sapling",
+      "output": "minecraft:oak_log",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/wood/oak/stripped_log",
+      "catalyst": "minecraft:oak_sapling",
+      "output": "minecraft:stripped_oak_log",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/wood/oak/wood",
+      "catalyst": "minecraft:oak_sapling",
+      "output": "minecraft:oak_wood",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/wood/oak/stripped_wood",
+      "catalyst": "minecraft:oak_sapling",
+      "output": "minecraft:stripped_oak_wood",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/wood/oak/planks",
+      "catalyst": "minecraft:oak_sapling",
+      "output": "minecraft:oak_planks",
+      "cost": 1
+    },
+    {
+      "id": "convert_table:growth/wood/spruce/log",
+      "catalyst": "minecraft:spruce_sapling",
+      "output": "minecraft:spruce_log",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/wood/spruce/stripped_log",
+      "catalyst": "minecraft:spruce_sapling",
+      "output": "minecraft:stripped_spruce_log",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/wood/spruce/wood",
+      "catalyst": "minecraft:spruce_sapling",
+      "output": "minecraft:spruce_wood",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/wood/spruce/stripped_wood",
+      "catalyst": "minecraft:spruce_sapling",
+      "output": "minecraft:stripped_spruce_wood",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/wood/spruce/planks",
+      "catalyst": "minecraft:spruce_sapling",
+      "output": "minecraft:spruce_planks",
+      "cost": 1
+    },
+    {
+      "id": "convert_table:growth/wood/birch/log",
+      "catalyst": "minecraft:birch_sapling",
+      "output": "minecraft:birch_log",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/wood/birch/stripped_log",
+      "catalyst": "minecraft:birch_sapling",
+      "output": "minecraft:stripped_birch_log",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/wood/birch/wood",
+      "catalyst": "minecraft:birch_sapling",
+      "output": "minecraft:birch_wood",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/wood/birch/stripped_wood",
+      "catalyst": "minecraft:birch_sapling",
+      "output": "minecraft:stripped_birch_wood",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/wood/birch/planks",
+      "catalyst": "minecraft:birch_sapling",
+      "output": "minecraft:birch_planks",
+      "cost": 1
+    },
+    {
+      "id": "convert_table:growth/wood/jungle/log",
+      "catalyst": "minecraft:jungle_sapling",
+      "output": "minecraft:jungle_log",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/wood/jungle/stripped_log",
+      "catalyst": "minecraft:jungle_sapling",
+      "output": "minecraft:stripped_jungle_log",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/wood/jungle/wood",
+      "catalyst": "minecraft:jungle_sapling",
+      "output": "minecraft:jungle_wood",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/wood/jungle/stripped_wood",
+      "catalyst": "minecraft:jungle_sapling",
+      "output": "minecraft:stripped_jungle_wood",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/wood/jungle/planks",
+      "catalyst": "minecraft:jungle_sapling",
+      "output": "minecraft:jungle_planks",
+      "cost": 1
+    },
+    {
+      "id": "convert_table:growth/wood/acacia/log",
+      "catalyst": "minecraft:acacia_sapling",
+      "output": "minecraft:acacia_log",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/wood/acacia/stripped_log",
+      "catalyst": "minecraft:acacia_sapling",
+      "output": "minecraft:stripped_acacia_log",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/wood/acacia/wood",
+      "catalyst": "minecraft:acacia_sapling",
+      "output": "minecraft:acacia_wood",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/wood/acacia/stripped_wood",
+      "catalyst": "minecraft:acacia_sapling",
+      "output": "minecraft:stripped_acacia_wood",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/wood/acacia/planks",
+      "catalyst": "minecraft:acacia_sapling",
+      "output": "minecraft:acacia_planks",
+      "cost": 1
+    },
+    {
+      "id": "convert_table:growth/wood/dark_oak/log",
+      "catalyst": "minecraft:dark_oak_sapling",
+      "output": "minecraft:dark_oak_log",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/wood/dark_oak/stripped_log",
+      "catalyst": "minecraft:dark_oak_sapling",
+      "output": "minecraft:stripped_dark_oak_log",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/wood/dark_oak/wood",
+      "catalyst": "minecraft:dark_oak_sapling",
+      "output": "minecraft:dark_oak_wood",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/wood/dark_oak/stripped_wood",
+      "catalyst": "minecraft:dark_oak_sapling",
+      "output": "minecraft:stripped_dark_oak_wood",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/wood/dark_oak/planks",
+      "catalyst": "minecraft:dark_oak_sapling",
+      "output": "minecraft:dark_oak_planks",
+      "cost": 1
+    },
+    {
+      "id": "convert_table:growth/wood/cherry/log",
+      "catalyst": "minecraft:cherry_sapling",
+      "output": "minecraft:cherry_log",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/wood/cherry/stripped_log",
+      "catalyst": "minecraft:cherry_sapling",
+      "output": "minecraft:stripped_cherry_log",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/wood/cherry/wood",
+      "catalyst": "minecraft:cherry_sapling",
+      "output": "minecraft:cherry_wood",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/wood/cherry/stripped_wood",
+      "catalyst": "minecraft:cherry_sapling",
+      "output": "minecraft:stripped_cherry_wood",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/wood/cherry/planks",
+      "catalyst": "minecraft:cherry_sapling",
+      "output": "minecraft:cherry_planks",
+      "cost": 1
+    },
+    {
+      "id": "convert_table:growth/wood/pale_oak/log",
+      "catalyst": "minecraft:pale_oak_sapling",
+      "output": "minecraft:pale_oak_log",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/wood/pale_oak/stripped_log",
+      "catalyst": "minecraft:pale_oak_sapling",
+      "output": "minecraft:stripped_pale_oak_log",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/wood/pale_oak/wood",
+      "catalyst": "minecraft:pale_oak_sapling",
+      "output": "minecraft:pale_oak_wood",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/wood/pale_oak/stripped_wood",
+      "catalyst": "minecraft:pale_oak_sapling",
+      "output": "minecraft:stripped_pale_oak_wood",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/wood/pale_oak/planks",
+      "catalyst": "minecraft:pale_oak_sapling",
+      "output": "minecraft:pale_oak_planks",
+      "cost": 1
+    },
+    {
+      "id": "convert_table:growth/wood/mangrove/log",
+      "catalyst": "minecraft:mangrove_propagule",
+      "output": "minecraft:mangrove_log",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/wood/mangrove/stripped_log",
+      "catalyst": "minecraft:mangrove_propagule",
+      "output": "minecraft:stripped_mangrove_log",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/wood/mangrove/wood",
+      "catalyst": "minecraft:mangrove_propagule",
+      "output": "minecraft:mangrove_wood",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/wood/mangrove/stripped_wood",
+      "catalyst": "minecraft:mangrove_propagule",
+      "output": "minecraft:stripped_mangrove_wood",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/wood/mangrove/planks",
+      "catalyst": "minecraft:mangrove_propagule",
+      "output": "minecraft:mangrove_planks",
+      "cost": 1
+    },
+    {
+      "id": "convert_table:growth/wood/crimson/stem",
+      "catalyst": "minecraft:crimson_fungus",
+      "output": "minecraft:crimson_stem",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/wood/crimson/stripped_stem",
+      "catalyst": "minecraft:crimson_fungus",
+      "output": "minecraft:stripped_crimson_stem",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/wood/crimson/hyphae",
+      "catalyst": "minecraft:crimson_fungus",
+      "output": "minecraft:crimson_hyphae",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/wood/crimson/stripped_hyphae",
+      "catalyst": "minecraft:crimson_fungus",
+      "output": "minecraft:stripped_crimson_hyphae",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/wood/crimson/planks",
+      "catalyst": "minecraft:crimson_fungus",
+      "output": "minecraft:crimson_planks",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/wood/warped/stem",
+      "catalyst": "minecraft:warped_fungus",
+      "output": "minecraft:warped_stem",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/wood/warped/stripped_stem",
+      "catalyst": "minecraft:warped_fungus",
+      "output": "minecraft:stripped_warped_stem",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/wood/warped/hyphae",
+      "catalyst": "minecraft:warped_fungus",
+      "output": "minecraft:warped_hyphae",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/wood/warped/stripped_hyphae",
+      "catalyst": "minecraft:warped_fungus",
+      "output": "minecraft:stripped_warped_hyphae",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/wood/warped/planks",
+      "catalyst": "minecraft:warped_fungus",
+      "output": "minecraft:warped_planks",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/wood/bamboo/block",
+      "catalyst": "minecraft:bamboo",
+      "output": "minecraft:bamboo_block",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/wood/bamboo/stripped_block",
+      "catalyst": "minecraft:bamboo",
+      "output": "minecraft:stripped_bamboo_block",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/wood/bamboo/planks",
+      "catalyst": "minecraft:bamboo",
+      "output": "minecraft:bamboo_planks",
+      "cost": 1
+    },
+    {
+      "id": "convert_table:growth/wood/bamboo/mosaic",
+      "catalyst": "minecraft:bamboo",
+      "output": "minecraft:bamboo_mosaic",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/color/white/wool",
+      "catalyst": "minecraft:white_dye",
+      "output": "minecraft:white_wool",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/color/white/terracotta",
+      "catalyst": "minecraft:white_dye",
+      "output": "minecraft:white_terracotta",
+      "cost": 5
+    },
+    {
+      "id": "convert_table:growth/color/white/concrete_powder",
+      "catalyst": "minecraft:white_dye",
+      "output": "minecraft:white_concrete_powder",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/color/orange/wool",
+      "catalyst": "minecraft:orange_dye",
+      "output": "minecraft:orange_wool",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/color/orange/terracotta",
+      "catalyst": "minecraft:orange_dye",
+      "output": "minecraft:orange_terracotta",
+      "cost": 5
+    },
+    {
+      "id": "convert_table:growth/color/orange/concrete_powder",
+      "catalyst": "minecraft:orange_dye",
+      "output": "minecraft:orange_concrete_powder",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/color/magenta/wool",
+      "catalyst": "minecraft:magenta_dye",
+      "output": "minecraft:magenta_wool",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/color/magenta/terracotta",
+      "catalyst": "minecraft:magenta_dye",
+      "output": "minecraft:magenta_terracotta",
+      "cost": 5
+    },
+    {
+      "id": "convert_table:growth/color/magenta/concrete_powder",
+      "catalyst": "minecraft:magenta_dye",
+      "output": "minecraft:magenta_concrete_powder",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/color/light_blue/wool",
+      "catalyst": "minecraft:light_blue_dye",
+      "output": "minecraft:light_blue_wool",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/color/light_blue/terracotta",
+      "catalyst": "minecraft:light_blue_dye",
+      "output": "minecraft:light_blue_terracotta",
+      "cost": 5
+    },
+    {
+      "id": "convert_table:growth/color/light_blue/concrete_powder",
+      "catalyst": "minecraft:light_blue_dye",
+      "output": "minecraft:light_blue_concrete_powder",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/color/yellow/wool",
+      "catalyst": "minecraft:yellow_dye",
+      "output": "minecraft:yellow_wool",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/color/yellow/terracotta",
+      "catalyst": "minecraft:yellow_dye",
+      "output": "minecraft:yellow_terracotta",
+      "cost": 5
+    },
+    {
+      "id": "convert_table:growth/color/yellow/concrete_powder",
+      "catalyst": "minecraft:yellow_dye",
+      "output": "minecraft:yellow_concrete_powder",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/color/lime/wool",
+      "catalyst": "minecraft:lime_dye",
+      "output": "minecraft:lime_wool",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/color/lime/terracotta",
+      "catalyst": "minecraft:lime_dye",
+      "output": "minecraft:lime_terracotta",
+      "cost": 5
+    },
+    {
+      "id": "convert_table:growth/color/lime/concrete_powder",
+      "catalyst": "minecraft:lime_dye",
+      "output": "minecraft:lime_concrete_powder",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/color/pink/wool",
+      "catalyst": "minecraft:pink_dye",
+      "output": "minecraft:pink_wool",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/color/pink/terracotta",
+      "catalyst": "minecraft:pink_dye",
+      "output": "minecraft:pink_terracotta",
+      "cost": 5
+    },
+    {
+      "id": "convert_table:growth/color/pink/concrete_powder",
+      "catalyst": "minecraft:pink_dye",
+      "output": "minecraft:pink_concrete_powder",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/color/gray/wool",
+      "catalyst": "minecraft:gray_dye",
+      "output": "minecraft:gray_wool",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/color/gray/terracotta",
+      "catalyst": "minecraft:gray_dye",
+      "output": "minecraft:gray_terracotta",
+      "cost": 5
+    },
+    {
+      "id": "convert_table:growth/color/gray/concrete_powder",
+      "catalyst": "minecraft:gray_dye",
+      "output": "minecraft:gray_concrete_powder",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/color/light_gray/wool",
+      "catalyst": "minecraft:light_gray_dye",
+      "output": "minecraft:light_gray_wool",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/color/light_gray/terracotta",
+      "catalyst": "minecraft:light_gray_dye",
+      "output": "minecraft:light_gray_terracotta",
+      "cost": 5
+    },
+    {
+      "id": "convert_table:growth/color/light_gray/concrete_powder",
+      "catalyst": "minecraft:light_gray_dye",
+      "output": "minecraft:light_gray_concrete_powder",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/color/cyan/wool",
+      "catalyst": "minecraft:cyan_dye",
+      "output": "minecraft:cyan_wool",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/color/cyan/terracotta",
+      "catalyst": "minecraft:cyan_dye",
+      "output": "minecraft:cyan_terracotta",
+      "cost": 5
+    },
+    {
+      "id": "convert_table:growth/color/cyan/concrete_powder",
+      "catalyst": "minecraft:cyan_dye",
+      "output": "minecraft:cyan_concrete_powder",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/color/purple/wool",
+      "catalyst": "minecraft:purple_dye",
+      "output": "minecraft:purple_wool",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/color/purple/terracotta",
+      "catalyst": "minecraft:purple_dye",
+      "output": "minecraft:purple_terracotta",
+      "cost": 5
+    },
+    {
+      "id": "convert_table:growth/color/purple/concrete_powder",
+      "catalyst": "minecraft:purple_dye",
+      "output": "minecraft:purple_concrete_powder",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/color/blue/wool",
+      "catalyst": "minecraft:blue_dye",
+      "output": "minecraft:blue_wool",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/color/blue/terracotta",
+      "catalyst": "minecraft:blue_dye",
+      "output": "minecraft:blue_terracotta",
+      "cost": 5
+    },
+    {
+      "id": "convert_table:growth/color/blue/concrete_powder",
+      "catalyst": "minecraft:blue_dye",
+      "output": "minecraft:blue_concrete_powder",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/color/brown/wool",
+      "catalyst": "minecraft:brown_dye",
+      "output": "minecraft:brown_wool",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/color/brown/terracotta",
+      "catalyst": "minecraft:brown_dye",
+      "output": "minecraft:brown_terracotta",
+      "cost": 5
+    },
+    {
+      "id": "convert_table:growth/color/brown/concrete_powder",
+      "catalyst": "minecraft:brown_dye",
+      "output": "minecraft:brown_concrete_powder",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/color/green/wool",
+      "catalyst": "minecraft:green_dye",
+      "output": "minecraft:green_wool",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/color/green/terracotta",
+      "catalyst": "minecraft:green_dye",
+      "output": "minecraft:green_terracotta",
+      "cost": 5
+    },
+    {
+      "id": "convert_table:growth/color/green/concrete_powder",
+      "catalyst": "minecraft:green_dye",
+      "output": "minecraft:green_concrete_powder",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/color/red/wool",
+      "catalyst": "minecraft:red_dye",
+      "output": "minecraft:red_wool",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/color/red/terracotta",
+      "catalyst": "minecraft:red_dye",
+      "output": "minecraft:red_terracotta",
+      "cost": 5
+    },
+    {
+      "id": "convert_table:growth/color/red/concrete_powder",
+      "catalyst": "minecraft:red_dye",
+      "output": "minecraft:red_concrete_powder",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/color/black/wool",
+      "catalyst": "minecraft:black_dye",
+      "output": "minecraft:black_wool",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/color/black/terracotta",
+      "catalyst": "minecraft:black_dye",
+      "output": "minecraft:black_terracotta",
+      "cost": 5
+    },
+    {
+      "id": "convert_table:growth/color/black/concrete_powder",
+      "catalyst": "minecraft:black_dye",
+      "output": "minecraft:black_concrete_powder",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/stone/cobblestone/block",
+      "catalyst": "minecraft:cobblestone",
+      "output": "minecraft:cobblestone",
+      "cost": 1
+    },
+    {
+      "id": "convert_table:growth/stone/cobblestone/stairs",
+      "catalyst": "minecraft:cobblestone",
+      "output": "minecraft:cobblestone_stairs",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/stone/cobblestone/slab",
+      "catalyst": "minecraft:cobblestone",
+      "output": "minecraft:cobblestone_slab",
+      "cost": 1
+    },
+    {
+      "id": "convert_table:growth/stone/cobblestone/wall",
+      "catalyst": "minecraft:cobblestone",
+      "output": "minecraft:cobblestone_wall",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/stone/stone/block",
+      "catalyst": "minecraft:stone",
+      "output": "minecraft:stone",
+      "cost": 1
+    },
+    {
+      "id": "convert_table:growth/stone/stone/smooth",
+      "catalyst": "minecraft:stone",
+      "output": "minecraft:smooth_stone",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/stone/stone/bricks",
+      "catalyst": "minecraft:stone",
+      "output": "minecraft:stone_bricks",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/stone/stone/cracked_bricks",
+      "catalyst": "minecraft:stone",
+      "output": "minecraft:cracked_stone_bricks",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/stone/stone/chiseled_bricks",
+      "catalyst": "minecraft:stone",
+      "output": "minecraft:chiseled_stone_bricks",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/stone/stone/stairs",
+      "catalyst": "minecraft:stone",
+      "output": "minecraft:stone_stairs",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/stone/stone/slab",
+      "catalyst": "minecraft:stone",
+      "output": "minecraft:stone_slab",
+      "cost": 1
+    },
+    {
+      "id": "convert_table:growth/stone/stone/brick_stairs",
+      "catalyst": "minecraft:stone",
+      "output": "minecraft:stone_brick_stairs",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/stone/stone/brick_slab",
+      "catalyst": "minecraft:stone",
+      "output": "minecraft:stone_brick_slab",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/stone/stone/brick_wall",
+      "catalyst": "minecraft:stone",
+      "output": "minecraft:stone_brick_wall",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/stone/granite/block",
+      "catalyst": "minecraft:granite",
+      "output": "minecraft:granite",
+      "cost": 1
+    },
+    {
+      "id": "convert_table:growth/stone/granite/polished",
+      "catalyst": "minecraft:granite",
+      "output": "minecraft:polished_granite",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/stone/granite/wall",
+      "catalyst": "minecraft:granite",
+      "output": "minecraft:granite_wall",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/stone/diorite/block",
+      "catalyst": "minecraft:diorite",
+      "output": "minecraft:diorite",
+      "cost": 1
+    },
+    {
+      "id": "convert_table:growth/stone/diorite/polished",
+      "catalyst": "minecraft:diorite",
+      "output": "minecraft:polished_diorite",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/stone/diorite/wall",
+      "catalyst": "minecraft:diorite",
+      "output": "minecraft:diorite_wall",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/stone/andesite/block",
+      "catalyst": "minecraft:andesite",
+      "output": "minecraft:andesite",
+      "cost": 1
+    },
+    {
+      "id": "convert_table:growth/stone/andesite/polished",
+      "catalyst": "minecraft:andesite",
+      "output": "minecraft:polished_andesite",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/stone/andesite/wall",
+      "catalyst": "minecraft:andesite",
+      "output": "minecraft:andesite_wall",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/stone/deepslate/cobbled",
+      "catalyst": "minecraft:deepslate",
+      "output": "minecraft:cobbled_deepslate",
+      "cost": 1
+    },
+    {
+      "id": "convert_table:growth/stone/deepslate/polished",
+      "catalyst": "minecraft:deepslate",
+      "output": "minecraft:polished_deepslate",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/stone/deepslate/bricks",
+      "catalyst": "minecraft:deepslate",
+      "output": "minecraft:deepslate_bricks",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/stone/deepslate/cracked_bricks",
+      "catalyst": "minecraft:deepslate",
+      "output": "minecraft:cracked_deepslate_bricks",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/stone/deepslate/tiles",
+      "catalyst": "minecraft:deepslate",
+      "output": "minecraft:deepslate_tiles",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/stone/deepslate/cracked_tiles",
+      "catalyst": "minecraft:deepslate",
+      "output": "minecraft:cracked_deepslate_tiles",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/stone/deepslate/chiseled",
+      "catalyst": "minecraft:deepslate",
+      "output": "minecraft:chiseled_deepslate",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/stone/tuff/block",
+      "catalyst": "minecraft:tuff",
+      "output": "minecraft:tuff",
+      "cost": 1
+    },
+    {
+      "id": "convert_table:growth/stone/tuff/polished",
+      "catalyst": "minecraft:tuff",
+      "output": "minecraft:polished_tuff",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/stone/tuff/bricks",
+      "catalyst": "minecraft:tuff",
+      "output": "minecraft:tuff_bricks",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/stone/tuff/chiseled_bricks",
+      "catalyst": "minecraft:tuff",
+      "output": "minecraft:chiseled_tuff_bricks",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/stone/tuff/stairs",
+      "catalyst": "minecraft:tuff",
+      "output": "minecraft:tuff_stairs",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/stone/tuff/slab",
+      "catalyst": "minecraft:tuff",
+      "output": "minecraft:tuff_slab",
+      "cost": 1
+    },
+    {
+      "id": "convert_table:growth/stone/tuff/wall",
+      "catalyst": "minecraft:tuff",
+      "output": "minecraft:tuff_wall",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/stone/tuff/polished_stairs",
+      "catalyst": "minecraft:tuff",
+      "output": "minecraft:polished_tuff_stairs",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/stone/tuff/polished_slab",
+      "catalyst": "minecraft:tuff",
+      "output": "minecraft:polished_tuff_slab",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/stone/tuff/polished_wall",
+      "catalyst": "minecraft:tuff",
+      "output": "minecraft:polished_tuff_wall",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/stone/tuff/brick_stairs",
+      "catalyst": "minecraft:tuff",
+      "output": "minecraft:tuff_brick_stairs",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/stone/tuff/brick_slab",
+      "catalyst": "minecraft:tuff",
+      "output": "minecraft:tuff_brick_slab",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/stone/tuff/brick_wall",
+      "catalyst": "minecraft:tuff",
+      "output": "minecraft:tuff_brick_wall",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/stone/basalt/block",
+      "catalyst": "minecraft:basalt",
+      "output": "minecraft:basalt",
+      "cost": 1
+    },
+    {
+      "id": "convert_table:growth/stone/basalt/polished",
+      "catalyst": "minecraft:basalt",
+      "output": "minecraft:polished_basalt",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/stone/basalt/smooth",
+      "catalyst": "minecraft:basalt",
+      "output": "minecraft:smooth_basalt",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/stone/blackstone/block",
+      "catalyst": "minecraft:blackstone",
+      "output": "minecraft:blackstone",
+      "cost": 1
+    },
+    {
+      "id": "convert_table:growth/stone/blackstone/polished",
+      "catalyst": "minecraft:blackstone",
+      "output": "minecraft:polished_blackstone",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/stone/blackstone/bricks",
+      "catalyst": "minecraft:blackstone",
+      "output": "minecraft:polished_blackstone_bricks",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/stone/blackstone/cracked_bricks",
+      "catalyst": "minecraft:blackstone",
+      "output": "minecraft:cracked_polished_blackstone_bricks",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/stone/blackstone/chiseled",
+      "catalyst": "minecraft:blackstone",
+      "output": "minecraft:chiseled_polished_blackstone",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/stone/blackstone/stairs",
+      "catalyst": "minecraft:blackstone",
+      "output": "minecraft:blackstone_stairs",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/stone/blackstone/slab",
+      "catalyst": "minecraft:blackstone",
+      "output": "minecraft:blackstone_slab",
+      "cost": 1
+    },
+    {
+      "id": "convert_table:growth/stone/blackstone/wall",
+      "catalyst": "minecraft:blackstone",
+      "output": "minecraft:blackstone_wall",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/stone/blackstone/polished_stairs",
+      "catalyst": "minecraft:blackstone",
+      "output": "minecraft:polished_blackstone_stairs",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/stone/blackstone/polished_slab",
+      "catalyst": "minecraft:blackstone",
+      "output": "minecraft:polished_blackstone_slab",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/stone/blackstone/polished_wall",
+      "catalyst": "minecraft:blackstone",
+      "output": "minecraft:polished_blackstone_wall",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/stone/blackstone/brick_stairs",
+      "catalyst": "minecraft:blackstone",
+      "output": "minecraft:polished_blackstone_brick_stairs",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/stone/blackstone/brick_slab",
+      "catalyst": "minecraft:blackstone",
+      "output": "minecraft:polished_blackstone_brick_slab",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/stone/blackstone/brick_wall",
+      "catalyst": "minecraft:blackstone",
+      "output": "minecraft:polished_blackstone_brick_wall",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/stone/end_stone/block",
+      "catalyst": "minecraft:end_stone",
+      "output": "minecraft:end_stone",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/stone/end_stone/bricks",
+      "catalyst": "minecraft:end_stone",
+      "output": "minecraft:end_stone_bricks",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/stone/end_stone/brick_stairs",
+      "catalyst": "minecraft:end_stone",
+      "output": "minecraft:end_stone_brick_stairs",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/stone/end_stone/brick_slab",
+      "catalyst": "minecraft:end_stone",
+      "output": "minecraft:end_stone_brick_slab",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/stone/end_stone/brick_wall",
+      "catalyst": "minecraft:end_stone",
+      "output": "minecraft:end_stone_brick_wall",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/sand/sandstone/sand",
+      "catalyst": "minecraft:sand",
+      "output": "minecraft:sand",
+      "cost": 1
+    },
+    {
+      "id": "convert_table:growth/sand/sandstone/sandstone",
+      "catalyst": "minecraft:sand",
+      "output": "minecraft:sandstone",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/sand/sandstone/cut",
+      "catalyst": "minecraft:sand",
+      "output": "minecraft:cut_sandstone",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/sand/sandstone/chiseled",
+      "catalyst": "minecraft:sand",
+      "output": "minecraft:chiseled_sandstone",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/sand/sandstone/smooth",
+      "catalyst": "minecraft:sand",
+      "output": "minecraft:smooth_sandstone",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/sand/sandstone/stairs",
+      "catalyst": "minecraft:sand",
+      "output": "minecraft:sandstone_stairs",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/sand/sandstone/slab",
+      "catalyst": "minecraft:sand",
+      "output": "minecraft:sandstone_slab",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/sand/sandstone/wall",
+      "catalyst": "minecraft:sand",
+      "output": "minecraft:sandstone_wall",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/sand/red_sandstone/sand",
+      "catalyst": "minecraft:red_sand",
+      "output": "minecraft:red_sand",
+      "cost": 1
+    },
+    {
+      "id": "convert_table:growth/sand/red_sandstone/sandstone",
+      "catalyst": "minecraft:red_sand",
+      "output": "minecraft:red_sandstone",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/sand/red_sandstone/cut",
+      "catalyst": "minecraft:red_sand",
+      "output": "minecraft:cut_red_sandstone",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/sand/red_sandstone/chiseled",
+      "catalyst": "minecraft:red_sand",
+      "output": "minecraft:chiseled_red_sandstone",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/sand/red_sandstone/smooth",
+      "catalyst": "minecraft:red_sand",
+      "output": "minecraft:smooth_red_sandstone",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/sand/red_sandstone/stairs",
+      "catalyst": "minecraft:red_sand",
+      "output": "minecraft:red_sandstone_stairs",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/sand/red_sandstone/slab",
+      "catalyst": "minecraft:red_sand",
+      "output": "minecraft:red_sandstone_slab",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/sand/red_sandstone/wall",
+      "catalyst": "minecraft:red_sand",
+      "output": "minecraft:red_sandstone_wall",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/soil/dirt/block",
+      "catalyst": "minecraft:dirt",
+      "output": "minecraft:dirt",
+      "cost": 1
+    },
+    {
+      "id": "convert_table:growth/soil/dirt/coarse",
+      "catalyst": "minecraft:dirt",
+      "output": "minecraft:coarse_dirt",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/soil/dirt/mud",
+      "catalyst": "minecraft:dirt",
+      "output": "minecraft:mud",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/soil/gravel/block",
+      "catalyst": "minecraft:gravel",
+      "output": "minecraft:gravel",
+      "cost": 1
+    },
+    {
+      "id": "convert_table:growth/soil/gravel/coarse_dirt",
+      "catalyst": "minecraft:gravel",
+      "output": "minecraft:coarse_dirt",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/soil/clay/clay",
+      "catalyst": "minecraft:clay_ball",
+      "output": "minecraft:clay",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/soil/clay/terracotta",
+      "catalyst": "minecraft:clay_ball",
+      "output": "minecraft:terracotta",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/soil/clay/bricks",
+      "catalyst": "minecraft:clay_ball",
+      "output": "minecraft:bricks",
+      "cost": 5
+    },
+    {
+      "id": "convert_table:growth/soil/clay/brick_stairs",
+      "catalyst": "minecraft:clay_ball",
+      "output": "minecraft:brick_stairs",
+      "cost": 6
+    },
+    {
+      "id": "convert_table:growth/soil/clay/brick_slab",
+      "catalyst": "minecraft:clay_ball",
+      "output": "minecraft:brick_slab",
+      "cost": 5
+    },
+    {
+      "id": "convert_table:growth/soil/clay/brick_wall",
+      "catalyst": "minecraft:clay_ball",
+      "output": "minecraft:brick_wall",
+      "cost": 6
+    },
+    {
+      "id": "convert_table:growth/soil/mud/mud",
+      "catalyst": "minecraft:mud",
+      "output": "minecraft:mud",
+      "cost": 1
+    },
+    {
+      "id": "convert_table:growth/soil/mud/packed",
+      "catalyst": "minecraft:mud",
+      "output": "minecraft:packed_mud",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/soil/mud/bricks",
+      "catalyst": "minecraft:mud",
+      "output": "minecraft:mud_bricks",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/soil/mud/brick_stairs",
+      "catalyst": "minecraft:mud",
+      "output": "minecraft:mud_brick_stairs",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/soil/mud/brick_slab",
+      "catalyst": "minecraft:mud",
+      "output": "minecraft:mud_brick_slab",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/soil/mud/brick_wall",
+      "catalyst": "minecraft:mud",
+      "output": "minecraft:mud_brick_wall",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/soil/moss/block",
+      "catalyst": "minecraft:moss_block",
+      "output": "minecraft:moss_block",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/soil/moss/carpet",
+      "catalyst": "minecraft:moss_block",
+      "output": "minecraft:moss_carpet",
+      "cost": 1
+    },
+    {
+      "id": "convert_table:growth/soil/moss/mossy_cobblestone",
+      "catalyst": "minecraft:moss_block",
+      "output": "minecraft:mossy_cobblestone",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/soil/moss/mossy_bricks",
+      "catalyst": "minecraft:moss_block",
+      "output": "minecraft:mossy_stone_bricks",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/soil/moss/mossy_brick_stairs",
+      "catalyst": "minecraft:moss_block",
+      "output": "minecraft:mossy_stone_brick_stairs",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/soil/moss/mossy_brick_slab",
+      "catalyst": "minecraft:moss_block",
+      "output": "minecraft:mossy_stone_brick_slab",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/soil/moss/mossy_brick_wall",
+      "catalyst": "minecraft:moss_block",
+      "output": "minecraft:mossy_stone_brick_wall",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/nether/netherrack/block",
+      "catalyst": "minecraft:netherrack",
+      "output": "minecraft:netherrack",
+      "cost": 1
+    },
+    {
+      "id": "convert_table:growth/nether/netherrack/bricks",
+      "catalyst": "minecraft:netherrack",
+      "output": "minecraft:nether_bricks",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/nether/netherrack/brick_stairs",
+      "catalyst": "minecraft:netherrack",
+      "output": "minecraft:nether_brick_stairs",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/nether/netherrack/brick_slab",
+      "catalyst": "minecraft:netherrack",
+      "output": "minecraft:nether_brick_slab",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/nether/netherrack/brick_wall",
+      "catalyst": "minecraft:netherrack",
+      "output": "minecraft:nether_brick_wall",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/nether/soul_sand/block",
+      "catalyst": "minecraft:soul_sand",
+      "output": "minecraft:soul_sand",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/nether/soul_soil/block",
+      "catalyst": "minecraft:soul_soil",
+      "output": "minecraft:soul_soil",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/soil/podzol/podzol",
+      "catalyst": "minecraft:podzol",
+      "output": "minecraft:podzol",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/soil/mycelium/mycelium",
+      "catalyst": "minecraft:mycelium",
+      "output": "minecraft:mycelium",
+      "cost": 3
+    },
+    {
+      "id": "convert_table:growth/stone/calcite/calcite",
+      "catalyst": "minecraft:calcite",
+      "output": "minecraft:calcite",
+      "cost": 4
+    },
+    {
+      "id": "convert_table:growth/snow/snowball/snow_block",
+      "catalyst": "minecraft:snowball",
+      "output": "minecraft:snow_block",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/stone/dripstone/dripstone_block",
+      "catalyst": "minecraft:dripstone_block",
+      "output": "minecraft:dripstone_block",
+      "cost": 2
+    },
+    {
+      "id": "convert_table:growth/stone/dripstone/pointed_dripstone",
+      "catalyst": "minecraft:dripstone_block",
+      "output": "minecraft:pointed_dripstone",
+      "cost": 3
+    }
+  ]
+}

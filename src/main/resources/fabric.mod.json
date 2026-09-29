@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "convert_table",
+  "version": "${version}",
+  "name": "ConvertTable",
+  "description": "Animated conversion tables and a crystal growth system with catalyst production for Minecraft 26.3.",
+  "authors": [
+    "ConvertTable"
+  ],
+  "license": "MIT",
+  "environment": "*",
+  "mixins": [
+    "convert_table.mixins.json"
+  ],
+  "entrypoints": {
+    "main": [
+      "com.example.converttable.ConvertTable"
+    ],
+    "client": [
+      "com.example.converttable.ConvertTableClient"
+    ],
+    "jei_mod_plugin": [
+      "com.example.converttable.compat.ConversionJeiPlugin"
+    ],
+    "rei_client": [
+      "com.example.converttable.compat.ConversionReiPlugin"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.19.5",
+    "minecraft": "~26.3",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}

@@ -1,0 +1,7 @@
+TBBmalloc: skip allocation functions replacement in ucrtbase.dll: unknown prologue for function _msize
+Blender 3.2.1 (hash a2d59b2dac9e built 2022-07-06 07:45:50)
+Read blend: D:\Desktop\Document\Coding\FULL STACK\ConvertTable\assets\geode_prototype\mother_rock_geode_16px.blend
+Info: Saved "mother_rock_geode_16px.blend"
+Info: Saved "mother_rock_geode_16px.blend"
+
+Blender quit

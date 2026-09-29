@@ -1,0 +1,10 @@
+{
+  "Version": "1.3.0",
+  "Jar": "D:\\Desktop\\Document\\MC\\MC\\.minecraft\\versions\\26.2-Fabric 0.19.5 CT TEST\\mods\\convert-table-1.3.0.jar",
+  "SHA256": "26063F934B6B58D196094BE75A596C4B4FDBC0DC19604A34CC5ACC9BB30319C6",
+  "Config": "D:\\Desktop\\Document\\MC\\MC\\.minecraft\\versions\\26.2-Fabric 0.19.5 CT TEST\\config\\convert_table\\recipes.json",
+  "ExecutionEnabled": true,
+  "Groups": 99,
+  "Advanced": 52,
+  "Backup": "D:\\Desktop\\Document\\MC\\MC\\.minecraft\\versions\\26.2-Fabric 0.19.5 CT TEST\\.codex-backups\\convert-table\\20260921-232139"
+}
