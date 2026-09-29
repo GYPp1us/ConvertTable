@@ -75,10 +75,11 @@ jobs:
           test -f "$SRC_JAR" || { echo "::error::Missing sources jar"; exit 1; }
           unzip -p "$MOD_JAR" fabric.mod.json | grep -q '"id": "convert_table"' \
             || { echo "::error::Mod jar metadata is wrong"; exit 1; }
+          # Stable-named copy so /releases/latest/download/convert-table.jar always resolves.
+          cp "$MOD_JAR" convert-table.jar
           echo "mod_jar=$MOD_JAR" >> "$GITHUB_OUTPUT"
           echo "src_jar=$SRC_JAR" >> "$GITHUB_OUTPUT"
           sha256sum "$MOD_JAR" "$SRC_JAR" | tee SHA256SUMS.txt
-          echo "mod_sha256=$(sha256sum "$MOD_JAR" | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
 
       - name: Compose release notes
         id: notes
@@ -104,6 +105,7 @@ jobs:
           | Java | 25 |
 
           ### Artifacts
+          - `convert-table.jar` — stable-named copy, always the newest build
           - `convert-table-${{ steps.meta.outputs.version }}.jar` — install this one
           - `convert-table-${{ steps.meta.outputs.version }}-sources.jar` — development only
           - `SHA256SUMS.txt` — checksums
@@ -129,4 +131,5 @@ jobs:
             --verify-tag \
             "${{ steps.jars.outputs.mod_jar }}#${{ steps.jars.outputs.mod_jar }}" \
             "${{ steps.jars.outputs.src_jar }}#${{ steps.jars.outputs.src_jar }}" \
+            convert-table.jar \
             SHA256SUMS.txt

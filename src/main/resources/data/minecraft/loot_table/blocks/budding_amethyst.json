@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:block",
+  "random_sequence": "minecraft:blocks/budding_amethyst",
+  "pools": [
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        },
+        {
+          "condition": "minecraft:tool/can_silk_touch"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:budding_amethyst"
+        }
+      ]
+    }
+  ]
+}

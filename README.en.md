@@ -179,6 +179,8 @@ Each recipe yields one block.
 | Crystal table | `CAC`<br>`BXB`<br>`CSC` | C calcite · A amethyst block · B budding amethyst · X **end crystal** · S smooth basalt |
 | Catalyst pedestal | `···`<br>`CAC`<br>`SSS` | C calcite · A amethyst block · S smooth basalt |
 
+> **Budding amethyst is now obtainable.** This mod overrides the vanilla loot table: mine budding amethyst with a **Silk Touch** pickaxe to get the block itself (vanilla just destroys it). Explosions still destroy it. Without this the crystal table could never be crafted or relocated.
+
 ---
 
 ## Configuring recipes
@@ -214,6 +216,9 @@ Yes, through saving and chunk unloading. Disconnecting the sculk surface does no
 
 **The pedestal isn't producing.**
 Check in order: is the vein connected, are there immature buds, is a catalyst inserted, is a target selected, and are the output slots or adjacent containers full?
+
+**How do I get budding amethyst?**
+Mine it with a **Silk Touch** pickaxe. Vanilla destroys it outright; this mod makes it collectable, otherwise the crystal table could neither be crafted nor moved.
 
 ---
 
