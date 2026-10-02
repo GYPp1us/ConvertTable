@@ -9,8 +9,8 @@
         16,
         16
       ],
-      "static_quads": 872,
-      "item_quads": 890,
+      "static_quads": 952,
+      "item_quads": 970,
       "animated_groups": {
         "recessed_rotor": 18
       },
@@ -173,6 +173,14 @@
           ],
           "gold_texels": 0,
           "emissive_texels": 0
+        },
+        "ring_glow": {
+          "roughness_range": [
+            0.271,
+            0.286
+          ],
+          "gold_texels": 0,
+          "emissive_texels": 256
         },
         "obsidian": {
           "roughness_range": [

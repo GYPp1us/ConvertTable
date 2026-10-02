@@ -1,0 +1,234 @@
+{
+  "renderer": "assets/tools/render_readme.py",
+  "source": "jar",
+  "jar": "build\\libs\\convert-table-0.2.0.jar",
+  "jar_sha256": "463a4b86e819ea1dbedc79c61a96a42c8e8aabeaf1017a49ff0c6f6d86bf7152",
+  "render_settings": {
+    "size": 512,
+    "frames": 24,
+    "gif_delay_resolution_ms": 10,
+    "gif_time_unit": "seconds, matching the Minecraft client renderer",
+    "camera": "orthographic north/east/top"
+  },
+  "inputs": {
+    "assets/convert_table/conversion_table/black_gold.json": "6bac023ba0564da42801cf9c8dce9249d27a06b676297e907d4359ffe82e2cea",
+    "assets/convert_table/conversion_table/end.json": "d55acd1737cd8c96407e79e820ed5f49698ef784fac5863b776d24d37235e9a9",
+    "assets/convert_table/conversion_table/sculk.json": "f6d765ed7b6094b3653d06101f6a2ba050409377347359b7d29f1ac693ef886a",
+    "assets/convert_table/models/block/black_gold.json": "09d10c70a09e3bf336b859465a21da5bf5e12a7adf3ff7b0c368e383c3877241",
+    "assets/convert_table/models/block/catalyst_pedestal.json": "7e7b7b28d4b34a927b223d093bf08429c5c225ef9aadb155ae350fb734684494",
+    "assets/convert_table/models/block/crystal_table.json": "d2e67b824931714935580ff08e791fd0703204e2084bf8376166e6a962ddd10c",
+    "assets/convert_table/models/block/end.json": "c14346d4b09f0692cd535f9ed402b5456019333db95a814c08ad1bfa7cf7dd07",
+    "assets/convert_table/models/block/sculk.json": "7bfe291d0adf08074e640cb8a71ac111a6c20bc40065898aa355d67aa8bfdc24",
+    "assets/convert_table/textures/block/black_gold/amethyst_core.png": "19769546e9d941315ac9c472c794b2a7e9981ffd814ed4b157b68fdec97f75b6",
+    "assets/convert_table/textures/block/black_gold/gold.png": "d9fa2e7917029c366fd11e9365bd50bbe84d883bbbdc7a6b9e09682daec61dd6",
+    "assets/convert_table/textures/block/black_gold/pit_steps.png": "38e63a738544e83581817c66a1332f60cf7ab90493afc5fc472c1ada314bca60",
+    "assets/convert_table/textures/block/black_gold/pit_wall.png": "b605caca15b8781c409f6ac4dcd46c55750012be80b6d393f0e07d2c03fd65e1",
+    "assets/convert_table/textures/block/black_gold/side_carved_frame.png": "79708277170d6097755c68112cb8604efd9595eb46648ee2447259c00bb727f3",
+    "assets/convert_table/textures/block/black_gold/side_gold_clamps.png": "c0a8a7e1b97b0390c0ee5c2d64f04dd83c6002ba61e10e37b7b9eb548aad992d",
+    "assets/convert_table/textures/block/black_gold/side_inset_front.png": "ba19551e58465d0afc12e1042f326de0c65ab0365db5eb406487796fda433742",
+    "assets/convert_table/textures/block/black_gold/side_inset_side.png": "e39c62a80c921ace688e92ad996697d857ea7fbb186fd57711669fe13819c751",
+    "assets/convert_table/textures/block/black_gold/tabletop.png": "f02c59d85ea86c9c1e260a5c45426085e729a80e53216c54d9f036143c9e358e",
+    "assets/convert_table/textures/block/crystal_table/bud_lilac.png": "dc6ce3cd6092426ae800f6dd791ed4a5efc0b96fb923b1bdf8a8a4cc521b8ce3",
+    "assets/convert_table/textures/block/crystal_table/bud_pink.png": "e85ad2f6120fa3f7e7da272d1e510dca6d8fa37e85f78a543c8c0a6e7b25793d",
+    "assets/convert_table/textures/block/crystal_table/bud_silver.png": "3286d51d3617b6d97c6b1c7b66227ce12f3c0166b8db1768c20f7acddd51be65",
+    "assets/convert_table/textures/block/crystal_table/engraved_amethyst.png": "ecdc72bee07945ec49aabe435eac0116d27a2bf1e33dbb3aad47a70af61685a1",
+    "assets/convert_table/textures/block/crystal_table/engraved_glint.png": "11c55ceccbc76ec181459290fd5d41bf3640fad358d6cbe26510a8320d3a4f48",
+    "assets/convert_table/textures/block/crystal_table/geode_basalt.png": "eac5e03b31b9e41db731e24f164469a66a65c9e37e110a87705d612c6f22fdae",
+    "assets/convert_table/textures/block/crystal_table/geode_basalt_dark.png": "070fad03a9c45c761ecfc3508142d11dea8e89ad774adebf16f926dae330234f",
+    "assets/convert_table/textures/block/crystal_table/geode_basalt_light.png": "1e5e8298b9c3284e8ffcc9e6f66d77ca49d10682aefcd588cc420ec6bc322350",
+    "assets/convert_table/textures/block/crystal_table/geode_calcite.png": "26b1ee6598dc8522e41e5d4973ce3ad69234bda06b04c7c1b3f8276f0db58d88",
+    "assets/convert_table/textures/block/crystal_table/geode_calcite_light.png": "a7df1c83e85755f3ea74c6c46066fc99358a22f80e4546e3cc0652789d5b510f",
+    "assets/convert_table/textures/block/crystal_table/geode_calcite_shadow.png": "cbaa8adc2826a48c4bfac9148512cc6727dc1ddc80a1e5a8f9ad3ee0ff4d4b99",
+    "assets/convert_table/textures/block/crystal_table/geode_lining_light.png": "00d686da084295f8bca68a64d5927c5e392294acfc96c2fd162634bbfc2cd623",
+    "assets/convert_table/textures/block/crystal_table/side_backing.png": "50b6ac25d03fcf802b9842445a8587c740a5e0745e13bf5fbf7931543dcde026",
+    "assets/convert_table/textures/block/crystal_table/side_relief.png": "bb7350f2a80ff4174ad860c2c271aa9f0a5a0a9be6f56b94ca07052f9fe4375a",
+    "assets/convert_table/textures/block/crystal_table/vein.png": "a1e972c6fe18ea98b54d5680b2b6617f7cd68facce47f3684ab3951a3dfa3768",
+    "assets/convert_table/textures/block/end/crystal.png": "047557a9911e01ef0dcecba4c4df6aef5d41f37f30ef24c471b595666a6a4927",
+    "assets/convert_table/textures/block/end/end_stone.png": "879ba6549e0c512c2b5b426f6b70030a808cd38f31bbfcacfb69812d756d8ef2",
+    "assets/convert_table/textures/block/end/obsidian.png": "482c442897b1fb2c777088bb7cdb4b2b5c9dc783feb165eb7fc2c5d0a9c10807",
+    "assets/convert_table/textures/block/end/pool.png": "f17d3df10c47d1543e2433a5566874ec017958cd5ea2797118253047c09e3553",
+    "assets/convert_table/textures/block/end/purpur.png": "dafbf4f8e67a889448e3f7f8555edb4c5a8adea5867ac4f6d01720559f26966f",
+    "assets/convert_table/textures/block/end/ring_glow.png": "dafbf4f8e67a889448e3f7f8555edb4c5a8adea5867ac4f6d01720559f26966f",
+    "assets/convert_table/textures/block/end/side_inset_front.png": "6c80cc33c5a3ea4fb1866f5a5090c2defc4eeeeef23d9a9f054b18d43f8fc011",
+    "assets/convert_table/textures/block/end/side_inset_side.png": "e9fa5e7deedb24f83379d053845ae46fb022de380a38be4d6a571106c2e90ed8",
+    "assets/convert_table/textures/block/end/side_midframe.png": "029718721daf8ea1791f0fc2c67bda8230a25ab59786a121fe1bd53f940f8164",
+    "assets/convert_table/textures/block/end/side_purpur_guards.png": "e5c2f255f7e4fd4e71b6e12cb8cb40778ba8312575d2201fe9955e7516b9849f",
+    "assets/convert_table/textures/block/end/top_frame.png": "879ba6549e0c512c2b5b426f6b70030a808cd38f31bbfcacfb69812d756d8ef2",
+    "assets/convert_table/textures/block/sculk/bone.png": "e1a05261829d7545b4bf4c10bb152e2ab8d2195628a6dc12045dbed0b8c95d34",
+    "assets/convert_table/textures/block/sculk/corner_deepslate.png": "fa2884f490fe137e36b61fbf4597dca567c9ce971457434445a46490aba308f8",
+    "assets/convert_table/textures/block/sculk/resonance_bed.png": "7efd9a848f6afe427737e891dabd8b5640dfcb02d3a9f7cf4beba2b16bbdeef9",
+    "assets/convert_table/textures/block/sculk/sculk.png": "6a9e08ccd229bdf0647e5b27f07a2b358a37d549361561bc6b77cc8b64f66829",
+    "assets/convert_table/textures/block/sculk/side_bone_frame.png": "a3a33f715a56b0302803bb167ab772ce49b6bd2a3faa92c53e0d86e44f5597c3",
+    "assets/convert_table/textures/block/sculk/side_deepslate_caps.png": "45a6b7c0b1033f86b0c2d88bd0a4ca1fdd18e6c1f089e47b3f25c011a3616031",
+    "assets/convert_table/textures/block/sculk/side_inset_front.png": "481577f768ff669c4e3b264be72b69aeb8bda28343cd3f83c23edfde75d2e1a7",
+    "assets/convert_table/textures/block/sculk/side_inset_side.png": "37d7ac2c0a165a2bb7ce90c7e6357db327bd7367f959aa1b3d56bf3bb9ccc8e2",
+    "assets/convert_table/textures/block/sculk/soul_crystal.png": "c7c6b26c6ef006cb778129cdba39b7303093d079368a7de32a99069a33b07bc3",
+    "assets/convert_table/textures/block/sculk/soul_tip.png": "63725e3871dbc3423fafc818ac5565bebc3c41a3fcb30beb639eba313de0824b",
+    "assets/convert_table/textures/block/sculk/tabletop.png": "b07002eea01de091224a5abd90f2454c06f69b9fa46643a11004451c6f126802"
+  },
+  "outputs": {
+    "black_gold.gif": {
+      "frames": 24,
+      "frame_size": [
+        512,
+        512
+      ],
+      "cycle_seconds": 12.0,
+      "cycle_ms": 12000,
+      "frame_durations_ms": [
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500
+      ],
+      "animation_groups": [
+        "recessed_rotor"
+      ],
+      "sha256": "106ebdb76860b264503e5449436d4d6455596f7c7f4209dd842c1b64f7c68635"
+    },
+    "black_gold.png": {
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "9a57a4fd83faaab2a5d2bd40b1e08e6295672296bbc4bf7b63a333dd45876d03"
+    },
+    "end.gif": {
+      "frames": 24,
+      "frame_size": [
+        512,
+        512
+      ],
+      "cycle_seconds": 12.0,
+      "cycle_ms": 12000,
+      "frame_durations_ms": [
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500
+      ],
+      "animation_groups": [
+        "rotor"
+      ],
+      "sha256": "597af382120500455864e169a3e2d01af407cd4326b428a8faa12169fac68332"
+    },
+    "end.png": {
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "296fd887b131ca8accea39981e576a5c905383b3ab1c0daf0ba9a52df8306127"
+    },
+    "sculk.gif": {
+      "frames": 24,
+      "frame_size": [
+        512,
+        512
+      ],
+      "cycle_seconds": 12.0,
+      "cycle_ms": 12000,
+      "frame_durations_ms": [
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500
+      ],
+      "animation_groups": [
+        "floating_center",
+        "floating_satellite_1",
+        "floating_satellite_2",
+        "floating_satellite_3",
+        "floating_satellite_4"
+      ],
+      "sha256": "e5f923276dfa3baa2c698d07966afbdc39ac91b6af920a3ca2b605e7f584e638"
+    },
+    "sculk.png": {
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "55fe59af5fc4b16e295856a62944bb972411e6626ca345ed5380fed39ae1f89d"
+    },
+    "crystal_table.png": {
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "80bcf2e3e6652820b5a6144e2b788866df22a2ffe38e5ec945caf514d5ac7478"
+    },
+    "catalyst_pedestal.png": {
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "e3ab6f03f2d2b4016dfe51cc4d4a728671702c02deecfb1f27322734f7fd0a57"
+    },
+    "banner.png": {
+      "size": [
+        1600,
+        420
+      ],
+      "sha256": "5e8a8cc918ab425d2233b33b1058c24cf4a4fc4438367259dfc226979feebda7"
+    }
+  }
+}

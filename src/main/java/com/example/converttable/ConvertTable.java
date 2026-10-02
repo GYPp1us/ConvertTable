@@ -15,6 +15,7 @@ public final class ConvertTable implements ModInitializer {
 	public void onInitialize() {
 		ConversionTables.initialize();
         GrowthBlocks.initialize();
+        ConnectionRod.initialize();
         RecipeConfig.initialize();
         SculkDeathCharging.initialize();
 		LOGGER.info("ConvertTable loaded on Fabric for Minecraft 26.3");

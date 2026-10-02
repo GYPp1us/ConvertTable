@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.state.properties.ChestType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
-/** Real client/server tests; isolated world, no recipes are executed. */
+/** Real client/server input, conversion, timing and viewer tests in an isolated world. */
 final class ConversionTableUiGameTest {
     private static void check(boolean value, String message) {
         if (!value) throw new AssertionError(message);
@@ -64,26 +64,23 @@ final class ConversionTableUiGameTest {
                 var scan=TableRangeScanner.scan(level,origin,true);
                 check(scan.nodes()==4,"Disconnected sculk counted: "+scan.nodes());
                 check(scan.ground()==2,"Covered sculk top counted: "+scan.ground());
-                check(scan.pixels()[16*33+17]==2,"Z projection missing collapsed X=1,Y=0");
-                check(scan.pixels()[15*33+18]==1,"Z projection did not preserve positive Y");
+                check(scan.pixels()[16*33+17]==2,"XZ projection missing X=1,Z=0");
+                check(scan.pixels()[16*33+18]==1,"XZ projection did not collapse covered vertical nodes");
+                check(scan.pixels()[17*33+17]==2,"XZ projection did not preserve positive Z");
                 check(scan.pixels()[16*33+13]==0,"Disconnected node projected");
 
-                // Double chest is one container; distance 4 included and 5 excluded.
+                // Physical endpoints used by the later explicit input/output bindings.
                 var left=Blocks.CHEST.defaultBlockState().setValue(ChestBlock.FACING,Direction.NORTH).setValue(ChestBlock.TYPE,ChestType.LEFT);
                 BlockPos chest=origin.offset(-1,0,-1), partner=ChestBlock.getConnectedBlockPos(chest,left);
                 level.setBlock(chest,left,2);
                 level.setBlock(partner,left.setValue(ChestBlock.TYPE,ChestType.RIGHT),2);
                 level.setBlockAndUpdate(origin.offset(0,0,4),Blocks.BARREL.defaultBlockState());
                 level.setBlockAndUpdate(origin.offset(0,0,5),Blocks.BARREL.defaultBlockState());
-                check(TableRangeScanner.scan(level,origin,true).containers()==2,"Container radius/double-chest dedup failed");
-                for(int i=0;i<9;i++) level.setBlockAndUpdate(origin.offset(i%3-1,2,i/3-1),Blocks.BARREL.defaultBlockState());
-                var limited=TableRangeScanner.scan(level,origin,true);
-                check(limited.containers()==8 && (limited.flags()&TableRangeScanner.CONTAINER_OVERFLOW)!=0,"Container cap not reported");
-                for(int i=0;i<9;i++) level.setBlockAndUpdate(origin.offset(i%3-1,2,i/3-1),Blocks.AIR.defaultBlockState());
                 // Add a visible branching network for the screenshot.
                 for(int x=3;x<=9;x++) level.setBlockAndUpdate(origin.offset(x,0,0),Blocks.SCULK.defaultBlockState());
-                for(int y=1;y<=5;y++) level.setBlockAndUpdate(origin.offset(7,y,0),Blocks.SCULK.defaultBlockState());
+                for(int y=1;y<=5;y++) level.setBlockAndUpdate(origin.offset(8,y,0),Blocks.SCULK.defaultBlockState());
                 for(int z=1;z<=5;z++) level.setBlockAndUpdate(origin.offset(5,0,z),Blocks.SCULK.defaultBlockState());
+                for(int z=-1;z>=-5;z--) level.setBlockAndUpdate(origin.offset(4,0,z),Blocks.SCULK.defaultBlockState());
             });
             var variants=new ConversionTableBlock[]{ConversionTables.BLACK_GOLD,ConversionTables.END,ConversionTables.SCULK};
             var names=new String[]{"piglin","end","sculk"};
@@ -98,7 +95,9 @@ final class ConversionTableUiGameTest {
                     var input=new ItemStack(Items.OAK_PLANKS,32);
                     input.set(DataComponents.CUSTOM_NAME,Component.literal("Stored safely"));
                     table.setItem(0,input);
-                    table.setItem(1,new ItemStack(variant==0?Items.GOLD_NUGGET:Items.CHORUS_FRUIT,8));
+                    if (variant < 2) table.setItem(1,new ItemStack(variant==0?Items.GOLD_NUGGET:Items.CHORUS_FRUIT,8));
+                    check(table.links.toggle(level, origin, origin.offset(-1,0,-1), Direction.UP, true)==1,"Input link setup failed");
+                    check(table.links.toggle(level, origin, origin.offset(0,0,4), Direction.UP, false)==1,"Output link setup failed");
                     variants[variant].useWithoutItem(level.getBlockState(origin),level,origin,player,
                         new BlockHitResult(Vec3.atCenterOf(origin),Direction.SOUTH,origin,false));
                     check(player.containerMenu instanceof ConversionTableMenu,"Right click did not open menu");
@@ -106,12 +105,18 @@ final class ConversionTableUiGameTest {
                     check(!menu.getSlot(2).mayPlace(input),"Output accepts insertion");
                     check(!menu.getSlot(1).mayPlace(input),"Fuel accepts invalid item");
                     check(!menu.clickMenuButton(player,Integer.MAX_VALUE),"Invalid button accepted");
-                    player.getInventory().setItem(9,new ItemStack(variant==0?Items.GOLD_NUGGET:Items.CHORUS_FRUIT,4));
-                    check(!menu.quickMoveStack(player,menu.deviceSlots()).isEmpty() && table.getItem(1).getCount()==12
-                        && player.getInventory().getItem(9).isEmpty(),"Shift-click fuel routing failed");
-                    table.removeItem(1,4);
+                    if (variant < 2) {
+                        player.getInventory().setItem(9,new ItemStack(variant==0?Items.GOLD_NUGGET:Items.CHORUS_FRUIT,4));
+                        check(!menu.quickMoveStack(player,menu.deviceSlots()).isEmpty() && table.getItem(1).getCount()==12
+                            && player.getInventory().getItem(9).isEmpty(),"Shift-click fuel routing failed");
+                        table.removeItem(1,4);
+                    } else {
+                        check(!menu.getSlot(1).isActive() && !menu.getSlot(1).mayPlace(new ItemStack(Items.CHORUS_FRUIT)),"Sculk fuel slot remained usable");
+                    }
                     if(variant==0) check(!menu.clickMenuButton(player,1),"Piglin has mode controls");
                     else {
+                        check(!menu.clickMenuButton(player,1000+BuiltInRegistries.ITEM.getId(Items.AIR)),"Air target accepted");
+                        check(!menu.clickMenuButton(player,1000+BuiltInRegistries.ITEM.getId(Items.DIAMOND)),"Unrelated target accepted");
                         check(menu.clickMenuButton(player,1000+BuiltInRegistries.ITEM.getId(Items.BIRCH_PLANKS)),"Target not accepted");
                         check(menu.clickMenuButton(player,3),"Match toggle rejected");
                     }
@@ -125,17 +130,44 @@ final class ConversionTableUiGameTest {
                 context.runOnClient(mc->{
                     var menu=(ConversionTableMenu)mc.player.containerMenu;
                     check(menu.variant==variant,"Wrong client variant");
-                    check(menu.getSlot(0).getItem().getCount()==32 && menu.getSlot(1).getItem().getCount()==8,"Input/fuel consumed");
+                    check(menu.getSlot(0).getItem().getCount()==32 && menu.getSlot(1).getItem().getCount()==(variant<2?8:0),"Input/fuel changed");
+                    check(menu.inputContainerCount()==1 && menu.outputContainerCount()==1,"Input/output role counts not synchronized");
                     if(variant>0) {
                         check(menu.containerCount()==2,"Container count not synchronized");
                         check(menu.previewTarget()==Items.BIRCH_PLANKS && menu.matchMode()==1,"Preferences not synchronized");
                     }
                     if(variant==2) {
-                        check(menu.pixel(18,15)==1,"Projection not synchronized");
-                        mc.gameMode.handleInventoryButtonClick(menu.containerId,2);
+                        check(menu.pixel(18,16)==1 && menu.pixel(17,17)==2,"XZ projection not synchronized");
+                        check(menu.pixel(23,16)==2,"Projection bit 15 was lost during signed-short synchronization");
+                        check(menu.pixel(20,11)==2 && menu.pixel(21,21)==2,"North/south XZ branches are mirrored or collapsed");
                     }
                 });
-                if(variant==2) context.waitFor(mc->((ConversionTableMenu)mc.player.containerMenu).inputMode()==2,100);
+                if (variant > 0) {
+                    if (variant == 2) UiGameTestInput.clickPanel(context,320,238,220,34);
+                    UiGameTestInput.clickTarget(context,Items.SPRUCE_PLANKS);
+                    context.waitFor(mc->((ConversionTableMenu)mc.player.containerMenu).previewTarget()==Items.SPRUCE_PLANKS,100);
+                    server.runOnServer(game->{
+                        var table=(ConversionTableBlockEntity)game.overworld().getBlockEntity(origin);
+                        check(table.target.equals(BuiltInRegistries.ITEM.getKey(Items.SPRUCE_PLANKS)),"Mouse target click did not reach the server");
+                        check(table.getItem(0).getCount()==32,"Target selection consumed input");
+                    });
+                    UiGameTestInput.clickTarget(context,Items.BIRCH_PLANKS);
+                    context.waitFor(mc->((ConversionTableMenu)mc.player.containerMenu).previewTarget()==Items.BIRCH_PLANKS,100);
+                }
+                if(variant==2) {
+                    UiGameTestInput.clickPanel(context,320,238,152,34);
+                    context.waitFor(mc->((ConversionTableMenu)mc.player.containerMenu).inputMode()==2,100);
+                    UiGameTestInput.clickPanel(context,320,238,280,34);
+                    var expected=context.computeOnClient(mc->new int[33*33]);
+                    server.runOnServer(game->{
+                        int[] pixels=TableRangeScanner.scan(game.overworld(),origin,true).pixels();
+                        System.arraycopy(pixels,0,expected,0,pixels.length);
+                    });
+                    context.runOnClient(mc->{
+                        var menu=(ConversionTableMenu)mc.player.containerMenu;
+                        for (int at=0;at<expected.length;at++) check(menu.pixel(at%33,at/33)==expected[at],"Projection cell differs from server at "+at);
+                    });
+                }
                 context.runOnClient(mc->{mc.gui.toastManager().clear();});
                 context.waitTicks(4);
                 context.takeScreenshot(TestScreenshotOptions.of("ui-"+names[i]));
@@ -146,11 +178,18 @@ final class ConversionTableUiGameTest {
                     context.waitFor(mc->!(mc.gui.screen() instanceof ConversionTableScreen),100);
                 }
             }
+            server.runOnServer(GrowthAllocationGameTest::verify);
+            server.runOnServer(ConnectionRodGameTest::run);
+            server.runOnServer(TimedConversionGameTest::run);
+            server.runOnServer(RecipeCoverageGameTest::run);
+            TimedConversionUiGameTest.run(context, server);
+            server.runOnServer(SculkExperienceGameTest::run);
             server.runOnServer(game->ConversionExecutionGameTest.run(game));
-            context.waitTicks(20);
+            context.waitTicks(25);
             server.runOnServer(game->ConversionExecutionGameTest.verifyAutomatic(game));
             ConversionRecipeGameTest.viewers(context);
-            ConvertTable.LOGGER.info("CONVERSION_TABLE_UI_TEST_PASS: right-click, 3 screens, inventory persistence, no consumption, target/mode sync, double chest, radius/cap, live removal, XY projection");
+            GrowthJeiGameTest.run(context);
+            ConvertTable.LOGGER.info("CONVERSION_TABLE_UI_TEST_PASS: right-click, 3 screens, inventory persistence, no consumption, real mouse target/mode packets, explicit links, no sculk fuel slot, live removal, XZ projection with signed-short high bits");
         }
     }
 }

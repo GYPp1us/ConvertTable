@@ -199,8 +199,10 @@ class Model:
                         if cell.role=='layer':
                             texture=cell.texture
                             if s==cell.side:mode=('side',s,self.height)
-                            elif min(x,15-x,z,15-z)==0 and (s-cell.side)%2==1:
+                            elif [z,15-x,15-z,x][s]==0 and (s-cell.side)%2==1:
                                 # The meeting outer corner uses the other side's projection.
+                                # A raised snout also reaches the outer depth, but its
+                                # perpendicular returns must keep their opaque source texel.
                                 mode=('side',s,self.height)
                             else:mode=('pixel',cell.u,cell.v)
                         elif cell.role=='body':

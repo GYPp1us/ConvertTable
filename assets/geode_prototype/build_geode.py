@@ -27,7 +27,7 @@ rng = random.Random(904)
 
 
 def material_id(name):
-    # Dedicated stone IDs keep the catalyst pedestal's shared legacy maps intact.
+    # The table and pedestal share these current stone IDs; legacy maps stay archived.
     return 'geode_'+name if name.startswith(('calcite','basalt','lining')) else name
 
 def stone_tone(mat):
@@ -116,9 +116,18 @@ for x in (0, 12):
     for z in (0, 12):
         box('10_black_corner_shoulders', (x,9,z), (x+4,13,z+4), 'basalt_dark')
         box('10_black_corner_shoulders', (x,12,z), (x+4,13,z+4), 'basalt')
-        box('11_corner_crystal_buds', (x+1,13,z+1), (x+3,14,z+3), 'bud_lilac')
-        box('11_corner_crystal_buds', (x+1,14,z+1), (x+3,15,z+2), 'bud_pink')
-        box('11_corner_crystal_buds', (x+1,15,z+1), (x+2,16,z+2), 'bud_silver')
+
+# Like the sculk spires, bake four quarter-turns of the northwest bud into
+# integer-grid geometry. Roots stay centered on the same 2x2 corner footprint;
+# the stepped upper tiers and silver tips point out to their own quadrant.
+for quarter_turns in range(4):
+    for x,y,z,mat in [(1,13,1,'bud_lilac'),(2,13,1,'bud_lilac'),
+                      (1,13,2,'bud_lilac'),(2,13,2,'bud_lilac'),
+                      (1,14,1,'bud_pink'),(2,14,1,'bud_pink'),
+                      (1,15,1,'bud_silver')]:
+        p=(x,y,z)
+        for _ in range(quarter_turns):p=(15-p[2],p[1],p[0])
+        box('11_corner_crystal_buds',p,(p[0]+1,p[1]+1,p[2]+1),mat)
 
 # Irregular attached, stepped crystal cluster inside the cavity; no floating pieces.
 box('12_geode_growth_core', (6,9,6), (10,10,10), 'bud_lilac')

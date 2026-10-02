@@ -11,10 +11,19 @@ import net.minecraft.world.item.Items;
 final class ConversionRecipeGameTest {
     static void check(boolean condition,String message) {if(!condition)throw new AssertionError(message);}
     static void verifyConfig() {
+        RecipeConfigMigrationGameTest.run();
         var raw=JsonParser.parseString(RecipeConfig.defaults()).getAsJsonObject();
-        check(raw.getAsJsonArray("groups").size()==99,"Expected all 99 planned groups");
-        check(raw.getAsJsonArray("advanced").size()==52,"Coral templates must expand 40 plans into 52 concrete recipes");
+        check(raw.getAsJsonArray("groups").size()>=107,"Missing Farmer's Delight groups");
+        check(raw.getAsJsonArray("advanced").size()>=83,"Missing new advanced recipes");
         var catalog=RecipeCatalog.parse(raw.toString());
+        var legacy=raw.deepCopy();
+        legacy.getAsJsonObject("settings").getAsJsonObject("sculk").remove("ordinary_souls_per_batch");
+        check(RecipeCatalog.parse(legacy.toString()).advanced().size()==catalog.advanced().size(),
+            "A legacy configuration without the ordinary soul fee was rejected");
+        var freeSouls=raw.deepCopy();
+        freeSouls.getAsJsonObject("settings").getAsJsonObject("sculk").addProperty("ordinary_souls_per_batch",0);
+        rejected(freeSouls.toString(),"zero ordinary soul cost");
+        check(catalog.unavailable().stream().noneMatch(id->id.startsWith("minecraft:")),"Bundled recipe references missing vanilla item IDs");
         check(catalog.groups().size()>80 && catalog.advanced().size()>40,"Too many recipes unexpectedly lost");
         var coral=catalog.advanced().stream().filter(r->r.source().matches("ADV-0(09|10|11)")).toList();
         check(coral.size()==15,"Missing coral variants");
@@ -28,13 +37,28 @@ final class ConversionRecipeGameTest {
         rejected(duplicate.toString(),"duplicate group");
         var negative=raw.deepCopy();negative.getAsJsonArray("advanced").get(0).getAsJsonObject().addProperty("deaths",-1);
         rejected(negative.toString(),"negative death cost");
+        var badPool=raw.deepCopy();
+        var badRecipe=badPool.getAsJsonArray("advanced").get(0).getAsJsonObject();
+        var outputs=new com.google.gson.JsonArray();outputs.add("minecraft:dirt");outputs.add("minecraft:stone");
+        badRecipe.addProperty("output","minecraft:diamond");badRecipe.add("outputs",outputs);
+        rejected(badPool.toString(),"primary output outside random pool");
+        var missingPool=raw.deepCopy();
+        var missingRecipe=missingPool.getAsJsonArray("advanced").get(0).getAsJsonObject();
+        var missingOutputs=new com.google.gson.JsonArray();
+        missingOutputs.add("test_missing:first");missingOutputs.add("test_missing:second");
+        missingRecipe.addProperty("output","test_missing:first");missingRecipe.add("outputs",missingOutputs);
+        check(RecipeCatalog.parse(missingPool.toString()).advanced().size()==catalog.advanced().size()-1,
+            "Completely unavailable random pool must be omitted");
         var xp=raw.deepCopy();xp.getAsJsonObject("settings").getAsJsonObject("sculk").addProperty("consume_player_xp",true);
         rejected(xp.toString(),"experience cost");
         var unknown=raw.deepCopy();unknown.getAsJsonArray("groups").get(0).getAsJsonObject().getAsJsonArray("items").add("minecraft:missing_test_item");
         check(RecipeCatalog.parse(unknown.toString()).unavailable().contains("minecraft:missing_test_item"),"Unknown items not reported");
         var disabled=raw.deepCopy();disabled.getAsJsonArray("groups").get(0).getAsJsonObject().addProperty("enabled",false);
         check(RecipeCatalog.parse(disabled.toString()).groups().size()==catalog.groups().size()-1,"Disabled group still available");
-        ConvertTable.LOGGER.info("RECIPE_CONFIG_TEST_PASS: 99 groups, 52 concrete plans, validation, unknown IDs, coral mapping/remainders");
+        check(catalog.advanced().stream().anyMatch(r->r.id().equals("life-cod")),"Fish revival missing");
+        boolean farmers=FabricLoader.getInstance().isModLoaded("farmersdelight");
+        check(catalog.advanced().stream().anyMatch(r->r.id().equals("fd-draw-01"))==farmers,"Optional seed pool availability wrong");
+        ConvertTable.LOGGER.info("RECIPE_CONFIG_TEST_PASS: {} groups, {} plans, optional Farmers={}, validation/coral/remainders",catalog.groups().size(),catalog.advanced().size(),farmers);
     }
     private static void rejected(String json,String reason) {
         try {RecipeCatalog.parse(json);}catch(IllegalArgumentException expected){return;}
@@ -50,6 +74,8 @@ final class ConversionRecipeGameTest {
                 check(ids.add(r.id()),"Duplicate viewer recipe");
                 if(r.category()<3)check(r.outputs().stream().noneMatch(s->s.is(r.input().getItem())),"Ordinary conversion includes unchanged output");
                 if(r.category()==0)check(r.reagent().is(Items.GOLD_NUGGET),"Piglin cost missing");
+                if(r.category()==2)check(r.deaths()==RecipeConfig.setting("sculk","ordinary_souls_per_batch")
+                    &&r.phase()==0&&r.reagent().isEmpty(),"Ordinary viewer soul fee or removed fuel is incorrect");
             }
             check(all.stream().anyMatch(r->r.category()==3 && r.deaths()>0),"Death-cost recipes missing");
             ConvertTable.LOGGER.info("RECIPE_SYNC_TEST_PASS: {} viewer recipes; {} unavailable IDs",all.size(),ClientRecipeCatalog.current().unavailable().size());

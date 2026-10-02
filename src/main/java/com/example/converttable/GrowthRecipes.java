@@ -61,6 +61,11 @@ public final class GrowthRecipes {
         return id == null ? null : CATALOG.byId().get(id);
     }
 
+    /** Returns every valid recipe in bundled order for optional recipe viewers. */
+    public static List<Recipe> allRecipes() {
+        return List.copyOf(CATALOG.byId().values());
+    }
+
     /**
      * Compatibility helper for older callers. New production code should use the selected
      * recipe's cost; this returns the first target's cost for a valid catalyst.

@@ -24,14 +24,20 @@ import net.minecraft.world.level.storage.ValueOutput;
 
 /** A reusable catalyst and selected output; its source owns the shared production budget. */
 public final class CatalystPedestalBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer {
+    public final ContainerLinks links = new ContainerLinks();
+    public List<ContainerLinks.Entry> outputContainers() { return links.resolve(level, worldPosition, false); }
     public static final int OUTPUT_FIRST = 1, OUTPUT_LAST = 9;
     // 0 idle, 1 growing, 2 catalyst missing, 3 crystal missing, 4 network conflict,
-    // 5 output full, 6 buds missing, 7 unsupported catalyst, 8 target missing.
+    // 5 output full, 6 buds missing, 7 unsupported catalyst, 8 target missing, 9 waiting for a factor share.
     private NonNullList<ItemStack> items = NonNullList.withSize(10, ItemStack.EMPTY);
     private ItemStack catalystState = ItemStack.EMPTY;
     private boolean running;
     private Identifier selectedId;
     private int credit, lastRate, lastAvailable, lastSpent, status;
+    // Twenty subunits per factor let a one-factor/second supply visibly advance each tick.
+    private int fraction, cycleAllocation, cycleElapsed;
+    private long cycleStart = Long.MIN_VALUE;
+    private CrystalTableBlockEntity cycleOwner;
     private long producedTotal;
 
     public CatalystPedestalBlockEntity(BlockPos pos, BlockState state) {
@@ -41,9 +47,11 @@ public final class CatalystPedestalBlockEntity extends BaseContainerBlockEntity 
     public static void tick(Level level, BlockPos pos, BlockState state, CatalystPedestalBlockEntity table) {
         if (level.isClientSide()) return;
         if (!ItemStack.matches(table.catalystState, table.getItem(0))) table.catalystChanged();
+        table.advanceGrowth(level.getGameTime());
         if (level.getGameTime() % 5 == 0) GrowthOutputLinks.flush(level, pos, table);
         if (level.getGameTime() % 20 == 0 && table.crystal() == null) {
             table.lastRate = table.lastSpent = table.lastAvailable = 0;
+            table.stopCycle();
             table.status = !table.running ? 0 : table.getItem(0).isEmpty() ? 2
                 : !GrowthRecipes.isCatalyst(table.getItem(0)) ? 7
                 : table.selectedRecipe() == null ? 8 : 3;
@@ -56,6 +64,10 @@ public final class CatalystPedestalBlockEntity extends BaseContainerBlockEntity 
     public int lastAvailable() { return lastAvailable; }
     public int lastSpent() { return lastSpent; }
     public int credit() { return credit; }
+    public int progressUnits() { return (int) Math.min(Integer.MAX_VALUE, (long) credit * 20 + fraction); }
+    public int progressMaximum() { return (int) Math.min(Integer.MAX_VALUE, (long) cost() * 20); }
+    public int progressRate() { return running && status == 1 ? lastSpent : 0; }
+    public boolean processing() { return running && status == 1 && cycleAllocation > 0 && cycleElapsed < 20; }
     public int cost() { var recipe = selectedRecipe(); return recipe == null ? 0 : recipe.cost(); }
     public long producedTotal() { return producedTotal; }
     public List<GrowthRecipes.Recipe> recipes() { return GrowthRecipes.recipes(getItem(0)); }
@@ -79,7 +91,8 @@ public final class CatalystPedestalBlockEntity extends BaseContainerBlockEntity 
         if (target.equals(selectedId)) return true;
         selectedId = target;
         running = false;
-        credit = lastRate = lastSpent = 0;
+        credit = fraction = lastRate = lastSpent = 0;
+        stopCycle();
         status = 0;
         syncDisplay();
         return true;
@@ -87,13 +100,16 @@ public final class CatalystPedestalBlockEntity extends BaseContainerBlockEntity 
 
     public void toggleRunning() {
         running = !running;
-        if (!running) { status = 0; lastRate = lastSpent = 0; }
+        if (!running) { status = 0; lastRate = lastSpent = 0; stopCycle(); }
         setChanged();
     }
 
     public CrystalTableBlockEntity crystal() { return GrowthNetwork.findSource(level, worldPosition); }
 
     boolean prepareCycle(CrystalTableBlockEntity owner, GrowthNetwork.Snapshot network) {
+        // Settle the previous second before installing a new budget, independent of BE tick order.
+        advanceGrowth(level.getGameTime());
+        stopCycle();
         lastRate = lastSpent = 0;
         lastAvailable = network.available();
         if (!running) { status = 0; return false; }
@@ -103,10 +119,16 @@ public final class CatalystPedestalBlockEntity extends BaseContainerBlockEntity 
         if (!network.usable() || crystal() != owner) { status = 4; return false; }
         if (outputRoom(selectedOutput()) == 0) { status = 5; return false; }
         status = network.available() == 0 ? 6 : 1;
+        cycleOwner = owner;
         return true;
     }
 
-    int demand() { return Math.max(0, outputRoom(selectedOutput()) * cost() - credit); }
+    int demand() { return remainingDemand(outputRoom(selectedOutput()), cost()); }
+
+    private int remainingDemand(int room, int cost) {
+        long units = ((long) room * cost - credit) * 20 - fraction;
+        return (int) Math.clamp((units + 19) / 20, 0L, Integer.MAX_VALUE);
+    }
 
     int acceptGrowth(int allocation, int available) {
         lastAvailable = available;
@@ -114,19 +136,52 @@ public final class CatalystPedestalBlockEntity extends BaseContainerBlockEntity 
         if (recipe == null || !running) return 0;
         ItemStack output = new ItemStack(recipe.output());
         int room = outputRoom(output);
-        int spent = Math.min(Math.max(0, allocation), Math.max(0, room * recipe.cost() - credit));
-        int total = credit + spent;
-        int copies = Math.min(total / recipe.cost(), room);
-        credit = total - copies * recipe.cost();
+        int spent = Math.min(Math.max(0, allocation), remainingDemand(room, recipe.cost()));
+        cycleAllocation = spent;
+        cycleElapsed = 0;
+        cycleStart = level.getGameTime();
+        lastSpent = spent;
+        status = available == 0 ? 6 : spent > 0 ? 1 : 9;
+        if (spent > 0) setChanged();
+        return spent;
+    }
+
+    /** Earn an allocated second's factors over its twenty real server ticks. */
+    void advanceGrowth(long now) {
+        if (cycleAllocation <= 0 || cycleElapsed >= 20) return;
+        var recipe = selectedRecipe();
+        if (!running || recipe == null) { stopCycle(); return; }
+        ItemStack output = new ItemStack(recipe.output());
+        int room = outputRoom(output);
+        if (room == 0) { status = 5; stopCycle(); return; }
+        int elapsed = (int) Math.clamp(now - cycleStart, 0L, 20L);
+        int delta = elapsed - cycleElapsed;
+        if (delta <= 0) return;
+        long units = (long) credit * 20 + fraction + (long) cycleAllocation * delta;
+        long costUnits = (long) recipe.cost() * 20;
+        int copies = (int) Math.min(units / costUnits, room);
+        // Check the physical network again at the actual output transaction, never copy after disconnection.
+        if (copies > 0 && (cycleOwner == null || crystal() != cycleOwner || !cycleOwner.snapshot().usable())) {
+            status = crystal() == null ? 3 : 4;
+            stopCycle();
+            return;
+        }
+        cycleElapsed = elapsed;
+        units -= (long) copies * costUnits;
+        credit = (int) (units / 20);
+        fraction = (int) (units % 20);
         if (copies > 0) {
             insertOutput(output, copies);
             producedTotal += copies;
+            lastRate += copies;
         }
-        lastRate = copies;
-        lastSpent = spent;
-        status = available == 0 ? 6 : 1;
-        if (spent > 0) setChanged();
-        return spent;
+        setChanged();
+    }
+
+    private void stopCycle() {
+        cycleAllocation = cycleElapsed = 0;
+        cycleStart = Long.MIN_VALUE;
+        cycleOwner = null;
     }
 
     private int outputRoom(ItemStack sample) {
@@ -161,7 +216,8 @@ public final class CatalystPedestalBlockEntity extends BaseContainerBlockEntity 
     private void catalystChanged() {
         catalystState = getItem(0).copy();
         running = false;
-        credit = lastRate = lastSpent = 0;
+        credit = fraction = lastRate = lastSpent = 0;
+        stopCycle();
         status = 0;
         List<GrowthRecipes.Recipe> choices = recipes();
         selectedId = choices.size() == 1 ? choices.getFirst().id() : null;
@@ -215,8 +271,10 @@ public final class CatalystPedestalBlockEntity extends BaseContainerBlockEntity 
     @Override protected void saveAdditional(ValueOutput output) {
         super.saveAdditional(output);
         ContainerHelper.saveAllItems(output, items);
+        links.save(output);
         output.putBoolean("Running", running);
         output.putInt("Credit", credit);
+        output.putInt("GrowthFraction", fraction);
         output.putLong("ProducedTotal", producedTotal);
         if (selectedId != null) output.putString("SelectedRecipe", selectedId.toString());
     }
@@ -224,11 +282,14 @@ public final class CatalystPedestalBlockEntity extends BaseContainerBlockEntity 
         super.loadAdditional(input);
         items = NonNullList.withSize(10, ItemStack.EMPTY);
         ContainerHelper.loadAllItems(input, items);
+        links.load(input);
         catalystState = getItem(0).copy();
         selectedId = Identifier.tryParse(input.getStringOr("SelectedRecipe", ""));
         var recipe = selectedRecipe();
         running = input.getBooleanOr("Running", false) && recipe != null;
         credit = recipe == null ? 0 : Math.clamp(input.getIntOr("Credit", 0), 0, recipe.cost() - 1);
+        fraction = recipe == null ? 0 : Math.clamp(input.getIntOr("GrowthFraction", 0), 0, 19);
+        stopCycle(); // Future factors have not been earned yet and must be allocated again after reload.
         producedTotal = Math.max(0L, input.getLongOr("ProducedTotal", 0L));
     }
     @Override public Packet<ClientGamePacketListener> getUpdatePacket() {

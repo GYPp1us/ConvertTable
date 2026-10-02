@@ -1,4 +1,6 @@
-# v1.4 DESIGN DRAFT ONLY; not loaded by the mod.
+# Canonical ordinary/advanced recipe source. Exported to runtime JSON by sync_recipes.py.
+# The mod loads the exported JSON, not this TOML. ui/network/rules draft metadata is not executable.
+# Conversion operation durations are code constants, not editable recipe settings: piglin 4 s, end 2 s, sculk 1 s.
 # Death costs retain v1.3 numbers provisionally; they need gameplay balancing.
 # Conversion Table data; compact canonical source for coding/LLM edits.
 # Item format in arrays/recipe fields: "minecraft_id|中文名".
@@ -7,7 +9,7 @@
 
 [meta]
 mc = "26.3"
-version = "1.4"
+version = "1.6"
 schema = 2
 
 [piglin]
@@ -22,16 +24,19 @@ mode = "select"
 fuel = "chorus_fruit|紫颂果"
 fuel_charge = 16
 charge_per_batch = 1
-container_radius = 4
+container_radius = 16
 max_containers = 8
 
 [sculk]
 mode = "select+advanced"
 inherits_end = true
-# v1.4 planning draft; ordinary conversion still inherits End phase fuel.
-advanced_charge_per_operation = 1
+# Sculk ordinary and advanced conversions do not consume phase fuel.
+advanced_charge_per_operation = 0
+# Ordinary sculk conversions spend this many available souls per successful batch.
+ordinary_souls_per_batch = 1
 advanced_cost = "death_count"
 death_cost_balance = "draft_preserve_previous_numeric_costs"
+# Legacy field retained and validated for compatibility; runtime ignores it. Available souls use each eligible mob's XP reward times the fixed code multiplier 32 (1 XP = 32 souls).
 death_count_per_mob = 1
 death_count_capacity = 4096
 death_surface = "minecraft:sculk"
@@ -68,14 +73,14 @@ default_match_mode = "exact_item"
 skip_target_item = true
 preview_before_start = true
 target_selection = ["search", "current_group", "favorites", "recent"]
-container_roles = []
-container_display = "connected_count_only"
-linked_container_limit_counts_both_roles = false
+container_roles = ["input", "output"]
+container_display = "input_output_counts"
+linked_container_limit_counts_both_roles = true
 contents_mode_requires_explicit_selection = true
 piglin_target_selector = false
 piglin_progress_bar = false
-sculk_projection_axis = "Z"
-sculk_projection_plane = "XY"
+sculk_projection_axis = "Y"
+sculk_projection_plane = "XZ"
 sculk_projection_style = "minimal_2d_grid"
 sculk_projection = ["connected_nodes", "eligible_ground", "ownership", "disconnected", "unknown"]
 advanced_auto_false = "manual_single_operation_only"
@@ -926,6 +931,71 @@ batch = 64
 items = ["red_mushroom|红色蘑菇", "brown_mushroom|棕色蘑菇", "shelf_mushroom|层孔菇"]
 note = "26.3新增官方 #mushrooms；用于红蘑菇/棕蘑菇/Shelf Mushroom 的严格互转集合。"
 
+
+[[group]]
+id = "FD-01"
+cat = "农夫乐事"
+name = "蔬菜"
+tier = "piglin"
+batch = 64
+items = ["farmersdelight:cabbage|卷心菜", "farmersdelight:tomato|番茄", "farmersdelight:onion|洋葱", "farmersdelight:rice|稻米"]
+
+[[group]]
+id = "FD-02"
+cat = "农夫乐事"
+name = "种子"
+tier = "piglin"
+batch = 64
+items = ["farmersdelight:cabbage_seeds|卷心菜种子", "farmersdelight:tomato_seeds|番茄种子"]
+
+[[group]]
+id = "FD-03"
+cat = "农夫乐事"
+name = "生肉切片"
+tier = "end"
+batch = 64
+items = ["farmersdelight:minced_beef|牛肉馅", "farmersdelight:bacon|生培根", "farmersdelight:chicken_cuts|生鸡肉丁", "farmersdelight:mutton_chops|生羊排"]
+
+[[group]]
+id = "FD-04"
+cat = "农夫乐事"
+name = "熟肉切片"
+tier = "end"
+batch = 64
+items = ["farmersdelight:beef_patty|牛肉饼", "farmersdelight:cooked_bacon|熟培根", "farmersdelight:cooked_chicken_cuts|熟鸡肉丁", "farmersdelight:cooked_mutton_chops|熟羊排"]
+
+[[group]]
+id = "FD-05"
+cat = "农夫乐事"
+name = "生鱼切片"
+tier = "piglin"
+batch = 64
+items = ["farmersdelight:cod_slice|生鳕鱼片", "farmersdelight:salmon_slice|生鲑鱼片"]
+
+[[group]]
+id = "FD-06"
+cat = "农夫乐事"
+name = "熟鱼切片"
+tier = "piglin"
+batch = 64
+items = ["farmersdelight:cooked_cod_slice|熟鳕鱼片", "farmersdelight:cooked_salmon_slice|熟鲑鱼片"]
+
+[[group]]
+id = "FD-07"
+cat = "农夫乐事"
+name = "饼干"
+tier = "end"
+batch = 64
+items = ["farmersdelight:sweet_berry_cookie|甜浆果曲奇", "farmersdelight:honey_cookie|蜂蜜曲奇"]
+
+[[group]]
+id = "FD-08"
+cat = "农夫乐事"
+name = "面团与生意面"
+tier = "end"
+batch = 64
+items = ["farmersdelight:wheat_dough|面团", "farmersdelight:raw_pasta|生意面"]
+
 [[recipe]]
 id = "ADV-001"
 cat = "流体/世界规则"
@@ -1485,3 +1555,355 @@ deaths = 36
 auto = false
 unlock = "26.2 白名单"
 note = "26.2新增。"
+
+[[recipe]]
+id = "FD-DRAW-01"
+cat = "农夫乐事"
+name = "农夫乐事种子抽卡"
+input = "wheat_seeds|小麦种子"
+input_n = 16
+output = "farmersdelight:cabbage_seeds|卷心菜种子"
+output_n = 1
+deaths = 8
+auto = true
+catalyst = "bone_meal|骨粉"
+catalyst_n = 1
+outputs = ["farmersdelight:cabbage_seeds|卷心菜种子", "farmersdelight:tomato_seeds|番茄种子", "farmersdelight:rice|稻米", "farmersdelight:onion|洋葱"]
+
+[[recipe]]
+id = "MAT-001"
+cat = "基础材料"
+name = "黏液球转岩浆膏"
+input = "slime_ball|黏液球"
+input_n = 1
+output = "magma_cream|岩浆膏"
+output_n = 1
+deaths = 2
+auto = true
+
+[[recipe]]
+id = "MAT-002"
+cat = "基础材料"
+name = "岩浆膏转黏液球"
+input = "magma_cream|岩浆膏"
+input_n = 1
+output = "slime_ball|黏液球"
+output_n = 1
+deaths = 2
+auto = true
+
+[[recipe]]
+id = "TREE-OAK-LOG"
+cat = "自然"
+name = "木材溯源：橡树树苗"
+input = "oak_log|橡木原木"
+input_n = 1
+output = "oak_sapling|橡树树苗"
+output_n = 1
+deaths = 4
+auto = true
+
+[[recipe]]
+id = "TREE-OAK-WOOD"
+cat = "自然"
+name = "木材溯源：橡树树苗"
+input = "oak_wood|橡木"
+input_n = 1
+output = "oak_sapling|橡树树苗"
+output_n = 1
+deaths = 4
+auto = true
+
+[[recipe]]
+id = "TREE-SPRUCE-LOG"
+cat = "自然"
+name = "木材溯源：云杉树苗"
+input = "spruce_log|云杉原木"
+input_n = 1
+output = "spruce_sapling|云杉树苗"
+output_n = 1
+deaths = 4
+auto = true
+
+[[recipe]]
+id = "TREE-SPRUCE-WOOD"
+cat = "自然"
+name = "木材溯源：云杉树苗"
+input = "spruce_wood|云杉木"
+input_n = 1
+output = "spruce_sapling|云杉树苗"
+output_n = 1
+deaths = 4
+auto = true
+
+[[recipe]]
+id = "TREE-BIRCH-LOG"
+cat = "自然"
+name = "木材溯源：白桦树苗"
+input = "birch_log|白桦原木"
+input_n = 1
+output = "birch_sapling|白桦树苗"
+output_n = 1
+deaths = 4
+auto = true
+
+[[recipe]]
+id = "TREE-BIRCH-WOOD"
+cat = "自然"
+name = "木材溯源：白桦树苗"
+input = "birch_wood|白桦木"
+input_n = 1
+output = "birch_sapling|白桦树苗"
+output_n = 1
+deaths = 4
+auto = true
+
+[[recipe]]
+id = "TREE-JUNGLE-LOG"
+cat = "自然"
+name = "木材溯源：丛林树苗"
+input = "jungle_log|丛林原木"
+input_n = 1
+output = "jungle_sapling|丛林树苗"
+output_n = 1
+deaths = 4
+auto = true
+
+[[recipe]]
+id = "TREE-JUNGLE-WOOD"
+cat = "自然"
+name = "木材溯源：丛林树苗"
+input = "jungle_wood|丛林木"
+input_n = 1
+output = "jungle_sapling|丛林树苗"
+output_n = 1
+deaths = 4
+auto = true
+
+[[recipe]]
+id = "TREE-ACACIA-LOG"
+cat = "自然"
+name = "木材溯源：金合欢树苗"
+input = "acacia_log|金合欢原木"
+input_n = 1
+output = "acacia_sapling|金合欢树苗"
+output_n = 1
+deaths = 4
+auto = true
+
+[[recipe]]
+id = "TREE-ACACIA-WOOD"
+cat = "自然"
+name = "木材溯源：金合欢树苗"
+input = "acacia_wood|金合欢木"
+input_n = 1
+output = "acacia_sapling|金合欢树苗"
+output_n = 1
+deaths = 4
+auto = true
+
+[[recipe]]
+id = "TREE-DARK-OAK-LOG"
+cat = "自然"
+name = "木材溯源：深色橡树树苗"
+input = "dark_oak_log|深色橡木原木"
+input_n = 1
+output = "dark_oak_sapling|深色橡树树苗"
+output_n = 1
+deaths = 4
+auto = true
+
+[[recipe]]
+id = "TREE-DARK-OAK-WOOD"
+cat = "自然"
+name = "木材溯源：深色橡树树苗"
+input = "dark_oak_wood|深色橡木"
+input_n = 1
+output = "dark_oak_sapling|深色橡树树苗"
+output_n = 1
+deaths = 4
+auto = true
+
+[[recipe]]
+id = "TREE-MANGROVE-LOG"
+cat = "自然"
+name = "木材溯源：红树胎生苗"
+input = "mangrove_log|红树原木"
+input_n = 1
+output = "mangrove_propagule|红树胎生苗"
+output_n = 1
+deaths = 4
+auto = true
+
+[[recipe]]
+id = "TREE-MANGROVE-WOOD"
+cat = "自然"
+name = "木材溯源：红树胎生苗"
+input = "mangrove_wood|红树木"
+input_n = 1
+output = "mangrove_propagule|红树胎生苗"
+output_n = 1
+deaths = 4
+auto = true
+
+[[recipe]]
+id = "TREE-CHERRY-LOG"
+cat = "自然"
+name = "木材溯源：樱花树苗"
+input = "cherry_log|樱花原木"
+input_n = 1
+output = "cherry_sapling|樱花树苗"
+output_n = 1
+deaths = 4
+auto = true
+
+[[recipe]]
+id = "TREE-CHERRY-WOOD"
+cat = "自然"
+name = "木材溯源：樱花树苗"
+input = "cherry_wood|樱花木"
+input_n = 1
+output = "cherry_sapling|樱花树苗"
+output_n = 1
+deaths = 4
+auto = true
+
+[[recipe]]
+id = "TREE-PALE-OAK-LOG"
+cat = "自然"
+name = "木材溯源：苍白橡树树苗"
+input = "pale_oak_log|苍白橡木原木"
+input_n = 1
+output = "pale_oak_sapling|苍白橡树树苗"
+output_n = 1
+deaths = 4
+auto = true
+
+[[recipe]]
+id = "TREE-PALE-OAK-WOOD"
+cat = "自然"
+name = "木材溯源：苍白橡树树苗"
+input = "pale_oak_wood|苍白橡木"
+input_n = 1
+output = "pale_oak_sapling|苍白橡树树苗"
+output_n = 1
+deaths = 4
+auto = true
+
+[[recipe]]
+id = "TREE-POPLAR-LOG"
+cat = "自然"
+name = "木材溯源：杨树树苗"
+input = "poplar_log|杨木原木"
+input_n = 1
+output = "poplar_sapling|杨树树苗"
+output_n = 1
+deaths = 4
+auto = true
+
+[[recipe]]
+id = "TREE-POPLAR-WOOD"
+cat = "自然"
+name = "木材溯源：杨树树苗"
+input = "poplar_wood|杨木"
+input_n = 1
+output = "poplar_sapling|杨树树苗"
+output_n = 1
+deaths = 4
+auto = true
+
+[[recipe]]
+id = "TREE-CRIMSON-STEM"
+cat = "自然"
+name = "菌木溯源：绯红菌"
+input = "crimson_stem"
+input_n = 1
+output = "crimson_fungus"
+output_n = 1
+deaths = 4
+auto = true
+
+[[recipe]]
+id = "TREE-CRIMSON-HYPHAE"
+cat = "自然"
+name = "菌木溯源：绯红菌"
+input = "crimson_hyphae"
+input_n = 1
+output = "crimson_fungus"
+output_n = 1
+deaths = 4
+auto = true
+
+[[recipe]]
+id = "TREE-WARPED-STEM"
+cat = "自然"
+name = "菌木溯源：诡异菌"
+input = "warped_stem"
+input_n = 1
+output = "warped_fungus"
+output_n = 1
+deaths = 4
+auto = true
+
+[[recipe]]
+id = "TREE-WARPED-HYPHAE"
+cat = "自然"
+name = "菌木溯源：诡异菌"
+input = "warped_hyphae"
+input_n = 1
+output = "warped_fungus"
+output_n = 1
+deaths = 4
+auto = true
+
+[[recipe]]
+id = "LIFE-COD"
+cat = "生命"
+name = "鱼的复生：鳕鱼桶"
+input = "cod|生鳕鱼"
+input_n = 1
+output = "cod_bucket|鳕鱼桶"
+output_n = 1
+deaths = 8
+auto = true
+catalyst = "water_bucket|水桶"
+catalyst_n = 1
+
+[[recipe]]
+id = "LIFE-SALMON"
+cat = "生命"
+name = "鱼的复生：鲑鱼桶"
+input = "salmon|生鲑鱼"
+input_n = 1
+output = "salmon_bucket|鲑鱼桶"
+output_n = 1
+deaths = 8
+auto = true
+catalyst = "water_bucket|水桶"
+catalyst_n = 1
+
+[[recipe]]
+id = "LIFE-TROPICAL-FISH"
+cat = "生命"
+name = "鱼的复生：热带鱼桶"
+input = "tropical_fish|热带鱼"
+input_n = 1
+output = "tropical_fish_bucket|热带鱼桶"
+output_n = 1
+deaths = 8
+auto = true
+catalyst = "water_bucket|水桶"
+catalyst_n = 1
+
+[[recipe]]
+id = "LIFE-PUFFERFISH"
+cat = "生命"
+name = "鱼的复生：河豚桶"
+input = "pufferfish|河豚"
+input_n = 1
+output = "pufferfish_bucket|河豚桶"
+output_n = 1
+deaths = 8
+auto = true
+catalyst = "water_bucket|水桶"
+catalyst_n = 1

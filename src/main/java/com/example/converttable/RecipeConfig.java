@@ -7,13 +7,18 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.networking.v1.*;
 
-/** Server-owned config. Restart the server/world to reload; never overwrite user edits. */
+/** Server-owned config. Restart to reload; only complete known release defaults may be upgraded. */
 public final class RecipeConfig {
     public static final Path PATH=FabricLoader.getInstance().getConfigDir().resolve("convert_table/recipes.json");
     private static volatile RecipeCatalog server=RecipeCatalog.empty();
     private static String serverJson="";
     public static boolean enabled() {return server.settings().has("execution_enabled") && server.settings().get("execution_enabled").getAsBoolean();}
-    public static int setting(String section,String key) {return server.settings().getAsJsonObject(section).get(key).getAsInt();}
+    public static int setting(String section,String key) {
+        var values=server.settings().getAsJsonObject(section);
+        // Existing worlds retain their configuration; the new soul fee also applies there.
+        if(section.equals("sculk")&&key.equals("ordinary_souls_per_batch")&&!values.has(key))return 1;
+        return values.get(key).getAsInt();
+    }
     public static RecipeCatalog server() {return server;}
     public static net.minecraft.world.item.Item fuelItem(int variant) {
         var settings=server.settings();
@@ -39,8 +44,17 @@ public final class RecipeConfig {
             if(!Files.exists(PATH)) Files.writeString(PATH,defaults(),StandardCharsets.UTF_8,StandardOpenOption.CREATE_NEW);
             if(Files.size(PATH)>750_000)throw new IllegalArgumentException("Recipe config exceeds 750KB");
             String json=Files.readString(PATH,StandardCharsets.UTF_8);
+            var migration=RecipeConfigMigration.upgrade(PATH,json,defaults());
+            json=migration.json();
             RecipeCatalog parsed=RecipeCatalog.parse(json);
             server=parsed; serverJson=json;
+            if(migration.migrated()) {
+                String version=FabricLoader.getInstance().getModContainer("convert_table")
+                    .map(mod->mod.getMetadata().getVersion().getFriendlyString()).orElse("bundled defaults");
+                ConvertTable.LOGGER.info("Upgraded untouched 1.5.2 recipe defaults to {}; backup: {}; source JAR SHA-256: {}; source JSON SHA-256: {}; canonical SHA-256: {}",
+                    version,migration.backup(),RecipeConfigMigration.SOURCE_JAR_SHA256,RecipeConfigMigration.SOURCE_JSON_SHA256,
+                    RecipeConfigMigration.RELEASED_DEFAULT_SHA256);
+            }
             ConvertTable.LOGGER.info("Conversion catalogue: {} groups, {} advanced entries; execution enabled: {}",parsed.groups().size(),parsed.advanced().size(),enabled());
             if(!parsed.unavailable().isEmpty())ConvertTable.LOGGER.warn("Unavailable item IDs excluded: {}",parsed.unavailable());
             Files.writeString(PATH.resolveSibling("unavailable-items.txt"),String.join("\n",parsed.unavailable()),StandardCharsets.UTF_8);

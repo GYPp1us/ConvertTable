@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Tag to release (must already exist, e.g. v1.5.1)'
+        description: 'Tag to release (must already exist, e.g. v0.2.0)'
         required: true
         type: string
 
@@ -26,6 +26,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ inputs.tag || github.ref }}
 
       - name: Set up JDK 25
         uses: actions/setup-java@v4
@@ -125,6 +126,10 @@ jobs:
         run: |
           set -euo pipefail
           TAG="${{ steps.meta.outputs.tag }}"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists; keeping its notes and verified assets."
+            exit 0
+          fi
           gh release create "$TAG" \
             --title "ConvertTable ${{ steps.meta.outputs.version }}" \
             --notes-file NOTES.md \

@@ -55,7 +55,8 @@ if (providers.gradleProperty('compatInstance').isPresent()) {
             if (providers.gradleProperty('uiTest').isPresent()) {
                 def recipes = layout.buildDirectory.file('run/clientGameTest/config/convert_table/recipes.json').get().asFile
                 recipes.parentFile.mkdirs()
-                recipes.setText(file('src/main/resources/convert_table/default_recipes.json').getText('UTF-8'),'UTF-8')
+                def source = providers.gradleProperty('testRecipeConfig').getOrElse('src/main/resources/convert_table/default_recipes.json')
+                recipes.setText(file(source).getText('UTF-8'),'UTF-8')
             }
 			copy { from new File(instance, 'shaderpacks'); include '*.zip', '*.zip.txt'; into layout.buildDirectory.dir('run/clientGameTest/shaderpacks') }
 		}
@@ -63,6 +64,16 @@ if (providers.gradleProperty('compatInstance').isPresent()) {
 }
 
 loom.runs.clientGameTest { vmArg '-Djava.awt.headless=true' }
+// Background game tests use their own settings; never change a player's launcher options.
+tasks.named('runClientGameTest') {
+    doFirst {
+        def options = layout.buildDirectory.file('run/clientGameTest/options.txt').get().asFile
+        options.parentFile.mkdirs()
+        def lines = options.exists() ? options.readLines('UTF-8') : []
+        lines = lines.findAll { !it.startsWith('soundCategory_master:') }
+        options.setText((lines + 'soundCategory_master:0.0').join('\n') + '\n', 'UTF-8')
+    }
+}
 if (providers.gradleProperty('testBackend').isPresent()) {
 	loom.runs.clientGameTest { vmArg '-Dconvert_table.testBackend=' + providers.gradleProperty('testBackend').get() }
 	tasks.named('runClientGameTest') {
@@ -78,6 +89,8 @@ if (providers.gradleProperty('testBackend').isPresent()) {
 
 // Reuse a launcher's complete asset cache without changing it or downloading again.
 if (providers.gradleProperty('testAssets').isPresent()) {
+    // The explicit launcher cache is complete; do not fetch an unused Loom cache offline.
+    tasks.configureEach { task -> if (task.name == 'downloadAssets') task.enabled = false }
 	loom.runs.clientGameTest {
 		programArgs '--assetsDir', file(providers.gradleProperty('testAssets').get()).absolutePath,
 			'--assetIndex', providers.gradleProperty('testAssetIndex').getOrElse('32')
@@ -142,6 +155,16 @@ tasks.named('check') { dependsOn 'verifyAssetModels' }
 
 if (providers.gradleProperty('uiTest').isPresent()) { loom.runs.clientGameTest { vmArg '-Dconvert_table.uiTest=true' } }
 if (providers.gradleProperty('growthTest').isPresent()) { loom.runs.clientGameTest { vmArg '-Dconvert_table.growthTest=true' } }
+if (providers.gradleProperty('uiTest').isPresent() || providers.gradleProperty('growthTest').isPresent()) {
+    tasks.named('runClientGameTest') {
+        doFirst {
+            def testRecipes = layout.buildDirectory.file('run/clientGameTest/config/convert_table/recipes.json').get().asFile
+            testRecipes.parentFile.mkdirs()
+            def source = providers.gradleProperty('testRecipeConfig').getOrElse('src/main/resources/convert_table/default_recipes.json')
+            testRecipes.setText(file(source).getText('UTF-8'), 'UTF-8')
+        }
+    }
+}
 
 // Optional viewer APIs. Neither viewer is bundled or required at runtime.
 repositories { maven { url = 'https://api.modrinth.com/maven'; content { includeGroup 'maven.modrinth' } } }

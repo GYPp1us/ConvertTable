@@ -35,3 +35,7 @@ logs/
 
 # Agent/tooling scratch
 .codex-remote-attachments/
+
+# Generated workbook previews and inspection scratch (keep XLSX and manifest)
+outputs/01a0f354-50a1-7850-9a3e-c4f75b90728b/preview-*.png
+outputs/01a0f354-50a1-7850-9a3e-c4f75b90728b/*.inspect.ndjson

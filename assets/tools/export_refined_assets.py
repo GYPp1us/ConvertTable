@@ -50,7 +50,7 @@ def material_maps(variant,name,albedo,original_s):
     if variant=='end':
         if name in ('end_stone','top_frame'):
             rough[:]=.64;porosity[:]=55;f0[:]=8
-        elif name in ('purpur','side_purpur_guards'):
+        elif name in ('purpur','side_purpur_guards','ring_glow'):
             rough[:]=.28;porosity[:]=24
         elif name in ('obsidian','side_inset_front','side_inset_side'):
             rough[:]=.12;porosity[:]=2;f0[:]=12

@@ -14,9 +14,33 @@ def rgba(path):
         assert im.size == (16, 16), f'Not native 16x: {path}'
         return np.array(im.convert('RGBA'))
 
+def surface_texels(faces):
+    """Compare solid surfaces independently of rectangle merging and UV splits."""
+    result=set()
+    for face in faces:
+        p=np.array(face['vertices']);normal=np.cross(p[1]-p[0],p[2]-p[0])
+        normal=np.rint(normal/np.linalg.norm(normal)).astype(int)
+        axis=int(np.flatnonzero(normal)[0]);other=[i for i in range(3) if i!=axis]
+        lo=np.rint(p.min(0)).astype(int);hi=np.rint(p.max(0)).astype(int)
+        for a in range(lo[other[0]],hi[other[0]]):
+            for b in range(lo[other[1]],hi[other[1]]):
+                result.add((tuple(normal),int(lo[axis]),a,b))
+    return result
+
+
 for variant, details in manifest['variants'].items():
     source = ROOT/details['source']
     scene = json.loads((source/'scene.json').read_text(encoding='utf-8'))
+    if variant=='black_gold':
+        # Every emitted source face is a surface of a solid voxel. Transparent
+        # samples on these returns would silently discard geometry at publish.
+        alphas={name:rgba(source/'textures'/f'{name}.png')[:,:,3] for name in scene['textures']}
+        for part in scene['parts'].values():
+            for face in part['faces']:
+                uv=np.array(face['uv']);lo=np.rint(uv.min(0)).astype(int);hi=np.rint(uv.max(0)).astype(int)
+                alpha=alphas[face['texture']]
+                assert all(alpha[v%16,u%16]>127 for v in range(lo[1],hi[1]) for u in range(lo[0],hi[0])), \
+                    f'Black-gold return samples transparency: {face["texture"]} {face["vertices"]}'
     if variant=='end':
         for side,normal in enumerate([(0,0,-1),(1,0,0),(0,0,1),(-1,0,0)]):
             for f in scene['parts'][f'side_{side}_three_layers']['faces']:
@@ -53,6 +77,14 @@ for variant, details in manifest['variants'].items():
     assert moving['format'] == 2
     assert len(moving['groups']) == (5 if variant == 'sculk' else 1)
     for group in moving['groups']:
+        if variant=='black_gold':
+            expected=[f for part in scene['parts'].values() if part['group']==group['name'] for f in part['faces']]
+            assert surface_texels(expected)==surface_texels(group['quads']), 'Black-gold animation lost exposed surfaces'
+        if variant=='end' and group['name']=='rotor':
+            ring=[face for face in group['quads'] if face['texture'].endswith('/ring_glow')]
+            assert ring and all(face['light_emission']==15 for face in ring), 'End ring must emit at full brightness'
+            assert len({tuple(face['normal']) for face in ring})==6, 'End ring emission must cover every orientation'
+            assert np.all(rgba(RES/'textures/block/end/ring_glow_s.png')[:,:,3]==170), 'Missing ring shader emission'
         keys = np.array(group['keyframes'])
         assert keys[0, 0] == 0 and keys[-1, 0] == group['duration']
         assert np.all(np.diff(keys[:, 0]) > 0)
@@ -68,6 +100,9 @@ for variant, details in manifest['variants'].items():
     for kind in ('block', 'item'):
         model = json.loads((RES/'models'/kind/f'{variant}.json').read_text())
         faces = json.loads((ROOT/'assets/runtime'/f'{variant}_{kind}_faces.json').read_text())
+        if variant=='black_gold':
+            expected=[f for part in scene['parts'].values() if kind=='item' or part['group']=='static' for f in part['faces']]
+            assert surface_texels(expected)==surface_texels(faces), f'Black-gold {kind} lost exposed surfaces'
         assert len(model['elements']) == len(faces)
         for f in faces:
             p, uv = np.array(f['vertices']), np.array(f['uv'])
@@ -103,4 +138,27 @@ if (geode/'runtime_faces.json').exists():
         assert np.dot(np.cross(p[1]-p[0],p[2]-p[0]),f['normal'])>0
     total_faces+=len(faces)
     print('crystal_table: native 16x materials, emissive crystals, integer bounds and winding OK')
+    crystal_model=json.loads((RES/'models/block/crystal_table.json').read_text())
+    pedestal=json.loads((RES/'models/block/catalyst_pedestal.json').read_text())
+    shared=set(crystal_model['textures'].values())
+    assert set(pedestal['textures'].values())<=shared, 'Pedestal must share the current crystal-table materials'
+    for element in pedestal['elements']:
+        for face in element['faces'].values():
+            name=face['texture'].removeprefix('#')
+            crystal=name.startswith('bud_') or name=='vein'
+            assert (element.get('light_emission',0)>0)==crystal, 'Pedestal crystal emission differs from the geode'
+        assert len(element['faces'])==1, 'Pedestal must use the common per-face material exporter'
+    # Geometric quarter-turns must move the four asymmetric tips, not just UVs.
+    for label,model,texture,height,wanted in (
+            ('crystal_table',crystal_model,'#bud_silver',16,{(1,1),(14,1),(14,14),(1,14)}),
+            ('catalyst_pedestal',pedestal,'#bud_pink',8,{(1,1),(15,1),(15,15),(1,15)})):
+        tips=set()
+        for element in model['elements']:
+            face=element['faces'].get('up')
+            if face is None or face['texture']!=texture or element['to'][1]!=height:continue
+            assert element.get('light_emission',0)>0, f'{label}: corner tip lost emission'
+            for x in range(int(element['from'][0]),int(element['to'][0])):
+                for z in range(int(element['from'][2]),int(element['to'][2])):tips.add((x,z))
+        assert tips==wanted, f'{label}: corner buds must point to four different quadrants'
+    print('catalyst_pedestal: shared geode materials and crystal emission OK')
 print(f'PASS: {total_textures} material sets and {total_faces} exported faces.')

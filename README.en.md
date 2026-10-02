@@ -1,227 +1,149 @@
 <div align="center">
-  <img src="assets/previews/banner.png" alt="ConvertTable — a Fabric mod for Minecraft 26.3" width="100%">
+  <img src="assets/readme/banner.png" alt="The five ConvertTable blocks" width="100%">
 </div>
 
 <h1 align="center">ConvertTable</h1>
 
-<p align="center">
-  <a href="README.md">中文</a> · <b>English</b>
-</p>
+<p align="center"><a href="README.md">中文</a> · <b>English</b></p>
 
-<p align="center">
-  Three animated conversion tables, plus a crystal factory grown out of budding amethyst.<br>
-  Dump your junk in one end. Get the thing you actually wanted out the other.
-</p>
+Turn building materials into the styles you need, or produce blocks continuously with an amethyst network.
 
----
-
-## Contents
-
-- [What this is](#what-this-is)
-- [Install](#install)
-- [Conversion tables](#conversion-tables)
-- [Crystal table and catalyst pedestal](#crystal-table-and-catalyst-pedestal)
-- [Crafting](#crafting)
-- [Configuring recipes](#configuring-recipes)
-- [FAQ](#faq)
-
----
-
-## What this is
-
-Five blocks, two systems.
-
-**Conversion tables** turn junk into what you want. The Piglin table hands out random surprises, the End table spends chorus fruit to hit an exact target, and the Sculk table burns stored mob deaths on advanced reactions.
-
-**The crystal table** grows instead of converting. Wire budding amethyst into a vein and it accumulates growth potential on its own. Hang a catalyst pedestal off it, insert a catalyst, pick a target — and it starts turning that potential into real blocks, feeding them straight into your chests.
-
-| Block | In one line |
-| :--- | :--- |
-| Black gold conversion table | Piglin style, random output, gold nuggets as fuel |
-| End conversion table | End style, chosen target, chorus fruit as phase fuel |
-| Sculk conversion table | Sculk style, advanced recipes, spends mob death counts |
-| Crystal table | The geode exports growth potential for the whole vein |
-| Catalyst pedestal | Spends potential to copy blocks; the catalyst is never consumed |
-
----
+Version **v0.2.0** supports **Minecraft Java 26.3 / Fabric**. All five blocks can be crafted at a crafting table or found in the **Functional Blocks** creative tab.
 
 ## Install
 
-Requires **Minecraft Java 26.3** with **Fabric**, on Java **25**.
+Download the mod JAR for 26.3 from [Releases](https://github.com/GYPp1us/ConvertTable/releases/latest). Put it in `mods` with [Fabric API](https://modrinth.com/mod/fabric-api). Use Fabric Loader 0.19.5 or newer and Java 25. Install the same mod version on both sides for multiplayer. Do not install the `-sources` file.
 
-| Component | Version |
-| :--- | :--- |
-| Minecraft | 26.3 |
-| Fabric Loader | 0.19.5 or newer |
-| Fabric API | 0.161.0+26.3 or newer |
-| Java | 25 |
+## Choose a block
 
-1. Grab `convert-table-x.y.z.jar` from [Releases](https://github.com/GYPp1us/ConvertTable/releases/latest).
-2. Drop it in `mods` alongside [Fabric API](https://modrinth.com/mod/fabric-api).
-3. **For multiplayer, install it on both client and server** — the versions must match.
-4. Keep exactly one build in `mods`. The `-sources` jar is for development; don't install it.
-
-All five blocks live in the **Functional Blocks** tab:
-
-```mcfunction
-/give @s convert_table:black_gold_conversion_table
-/give @s convert_table:end_conversion_table
-/give @s convert_table:sculk_conversion_table
-/give @s convert_table:crystal_table
-/give @s convert_table:catalyst_pedestal
-```
-
-They take up one block, face you when placed, emit light level 6, drop themselves when mined with a pickaxe, and cannot be pushed by pistons.
-
----
-
-## Conversion tables
-
-Right-click to open the UI. Put material on the left, pick a target on the right, hit **Convert batch**. If clicking gets old, flip **Continuous** on — it starts off.
-
-<div align="center">
-
-| Black gold | End | Sculk |
+| Black Gold Conversion Table | End Conversion Table | Sculk Conversion Table |
 | :---: | :---: | :---: |
-| ![Black gold conversion table](assets/previews/black_gold_idle.gif) | ![End conversion table](assets/previews/end_idle.gif) | ![Sculk conversion table](assets/previews/sculk_idle.gif) |
+| ![Black Gold Conversion Table](assets/readme/black_gold.gif) | ![End Conversion Table](assets/readme/end.gif) | ![Sculk Conversion Table](assets/readme/sculk.gif) |
+| Spend gold nuggets for a random different material in the same group | Spend chorus fruit charge to choose the output | Ordinary batches spend 1 available soul; advanced recipes use their listed soul cost |
 
-</div>
+| Budding Crystal Table | Catalyst Pedestal |
+| :---: | :---: |
+| ![Budding Crystal Table](assets/readme/crystal_table.png) | ![Catalyst Pedestal](assets/readme/catalyst_pedestal.png) |
+| Export growth factors from connected amethyst buds | Produce a selected block using factors; keep the catalyst |
 
-### Three input modes
+## Black gold: random conversion
 
-| Mode | What it does |
-| :--- | :--- |
-| **Device slots** | Material is consumed from the input slot, output lands in the output slots. |
-| **Connected containers** | Converts items inside containers touching the table, in place. |
-| **Shulker contents** | Put a shulker box in the input slot; the contents change, the box stays. |
+1. Right-click the table. Put material in the **input slot** and gold nuggets in the **fuel slot**.
+2. Click **Start batch** and collect the output.
+3. Turn **Auto** on for repeated batches. The table starts each next eligible batch automatically and keeps running after you close the screen.
 
-The last two also offer **exact** and **group** matching. Exact uses the input slot as a sample and does not consume it; group accepts anything that converts to the target.
+Black gold has no target selector. Oak planks, for example, become a random different kind of plank from their group. A Connection Rod can also set linked input and output containers. Ordinary black gold conversions are **1:1**, and never select the input itself.
 
-### How the three differ
+The default cost is **1 gold nugget per batch**. Recipes set the batch limit; partial batches still pay once. Materials and costs are charged when the result is delivered. If output is blocked at completion, the screen stays at completed progress until space is available, then delivers the result.
 
-**Black gold** — material plus gold nuggets produces a *random* different item from the configured group. One cost per batch, even a partial one. If the output backs up, the rolled result is kept and survives a save. No target selector, no progress bar.
+## End: choose the output
 
-**End** — you pick the target. Chorus fruit supplies phase charge, 16 per fruit by default, and it is **only spent on a successful batch**. No idle drain. Continuous mode tries one batch every 10 server ticks (0.5 s), even with the UI closed.
+1. Put material in the **input slot** and **chorus fruit** in the fuel slot.
+2. Find and click the target on the right.
+3. Click **Start batch** or turn **Auto** on. Once enabled, material in the device slot or linked input containers starts the next eligible batch automatically, without another click.
 
-**Sculk** — does ordinary conversions plus advanced recipes. Those use the reagent and remainder slots and spend phase charge and **stored mob death counts**. Anything marked `auto: false` needs a manual click and will not run automatically.
+End supports all ordinary black gold groups and additional groups. Ordinary conversions remain **1:1**. By default, each chorus fruit supplies **16 phase charge**, and each batch costs **1 charge**. Costs are paid only when a conversion succeeds. On the sculk table, these ordinary groups cost **1 available soul per batch**.
 
-Every cost is checked before anything changes. If you can't afford it, nothing is consumed.
+### Link containers and process shulker boxes
 
-### Sculk charging
+End and sculk offer three input modes:
 
-A mob that dies with its feet on an **exposed connected sculk block** grants 1 credit to the nearest Sculk table. Players, armour stands and airborne deaths don't count. Default capacity is 4096.
+| Mode | How to use it | Where the output goes |
+| :--- | :--- | :--- |
+| **Device slots** | Insert material and select a target | The table's output slot, or a linked output container |
+| **Connected containers** | Link input and output containers with a Connection Rod, then select a target | Takes material from input containers and sends products to output containers |
+| **Shulker contents** | Put one shulker box in the input slot and select a target | Replaces contents inside the box; retrieve it manually |
 
-A shared network never duplicates credits between tables. Disconnecting the surface does not erase what you stored.
+Containers are not scanned automatically. With a Connection Rod, pair a conversion table and container for the input role with left-clicks, or the output role with right-clicks; click order does not matter. Input links glow green and output links amber. Each endpoint must be within **16 blocks** by combined distance along the three axes; each table supports up to **8 input and output links combined**. A container cannot have both roles. The clicked face controls sided-container access; a double chest counts as one.
 
----
+Repeat a link to remove it. Sneak-click the table with the rod to clear that role; clearing all input links returns the table to device-slot mode. Craft the rod shapelessly from one stick. Catalyst pedestals support output links only.
 
-## Crystal table and catalyst pedestal
+- **Exact matching**: connected containers use the input item as a sample without consuming it. Shulker contents lock onto the first successfully converted material. Reselect the target or change the input or matching mode to reset the lock.
+- **Group matching**: process every material that has a recipe for the selected target.
 
-Added in 1.5. This system is completely independent of the conversion tables.
+Shulker boxes retain their names and untouched contents. Boxes inside boxes are not opened recursively. An inaccessible input container blocks transfers. Ordinary batches can shrink to fit remaining output space. Conversion operations take a fixed **4 seconds** on Black Gold, **2 seconds** on End, and **1 second** on Sculk. The table screen shows an animated progress bar. If output is blocked when work completes, progress stays complete until space is available and the result can be delivered.
 
-<div align="center">
-  <img src="assets/geode_prototype/geode_dark.png" alt="The crystal geode" width="420">
-</div>
+## Sculk: collect available souls for conversions
 
-### Step 1 — run a vein
+Each ordinary batch costs **1 available soul** and no phase. Advanced recipes spend the soul amount listed for that recipe. Insert the required main material and any specified **catalyst material**, select the output, and convert. Catalyst materials are consumed. Empty buckets and other remainders go to the **remainder slot**. Some recipes need no catalyst or remainder; recipes with an outcome pool choose one listed result at equal odds.
 
-Connect **budding amethyst** to a crystal table using **amethyst blocks**. The buds along the vein are the generators:
+Advanced conversions spend the **available souls** shown by the table, without phase charge or player experience. **Manual only** recipes require the device input slot and a button click. They cannot run continuously or process container contents. On upgraded worlds, old phase fuel in the sculk table's fuel slot drops to the ground.
 
-- Each immature bud exports at most **1 point/second**, doubled to **2** with **calcite** nearby.
-- Each bud's internal growth potential is **24 / 16 / 8 / 0** for small / medium / large / cluster, raised by one with **smooth basalt**.
-- Clusters stop exporting. While production runs, mature clusters can be reseeded into small buds.
+### Collect available souls
 
-Discovery reaches radius 16 and up to 1024 nodes, loaded chunks only.
+Connect the table to the death area using sculk blocks or connected sculk veins. Mobs must die while standing on an **unobstructed sculk block top connected to the table**.
 
-### Step 2 — hang a pedestal
+- An eligible mob's death adds souls based on its normal XP reward: **1 XP = 32 available souls**, up to **4096** stored per table. Player kills are not required by default. Mobs that do not drop XP, including baby animals that do not drop XP, add **0 souls**.
+- Players, armor stands, and deaths in midair do not charge the table. The death area must be inside its sculk network, up to **16 blocks away** by combined axis distance. Networks contain up to **1024 sculk positions** and only count loaded areas.
+- XP orbs, loot drops, and vanilla sculk-catalyst behavior are left alone. If a server is configured to require player kills, only player-caused eligible deaths count.
+- When several tables share a network, each death belongs only to the nearest table by connected path.
+- Disconnecting the ground, saving, or unloading chunks preserves stored souls. Breaking a table drops its inventory but does not transfer its available souls into the dropped block.
 
-Place a **catalyst pedestal** against any connected conductor or the crystal table. Put one **catalyst** in, choose a target, and start.
+The **Range** tab in the sculk table screen shows a top-down X–Z network map. Each cell represents a horizontal position and merges all connected heights. Lighter cells mark sculk surfaces that can collect souls; darker cells mark other connected nodes; yellow marks the table. Unloaded chunks or scan limits are shown as an incomplete range.
 
-- **The catalyst is never consumed.** Insert it once and keep using it.
-- The selected block rotates at full block size above the catalyst.
-- Multiple pedestals **fairly share** the one vein's budget.
-- Changing the target pauses production and clears unspent credit; output you already earned stays.
+## Crystal table and catalyst pedestal: continuous production
 
-### Step 3 — pipe it into storage
+### 1. Build the network
 
-The pedestal has **9 output slots** and flushes them into adjacent containers. Double chests count once, and sided insertion rules are respected.
+Connect **budding amethyst** to the crystal table with **amethyst blocks**, touching face to face. Leave room for buds to grow on the budding amethyst. The buds export growth factors for the whole network.
 
-### What the screens show you
+Use **one crystal table per network**, with at most **8 budding amethyst blocks**. Conductors and budding amethyst must be within **8 blocks** of the table by combined axis distance. The entire network is limited to **128 positions, including the table**. Only loaded areas are processed. Exceeding the limits or connecting a second crystal table stops production.
 
-The **crystal screen** charts bud counts per stage and separates internal, exported and used potential.
+### 2. Attach the pedestal and insert a catalyst
 
-The **pedestal screen** has paged target icons, last-cycle production, absorbed growth, fractional credit, buffer occupancy, and container status for all six directions.
+Place a **catalyst pedestal** directly beside the crystal table, an amethyst block, or budding amethyst. Open it, insert a supported ordinary catalyst, select the output, and click **Start growth**. Click **Pause growth** to stop. A catalyst may have several targets, so select the intended output in the screen. The pedestal displays the live production rate as growth proceeds.
 
-Hold a catalyst pedestal, calcite or smooth basalt against a usable crystal conductor and a **flat pixel glyph** appears next to your crosshair (plinth, paired export arrows, or growth arrow) telling you the spot works.
+For example, an **oak sapling** can catalyze oak logs, oak saplings, or oak leaves; mangrove uses a propagule. Nether stems and plants use their matching fungi, and bamboo uses bamboo as its catalyst. Growth targets include basic logs, saplings, leaves, soil and stone, common flowers, and plants; stripped logs, planks, sandstone, glass, and other processed forms are excluded. Saplings, fungi, and magical catalysts such as amethyst shards, echo shards, hearts of the sea, and ender pearls are reusable, and no tools are required.
 
-### Recipe scale
+The catalyst is **never consumed**. Renamed, enchanted, or otherwise customized items cannot serve as catalysts. Multiple pedestals share the network's factors. The screen shows the current production rate and progress toward the next item. The rate is the growth-factor rate currently allocated to that pedestal divided by the selected item's factor cost, so it can be fractional. Pausing keeps partial progress; changing the target clears the current partial progress. Completed output stays.
 
-**53 catalyst groups** and **225 outputs** ship in the box. Oak saplings unlock oak logs, stripped logs, wood and planks, among much else.
+### 3. Collect output
 
----
+Output first enters the pedestal's **9 output slots**, then moves into containers linked with a Connection Rod. Check the link indicators to confirm that a chest can accept the selected item. Without an output link, or when all slots and linked containers are full, output remains in the pedestal.
+
+### 4. Increase production
+
+- Each immature bud exports up to **1 growth factor per second** by default.
+- Place **calcite** against any connected budding amethyst or amethyst conductor to raise the export limit to **2 factors per second** for immature buds throughout the network.
+- Similarly placed **smooth basalt** increases the buds' internal growth factors. The crystal table screen shows stored factors separately from the current production rate.
+- Mature clusters export no growth factors. In a usable network with at least one valid running pedestal, mature clusters are reseeded into small buds.
+
+Holding a pedestal, calcite, or smooth basalt while aiming at a usable network position displays a placement hint beside the crosshair.
+
+## Hopper automation
+
+| Block | Insert | Extract |
+| :--- | :--- | :--- |
+| Conversion table | Material from above; fuel or sculk catalyst materials from the sides | Output and remainders from below |
+| Catalyst pedestal | One valid catalyst from above | Output from the sides or below; linked output containers receive production |
+
+Turn **Auto** on for conversion tables or click **Start growth** on pedestals. With Auto on, a table starts each eligible job automatically when its input and costs are ready, including material in linked input containers. Missing resources pause work. If output is blocked, the job still progresses to completion and waits there until delivery is possible; materials and costs are charged on delivery. Ordinary batches can shrink to fit free output space. The sculk table's side accepts catalyst materials only, so supply only what the recipe needs.
 
 ## Crafting
 
-Each recipe yields one block.
+Each recipe produces **1 item**. `·` means an empty slot.
 
-### Conversion tables
-
-| Block | Pattern | Materials |
+| Block | Pattern | Ingredients |
 | :--- | :--- | :--- |
-| Black gold | `GTG`<br>`BAB`<br>`BCB` | G gold ingot · T **snout armour trim smithing template** · B polished blackstone · A amethyst shard · C chiseled polished blackstone |
-| End | `PHP`<br>`OAO`<br>`PEP` | P purpur block · H **dragon head** · E end stone · O obsidian · A amethyst shard |
-| Sculk | `DKD`<br>`SCS`<br>`DED` | D polished deepslate · K **sculk shrieker** · S sculk · C **sculk catalyst** · E echo shard |
+| Black Gold Conversion Table | `GTG`<br>`BAB`<br>`BCB` | G Gold ingot · T Snout armor trim smithing template · B Polished blackstone · A Amethyst shard · C Chiseled polished blackstone |
+| End Conversion Table | `PHP`<br>`OAO`<br>`PEP` | P Purpur block · H Dragon head · O Obsidian · A Amethyst shard · E End stone |
+| Sculk Conversion Table | `DKD`<br>`SCS`<br>`DED` | D Polished deepslate · K Sculk shrieker · S Sculk · C Sculk catalyst · E Echo shard |
+| Budding Crystal Table | `CAC`<br>`BXB`<br>`CSC` | C Calcite · A Amethyst block · B Budding amethyst · X End crystal · S Smooth basalt |
+| Catalyst Pedestal | `···`<br>`CAC`<br>`SSS` | C Calcite · A Amethyst block · S Smooth basalt |
+| Connection Rod | Shapeless | Stick × 1 |
 
-### Growth blocks
+**Collecting budding amethyst:** mine it with a **Silk Touch** pickaxe to obtain the block. Explosions still destroy it.
 
-| Block | Pattern | Materials |
-| :--- | :--- | :--- |
-| Crystal table | `CAC`<br>`BXB`<br>`CSC` | C calcite · A amethyst block · B budding amethyst · X **end crystal** · S smooth basalt |
-| Catalyst pedestal | `···`<br>`CAC`<br>`SSS` | C calcite · A amethyst block · S smooth basalt |
+## Recipes and troubleshooting
 
-> **Budding amethyst is now obtainable.** This mod overrides the vanilla loot table: mine budding amethyst with a **Silk Touch** pickaxe to get the block itself (vanilla just destroys it). Explosions still destroy it. Without this the crystal table could never be crafted or relocated.
+The complete default [recipe workbook](outputs/01a0f354-50a1-7850-9a3e-c4f75b90728b/ConvertTable配方.xlsx) contains **107 ordinary groups, 83 advanced sculk recipes, 105 growth recipes using 19 catalysts**, and six crafting recipes. The workbook's item names are in Chinese.
 
----
+Some Farmer's Delight conversion groups and the seed-draw advanced recipe require Farmer's Delight to be installed. The workbook still lists these optional-mod recipes.
 
-## Configuring recipes
+Optionally install **JEI or REI** for 26.3 to browse conversion recipes and uses. JEI also shows the crystal table and catalyst pedestal growth recipes. View growth targets in the pedestal screen or workbook. Servers can change conversion recipes; the in-game catalogue determines the available materials and costs.
 
-The server writes `config/convert_table/recipes.json` on first start. **Restart the world or server after editing it.**
+**New recipes are missing after an update:** install the same new mod version on both the client and server. Unchanged 0.1.1 (formerly 1.5.2) default recipes are backed up and updated automatically; customized recipes are preserved, so the server administrator must add the new recipes and restart. In JEI, press **U** over a catalyst or workstation item, or **R** over an output, to find growth recipes.
 
-- Defaults hold **99 conversion groups / 52 advanced recipes**.
-- Your edits are kept and synced to clients.
-- Want a catalogue-only setup with no actual conversion? Set `execution_enabled` to `false`.
-- Field-by-field docs live in [`config/convert_table/README.md`](config/convert_table/README.md).
-- Growth recipes are in `src/main/resources/data/convert_table/growth_recipes.json`; both sides load the same ordered catalogue.
+**Conversion does nothing:** read the screen's status and check the target, material, fuel, catalyst material, available souls, and space in output and remainder slots. Use device slots for manual-only recipes.
 
-**JEI / REI** are optional. With one installed you can look up inputs, outputs, costs, remainders and usages — but the adapters do **not** move items for you. 26.3-specific builds must be installed separately.
-
----
-
-## FAQ
-
-**Nothing happens after installing.**
-Check Minecraft is 26.3, Java is 25, and that only one ConvertTable version sits in `mods`.
-
-**Multiplayer errors or desync.**
-Client and server versions must match exactly, Fabric API included.
-
-**I don't see reflections, metal response or bloom.**
-The textures ship labPBR 1.3 `_n` / `_s` maps. Vanilla Minecraft only shows the colour textures and lit energy surfaces. Reflections, metal response and bloom need a shader pack that supports **labPBR and its moving-block render path**. No shader pack is bundled.
-
-**I broke the table — where's my stuff?**
-It drops by vanilla rules. Phase charge and death counts are **not** carried by the dropped item.
-
-**Do phase charge and death counts survive?**
-Yes, through saving and chunk unloading. Disconnecting the sculk surface does not erase charge either.
-
-**The pedestal isn't producing.**
-Check in order: is the vein connected, are there immature buds, is a catalyst inserted, is a target selected, and are the output slots or adjacent containers full?
-
-**How do I get budding amethyst?**
-Mine it with a **Silk Touch** pickaxe. Vanilla destroys it outright; this mod makes it collectable, otherwise the crystal table could neither be crafted nor moved.
-
----
-
-<div align="center">
-  <sub>MIT License · Built for Minecraft 26.3 with Fabric</sub>
-</div>
+**No growth output:** check that Growth is enabled, the catalyst is valid, a target is selected, and the network has connected budding amethyst with buds. Check network limits and remove any second crystal table. Finally, clear full output slots or containers linked with the Connection Rod.

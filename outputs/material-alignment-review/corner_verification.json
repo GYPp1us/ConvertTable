@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "body_and_counts": {
+    "geode_nonbud_voxels": 2295,
+    "geode_nonbud_hash": "4089940654b83495ef0882ede53bcdedd2254a469f71b2a91ae7e0533cc4d8e5",
+    "geode_bud_voxels": 28,
+    "geode_cuboids": 191,
+    "pedestal_body_faces": 152,
+    "pedestal_body_hash": "bc06edd5c8d405f17a3d07720c00defb9abfe533a7b8e9aa8dc7884f8c1c9b45"
+  },
+  "geode_tips": [
+    [
+      1,
+      15,
+      1
+    ],
+    [
+      1,
+      15,
+      14
+    ],
+    [
+      14,
+      15,
+      1
+    ],
+    [
+      14,
+      15,
+      14
+    ]
+  ]
+}

@@ -10,7 +10,10 @@ import net.minecraft.world.item.*;
 public record RecipeCatalog(List<Group> groups, List<Advanced> advanced, JsonObject settings, List<String> unavailable) {
     public record Group(String id, String name, int tier, int batch, List<Item> items) {}
     public record Advanced(String id, String source, String name, ItemStack input, ItemStack catalyst,
-                           ItemStack output, List<ItemStack> returns, int deaths, boolean auto, String unlock) {}
+                           ItemStack output, List<ItemStack> outputs, List<ItemStack> returns, int deaths, boolean auto, String unlock) {
+        public boolean random() { return outputs.size() > 1; }
+        public boolean matchesTarget(Item target) { return outputs.stream().anyMatch(stack -> stack.is(target)); }
+    }
     public static RecipeCatalog empty() { return new RecipeCatalog(List.of(),List.of(),new JsonObject(),List.of()); }
     public static RecipeCatalog parse(String json) {
         if(json.length()>250_000) throw new IllegalArgumentException("Recipe config exceeds 250000 characters");
@@ -22,7 +25,8 @@ public record RecipeCatalog(List<Group> groups, List<Advanced> advanced, JsonObj
         JsonObject piglin=settings.getAsJsonObject("piglin"), end=settings.getAsJsonObject("end"), sculk=settings.getAsJsonObject("sculk");
         if(piglin==null || end==null || sculk==null) throw new IllegalArgumentException("Missing table settings");
         number(piglin,"cost_n",1,64); number(end,"fuel_charge",1,4096); number(end,"charge_per_batch",1,4096);
-        number(sculk,"advanced_charge_per_operation",1,4096);
+        if (sculk.has("advanced_charge_per_operation")) number(sculk,"advanced_charge_per_operation",0,4096);
+        if (sculk.has("ordinary_souls_per_batch")) number(sculk,"ordinary_souls_per_batch",1,4096);
         if(!"death_count".equals(text(sculk,"advanced_cost")) || sculk.get("consume_player_xp").getAsBoolean())
             throw new IllegalArgumentException("Sculk uses death_count, not player experience");
         settings=settings.deepCopy();
@@ -56,6 +60,24 @@ public record RecipeCatalog(List<Group> groups, List<Advanced> advanced, JsonObj
         for(JsonElement element:recipeArray) {
             JsonObject r=element.getAsJsonObject(); String id=unique(r,ids);
             ItemStack input=stack(r,"input","input_n",missing), output=stack(r,"output","output_n",missing);
+            List<ItemStack> outputs = new ArrayList<>();
+            if (r.has("outputs")) {
+                JsonArray pool = r.getAsJsonArray("outputs");
+                if (pool.size() < 2 || pool.size() > 128) throw new IllegalArgumentException("Invalid random output pool: "+id);
+                Set<Identifier> seen = new HashSet<>();
+                Identifier primary = Identifier.tryParse(text(r,"output"));
+                for (var value : pool) {
+                    Item item = item(value.getAsString(), missing);
+                    if (!seen.add(Identifier.tryParse(value.getAsString())))
+                        throw new IllegalArgumentException("Duplicate random output: "+id);
+                    if (item != null) {
+                        outputs.add(new ItemStack(item, number(r,"output_n",1,4096)));
+                    }
+                }
+                if (!seen.contains(primary)) throw new IllegalArgumentException("Primary output is not in random pool: "+id);
+                if (outputs.isEmpty()) output = ItemStack.EMPTY;
+                else if (output.isEmpty()) output = outputs.getFirst();
+            } else if (!output.isEmpty()) outputs.add(output);
             ItemStack catalyst=r.has("catalyst")?stack(r,"catalyst","catalyst_n",missing):ItemStack.EMPTY;
             int deaths=number(r,"deaths",1,4096);
             List<ItemStack> returns=new ArrayList<>(); boolean valid=!input.isEmpty()&&!output.isEmpty()&&(!r.has("catalyst")||!catalyst.isEmpty());
@@ -66,7 +88,7 @@ public record RecipeCatalog(List<Group> groups, List<Advanced> advanced, JsonObj
                 if(back.isEmpty())valid=false; else returns.add(back);
             }
             if(enabled(r) && valid) advanced.add(new Advanced(id,optional(r,"source_id",id),text(r,"name"),input,catalyst,output,
-                List.copyOf(returns),deaths,r.get("auto").getAsBoolean(),optional(r,"unlock","")));
+                List.copyOf(outputs),List.copyOf(returns),deaths,r.get("auto").getAsBoolean(),optional(r,"unlock","")));
         }
         return new RecipeCatalog(List.copyOf(groups),List.copyOf(advanced),settings.deepCopy(),List.copyOf(new LinkedHashSet<>(missing)));
     }

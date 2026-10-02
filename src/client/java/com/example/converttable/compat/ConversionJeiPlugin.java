@@ -22,6 +22,8 @@ import net.minecraft.resources.Identifier;
 public final class ConversionJeiPlugin implements IModPlugin {
     public static final List<IRecipeType<ViewerRecipe>> TYPES=java.util.stream.IntStream.range(0,4)
         .mapToObj(i->IRecipeType.create(ConvertTable.MOD_ID,ViewerRecipe.NAMES[i],ViewerRecipe.class)).toList();
+    public static final IRecipeType<GrowthViewerRecipe> GROWTH_TYPE=
+        IRecipeType.create(ConvertTable.MOD_ID,"growth",GrowthViewerRecipe.class);
     private static IJeiRuntime runtime;
     public static IJeiRuntime activeRuntime() {return runtime;}
     private List<ViewerRecipe> registered=List.of();
@@ -30,14 +32,20 @@ public final class ConversionJeiPlugin implements IModPlugin {
     @Override public void registerCategories(IRecipeCategoryRegistration registration) {
         for(int i=0;i<4;i++) registration.addRecipeCategories(new Category(i,
             registration.getJeiHelpers().getGuiHelper().createDrawableItemLike(ViewerRecipe.station(i))));
+        registration.addRecipeCategories(new GrowthJeiCategory(
+            registration.getJeiHelpers().getGuiHelper().createDrawableItemLike(GrowthBlocks.CATALYST)));
     }
     @Override public void registerRecipes(IRecipeRegistration registration) {
         registered=ViewerRecipe.all();
         for(int i=0;i<4;i++)registration.addRecipes(TYPES.get(i),inCategory(registered,i));
+        var growth=GrowthViewerRecipe.all();
+        registration.addRecipes(GROWTH_TYPE,growth);
+        ConvertTable.LOGGER.info("JEI growth recipes registered: {}",growth.size());
         ConvertTable.LOGGER.info("JEI conversion recipes registered: {}",registered.size());
     }
     @Override public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         for(int i=0;i<4;i++)registration.addCraftingStation(TYPES.get(i),ViewerRecipe.station(i));
+        registration.addCraftingStation(GROWTH_TYPE,GrowthBlocks.CATALYST,GrowthBlocks.CRYSTAL);
     }
     @Override public void onRuntimeAvailable(IJeiRuntime value) {runtime=value;refresh();}
     @Override public void onRuntimeUnavailable() {runtime=null;registered=List.of();}
@@ -67,7 +75,7 @@ public final class ConversionJeiPlugin implements IModPlugin {
             builder.addInputSlot(8,7).setStandardSlotBackground().add(r.input());
             if(!r.reagent().isEmpty()) builder.addSlot(r.category()==1||r.category()==2?RecipeIngredientRole.RENDER_ONLY:RecipeIngredientRole.INPUT,54,7)
                 .setStandardSlotBackground().add(r.reagent());
-            if(r.category()==1||r.category()==2)builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).add(r.reagent());
+            if(!r.reagent().isEmpty() && r.category()==1)builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).add(r.reagent());
             builder.addOutputSlot(113,7).setOutputSlotBackground().addItemStacks(r.outputs());
             for(int i=0;i<r.returns().size();i++)builder.addOutputSlot(146+i*18,7).setStandardSlotBackground().add(r.returns().get(i));
         }

@@ -9541,6 +9541,32 @@
       "from": [
         6.0,
         8.0,
+        -0.0
+      ],
+      "to": [
+        6.0,
+        9.0,
+        1.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "east": {
+          "uv": [
+            5.0,
+            8.0,
+            6.0,
+            7.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        6.0,
+        8.0,
         1.0
       ],
       "to": [
@@ -9556,6 +9582,32 @@
             5.0,
             8.0,
             6.0,
+            7.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        7.0,
+        8.0,
+        0.0
+      ],
+      "to": [
+        7.0,
+        9.0,
+        1.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "west": {
+          "uv": [
+            7.0,
+            8.0,
+            8.0,
             7.0
           ],
           "texture": "#side_carved_frame",
@@ -9593,6 +9645,32 @@
       "from": [
         9.0,
         8.0,
+        -0.0
+      ],
+      "to": [
+        9.0,
+        9.0,
+        1.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "east": {
+          "uv": [
+            8.0,
+            8.0,
+            9.0,
+            7.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        9.0,
+        8.0,
         1.0
       ],
       "to": [
@@ -9608,6 +9686,32 @@
             8.0,
             8.0,
             9.0,
+            7.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        10.0,
+        8.0,
+        -0.0
+      ],
+      "to": [
+        10.0,
+        9.0,
+        1.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "west": {
+          "uv": [
+            10.0,
+            8.0,
+            11.0,
             7.0
           ],
           "texture": "#side_carved_frame",
@@ -9905,6 +10009,32 @@
       "from": [
         6.0,
         7.0,
+        0.0
+      ],
+      "to": [
+        6.0,
+        8.0,
+        1.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "east": {
+          "uv": [
+            5.0,
+            9.0,
+            6.0,
+            8.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        6.0,
+        7.0,
         1.0
       ],
       "to": [
@@ -9920,6 +10050,32 @@
             5.0,
             9.0,
             6.0,
+            8.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        7.0,
+        7.0,
+        -0.0
+      ],
+      "to": [
+        7.0,
+        8.0,
+        1.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "west": {
+          "uv": [
+            7.0,
+            9.0,
+            8.0,
             8.0
           ],
           "texture": "#side_carved_frame",
@@ -9957,6 +10113,32 @@
       "from": [
         9.0,
         7.0,
+        -0.0
+      ],
+      "to": [
+        9.0,
+        8.0,
+        1.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "east": {
+          "uv": [
+            8.0,
+            9.0,
+            9.0,
+            8.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        9.0,
+        7.0,
         1.0
       ],
       "to": [
@@ -9972,6 +10154,32 @@
             8.0,
             9.0,
             9.0,
+            8.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        10.0,
+        7.0,
+        -0.0
+      ],
+      "to": [
+        10.0,
+        8.0,
+        1.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "west": {
+          "uv": [
+            10.0,
+            9.0,
+            11.0,
             8.0
           ],
           "texture": "#side_carved_frame",
@@ -15328,12 +15536,63 @@
     },
     {
       "from": [
+        15.0,
+        8.0,
+        6.0
+      ],
+      "to": [
+        16.0,
+        9.0,
+        6.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "south": {
+          "uv": [
+            5.0,
+            8.0,
+            6.0,
+            7.0
+          ],
+          "texture": "#side_carved_frame"
+        }
+      }
+    },
+    {
+      "from": [
         14.0,
         8.0,
         7.0
       ],
       "to": [
         15.0,
+        9.0,
+        7.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "north": {
+          "uv": [
+            7.0,
+            8.0,
+            8.0,
+            7.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 180
+        }
+      }
+    },
+    {
+      "from": [
+        15.0,
+        8.0,
+        7.0
+      ],
+      "to": [
+        16.0,
         9.0,
         7.0
       ],
@@ -15379,12 +15638,63 @@
     },
     {
       "from": [
+        15.0,
+        8.0,
+        9.0
+      ],
+      "to": [
+        16.0,
+        9.0,
+        9.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "south": {
+          "uv": [
+            8.0,
+            8.0,
+            9.0,
+            7.0
+          ],
+          "texture": "#side_carved_frame"
+        }
+      }
+    },
+    {
+      "from": [
         14.0,
         8.0,
         10.0
       ],
       "to": [
         15.0,
+        9.0,
+        10.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "north": {
+          "uv": [
+            10.0,
+            8.0,
+            11.0,
+            7.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 180
+        }
+      }
+    },
+    {
+      "from": [
+        15.0,
+        8.0,
+        10.0
+      ],
+      "to": [
+        16.0,
         9.0,
         10.0
       ],
@@ -15558,12 +15868,63 @@
     },
     {
       "from": [
+        15.0,
+        7.0,
+        6.0
+      ],
+      "to": [
+        16.0,
+        8.0,
+        6.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "south": {
+          "uv": [
+            5.0,
+            9.0,
+            6.0,
+            8.0
+          ],
+          "texture": "#side_carved_frame"
+        }
+      }
+    },
+    {
+      "from": [
         14.0,
         7.0,
         7.0
       ],
       "to": [
         15.0,
+        8.0,
+        7.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "north": {
+          "uv": [
+            7.0,
+            9.0,
+            8.0,
+            8.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 180
+        }
+      }
+    },
+    {
+      "from": [
+        15.0,
+        7.0,
+        7.0
+      ],
+      "to": [
+        16.0,
         8.0,
         7.0
       ],
@@ -15609,12 +15970,63 @@
     },
     {
       "from": [
+        15.0,
+        7.0,
+        9.0
+      ],
+      "to": [
+        16.0,
+        8.0,
+        9.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "south": {
+          "uv": [
+            8.0,
+            9.0,
+            9.0,
+            8.0
+          ],
+          "texture": "#side_carved_frame"
+        }
+      }
+    },
+    {
+      "from": [
         14.0,
         7.0,
         10.0
       ],
       "to": [
         15.0,
+        8.0,
+        10.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "north": {
+          "uv": [
+            10.0,
+            9.0,
+            11.0,
+            8.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 180
+        }
+      }
+    },
+    {
+      "from": [
+        15.0,
+        7.0,
+        10.0
+      ],
+      "to": [
+        16.0,
         8.0,
         10.0
       ],
@@ -16716,6 +17128,32 @@
     },
     {
       "from": [
+        10.0,
+        8.0,
+        15.0
+      ],
+      "to": [
+        10.0,
+        9.0,
+        16.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "west": {
+          "uv": [
+            5.0,
+            8.0,
+            6.0,
+            7.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
         9.0,
         8.0,
         14.0
@@ -16724,6 +17162,32 @@
         9.0,
         9.0,
         15.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "east": {
+          "uv": [
+            7.0,
+            8.0,
+            8.0,
+            7.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        9.0,
+        8.0,
+        15.0
+      ],
+      "to": [
+        9.0,
+        9.0,
+        16.0
       ],
       "shade": true,
       "light_emission": 0,
@@ -16768,6 +17232,32 @@
     },
     {
       "from": [
+        7.0,
+        8.0,
+        15.0
+      ],
+      "to": [
+        7.0,
+        9.0,
+        16.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "west": {
+          "uv": [
+            8.0,
+            8.0,
+            9.0,
+            7.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
         6.0,
         8.0,
         14.0
@@ -16776,6 +17266,32 @@
         6.0,
         9.0,
         15.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "east": {
+          "uv": [
+            10.0,
+            8.0,
+            11.0,
+            7.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        6.0,
+        8.0,
+        15.0
+      ],
+      "to": [
+        6.0,
+        9.0,
+        16.0
       ],
       "shade": true,
       "light_emission": 0,
@@ -16949,6 +17465,32 @@
     },
     {
       "from": [
+        10.0,
+        7.0,
+        15.0
+      ],
+      "to": [
+        10.0,
+        8.0,
+        16.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "west": {
+          "uv": [
+            5.0,
+            9.0,
+            6.0,
+            8.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
         9.0,
         7.0,
         14.0
@@ -16957,6 +17499,32 @@
         9.0,
         8.0,
         15.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "east": {
+          "uv": [
+            7.0,
+            9.0,
+            8.0,
+            8.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        9.0,
+        7.0,
+        15.0
+      ],
+      "to": [
+        9.0,
+        8.0,
+        16.0
       ],
       "shade": true,
       "light_emission": 0,
@@ -17001,6 +17569,32 @@
     },
     {
       "from": [
+        7.0,
+        7.0,
+        15.0
+      ],
+      "to": [
+        7.0,
+        8.0,
+        16.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "west": {
+          "uv": [
+            8.0,
+            9.0,
+            9.0,
+            8.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
         6.0,
         7.0,
         14.0
@@ -17009,6 +17603,32 @@
         6.0,
         8.0,
         15.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "east": {
+          "uv": [
+            10.0,
+            9.0,
+            11.0,
+            8.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        6.0,
+        7.0,
+        15.0
+      ],
+      "to": [
+        6.0,
+        8.0,
+        16.0
       ],
       "shade": true,
       "light_emission": 0,
@@ -17975,6 +18595,32 @@
     },
     {
       "from": [
+        -0.0,
+        8.0,
+        10.0
+      ],
+      "to": [
+        1.0,
+        9.0,
+        10.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "north": {
+          "uv": [
+            5.0,
+            8.0,
+            6.0,
+            7.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 180
+        }
+      }
+    },
+    {
+      "from": [
         1.0,
         8.0,
         10.0
@@ -17996,6 +18642,31 @@
           ],
           "texture": "#side_carved_frame",
           "rotation": 180
+        }
+      }
+    },
+    {
+      "from": [
+        0.0,
+        8.0,
+        9.0
+      ],
+      "to": [
+        1.0,
+        9.0,
+        9.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "south": {
+          "uv": [
+            7.0,
+            8.0,
+            8.0,
+            7.0
+          ],
+          "texture": "#side_carved_frame"
         }
       }
     },
@@ -18026,6 +18697,32 @@
     },
     {
       "from": [
+        -0.0,
+        8.0,
+        7.0
+      ],
+      "to": [
+        1.0,
+        9.0,
+        7.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "north": {
+          "uv": [
+            8.0,
+            8.0,
+            9.0,
+            7.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 180
+        }
+      }
+    },
+    {
+      "from": [
         1.0,
         8.0,
         7.0
@@ -18047,6 +18744,31 @@
           ],
           "texture": "#side_carved_frame",
           "rotation": 180
+        }
+      }
+    },
+    {
+      "from": [
+        -0.0,
+        8.0,
+        6.0
+      ],
+      "to": [
+        1.0,
+        9.0,
+        6.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "south": {
+          "uv": [
+            10.0,
+            8.0,
+            11.0,
+            7.0
+          ],
+          "texture": "#side_carved_frame"
         }
       }
     },
@@ -18179,6 +18901,32 @@
     },
     {
       "from": [
+        -0.0,
+        7.0,
+        10.0
+      ],
+      "to": [
+        1.0,
+        8.0,
+        10.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "north": {
+          "uv": [
+            5.0,
+            9.0,
+            6.0,
+            8.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 180
+        }
+      }
+    },
+    {
+      "from": [
         1.0,
         7.0,
         10.0
@@ -18200,6 +18948,31 @@
           ],
           "texture": "#side_carved_frame",
           "rotation": 180
+        }
+      }
+    },
+    {
+      "from": [
+        0.0,
+        7.0,
+        9.0
+      ],
+      "to": [
+        1.0,
+        8.0,
+        9.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "south": {
+          "uv": [
+            7.0,
+            9.0,
+            8.0,
+            8.0
+          ],
+          "texture": "#side_carved_frame"
         }
       }
     },
@@ -18230,6 +19003,32 @@
     },
     {
       "from": [
+        0.0,
+        7.0,
+        7.0
+      ],
+      "to": [
+        1.0,
+        8.0,
+        7.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "north": {
+          "uv": [
+            8.0,
+            9.0,
+            9.0,
+            8.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 180
+        }
+      }
+    },
+    {
+      "from": [
         1.0,
         7.0,
         7.0
@@ -18251,6 +19050,31 @@
           ],
           "texture": "#side_carved_frame",
           "rotation": 180
+        }
+      }
+    },
+    {
+      "from": [
+        -0.0,
+        7.0,
+        6.0
+      ],
+      "to": [
+        1.0,
+        8.0,
+        6.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "south": {
+          "uv": [
+            10.0,
+            9.0,
+            11.0,
+            8.0
+          ],
+          "texture": "#side_carved_frame"
         }
       }
     },
@@ -19407,8 +20231,8 @@
     {
       "from": [
         3.0,
-        0.0,
-        0.0
+        1.0,
+        -0.0
       ],
       "to": [
         3.0,
@@ -19420,39 +20244,13 @@
       "faces": {
         "east": {
           "uv": [
-            0.0,
-            16.0,
-            1.0,
-            14.0
-          ],
-          "texture": "#side_gold_clamps",
-          "rotation": 180
-        }
-      }
-    },
-    {
-      "from": [
-        3.0,
-        0.0,
-        15.0
-      ],
-      "to": [
-        3.0,
-        2.0,
-        16.0
-      ],
-      "shade": true,
-      "light_emission": 0,
-      "faces": {
-        "east": {
-          "uv": [
+            2.0,
             15.0,
-            16.0,
-            16.0,
+            3.0,
             14.0
           ],
           "texture": "#side_gold_clamps",
-          "rotation": 180
+          "rotation": 270
         }
       }
     },
@@ -19563,7 +20361,7 @@
     {
       "from": [
         13.0,
-        0.0,
+        1.0,
         -0.0
       ],
       "to": [
@@ -19576,7 +20374,267 @@
       "faces": {
         "west": {
           "uv": [
+            13.0,
             15.0,
+            14.0,
+            14.0
+          ],
+          "texture": "#side_gold_clamps",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        13.0,
+        2.0,
+        -0.0
+      ],
+      "to": [
+        14.0,
+        2.0,
+        1.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "up": {
+          "uv": [
+            13.0,
+            15.0,
+            14.0,
+            14.0
+          ],
+          "texture": "#side_gold_clamps",
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "from": [
+        0.0,
+        2.0,
+        2.0
+      ],
+      "to": [
+        1.0,
+        2.0,
+        3.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "up": {
+          "uv": [
+            13.0,
+            15.0,
+            14.0,
+            14.0
+          ],
+          "texture": "#side_gold_clamps",
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "from": [
+        15.0,
+        2.0,
+        13.0
+      ],
+      "to": [
+        16.0,
+        2.0,
+        14.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "up": {
+          "uv": [
+            13.0,
+            15.0,
+            14.0,
+            14.0
+          ],
+          "texture": "#side_gold_clamps",
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "from": [
+        2.0,
+        2.0,
+        15.0
+      ],
+      "to": [
+        3.0,
+        2.0,
+        16.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "up": {
+          "uv": [
+            13.0,
+            15.0,
+            14.0,
+            14.0
+          ],
+          "texture": "#side_gold_clamps",
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "from": [
+        14.0,
+        2.0,
+        -0.0
+      ],
+      "to": [
+        15.0,
+        2.0,
+        1.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "up": {
+          "uv": [
+            14.0,
+            15.0,
+            15.0,
+            14.0
+          ],
+          "texture": "#side_gold_clamps",
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "from": [
+        0.0,
+        2.0,
+        1.0
+      ],
+      "to": [
+        1.0,
+        2.0,
+        2.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "up": {
+          "uv": [
+            14.0,
+            15.0,
+            15.0,
+            14.0
+          ],
+          "texture": "#side_gold_clamps",
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "from": [
+        15.0,
+        2.0,
+        14.0
+      ],
+      "to": [
+        16.0,
+        2.0,
+        15.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "up": {
+          "uv": [
+            14.0,
+            15.0,
+            15.0,
+            14.0
+          ],
+          "texture": "#side_gold_clamps",
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "from": [
+        1.0,
+        2.0,
+        15.0
+      ],
+      "to": [
+        2.0,
+        2.0,
+        16.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "up": {
+          "uv": [
+            14.0,
+            15.0,
+            15.0,
+            14.0
+          ],
+          "texture": "#side_gold_clamps",
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "from": [
+        16.0,
+        0.0,
+        -0.0
+      ],
+      "to": [
+        16.0,
+        2.0,
+        3.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "east": {
+          "uv": [
+            0.0,
+            16.0,
+            3.0,
+            14.0
+          ],
+          "texture": "#side_gold_clamps",
+          "rotation": 180
+        }
+      }
+    },
+    {
+      "from": [
+        16.0,
+        0.0,
+        13.0
+      ],
+      "to": [
+        16.0,
+        2.0,
+        16.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "east": {
+          "uv": [
+            13.0,
             16.0,
             16.0,
             14.0
@@ -19588,595 +20646,361 @@
     },
     {
       "from": [
+        15.0,
+        2.0,
+        -0.0
+      ],
+      "to": [
+        16.0,
+        2.0,
+        1.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "up": {
+          "uv": [
+            0.0,
+            15.0,
+            1.0,
+            14.0
+          ],
+          "texture": "#side_gold_clamps",
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "from": [
+        -0.0,
+        2.0,
+        15.0
+      ],
+      "to": [
+        1.0,
+        2.0,
+        16.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "up": {
+          "uv": [
+            0.0,
+            15.0,
+            1.0,
+            14.0
+          ],
+          "texture": "#side_gold_clamps",
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "from": [
+        15.0,
+        2.0,
+        15.0
+      ],
+      "to": [
+        16.0,
+        2.0,
+        16.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "up": {
+          "uv": [
+            0.0,
+            15.0,
+            1.0,
+            14.0
+          ],
+          "texture": "#side_gold_clamps",
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "from": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "to": [
+        1.0,
+        0.0,
+        1.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "down": {
+          "uv": [
+            15.0,
+            16.0,
+            16.0,
+            15.0
+          ],
+          "texture": "#side_gold_clamps",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "to": [
+        2.0,
+        0.0,
+        1.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "down": {
+          "uv": [
+            1.0,
+            16.0,
+            2.0,
+            15.0
+          ],
+          "texture": "#side_gold_clamps",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        15.0,
+        0.0,
+        1.0
+      ],
+      "to": [
+        16.0,
+        0.0,
+        2.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "down": {
+          "uv": [
+            1.0,
+            16.0,
+            2.0,
+            15.0
+          ],
+          "texture": "#side_gold_clamps",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        -0.0,
+        0.0,
+        14.0
+      ],
+      "to": [
+        1.0,
+        0.0,
+        15.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "down": {
+          "uv": [
+            1.0,
+            16.0,
+            2.0,
+            15.0
+          ],
+          "texture": "#side_gold_clamps",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        14.0,
+        0.0,
+        15.0
+      ],
+      "to": [
+        15.0,
+        0.0,
+        16.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "down": {
+          "uv": [
+            1.0,
+            16.0,
+            2.0,
+            15.0
+          ],
+          "texture": "#side_gold_clamps",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        3.0,
+        -0.0,
+        0.0
+      ],
+      "to": [
+        3.0,
+        1.0,
+        1.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "east": {
+          "uv": [
+            2.0,
+            16.0,
+            3.0,
+            15.0
+          ],
+          "texture": "#side_gold_clamps",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        2.0,
+        0.0,
+        -0.0
+      ],
+      "to": [
+        3.0,
+        0.0,
+        1.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "down": {
+          "uv": [
+            2.0,
+            16.0,
+            3.0,
+            15.0
+          ],
+          "texture": "#side_gold_clamps",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        15.0,
+        0.0,
+        2.0
+      ],
+      "to": [
+        16.0,
+        0.0,
+        3.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "down": {
+          "uv": [
+            2.0,
+            16.0,
+            3.0,
+            15.0
+          ],
+          "texture": "#side_gold_clamps",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        -0.0,
+        0.0,
+        13.0
+      ],
+      "to": [
+        1.0,
+        0.0,
+        14.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "down": {
+          "uv": [
+            2.0,
+            16.0,
+            3.0,
+            15.0
+          ],
+          "texture": "#side_gold_clamps",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
         13.0,
         0.0,
         15.0
       ],
       "to": [
-        13.0,
-        2.0,
+        14.0,
+        0.0,
         16.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "down": {
+          "uv": [
+            2.0,
+            16.0,
+            3.0,
+            15.0
+          ],
+          "texture": "#side_gold_clamps",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        13.0,
+        -0.0,
+        -0.0
+      ],
+      "to": [
+        13.0,
+        1.0,
+        1.0
       ],
       "shade": true,
       "light_emission": 0,
       "faces": {
         "west": {
           "uv": [
-            0.0,
-            16.0,
-            1.0,
-            14.0
-          ],
-          "texture": "#side_gold_clamps",
-          "rotation": 180
-        }
-      }
-    },
-    {
-      "from": [
-        13.0,
-        2.0,
-        -0.0
-      ],
-      "to": [
-        14.0,
-        2.0,
-        1.0
-      ],
-      "shade": true,
-      "light_emission": 0,
-      "faces": {
-        "up": {
-          "uv": [
-            13.0,
-            15.0,
-            14.0,
-            14.0
-          ],
-          "texture": "#side_gold_clamps",
-          "rotation": 90
-        }
-      }
-    },
-    {
-      "from": [
-        0.0,
-        2.0,
-        2.0
-      ],
-      "to": [
-        1.0,
-        2.0,
-        3.0
-      ],
-      "shade": true,
-      "light_emission": 0,
-      "faces": {
-        "up": {
-          "uv": [
-            13.0,
-            15.0,
-            14.0,
-            14.0
-          ],
-          "texture": "#side_gold_clamps",
-          "rotation": 90
-        }
-      }
-    },
-    {
-      "from": [
-        15.0,
-        2.0,
-        13.0
-      ],
-      "to": [
-        16.0,
-        2.0,
-        14.0
-      ],
-      "shade": true,
-      "light_emission": 0,
-      "faces": {
-        "up": {
-          "uv": [
-            13.0,
-            15.0,
-            14.0,
-            14.0
-          ],
-          "texture": "#side_gold_clamps",
-          "rotation": 90
-        }
-      }
-    },
-    {
-      "from": [
-        2.0,
-        2.0,
-        15.0
-      ],
-      "to": [
-        3.0,
-        2.0,
-        16.0
-      ],
-      "shade": true,
-      "light_emission": 0,
-      "faces": {
-        "up": {
-          "uv": [
-            13.0,
-            15.0,
-            14.0,
-            14.0
-          ],
-          "texture": "#side_gold_clamps",
-          "rotation": 90
-        }
-      }
-    },
-    {
-      "from": [
-        14.0,
-        2.0,
-        -0.0
-      ],
-      "to": [
-        15.0,
-        2.0,
-        1.0
-      ],
-      "shade": true,
-      "light_emission": 0,
-      "faces": {
-        "up": {
-          "uv": [
-            14.0,
-            15.0,
-            15.0,
-            14.0
-          ],
-          "texture": "#side_gold_clamps",
-          "rotation": 90
-        }
-      }
-    },
-    {
-      "from": [
-        0.0,
-        2.0,
-        1.0
-      ],
-      "to": [
-        1.0,
-        2.0,
-        2.0
-      ],
-      "shade": true,
-      "light_emission": 0,
-      "faces": {
-        "up": {
-          "uv": [
-            14.0,
-            15.0,
-            15.0,
-            14.0
-          ],
-          "texture": "#side_gold_clamps",
-          "rotation": 90
-        }
-      }
-    },
-    {
-      "from": [
-        15.0,
-        2.0,
-        14.0
-      ],
-      "to": [
-        16.0,
-        2.0,
-        15.0
-      ],
-      "shade": true,
-      "light_emission": 0,
-      "faces": {
-        "up": {
-          "uv": [
-            14.0,
-            15.0,
-            15.0,
-            14.0
-          ],
-          "texture": "#side_gold_clamps",
-          "rotation": 90
-        }
-      }
-    },
-    {
-      "from": [
-        1.0,
-        2.0,
-        15.0
-      ],
-      "to": [
-        2.0,
-        2.0,
-        16.0
-      ],
-      "shade": true,
-      "light_emission": 0,
-      "faces": {
-        "up": {
-          "uv": [
-            14.0,
-            15.0,
-            15.0,
-            14.0
-          ],
-          "texture": "#side_gold_clamps",
-          "rotation": 90
-        }
-      }
-    },
-    {
-      "from": [
-        16.0,
-        0.0,
-        -0.0
-      ],
-      "to": [
-        16.0,
-        2.0,
-        3.0
-      ],
-      "shade": true,
-      "light_emission": 0,
-      "faces": {
-        "east": {
-          "uv": [
-            0.0,
-            16.0,
-            3.0,
-            14.0
-          ],
-          "texture": "#side_gold_clamps",
-          "rotation": 180
-        }
-      }
-    },
-    {
-      "from": [
-        16.0,
-        0.0,
-        13.0
-      ],
-      "to": [
-        16.0,
-        2.0,
-        16.0
-      ],
-      "shade": true,
-      "light_emission": 0,
-      "faces": {
-        "east": {
-          "uv": [
             13.0,
             16.0,
-            16.0,
-            14.0
-          ],
-          "texture": "#side_gold_clamps",
-          "rotation": 180
-        }
-      }
-    },
-    {
-      "from": [
-        15.0,
-        2.0,
-        -0.0
-      ],
-      "to": [
-        16.0,
-        2.0,
-        1.0
-      ],
-      "shade": true,
-      "light_emission": 0,
-      "faces": {
-        "up": {
-          "uv": [
-            0.0,
-            15.0,
-            1.0,
-            14.0
-          ],
-          "texture": "#side_gold_clamps",
-          "rotation": 90
-        }
-      }
-    },
-    {
-      "from": [
-        -0.0,
-        2.0,
-        15.0
-      ],
-      "to": [
-        1.0,
-        2.0,
-        16.0
-      ],
-      "shade": true,
-      "light_emission": 0,
-      "faces": {
-        "up": {
-          "uv": [
-            0.0,
-            15.0,
-            1.0,
-            14.0
-          ],
-          "texture": "#side_gold_clamps",
-          "rotation": 90
-        }
-      }
-    },
-    {
-      "from": [
-        15.0,
-        2.0,
-        15.0
-      ],
-      "to": [
-        16.0,
-        2.0,
-        16.0
-      ],
-      "shade": true,
-      "light_emission": 0,
-      "faces": {
-        "up": {
-          "uv": [
-            0.0,
-            15.0,
-            1.0,
-            14.0
-          ],
-          "texture": "#side_gold_clamps",
-          "rotation": 90
-        }
-      }
-    },
-    {
-      "from": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "to": [
-        1.0,
-        0.0,
-        1.0
-      ],
-      "shade": true,
-      "light_emission": 0,
-      "faces": {
-        "down": {
-          "uv": [
-            15.0,
-            16.0,
-            16.0,
-            15.0
-          ],
-          "texture": "#side_gold_clamps",
-          "rotation": 270
-        }
-      }
-    },
-    {
-      "from": [
-        1.0,
-        0.0,
-        0.0
-      ],
-      "to": [
-        2.0,
-        0.0,
-        1.0
-      ],
-      "shade": true,
-      "light_emission": 0,
-      "faces": {
-        "down": {
-          "uv": [
-            1.0,
-            16.0,
-            2.0,
-            15.0
-          ],
-          "texture": "#side_gold_clamps",
-          "rotation": 270
-        }
-      }
-    },
-    {
-      "from": [
-        15.0,
-        0.0,
-        1.0
-      ],
-      "to": [
-        16.0,
-        0.0,
-        2.0
-      ],
-      "shade": true,
-      "light_emission": 0,
-      "faces": {
-        "down": {
-          "uv": [
-            1.0,
-            16.0,
-            2.0,
-            15.0
-          ],
-          "texture": "#side_gold_clamps",
-          "rotation": 270
-        }
-      }
-    },
-    {
-      "from": [
-        -0.0,
-        0.0,
-        14.0
-      ],
-      "to": [
-        1.0,
-        0.0,
-        15.0
-      ],
-      "shade": true,
-      "light_emission": 0,
-      "faces": {
-        "down": {
-          "uv": [
-            1.0,
-            16.0,
-            2.0,
-            15.0
-          ],
-          "texture": "#side_gold_clamps",
-          "rotation": 270
-        }
-      }
-    },
-    {
-      "from": [
-        14.0,
-        0.0,
-        15.0
-      ],
-      "to": [
-        15.0,
-        0.0,
-        16.0
-      ],
-      "shade": true,
-      "light_emission": 0,
-      "faces": {
-        "down": {
-          "uv": [
-            1.0,
-            16.0,
-            2.0,
-            15.0
-          ],
-          "texture": "#side_gold_clamps",
-          "rotation": 270
-        }
-      }
-    },
-    {
-      "from": [
-        2.0,
-        0.0,
-        -0.0
-      ],
-      "to": [
-        3.0,
-        0.0,
-        1.0
-      ],
-      "shade": true,
-      "light_emission": 0,
-      "faces": {
-        "down": {
-          "uv": [
-            2.0,
-            16.0,
-            3.0,
-            15.0
-          ],
-          "texture": "#side_gold_clamps",
-          "rotation": 270
-        }
-      }
-    },
-    {
-      "from": [
-        15.0,
-        0.0,
-        2.0
-      ],
-      "to": [
-        16.0,
-        0.0,
-        3.0
-      ],
-      "shade": true,
-      "light_emission": 0,
-      "faces": {
-        "down": {
-          "uv": [
-            2.0,
-            16.0,
-            3.0,
-            15.0
-          ],
-          "texture": "#side_gold_clamps",
-          "rotation": 270
-        }
-      }
-    },
-    {
-      "from": [
-        -0.0,
-        0.0,
-        13.0
-      ],
-      "to": [
-        1.0,
-        0.0,
-        14.0
-      ],
-      "shade": true,
-      "light_emission": 0,
-      "faces": {
-        "down": {
-          "uv": [
-            2.0,
-            16.0,
-            3.0,
-            15.0
-          ],
-          "texture": "#side_gold_clamps",
-          "rotation": 270
-        }
-      }
-    },
-    {
-      "from": [
-        13.0,
-        0.0,
-        15.0
-      ],
-      "to": [
-        14.0,
-        0.0,
-        16.0
-      ],
-      "shade": true,
-      "light_emission": 0,
-      "faces": {
-        "down": {
-          "uv": [
-            2.0,
-            16.0,
-            3.0,
+            14.0,
             15.0
           ],
           "texture": "#side_gold_clamps",
@@ -20550,34 +21374,8 @@
     },
     {
       "from": [
-        0.0,
-        -0.0,
-        3.0
-      ],
-      "to": [
-        1.0,
-        2.0,
-        3.0
-      ],
-      "shade": true,
-      "light_emission": 0,
-      "faces": {
-        "south": {
-          "uv": [
-            15.0,
-            16.0,
-            16.0,
-            14.0
-          ],
-          "texture": "#side_gold_clamps",
-          "rotation": 180
-        }
-      }
-    },
-    {
-      "from": [
         15.0,
-        0.0,
+        1.0,
         3.0
       ],
       "to": [
@@ -20590,46 +21388,19 @@
       "faces": {
         "south": {
           "uv": [
-            0.0,
-            16.0,
-            1.0,
+            2.0,
+            15.0,
+            3.0,
             14.0
           ],
-          "texture": "#side_gold_clamps",
-          "rotation": 180
-        }
-      }
-    },
-    {
-      "from": [
-        0.0,
-        0.0,
-        13.0
-      ],
-      "to": [
-        1.0,
-        2.0,
-        13.0
-      ],
-      "shade": true,
-      "light_emission": 0,
-      "faces": {
-        "north": {
-          "uv": [
-            0.0,
-            16.0,
-            1.0,
-            14.0
-          ],
-          "texture": "#side_gold_clamps",
-          "rotation": 180
+          "texture": "#side_gold_clamps"
         }
       }
     },
     {
       "from": [
         15.0,
-        -0.0,
+        1.0,
         13.0
       ],
       "to": [
@@ -20642,9 +21413,9 @@
       "faces": {
         "north": {
           "uv": [
+            13.0,
             15.0,
-            16.0,
-            16.0,
+            14.0,
             14.0
           ],
           "texture": "#side_gold_clamps",
@@ -20706,6 +21477,263 @@
     },
     {
       "from": [
+        15.0,
+        0.0,
+        3.0
+      ],
+      "to": [
+        16.0,
+        1.0,
+        3.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "south": {
+          "uv": [
+            2.0,
+            16.0,
+            3.0,
+            15.0
+          ],
+          "texture": "#side_gold_clamps"
+        }
+      }
+    },
+    {
+      "from": [
+        15.0,
+        -0.0,
+        13.0
+      ],
+      "to": [
+        16.0,
+        1.0,
+        13.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "north": {
+          "uv": [
+            13.0,
+            16.0,
+            14.0,
+            15.0
+          ],
+          "texture": "#side_gold_clamps",
+          "rotation": 180
+        }
+      }
+    },
+    {
+      "from": [
+        13.0,
+        1.0,
+        15.0
+      ],
+      "to": [
+        13.0,
+        2.0,
+        16.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "west": {
+          "uv": [
+            2.0,
+            15.0,
+            3.0,
+            14.0
+          ],
+          "texture": "#side_gold_clamps",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        3.0,
+        1.0,
+        15.0
+      ],
+      "to": [
+        3.0,
+        2.0,
+        16.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "east": {
+          "uv": [
+            13.0,
+            15.0,
+            14.0,
+            14.0
+          ],
+          "texture": "#side_gold_clamps",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        13.0,
+        -0.0,
+        15.0
+      ],
+      "to": [
+        13.0,
+        1.0,
+        16.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "west": {
+          "uv": [
+            2.0,
+            16.0,
+            3.0,
+            15.0
+          ],
+          "texture": "#side_gold_clamps",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        3.0,
+        -0.0,
+        15.0
+      ],
+      "to": [
+        3.0,
+        1.0,
+        16.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "east": {
+          "uv": [
+            13.0,
+            16.0,
+            14.0,
+            15.0
+          ],
+          "texture": "#side_gold_clamps",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        0.0,
+        1.0,
+        13.0
+      ],
+      "to": [
+        1.0,
+        2.0,
+        13.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "north": {
+          "uv": [
+            2.0,
+            15.0,
+            3.0,
+            14.0
+          ],
+          "texture": "#side_gold_clamps",
+          "rotation": 180
+        }
+      }
+    },
+    {
+      "from": [
+        -0.0,
+        1.0,
+        3.0
+      ],
+      "to": [
+        1.0,
+        2.0,
+        3.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "south": {
+          "uv": [
+            13.0,
+            15.0,
+            14.0,
+            14.0
+          ],
+          "texture": "#side_gold_clamps"
+        }
+      }
+    },
+    {
+      "from": [
+        -0.0,
+        -0.0,
+        13.0
+      ],
+      "to": [
+        1.0,
+        1.0,
+        13.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "north": {
+          "uv": [
+            2.0,
+            16.0,
+            3.0,
+            15.0
+          ],
+          "texture": "#side_gold_clamps",
+          "rotation": 180
+        }
+      }
+    },
+    {
+      "from": [
+        -0.0,
+        0.0,
+        3.0
+      ],
+      "to": [
+        1.0,
+        1.0,
+        3.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "south": {
+          "uv": [
+            13.0,
+            16.0,
+            14.0,
+            15.0
+          ],
+          "texture": "#side_gold_clamps"
+        }
+      }
+    },
+    {
+      "from": [
         6.0,
         6.0,
         0.0
@@ -20863,6 +21891,32 @@
     {
       "from": [
         6.0,
+        10.0,
+        -0.0
+      ],
+      "to": [
+        6.0,
+        11.0,
+        1.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "west": {
+          "uv": [
+            6.0,
+            6.0,
+            7.0,
+            5.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        6.0,
         11.0,
         -0.0
       ],
@@ -21169,6 +22223,32 @@
           ],
           "texture": "#side_carved_frame",
           "rotation": 90
+        }
+      }
+    },
+    {
+      "from": [
+        10.0,
+        10.0,
+        0.0
+      ],
+      "to": [
+        10.0,
+        11.0,
+        1.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "east": {
+          "uv": [
+            9.0,
+            6.0,
+            10.0,
+            5.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
         }
       }
     },
@@ -21273,6 +22353,32 @@
           ],
           "texture": "#side_carved_frame",
           "rotation": 90
+        }
+      }
+    },
+    {
+      "from": [
+        5.0,
+        9.0,
+        0.0
+      ],
+      "to": [
+        5.0,
+        10.0,
+        1.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "west": {
+          "uv": [
+            5.0,
+            7.0,
+            6.0,
+            6.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
         }
       }
     },
@@ -21382,6 +22488,32 @@
     },
     {
       "from": [
+        11.0,
+        9.0,
+        0.0
+      ],
+      "to": [
+        11.0,
+        10.0,
+        1.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "east": {
+          "uv": [
+            10.0,
+            7.0,
+            11.0,
+            6.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
         10.0,
         10.0,
         -0.0
@@ -21487,6 +22619,84 @@
     {
       "from": [
         5.0,
+        8.0,
+        0.0
+      ],
+      "to": [
+        5.0,
+        9.0,
+        1.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "west": {
+          "uv": [
+            5.0,
+            8.0,
+            6.0,
+            7.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        11.0,
+        8.0,
+        0.0
+      ],
+      "to": [
+        11.0,
+        9.0,
+        1.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "east": {
+          "uv": [
+            10.0,
+            8.0,
+            11.0,
+            7.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        5.0,
+        7.0,
+        0.0
+      ],
+      "to": [
+        5.0,
+        8.0,
+        1.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "west": {
+          "uv": [
+            5.0,
+            9.0,
+            6.0,
+            8.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        5.0,
         7.0,
         -0.0
       ],
@@ -21581,6 +22791,32 @@
             5.0,
             9.0,
             6.0,
+            8.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        11.0,
+        7.0,
+        0.0
+      ],
+      "to": [
+        11.0,
+        8.0,
+        1.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "east": {
+          "uv": [
+            10.0,
+            9.0,
+            11.0,
             8.0
           ],
           "texture": "#side_carved_frame",
@@ -21686,6 +22922,32 @@
             9.0,
             11.0,
             8.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        6.0,
+        6.0,
+        0.0
+      ],
+      "to": [
+        6.0,
+        7.0,
+        1.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "west": {
+          "uv": [
+            6.0,
+            10.0,
+            7.0,
+            9.0
           ],
           "texture": "#side_carved_frame",
           "rotation": 270
@@ -22006,6 +23268,32 @@
     },
     {
       "from": [
+        10.0,
+        6.0,
+        0.0
+      ],
+      "to": [
+        10.0,
+        7.0,
+        1.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "east": {
+          "uv": [
+            9.0,
+            10.0,
+            10.0,
+            9.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
         9.0,
         6.0,
         -0.0
@@ -22105,6 +23393,32 @@
           ],
           "texture": "#side_carved_frame",
           "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        15.0,
+        10.0,
+        6.0
+      ],
+      "to": [
+        16.0,
+        11.0,
+        6.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "north": {
+          "uv": [
+            6.0,
+            6.0,
+            7.0,
+            5.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 180
         }
       }
     },
@@ -22261,6 +23575,235 @@
           ],
           "texture": "#side_carved_frame",
           "rotation": 180
+        }
+      }
+    },
+    {
+      "from": [
+        15.0,
+        10.0,
+        10.0
+      ],
+      "to": [
+        16.0,
+        11.0,
+        10.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "south": {
+          "uv": [
+            9.0,
+            6.0,
+            10.0,
+            5.0
+          ],
+          "texture": "#side_carved_frame"
+        }
+      }
+    },
+    {
+      "from": [
+        15.0,
+        9.0,
+        5.0
+      ],
+      "to": [
+        16.0,
+        10.0,
+        5.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "north": {
+          "uv": [
+            5.0,
+            7.0,
+            6.0,
+            6.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 180
+        }
+      }
+    },
+    {
+      "from": [
+        15.0,
+        9.0,
+        11.0
+      ],
+      "to": [
+        16.0,
+        10.0,
+        11.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "south": {
+          "uv": [
+            10.0,
+            7.0,
+            11.0,
+            6.0
+          ],
+          "texture": "#side_carved_frame"
+        }
+      }
+    },
+    {
+      "from": [
+        15.0,
+        8.0,
+        5.0
+      ],
+      "to": [
+        16.0,
+        9.0,
+        5.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "north": {
+          "uv": [
+            5.0,
+            8.0,
+            6.0,
+            7.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 180
+        }
+      }
+    },
+    {
+      "from": [
+        15.0,
+        8.0,
+        11.0
+      ],
+      "to": [
+        16.0,
+        9.0,
+        11.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "south": {
+          "uv": [
+            10.0,
+            8.0,
+            11.0,
+            7.0
+          ],
+          "texture": "#side_carved_frame"
+        }
+      }
+    },
+    {
+      "from": [
+        15.0,
+        7.0,
+        5.0
+      ],
+      "to": [
+        16.0,
+        8.0,
+        5.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "north": {
+          "uv": [
+            5.0,
+            9.0,
+            6.0,
+            8.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 180
+        }
+      }
+    },
+    {
+      "from": [
+        15.0,
+        7.0,
+        11.0
+      ],
+      "to": [
+        16.0,
+        8.0,
+        11.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "south": {
+          "uv": [
+            10.0,
+            9.0,
+            11.0,
+            8.0
+          ],
+          "texture": "#side_carved_frame"
+        }
+      }
+    },
+    {
+      "from": [
+        15.0,
+        6.0,
+        6.0
+      ],
+      "to": [
+        16.0,
+        7.0,
+        6.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "north": {
+          "uv": [
+            6.0,
+            10.0,
+            7.0,
+            9.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 180
+        }
+      }
+    },
+    {
+      "from": [
+        15.0,
+        6.0,
+        10.0
+      ],
+      "to": [
+        16.0,
+        7.0,
+        10.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "south": {
+          "uv": [
+            9.0,
+            10.0,
+            10.0,
+            9.0
+          ],
+          "texture": "#side_carved_frame"
         }
       }
     },
@@ -22422,6 +23965,291 @@
     },
     {
       "from": [
+        10.0,
+        10.0,
+        15.0
+      ],
+      "to": [
+        10.0,
+        11.0,
+        16.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "east": {
+          "uv": [
+            6.0,
+            6.0,
+            7.0,
+            5.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        6.0,
+        10.0,
+        15.0
+      ],
+      "to": [
+        6.0,
+        11.0,
+        16.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "west": {
+          "uv": [
+            9.0,
+            6.0,
+            10.0,
+            5.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        11.0,
+        9.0,
+        15.0
+      ],
+      "to": [
+        11.0,
+        10.0,
+        16.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "east": {
+          "uv": [
+            5.0,
+            7.0,
+            6.0,
+            6.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        5.0,
+        9.0,
+        15.0
+      ],
+      "to": [
+        5.0,
+        10.0,
+        16.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "west": {
+          "uv": [
+            10.0,
+            7.0,
+            11.0,
+            6.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        11.0,
+        8.0,
+        15.0
+      ],
+      "to": [
+        11.0,
+        9.0,
+        16.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "east": {
+          "uv": [
+            5.0,
+            8.0,
+            6.0,
+            7.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        5.0,
+        8.0,
+        15.0
+      ],
+      "to": [
+        5.0,
+        9.0,
+        16.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "west": {
+          "uv": [
+            10.0,
+            8.0,
+            11.0,
+            7.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        11.0,
+        7.0,
+        15.0
+      ],
+      "to": [
+        11.0,
+        8.0,
+        16.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "east": {
+          "uv": [
+            5.0,
+            9.0,
+            6.0,
+            8.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        5.0,
+        7.0,
+        15.0
+      ],
+      "to": [
+        5.0,
+        8.0,
+        16.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "west": {
+          "uv": [
+            10.0,
+            9.0,
+            11.0,
+            8.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        10.0,
+        6.0,
+        15.0
+      ],
+      "to": [
+        10.0,
+        7.0,
+        16.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "east": {
+          "uv": [
+            6.0,
+            10.0,
+            7.0,
+            9.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        6.0,
+        6.0,
+        15.0
+      ],
+      "to": [
+        6.0,
+        7.0,
+        16.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "west": {
+          "uv": [
+            9.0,
+            10.0,
+            10.0,
+            9.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 270
+        }
+      }
+    },
+    {
+      "from": [
+        -0.0,
+        10.0,
+        10.0
+      ],
+      "to": [
+        1.0,
+        11.0,
+        10.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "south": {
+          "uv": [
+            6.0,
+            6.0,
+            7.0,
+            5.0
+          ],
+          "texture": "#side_carved_frame"
+        }
+      }
+    },
+    {
+      "from": [
         0.0,
         6.0,
         6.0
@@ -22570,6 +24398,236 @@
             7.0,
             7.0,
             5.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 180
+        }
+      }
+    },
+    {
+      "from": [
+        0.0,
+        10.0,
+        6.0
+      ],
+      "to": [
+        1.0,
+        11.0,
+        6.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "north": {
+          "uv": [
+            9.0,
+            6.0,
+            10.0,
+            5.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 180
+        }
+      }
+    },
+    {
+      "from": [
+        -0.0,
+        9.0,
+        11.0
+      ],
+      "to": [
+        1.0,
+        10.0,
+        11.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "south": {
+          "uv": [
+            5.0,
+            7.0,
+            6.0,
+            6.0
+          ],
+          "texture": "#side_carved_frame"
+        }
+      }
+    },
+    {
+      "from": [
+        -0.0,
+        9.0,
+        5.0
+      ],
+      "to": [
+        1.0,
+        10.0,
+        5.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "north": {
+          "uv": [
+            10.0,
+            7.0,
+            11.0,
+            6.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 180
+        }
+      }
+    },
+    {
+      "from": [
+        -0.0,
+        8.0,
+        11.0
+      ],
+      "to": [
+        1.0,
+        9.0,
+        11.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "south": {
+          "uv": [
+            5.0,
+            8.0,
+            6.0,
+            7.0
+          ],
+          "texture": "#side_carved_frame"
+        }
+      }
+    },
+    {
+      "from": [
+        -0.0,
+        8.0,
+        5.0
+      ],
+      "to": [
+        1.0,
+        9.0,
+        5.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "north": {
+          "uv": [
+            10.0,
+            8.0,
+            11.0,
+            7.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 180
+        }
+      }
+    },
+    {
+      "from": [
+        -0.0,
+        7.0,
+        11.0
+      ],
+      "to": [
+        1.0,
+        8.0,
+        11.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "south": {
+          "uv": [
+            5.0,
+            9.0,
+            6.0,
+            8.0
+          ],
+          "texture": "#side_carved_frame"
+        }
+      }
+    },
+    {
+      "from": [
+        -0.0,
+        7.0,
+        5.0
+      ],
+      "to": [
+        1.0,
+        8.0,
+        5.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "north": {
+          "uv": [
+            10.0,
+            9.0,
+            11.0,
+            8.0
+          ],
+          "texture": "#side_carved_frame",
+          "rotation": 180
+        }
+      }
+    },
+    {
+      "from": [
+        -0.0,
+        6.0,
+        10.0
+      ],
+      "to": [
+        1.0,
+        7.0,
+        10.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "south": {
+          "uv": [
+            6.0,
+            10.0,
+            7.0,
+            9.0
+          ],
+          "texture": "#side_carved_frame"
+        }
+      }
+    },
+    {
+      "from": [
+        -0.0,
+        6.0,
+        6.0
+      ],
+      "to": [
+        1.0,
+        7.0,
+        6.0
+      ],
+      "shade": true,
+      "light_emission": 0,
+      "faces": {
+        "north": {
+          "uv": [
+            9.0,
+            10.0,
+            10.0,
+            9.0
           ],
           "texture": "#side_carved_frame",
           "rotation": 180

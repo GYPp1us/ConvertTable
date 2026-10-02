@@ -11,7 +11,8 @@ final class TargetCatalog {
         var catalog=ClientRecipeCatalog.current();
         var ordinary=catalog.groups().stream().filter(g->g.tier()<=variant && (!restrict||g.items().contains(source)))
             .flatMap(g->g.items().stream()).filter(i->!restrict||i!=source);
-        var advanced=variant==2?catalog.advanced().stream().filter(r->!restrict||r.input().is(source)).map(r->r.output().getItem())
+        var advanced=variant==2?catalog.advanced().stream().filter(r->!restrict||r.input().is(source))
+            .flatMap(r->r.outputs().stream()).map(net.minecraft.world.item.ItemStack::getItem)
             :java.util.stream.Stream.<Item>empty();
         return java.util.stream.Stream.concat(ordinary,advanced).distinct()
             .filter(i->i.getDefaultInstance().getHoverName().getString().toLowerCase(Locale.ROOT).contains(q)

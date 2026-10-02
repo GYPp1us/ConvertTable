@@ -1,10 +1,10 @@
-"""Generate the repository banner (assets/previews/banner.png) from the mod's own art.
+"""Generate the README banner (assets/readme/banner.png) from current block renders.
 
-Reproducible: run `python assets/tools/make_banner.py` from the project root.
+Reproducible: run `python assets/tools/make_banner.py` from the project root, after
+`render_readme.py` has generated the five transparent block renders.
 
-The four subjects are the mod's own renders, which sit on near-black backdrops.
-They are screen-blended, so that backdrop contributes nothing and only the lit
-geometry lands on the banner gradient. Nothing is drawn that is not in the repo.
+The subjects are rendered directly from the packaged model and texture resources.
+Their alpha is preserved when blending them into the banner gradient.
 """
 
 from __future__ import annotations
@@ -15,9 +15,9 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-OUT = os.path.join(ROOT, "assets", "previews", "banner.png")
+OUT = os.path.join(ROOT, "assets", "readme", "banner.png")
 
-W, H = 1500, 420
+W, H = 1600, 420
 BG_TOP = (12, 14, 18)
 BG_BOTTOM = (24, 28, 35)
 
@@ -28,10 +28,11 @@ MUTED = (152, 162, 178)
 
 # (path relative to project root, glow tint)
 SUBJECTS = [
-    ("assets/previews/black_gold.png", (255, 190, 92)),
-    ("assets/previews/end.png", (176, 132, 255)),
-    ("assets/previews/sculk.png", (94, 214, 202)),
-    ("assets/geode_prototype/geode_dark.png", (208, 168, 255)),
+    ("assets/readme/black_gold.png", (255, 190, 92)),
+    ("assets/readme/end.png", (176, 132, 255)),
+    ("assets/readme/sculk.png", (94, 214, 202)),
+    ("assets/readme/crystal_table.png", (208, 168, 255)),
+    ("assets/readme/catalyst_pedestal.png", (132, 194, 255)),
 ]
 
 FONT_BOLD = r"C:\Windows\Fonts\seguisb.ttf"
@@ -81,9 +82,13 @@ def fit_subject(path: str, size: int) -> np.ndarray | None:
     if not os.path.exists(full):
         print(f"  ! missing render, skipped: {path}")
         return None
-    img = Image.open(full).convert("RGB")
-    rgb = np.asarray(img, np.float32) / 255.0
-    alpha = subject_alpha(rgb)
+    img = Image.open(full).convert("RGBA")
+    rgba = np.asarray(img, np.float32) / 255.0
+    rgb = rgba[:, :, :3]
+    if np.any(rgba[:, :, 3] < 0.999):
+        alpha = rgba[:, :, 3]
+    else:
+        alpha = subject_alpha(rgb)
 
     ys, xs = np.where(alpha > 0.5)
     if xs.size == 0:
@@ -129,10 +134,10 @@ def add_glow(base: np.ndarray, box, color, strength: float) -> np.ndarray:
 def main() -> None:
     base = gradient(W, H, BG_TOP, BG_BOTTOM)
 
-    slot = 220
-    x_start, y_slot = 556, 100
+    slot = 176
+    x_start, y_slot = 600, 100
 
-    boxes = [(x_start + i * (slot + 8), y_slot, slot) for i in range(len(SUBJECTS))]
+    boxes = [(x_start + i * (slot + 12), y_slot, slot) for i in range(len(SUBJECTS))]
 
     for (x, y, s), (_, tint) in zip(boxes, SUBJECTS):
         base = add_glow(base, (x, y, s), tint, strength=0.30)

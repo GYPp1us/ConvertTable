@@ -91,7 +91,10 @@ public final class CatalystPedestalScreen extends AbstractContainerScreen<Cataly
         if (recipe != null) g.item(new ItemStack(recipe.output()), 151, 29);
         if (contains(mouseX - leftPos, mouseY - topPos, 5, 26, 23, 23) && menu.getSlot(0).getItem().isEmpty())
             g.setTooltipForNextFrame(font, tr("catalyst_help"), mouseX, mouseY);
-        label(g, tr("production_short", menu.producedPerSecond()), 8, 49, 162, TEXT, mouseX, mouseY);
+        double production=menu.processing()&&menu.cost()>0?menu.progressRate()/(double)menu.cost():0;
+        label(g, tr("production_short", String.format(java.util.Locale.ROOT,"%.1f",production)), 8, 49, 162, TEXT, mouseX, mouseY);
+        if(contains(mouseX-leftPos,mouseY-topPos,8,49,162,10))
+            g.setComponentTooltipForNextFrame(font,List.of(tr("production_help"),tr("completed_cycle",menu.producedPerSecond())),mouseX,mouseY);
         label(g, tr("export_short", menu.availablePerSecond()), 8, 60, 162, MUTED, mouseX, mouseY);
         meter(g, 8, 70, 162, menu.availablePerSecond(), (menu.small() + menu.medium() + menu.large()) * 2, EXPORT);
         label(g, tr("used_short", menu.spentPerSecond()), 8, 78, 162, MUTED, mouseX, mouseY);
@@ -103,10 +106,12 @@ public final class CatalystPedestalScreen extends AbstractContainerScreen<Cataly
         g.centeredText(font, (page + 1) + " / " + Math.max(1, (menu.recipes().size() + PAGE_SIZE - 1) / PAGE_SIZE), 246, 87, MUTED);
         if (menu.recipes().isEmpty()) g.textWithWordWrap(font, tr("catalyst_help"), 192, 44, 114, MUTED, false);
         drawConnections(g, mouseX, mouseY);
-        label(g, tr("credit_short", menu.credit(), menu.cost()), 188, 171, 124, TEXT, mouseX, mouseY);
-        meter(g, 188, 183, 124, menu.credit(), menu.cost(), PURPLE);
+        Component nextProgress=recipe==null?tr("choose_target"):tr("next_item_short", factors(menu.progressUnits()),menu.cost());
+        label(g, nextProgress, 188, 171, 124, TEXT, mouseX, mouseY);
+        progress(g, 188, 183, 124, 5, menu.progressUnits(), menu.progressMaximum(), menu.status()==5?BLOCKED:PURPLE);
         if (contains(mouseX - leftPos, mouseY - topPos, 188, 170, 124, 20))
-            g.setTooltipForNextFrame(font, tr("credit_help"), mouseX, mouseY);
+            g.setComponentTooltipForNextFrame(font,List.of(nextProgress,tr("next_item_progress",percent(menu.progressUnits(),menu.progressMaximum())),
+                tr("growth_progress_help"),tr("credit_help")), mouseX, mouseY);
         label(g, tr("buffer_actual", menu.buffered(), menu.bufferCapacity()), 188, 194, 124, TEXT, mouseX, mouseY);
         meter(g, 188, 205, 124, menu.buffered(), menu.bufferCapacity(), menu.buffered() >= menu.bufferCapacity() ? BLOCKED : USED);
         String status = switch (menu.status()) {
@@ -118,6 +123,7 @@ public final class CatalystPedestalScreen extends AbstractContainerScreen<Cataly
             case 6 -> "no_buds";
             case 7 -> "invalid_catalyst";
             case 8 -> "choose_target";
+            case 9 -> "waiting_factors";
             default -> "idle";
         };
         label(g, tr(status), 188, 217, 124, menu.status() > 1 ? BLOCKED : MUTED, mouseX, mouseY);

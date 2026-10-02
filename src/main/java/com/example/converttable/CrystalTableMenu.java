@@ -8,7 +8,7 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.item.ItemStack;
 
 public final class CrystalTableMenu extends AbstractContainerMenu {
-    private static final int DATA_SIZE = 13;
+    private static final int DATA_SIZE = 15;
     private final CrystalTableBlockEntity table;
     private final ContainerData data = new SimpleContainerData(DATA_SIZE);
 
@@ -38,6 +38,8 @@ public final class CrystalTableMenu extends AbstractContainerMenu {
         data.set(10, table.lastSpent());
         data.set(11, snapshot.calciteMothers());
         data.set(12, snapshot.basaltMothers());
+        data.set(13, table.progressTicks());
+        data.set(14, table.processing() ? 1 : 0);
     }
 
     @Override public void broadcastChanges() { refresh(); super.broadcastChanges(); }
@@ -55,6 +57,10 @@ public final class CrystalTableMenu extends AbstractContainerMenu {
     public int spent() { return data.get(10); }
     public int calciteMothers() { return data.get(11); }
     public int basaltMothers() { return data.get(12); }
+    public int progressTicks() { return data.get(13); }
+    public int totalTicks() { return 20; }
+    public int progressRate() { return spent(); }
+    public boolean processing() { return data.get(14) != 0; }
 
     @Override public boolean stillValid(Player player) {
         return table == null || (!table.isRemoved()

@@ -46,6 +46,24 @@ final class GrowthScreenGraphics {
         g.horizontalLine(x, x + width - 1, y + 5, 0xffe1dfe4);
     }
 
+    /** The moving leading edge follows synchronized work; it never advances on a client timer. */
+    static void progress(GuiGraphicsExtractor g, int x, int y, int width, int height,
+                         int value, int maximum, int color) {
+        g.fill(x, y, x + width, y + height, 0xffb2b0b6);
+        int fill = maximum <= 0 ? 0 : (int) Math.round(width * Math.clamp(value / (double) maximum, 0.0, 1.0));
+        if (fill > 0) g.fill(x, y, x + fill, y + height, color);
+        if (fill > 0 && fill < width) g.fill(x + fill - 1, y, x + fill, y + height, 0xfff4f0f8);
+        g.horizontalLine(x, x + width - 1, y + height, 0xffe1dfe4);
+    }
+
+    static int percent(int value, int maximum) {
+        return maximum <= 0 ? 0 : (int) Math.floor(100.0 * Math.clamp(value / (double) maximum, 0.0, 1.0));
+    }
+
+    static String factors(int units) {
+        return units % 20 == 0 ? Integer.toString(units / 20) : String.format(java.util.Locale.ROOT, "%.2f", units / 20.0);
+    }
+
     static boolean contains(int mx, int my, int x, int y, int w, int h) {
         return mx >= x && mx < x + w && my >= y && my < y + h;
     }
@@ -67,6 +85,10 @@ final class GrowthScreenGraphics {
                 Component name = tr(selected ? "target_selected" : "target_option", item.getHoverName(), recipe.cost());
                 setMessage(name);
                 setTooltip(Tooltip.create(name));
+            } else {
+                setMessage(Component.empty());
+                setTooltip(null);
+                setFocused(false);
             }
         }
 

@@ -6,60 +6,44 @@ import java.util.List;
 import java.util.Set;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.CompoundContainer;
 import net.minecraft.world.Container;
 import net.minecraft.world.RandomizableContainer;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
-import net.minecraft.world.level.block.state.properties.ChestType;
 
-/** Adjacent export inventory discovery and transfer share the same sided rules. */
+/** Linked export inventory discovery and transfer share the same sided rules. */
 public final class GrowthOutputLinks {
-    /** Masks use Direction.ordinal(): down, up, north, south, west, east. */
+    /** Direction masks describe spatial main directions and use ordinal(): down, up, north, south, west, east. */
     public record Snapshot(int containers, int freeSpace, int directionMask, int blockedMask) {
         public static Snapshot empty() { return new Snapshot(0, 0, 0, 0); }
     }
-    private record Entry(BlockPos key, Container container, Direction direction, boolean accessible) { }
-    private static final Direction[] ORDER = {Direction.DOWN, Direction.NORTH, Direction.SOUTH,
-        Direction.WEST, Direction.EAST, Direction.UP};
+    /** direction is the dominant spatial axis; accessFace is the linked container's clicked sided-access face. */
+    private record Entry(BlockPos key, Container container, Direction direction, Direction accessFace,
+            boolean accessible) { }
 
     private GrowthOutputLinks() { }
 
     private static List<Entry> discover(Level level, BlockPos origin) {
-        if (level == null) return List.of();
+        if (level == null || !level.hasChunkAt(origin)) return List.of();
+        var blockEntity = level.getBlockEntity(origin);
+        if (!(blockEntity instanceof CatalystPedestalBlockEntity pedestal)) return List.of();
         List<Entry> result = new ArrayList<>();
-        for (Direction direction : ORDER) {
-            BlockPos pos = origin.relative(direction);
-            if (!level.hasChunkAt(pos)) continue;
-            var be = level.getBlockEntity(pos);
-            if (!(be instanceof Container container) || be instanceof CatalystPedestalBlockEntity
-                    || be instanceof ConversionTableBlockEntity) continue;
-            boolean accessible = accessible(container);
-            BlockPos key = pos;
-            var state = level.getBlockState(pos);
-            if (state.getBlock() instanceof ChestBlock && state.getValue(ChestBlock.TYPE) != ChestType.SINGLE) {
-                BlockPos partner = ChestBlock.getConnectedBlockPos(pos, state);
-                if (!level.hasChunkAt(partner)) accessible = false;
-                else {
-                    var other = level.getBlockState(partner);
-                    if (other.is(state.getBlock()) && other.getValue(ChestBlock.TYPE) != ChestType.SINGLE
-                            && other.getValue(ChestBlock.TYPE) != state.getValue(ChestBlock.TYPE)
-                            && other.getValue(ChestBlock.FACING) == state.getValue(ChestBlock.FACING)
-                            && level.getBlockEntity(partner) instanceof Container second) {
-                        accessible &= accessible(second);
-                        if (partner.asLong() < pos.asLong()) {
-                            key = partner;
-                            container = new CompoundContainer(second, container);
-                        } else container = new CompoundContainer(container, second);
-                    }
-                }
-            }
-            result.add(new Entry(key.immutable(), container, direction, accessible));
+        for (ContainerLinks.Entry binding : pedestal.outputContainers()) {
+            result.add(new Entry(binding.key(), binding.container(), mainDirection(origin, binding.key()),
+                binding.face(), accessible(binding.container())));
         }
         return result;
+    }
+
+    /** Ties resolve in Y, X, Z order for a stable UI mask. */
+    private static Direction mainDirection(BlockPos origin, BlockPos pos) {
+        int dx = pos.getX() - origin.getX(), dy = pos.getY() - origin.getY(), dz = pos.getZ() - origin.getZ();
+        int ax = Math.abs(dx), ay = Math.abs(dy), az = Math.abs(dz);
+        if (ay > 0 && ay >= ax && ay >= az) return dy < 0 ? Direction.DOWN : Direction.UP;
+        if (ax > 0 && ax >= az) return dx < 0 ? Direction.WEST : Direction.EAST;
+        return dz < 0 ? Direction.NORTH : Direction.SOUTH;
     }
 
     private static boolean accessible(Container target) {
@@ -74,7 +58,7 @@ public final class GrowthOutputLinks {
             int bit = 1 << entry.direction().ordinal();
             directions |= bit;
             int room = entry.accessible() && !output.isEmpty()
-                ? room(entry.container(), output, entry.direction().getOpposite()) : 0;
+                ? room(entry.container(), output, entry.accessFace()) : 0;
             if (!entry.accessible() || (!output.isEmpty() && room == 0)) blocked |= bit;
             if (counted.add(entry.key())) free += room;
         }
@@ -89,7 +73,7 @@ public final class GrowthOutputLinks {
                     slot <= CatalystPedestalBlockEntity.OUTPUT_LAST; slot++) {
                 ItemStack stack = pedestal.getItem(slot);
                 if (stack.isEmpty()) continue;
-                int moved = insert(entry.container(), stack, entry.direction().getOpposite());
+                int moved = insert(entry.container(), stack, entry.accessFace());
                 if (moved > 0) pedestal.setItem(slot, stack.copyWithCount(stack.getCount() - moved));
             }
         }

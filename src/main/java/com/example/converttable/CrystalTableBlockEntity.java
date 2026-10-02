@@ -13,12 +13,16 @@ import net.minecraft.world.level.block.AmethystClusterBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
 /** Owns a physical crystal array and distributes its export budget once per second. */
 public final class CrystalTableBlockEntity extends BlockEntity implements MenuProvider {
     private long lastScan = Long.MIN_VALUE;
     private GrowthNetwork.Snapshot snapshot = GrowthNetwork.Snapshot.empty();
     private int lastSpent;
+    private long cycleStart = Long.MIN_VALUE;
+    private BlockPos nextPedestal;
 
     public CrystalTableBlockEntity(BlockPos pos, BlockState state) {
         super(GrowthBlocks.CRYSTAL_ENTITY, pos, state);
@@ -39,9 +43,16 @@ public final class CrystalTableBlockEntity extends BlockEntity implements MenuPr
 
     public void invalidateNetwork() { lastScan = Long.MIN_VALUE; }
     public int lastSpent() { return lastSpent; }
+    public int progressTicks() { return level == null || cycleStart == Long.MIN_VALUE ? 0
+        : (int) Math.clamp(level.getGameTime() - cycleStart, 0L, 20L); }
+    public boolean processing() {
+        return lastSpent > 0 && progressTicks() < 20 && snapshot().usable()
+            && snapshot().pedestals().stream().anyMatch(pos -> level.getBlockEntity(pos)
+                instanceof CatalystPedestalBlockEntity pedestal && pedestal.processing());
+    }
     public int pedestalCount() { return snapshot().pedestals().size(); }
 
-    private void produce() {
+    void produce() {
         GrowthNetwork.Snapshot network = snapshot();
         List<CatalystPedestalBlockEntity> active = new ArrayList<>();
         for (BlockPos pos : network.pedestals()) {
@@ -59,26 +70,25 @@ public final class CrystalTableBlockEntity extends BlockEntity implements MenuPr
             invalidateNetwork();
             network = snapshot();
         }
-        int[] allocation = new int[active.size()];
         int budget = network.usable() ? network.available() : 0;
-        if (!active.isEmpty()) {
-            int cursor = (int) (level.getGameTime() / 20 % active.size());
-            while (budget > 0) {
-                boolean moved = false;
-                for (int offset = 0; offset < active.size() && budget > 0; offset++) {
-                    int index = (cursor + offset) % active.size();
-                    if (allocation[index] < active.get(index).demand()) {
-                        allocation[index]++;
-                        budget--;
-                        moved = true;
-                    }
-                }
-                if (!moved) break;
+        int cursor = 0;
+        if (nextPedestal != null) {
+            for (int i = 0; i < active.size(); i++) {
+                if (active.get(i).getBlockPos().asLong() >= nextPedestal.asLong()) { cursor = i; break; }
             }
+        }
+        var allocation = GrowthAllocation.divide(budget,
+            active.stream().mapToInt(CatalystPedestalBlockEntity::demand).toArray(), cursor);
+        if (allocation.spent() > 0) {
+            // Advance only when a factor was assigned. Intermittent supply, idle seconds,
+            // and a save/reload must not repeatedly favor the same first pedestal.
+            nextPedestal = active.get(allocation.nextIndex()).getBlockPos().immutable();
+            setChanged();
         }
         lastSpent = 0;
         for (int i = 0; i < active.size(); i++)
-            lastSpent += active.get(i).acceptGrowth(allocation[i], network.available());
+            lastSpent += active.get(i).acceptGrowth(allocation.amounts()[i], network.available());
+        cycleStart = level.getGameTime();
         // Even an idle network applies the physical calcite growth slowdown.
         GrowthDrain.publish(level, network, lastSpent);
     }
@@ -90,6 +100,17 @@ public final class CrystalTableBlockEntity extends BlockEntity implements MenuPr
 
     public boolean ownsAnyPedestal() {
         return pedestalCount() > 0;
+    }
+
+    @Override protected void saveAdditional(ValueOutput output) {
+        super.saveAdditional(output);
+        if (nextPedestal != null) output.putLong("NextPedestal", nextPedestal.asLong());
+    }
+
+    @Override protected void loadAdditional(ValueInput input) {
+        super.loadAdditional(input);
+        long next = input.getLongOr("NextPedestal", Long.MIN_VALUE);
+        nextPedestal = next == Long.MIN_VALUE ? null : BlockPos.of(next);
     }
 
     @Override public Component getDisplayName() {

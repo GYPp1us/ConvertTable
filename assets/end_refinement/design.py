@@ -152,6 +152,9 @@ for name,side in [('side_inset_front',False),('side_inset_side',True)]:
     a,e=make_side(side);add_texture(name,a,e)
 add_texture('end_stone',endstone,roughness=.9)
 add_texture('purpur',purpur,roughness=.72)
+# The moving annulus keeps its purple stone clusters, with a dedicated emissive
+# material so fixed guards/collars remain ordinary purpur. 170 exports to light 15.
+add_texture('ring_glow',purpur.copy(),np.full((16,16),170,dtype=np.uint8),.72)
 add_texture('obsidian',obsidian,roughness=.65)
 top=endstone.copy()
 # The four endstone rails contain endstone only; purple caps are a separate material.
@@ -297,7 +300,7 @@ for z in range(8):
         if outer[z][x]=='0':continue
         # Separate floating annulus above the tabletop. No connecting basin walls.
         # Ring underside Y=17 > tabletop Y=16: externally visible one-voxel air gap.
-        if inner[z][x]=='0':cells[x+4,17,z+4]='purpur'
+        if inner[z][x]=='0':cells[x+4,17,z+4]='ring_glow'
 # Keep the carved energy bed's existing footprint; only the floating ring is contracted.
 energy_outline=[
     '0001111000','0011111100','0111111110','1111111111','1111111111',

@@ -68,10 +68,12 @@ public final class CrystalTableScreen extends AbstractContainerScreen<CrystalTab
             : (menu.flags() & GrowthNetwork.UNKNOWN) != 0 ? "unknown"
             : menu.hasPedestal() ? "linked" : "need_pedestal";
         Component statusText = tr(status);
-        g.text(font, font.plainSubstrByWidth(statusText.getString(), 250), 8, 134,
-            menu.flags() != 0 ? BLOCKED : MUTED, false);
+        boolean delivering=menu.processing();
+        progress(g,8,132,252,10,delivering?menu.progressTicks():0,menu.totalTicks(),0xffa8c4cf);
+        Component cycle=delivering?tr("transfer_progress",percent(menu.progressTicks(),menu.totalTicks()),menu.progressRate()):statusText;
+        g.centeredText(font,font.plainSubstrByWidth(cycle.getString(),248),134,133,TEXT);
         if (contains(mouseX - leftPos, mouseY - topPos, 8, 132, 252, 12))
-            g.setTooltipForNextFrame(font, statusText, mouseX, mouseY);
+            g.setComponentTooltipForNextFrame(font,List.of(statusText,tr("transfer_progress_help")),mouseX,mouseY);
     }
 
     private void text(GuiGraphicsExtractor g, Component text, int x, int y, int mx, int my) {

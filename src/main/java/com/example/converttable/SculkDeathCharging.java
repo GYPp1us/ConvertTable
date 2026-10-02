@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.Blocks;
 
 /** Runs after real deaths, never cancels vanilla loot, XP or catalyst behaviour. */
 public final class SculkDeathCharging {
+    public static final int SOULS_PER_EXPERIENCE = 32;
     private static final Map<ServerLevel,Set<ConversionTableBlockEntity>> TABLES=new IdentityHashMap<>();
     private static final Map<ServerLevel,Map<UUID,Long>> SEEN=new IdentityHashMap<>();
     public static void initialize() {
@@ -50,8 +51,16 @@ public final class SculkDeathCharging {
             }
         }
         if(winner!=null) {
-            winner.deaths=Math.min(RecipeConfig.setting("sculk","death_count_capacity"),winner.deaths+RecipeConfig.setting("sculk","death_count_per_mob"));
-            winner.setChanged();
+            // Use vanilla's evaluated reward, including variable/equipment/enchantment rewards.
+            // Natural deaths may not have requested it; calculate once, as a sculk catalyst does.
+            int experience = entity instanceof DeathExperienceReward reward ? reward.convertTable$deathExperienceReward() : -1;
+            if (!entity.shouldDropExperience()) experience = 0;
+            else if (experience < 0) experience = entity.getExperienceReward(level, source.getEntity());
+            if (experience > 0) {
+                winner.deaths=(int)Math.min(RecipeConfig.setting("sculk","death_count_capacity"),
+                    (long)winner.deaths+(long)experience*SOULS_PER_EXPERIENCE);
+                winner.setChanged();
+            }
         }
     }
     private static boolean before(ConversionTableBlockEntity a,ConversionTableBlockEntity b) {

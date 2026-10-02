@@ -101,7 +101,9 @@ public final class ConversionTableRenderer implements BlockEntityRenderer<Conver
         double radians = Math.toRadians(yaw), c = Math.cos(radians), s = Math.sin(radians);
         for (Quad quad : group.quads()) {
             int blockLight = Math.max((light >> 4) & 15, quad.emission());
-            int packedLight = (light & 0x00F00000) | (blockLight << 4);
+            // Maximum material emission is fully lit even with no sky light.
+            int packedLight = quad.emission() == 15 ? 0x00F000F0
+                    : (light & 0x00F00000) | (blockLight << 4);
             float[] n = quad.normal();
             double x = n[0] * c + n[2] * s, z = -n[0] * s + n[2] * c;
             float shade = quad.emission() > 0 ? 1F : (float) (.6 * x * x + .8 * z * z + (n[1] > 0 ? 1 : .5) * n[1] * n[1]);

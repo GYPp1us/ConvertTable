@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:stick"
+  ],
+  "result": {
+    "id": "convert_table:connection_rod",
+    "count": 1
+  }
+}

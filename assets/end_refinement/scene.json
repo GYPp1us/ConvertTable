@@ -35,6 +35,7 @@
     "side_inset_side",
     "end_stone",
     "purpur",
+    "ring_glow",
     "obsidian",
     "top_frame",
     "pool",
@@ -43297,7 +43298,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -43340,7 +43341,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -43383,7 +43384,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -43426,7 +43427,7 @@
               4
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -43469,7 +43470,7 @@
               5
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -43512,7 +43513,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -43555,7 +43556,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -43598,7 +43599,7 @@
               4
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -43641,7 +43642,7 @@
               5
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -43684,7 +43685,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -43727,7 +43728,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -43770,7 +43771,7 @@
               4
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -43813,7 +43814,7 @@
               5
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -43856,7 +43857,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -43899,7 +43900,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -43942,7 +43943,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -43985,7 +43986,7 @@
               4
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -44028,7 +44029,7 @@
               5
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -44071,7 +44072,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -44114,7 +44115,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -44157,7 +44158,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -44200,7 +44201,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -44243,7 +44244,7 @@
               5
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -44286,7 +44287,7 @@
               6
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -44329,7 +44330,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -44372,7 +44373,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -44415,7 +44416,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -44458,7 +44459,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -44501,7 +44502,7 @@
               5
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -44544,7 +44545,7 @@
               6
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -44587,7 +44588,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -44630,7 +44631,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -44673,7 +44674,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -44716,7 +44717,7 @@
               6
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -44759,7 +44760,7 @@
               7
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -44802,7 +44803,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -44845,7 +44846,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -44888,7 +44889,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -44931,7 +44932,7 @@
               6
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -44974,7 +44975,7 @@
               7
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -45017,7 +45018,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -45060,7 +45061,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -45103,7 +45104,7 @@
               7
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -45146,7 +45147,7 @@
               8
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -45189,7 +45190,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -45232,7 +45233,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -45275,7 +45276,7 @@
               7
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -45318,7 +45319,7 @@
               8
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -45361,7 +45362,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -45404,7 +45405,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -45447,7 +45448,7 @@
               8
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -45490,7 +45491,7 @@
               9
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -45533,7 +45534,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -45576,7 +45577,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -45619,7 +45620,7 @@
               8
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -45662,7 +45663,7 @@
               9
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -45705,7 +45706,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -45748,7 +45749,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -45791,7 +45792,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -45834,7 +45835,7 @@
               9
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -45877,7 +45878,7 @@
               10
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -45920,7 +45921,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -45963,7 +45964,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -46006,7 +46007,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -46049,7 +46050,7 @@
               9
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -46092,7 +46093,7 @@
               10
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -46135,7 +46136,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -46178,7 +46179,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -46221,7 +46222,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -46264,7 +46265,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -46307,7 +46308,7 @@
               10
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -46350,7 +46351,7 @@
               11
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -46393,7 +46394,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -46414,49 +46415,6 @@
             ],
             [
               11,
-              15,
-              11
-            ]
-          ],
-          "uv": [
-            [
-              6,
-              -2
-            ],
-            [
-              6,
-              -1
-            ],
-            [
-              5,
-              -1
-            ],
-            [
-              5,
-              -2
-            ]
-          ],
-          "texture": "purpur"
-        },
-        {
-          "vertices": [
-            [
-              10,
-              15,
-              10
-            ],
-            [
-              10,
-              14,
-              10
-            ],
-            [
-              10,
-              14,
-              11
-            ],
-            [
-              10,
               15,
               11
             ]
@@ -46479,7 +46437,50 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
+        },
+        {
+          "vertices": [
+            [
+              10,
+              15,
+              10
+            ],
+            [
+              10,
+              14,
+              10
+            ],
+            [
+              10,
+              14,
+              11
+            ],
+            [
+              10,
+              15,
+              11
+            ]
+          ],
+          "uv": [
+            [
+              6,
+              -2
+            ],
+            [
+              6,
+              -1
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              5,
+              -2
+            ]
+          ],
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -46522,7 +46523,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -46565,7 +46566,7 @@
               10
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -46608,7 +46609,7 @@
               11
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -46651,7 +46652,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -46694,7 +46695,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -46737,7 +46738,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -46780,7 +46781,7 @@
               11
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -46823,7 +46824,7 @@
               12
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -46866,7 +46867,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -46909,7 +46910,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -46952,7 +46953,7 @@
               11
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -46995,7 +46996,7 @@
               12
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -47038,7 +47039,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -47081,7 +47082,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -47124,7 +47125,7 @@
               11
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -47167,7 +47168,7 @@
               12
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -47210,7 +47211,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -47253,7 +47254,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -47296,7 +47297,7 @@
               -2
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -47339,7 +47340,7 @@
               11
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [
@@ -47382,7 +47383,7 @@
               12
             ]
           ],
-          "texture": "purpur"
+          "texture": "ring_glow"
         },
         {
           "vertices": [

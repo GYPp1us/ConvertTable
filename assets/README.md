@@ -55,12 +55,41 @@ Materials share the block atlas across static and animated geometry. Rendering t
 - `tools/java/AssetModelCheck.java`: actual Minecraft parser and face/UV ordering, animation bounds and wrap checks.
 - `src/gametest/`: isolated client world test and real game screenshots, excluded from distribution.
 
+## README block renders
+
+`tools/render_readme.py` renders the five displayed blocks from the actual packaged
+vanilla block models, format-2 conversion-table meshes and their runtime color
+textures. It applies texture UVs and transparent cutouts, poses the three animated
+groups, and writes five transparent PNGs, three looping GIFs and the README banner
+to `assets/readme/`. Each run records SHA-256 hashes for every model, animation and
+texture it read in `assets/readme/manifest.json`. GIF playback uses the animation
+tracks' seconds-based period, matching the client renderer; frame delays are rounded
+to GIF's 10 ms resolution and distributed so each loop keeps the full period.
+
+After building, render from the exact JAR that will be distributed:
+
+```powershell
+python assets/tools/render_readme.py --jar build/libs/convert-table-0.2.0.jar
+```
+
+For a quick render from the current source resources before a build, omit `--jar`.
+The renderer does not regenerate or modify the model or texture resources.
+When only animation timing or tracks change, `--animations-only` reuses the static
+PNG and banner only if their hashes and all prior packaged resource hashes still
+match the supplied JAR.
+
 Source reference textures extracted from the locally cached Minecraft client remain local authoring references owned by Mojang/Microsoft. They are not distributed as a standalone reference pack.
 
 ## September material / model refinement
 
-Black gold has solid gold inward returns, a snout-shaped two-depth relief and orange-red lava energy. End has three structural tiers (carved backing, horizontal rails, corner guards), recessed rune pixels and stronger violet saturation. Geode has black upper/lower corner guards joined by wrapped vertical pillars, calcite rails and a mineral backing with four independently composed, irregular crystal growth patterns. Its 16px white, gray and black stone textures follow native calcite, smooth basalt and deepslate clusters with stronger contrast. Dedicated `geode_*` stone IDs preserve the catalyst pedestal's existing shared materials. Geode materials and runtime models are authored with `python assets/geode_prototype/author_materials.py`, Blender `build_geode.py`, then `python assets/geode_prototype/publish_geode.py`. This exports `models/block/crystal_table.json` and `textures/block/crystal_table/` without modifying registration, localization, recipes or loot. Blender `verify_render.py` checks the saved model and renders front, side, three-quarter and dim-light views.
+Black gold has solid gold inward returns, a snout-shaped two-depth relief and orange-red lava energy. End has three structural tiers (carved backing, horizontal rails, corner guards), recessed rune pixels and stronger violet saturation. Geode has black upper/lower corner guards joined by wrapped vertical pillars, calcite rails and a mineral backing with four independently composed, irregular crystal growth patterns. Its 16px white, gray and black stone textures follow native calcite, smooth basalt and deepslate clusters with stronger contrast. The catalyst pedestal now shares the crystal table's current `geode_*` stone textures and crystal emission. Geode materials and runtime models are authored with `python assets/geode_prototype/author_materials.py`, Blender `build_geode.py`, then `python assets/geode_prototype/publish_geode.py`. This exports `models/block/crystal_table.json` and `textures/block/crystal_table/` without modifying registration, localization, recipes or loot. Blender `verify_render.py` checks the saved model and renders front, side, three-quarter and dim-light views.
 
 ## 1.5 catalyst interaction
 
-`concepts/catalyst_table/growth_interaction_ui_v3.png` combines actual 26.3 crystal and catalyst screens with the world placement hint. The crosshair hint uses code-defined flat 12px glyphs: a crystal plinth, paired export arrows and a growth arrow. The updated crystal model and preserved pedestal materials are republished by `tools/build_assets.py`. Pedestal rendering shows the selected output at full block size, with the nonconsuming catalyst in the mineral well. The growth recipe catalog is bundled under `data/convert_table/growth_recipes.json`.
+`concepts/catalyst_table/growth_interaction_ui_v3.png` combines actual 26.3 crystal and catalyst screens with the world placement hint. The crosshair hint uses code-defined flat 12px glyphs: a crystal plinth, paired export arrows and a growth arrow. The updated crystal model and aligned pedestal materials are republished by `tools/build_assets.py`. Pedestal rendering shows the selected output at full block size, with the nonconsuming catalyst in the mineral well. The growth recipe catalog is bundled under `data/convert_table/growth_recipes.json`.
+
+## 1.6 material corrections
+
+Black-gold relief returns use the original opaque pixel unless that face lies on the actual outer block boundary. Validation compares every exposed source texel with static, item and animated exports. End uses `ring_glow` for its moving ring, with labPBR emission and full block/sky light in the dynamic renderer. The catalyst pedestal shares `geode_*` materials with the crystal table and splits its crystal faces by pixel emission.
+
+The crystal table and pedestal corner buds use 0/90/180/270-degree baked geometry rotations, matching the sculk table's four-quadrant arrangement. Each tip points toward its own outer corner; root positions, stone bodies and shared crystal materials remain fixed. The crystal-table generator rotates the northwest voxel template around the block center, while the pedestal rotates each bud around its existing local 2×2 root center.

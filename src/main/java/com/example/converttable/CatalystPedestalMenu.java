@@ -12,7 +12,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
 public final class CatalystPedestalMenu extends AbstractContainerMenu {
-    private static final int DEVICE_SLOTS = 10, DATA_SIZE = 22;
+    private static final int DEVICE_SLOTS = 10, DATA_SIZE = 26;
     private final Container storage;
     private final CatalystPedestalBlockEntity table;
     private final ContainerData data = new SimpleContainerData(DATA_SIZE);
@@ -61,7 +61,10 @@ public final class CatalystPedestalMenu extends AbstractContainerMenu {
         data.set(10, fill);
         data.set(11, table.credit());
         data.set(12, table.lastSpent());
-        data.set(13, table.recipes().indexOf(table.selectedRecipe()) + 1);
+        var recipe = table.selectedRecipe();
+        // List.of()/List.copyOf() reject indexOf(null): empty and unsupported catalysts
+        // are valid menu states, as is a multi-output catalyst awaiting a selection.
+        data.set(13, recipe == null ? 0 : table.recipes().indexOf(recipe) + 1);
         var links = table.outputLinks();
         data.set(14, links.containers());
         data.set(15, Math.min(65535, links.freeSpace()));
@@ -70,7 +73,6 @@ public final class CatalystPedestalMenu extends AbstractContainerMenu {
         data.set(18, network.potential());
         data.set(19, network.count(4));
         int capacity = 0;
-        var recipe = table.selectedRecipe();
         ItemStack target = recipe == null ? ItemStack.EMPTY : new ItemStack(recipe.output());
         for (int i = 1; i <= 9; i++) {
             ItemStack current = table.getItem(i);
@@ -79,6 +81,10 @@ public final class CatalystPedestalMenu extends AbstractContainerMenu {
         }
         data.set(20, capacity);
         data.set(21, crystal == null ? 0 : 1);
+        data.set(22, table.progressUnits() & 0xffff);
+        data.set(23, table.progressUnits() >>> 16);
+        data.set(24, table.progressRate());
+        data.set(25, table.processing() ? 1 : 0);
     }
 
     @Override public void broadcastChanges() { refresh(); super.broadcastChanges(); }
@@ -104,6 +110,10 @@ public final class CatalystPedestalMenu extends AbstractContainerMenu {
     public int clusters() { return data.get(19); }
     public int bufferCapacity() { return data.get(20); }
     public boolean hasCrystal() { return data.get(21) != 0; }
+    public int progressUnits() { return (data.get(22) & 0xffff) | ((data.get(23) & 0x7fff) << 16); }
+    public int progressMaximum() { return (int) Math.min(Integer.MAX_VALUE, (long) cost() * 20); }
+    public int progressRate() { return data.get(24); }
+    public boolean processing() { return data.get(25) != 0; }
     public List<GrowthRecipes.Recipe> recipes() { return GrowthRecipes.recipes(storage.getItem(0)); }
     public GrowthRecipes.Recipe selectedRecipe() {
         var recipes = recipes();

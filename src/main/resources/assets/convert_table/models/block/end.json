@@ -8,6 +8,7 @@
     "side_inset_side": "convert_table:block/end/side_inset_side",
     "end_stone": "convert_table:block/end/end_stone",
     "purpur": "convert_table:block/end/purpur",
+    "ring_glow": "convert_table:block/end/ring_glow",
     "obsidian": "convert_table:block/end/obsidian",
     "top_frame": "convert_table:block/end/top_frame",
     "pool": "convert_table:block/end/pool",
