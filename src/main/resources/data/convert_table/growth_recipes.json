@@ -1,635 +1,740 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "recipes": [
     {
       "id": "convert_table:growth/wood/oak/log",
       "catalyst": "minecraft:oak_sapling",
       "output": "minecraft:oak_log",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:oak_log"
     },
     {
       "id": "convert_table:growth/wood/spruce/log",
       "catalyst": "minecraft:spruce_sapling",
       "output": "minecraft:spruce_log",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:spruce_log"
     },
     {
       "id": "convert_table:growth/wood/birch/log",
       "catalyst": "minecraft:birch_sapling",
       "output": "minecraft:birch_log",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:birch_log"
     },
     {
       "id": "convert_table:growth/wood/jungle/log",
       "catalyst": "minecraft:jungle_sapling",
       "output": "minecraft:jungle_log",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:jungle_log"
     },
     {
       "id": "convert_table:growth/wood/acacia/log",
       "catalyst": "minecraft:acacia_sapling",
       "output": "minecraft:acacia_log",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:acacia_log"
     },
     {
       "id": "convert_table:growth/wood/dark_oak/log",
       "catalyst": "minecraft:dark_oak_sapling",
       "output": "minecraft:dark_oak_log",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:dark_oak_log"
     },
     {
       "id": "convert_table:growth/wood/cherry/log",
       "catalyst": "minecraft:cherry_sapling",
       "output": "minecraft:cherry_log",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:cherry_log"
     },
     {
       "id": "convert_table:growth/wood/pale_oak/log",
       "catalyst": "minecraft:pale_oak_sapling",
       "output": "minecraft:pale_oak_log",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:pale_oak_log"
     },
     {
       "id": "convert_table:growth/wood/mangrove/log",
       "catalyst": "minecraft:mangrove_propagule",
       "output": "minecraft:mangrove_log",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:mangrove_log"
     },
     {
       "id": "convert_table:growth/wood/crimson/stem",
       "catalyst": "minecraft:crimson_fungus",
       "output": "minecraft:crimson_stem",
-      "cost": 3
+      "cost": 3,
+      "source": "minecraft:crimson_stem"
     },
     {
       "id": "convert_table:growth/wood/warped/stem",
       "catalyst": "minecraft:warped_fungus",
       "output": "minecraft:warped_stem",
-      "cost": 3
+      "cost": 3,
+      "source": "minecraft:warped_stem"
     },
     {
       "id": "convert_table:growth/wood/bamboo/raw",
       "catalyst": "minecraft:bamboo",
       "output": "minecraft:bamboo",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:bamboo"
     },
     {
       "id": "convert_table:growth/stone/cobblestone/block",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:cobblestone",
-      "cost": 1
+      "cost": 1,
+      "source": "minecraft:cobblestone"
     },
     {
       "id": "convert_table:growth/stone/stone/block",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:stone",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:stone"
     },
     {
       "id": "convert_table:growth/stone/granite/block",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:granite",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:granite"
     },
     {
       "id": "convert_table:growth/stone/diorite/block",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:diorite",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:diorite"
     },
     {
       "id": "convert_table:growth/stone/andesite/block",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:andesite",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:andesite"
     },
     {
       "id": "convert_table:growth/stone/tuff/block",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:tuff",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:tuff"
     },
     {
       "id": "convert_table:growth/stone/deepslate/cobbled",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:cobbled_deepslate",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:cobbled_deepslate"
     },
     {
       "id": "convert_table:growth/stone/deepslate/block",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:deepslate",
-      "cost": 3
+      "cost": 3,
+      "source": "minecraft:deepslate"
     },
     {
       "id": "convert_table:growth/stone/basalt/block",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:basalt",
-      "cost": 3
+      "cost": 3,
+      "source": "minecraft:basalt"
     },
     {
       "id": "convert_table:growth/stone/blackstone/block",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:blackstone",
-      "cost": 3
+      "cost": 3,
+      "source": "minecraft:blackstone"
     },
     {
       "id": "convert_table:growth/nether/netherrack/block",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:netherrack",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:netherrack"
     },
     {
       "id": "convert_table:growth/stone/end_stone/block",
       "catalyst": "minecraft:ender_pearl",
       "output": "minecraft:end_stone",
-      "cost": 4
+      "cost": 4,
+      "source": "minecraft:end_stone"
     },
     {
       "id": "convert_table:growth/nether/soul_sand/block",
       "catalyst": "minecraft:echo_shard",
       "output": "minecraft:soul_sand",
-      "cost": 3
+      "cost": 3,
+      "source": "minecraft:soul_sand"
     },
     {
       "id": "convert_table:growth/nether/soul_soil/block",
       "catalyst": "minecraft:echo_shard",
       "output": "minecraft:soul_soil",
-      "cost": 3
+      "cost": 3,
+      "source": "minecraft:soul_soil"
     },
     {
       "id": "convert_table:growth/sand/sandstone/sand",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:sand",
-      "cost": 1
+      "cost": 1,
+      "source": "minecraft:sand"
     },
     {
       "id": "convert_table:growth/sand/red_sandstone/sand",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:red_sand",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:red_sand"
     },
     {
       "id": "convert_table:growth/soil/dirt/block",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:dirt",
-      "cost": 1
+      "cost": 1,
+      "source": "minecraft:dirt"
     },
     {
       "id": "convert_table:growth/soil/grass/block",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:grass_block",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:grass_block"
     },
     {
       "id": "convert_table:growth/soil/gravel/coarse_dirt",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:coarse_dirt",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:coarse_dirt"
     },
     {
       "id": "convert_table:growth/soil/mud/mud",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:mud",
-      "cost": 3
+      "cost": 3,
+      "source": "minecraft:mud"
     },
     {
       "id": "convert_table:growth/soil/gravel/block",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:gravel",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:gravel"
     },
     {
       "id": "convert_table:growth/soil/podzol/podzol",
       "catalyst": "minecraft:echo_shard",
       "output": "minecraft:podzol",
-      "cost": 4
+      "cost": 4,
+      "source": "minecraft:podzol"
     },
     {
       "id": "convert_table:growth/soil/moss/block",
       "catalyst": "minecraft:echo_shard",
       "output": "minecraft:moss_block",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:moss_block"
     },
     {
       "id": "convert_table:growth/soil/clay/clay_ball",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:clay_ball",
-      "cost": 3
+      "cost": 3,
+      "source": "minecraft:clay_ball"
     },
     {
       "id": "convert_table:growth/snow/snowball",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:snowball",
-      "cost": 1
+      "cost": 1,
+      "source": "minecraft:snowball"
     },
     {
       "id": "convert_table:growth/ice/ice",
       "catalyst": "minecraft:packed_ice",
       "output": "minecraft:ice",
-      "cost": 4
+      "cost": 4,
+      "source": "minecraft:ice"
     },
     {
       "id": "convert_table:growth/stone/dripstone/pointed_dripstone",
       "catalyst": "minecraft:dripstone_block",
       "output": "minecraft:pointed_dripstone",
-      "cost": 4
+      "cost": 4,
+      "source": "minecraft:pointed_dripstone"
     },
     {
       "id": "convert_table:growth/wood/poplar/log",
       "catalyst": "minecraft:poplar_sapling",
       "output": "minecraft:poplar_log",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:poplar_log"
     },
     {
       "id": "convert_table:growth/wood/oak/sapling",
       "catalyst": "minecraft:oak_sapling",
       "output": "minecraft:oak_sapling",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:oak_sapling"
     },
     {
       "id": "convert_table:growth/wood/oak/leaves",
       "catalyst": "minecraft:oak_sapling",
       "output": "minecraft:oak_leaves",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:oak_leaves"
     },
     {
       "id": "convert_table:growth/wood/spruce/sapling",
       "catalyst": "minecraft:spruce_sapling",
       "output": "minecraft:spruce_sapling",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:spruce_sapling"
     },
     {
       "id": "convert_table:growth/wood/spruce/leaves",
       "catalyst": "minecraft:spruce_sapling",
       "output": "minecraft:spruce_leaves",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:spruce_leaves"
     },
     {
       "id": "convert_table:growth/wood/birch/sapling",
       "catalyst": "minecraft:birch_sapling",
       "output": "minecraft:birch_sapling",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:birch_sapling"
     },
     {
       "id": "convert_table:growth/wood/birch/leaves",
       "catalyst": "minecraft:birch_sapling",
       "output": "minecraft:birch_leaves",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:birch_leaves"
     },
     {
       "id": "convert_table:growth/wood/jungle/sapling",
       "catalyst": "minecraft:jungle_sapling",
       "output": "minecraft:jungle_sapling",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:jungle_sapling"
     },
     {
       "id": "convert_table:growth/wood/jungle/leaves",
       "catalyst": "minecraft:jungle_sapling",
       "output": "minecraft:jungle_leaves",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:jungle_leaves"
     },
     {
       "id": "convert_table:growth/wood/acacia/sapling",
       "catalyst": "minecraft:acacia_sapling",
       "output": "minecraft:acacia_sapling",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:acacia_sapling"
     },
     {
       "id": "convert_table:growth/wood/acacia/leaves",
       "catalyst": "minecraft:acacia_sapling",
       "output": "minecraft:acacia_leaves",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:acacia_leaves"
     },
     {
       "id": "convert_table:growth/wood/dark_oak/sapling",
       "catalyst": "minecraft:dark_oak_sapling",
       "output": "minecraft:dark_oak_sapling",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:dark_oak_sapling"
     },
     {
       "id": "convert_table:growth/wood/dark_oak/leaves",
       "catalyst": "minecraft:dark_oak_sapling",
       "output": "minecraft:dark_oak_leaves",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:dark_oak_leaves"
     },
     {
       "id": "convert_table:growth/wood/cherry/sapling",
       "catalyst": "minecraft:cherry_sapling",
       "output": "minecraft:cherry_sapling",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:cherry_sapling"
     },
     {
       "id": "convert_table:growth/wood/cherry/leaves",
       "catalyst": "minecraft:cherry_sapling",
       "output": "minecraft:cherry_leaves",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:cherry_leaves"
     },
     {
       "id": "convert_table:growth/wood/pale_oak/sapling",
       "catalyst": "minecraft:pale_oak_sapling",
       "output": "minecraft:pale_oak_sapling",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:pale_oak_sapling"
     },
     {
       "id": "convert_table:growth/wood/pale_oak/leaves",
       "catalyst": "minecraft:pale_oak_sapling",
       "output": "minecraft:pale_oak_leaves",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:pale_oak_leaves"
     },
     {
       "id": "convert_table:growth/wood/mangrove/sapling",
       "catalyst": "minecraft:mangrove_propagule",
       "output": "minecraft:mangrove_propagule",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:mangrove_propagule"
     },
     {
       "id": "convert_table:growth/wood/mangrove/leaves",
       "catalyst": "minecraft:mangrove_propagule",
       "output": "minecraft:mangrove_leaves",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:mangrove_leaves"
     },
     {
       "id": "convert_table:growth/wood/poplar/sapling",
       "catalyst": "minecraft:poplar_sapling",
       "output": "minecraft:poplar_sapling",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:poplar_sapling"
     },
     {
       "id": "convert_table:growth/wood/poplar/orange_leaves",
       "catalyst": "minecraft:poplar_sapling",
       "output": "minecraft:orange_poplar_leaves",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:orange_poplar_leaves"
     },
     {
       "id": "convert_table:growth/wood/poplar/red_leaves",
       "catalyst": "minecraft:poplar_sapling",
       "output": "minecraft:red_poplar_leaves",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:red_poplar_leaves"
     },
     {
       "id": "convert_table:growth/wood/poplar/yellow_leaves",
       "catalyst": "minecraft:poplar_sapling",
       "output": "minecraft:yellow_poplar_leaves",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:yellow_poplar_leaves"
     },
     {
       "id": "convert_table:growth/plant/vine",
       "catalyst": "minecraft:echo_shard",
       "output": "minecraft:vine",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:vine"
     },
     {
       "id": "convert_table:growth/plant/weeping_vines",
       "catalyst": "minecraft:crimson_fungus",
       "output": "minecraft:weeping_vines",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:weeping_vines"
     },
     {
       "id": "convert_table:growth/plant/twisting_vines",
       "catalyst": "minecraft:warped_fungus",
       "output": "minecraft:twisting_vines",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:twisting_vines"
     },
     {
       "id": "convert_table:growth/plant/sugar_cane",
       "catalyst": "minecraft:echo_shard",
       "output": "minecraft:sugar_cane",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:sugar_cane"
     },
     {
       "id": "convert_table:growth/plant/cactus",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:cactus",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:cactus"
     },
     {
       "id": "convert_table:growth/plant/kelp",
       "catalyst": "minecraft:heart_of_the_sea",
       "output": "minecraft:kelp",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:kelp"
     },
     {
       "id": "convert_table:growth/plant/leaf_litter",
       "catalyst": "minecraft:echo_shard",
       "output": "minecraft:leaf_litter",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:leaf_litter"
     },
     {
       "id": "convert_table:growth/plant/seagrass",
       "catalyst": "minecraft:heart_of_the_sea",
       "output": "minecraft:seagrass",
-      "cost": 3
+      "cost": 3,
+      "source": "minecraft:seagrass"
     },
     {
       "id": "convert_table:growth/plant/lily_pad",
       "catalyst": "minecraft:heart_of_the_sea",
       "output": "minecraft:lily_pad",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:lily_pad"
     },
     {
       "id": "convert_table:growth/plant/fern",
       "catalyst": "minecraft:echo_shard",
       "output": "minecraft:fern",
-      "cost": 1
+      "cost": 1,
+      "source": "minecraft:fern"
     },
     {
       "id": "convert_table:growth/plant/large_fern",
       "catalyst": "minecraft:echo_shard",
       "output": "minecraft:large_fern",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:large_fern"
     },
     {
       "id": "convert_table:growth/plant/dead_bush",
       "catalyst": "minecraft:echo_shard",
       "output": "minecraft:dead_bush",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:dead_bush"
     },
     {
       "id": "convert_table:growth/plant/short_grass",
       "catalyst": "minecraft:echo_shard",
       "output": "minecraft:short_grass",
-      "cost": 1
+      "cost": 1,
+      "source": "minecraft:short_grass"
     },
     {
       "id": "convert_table:growth/plant/tall_grass",
       "catalyst": "minecraft:echo_shard",
       "output": "minecraft:tall_grass",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:tall_grass"
     },
     {
       "id": "convert_table:growth/plant/short_dry_grass",
       "catalyst": "minecraft:echo_shard",
       "output": "minecraft:short_dry_grass",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:short_dry_grass"
     },
     {
       "id": "convert_table:growth/plant/tall_dry_grass",
       "catalyst": "minecraft:echo_shard",
       "output": "minecraft:tall_dry_grass",
-      "cost": 3
+      "cost": 3,
+      "source": "minecraft:tall_dry_grass"
     },
     {
       "id": "convert_table:growth/flower/dandelion",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:dandelion",
-      "cost": 1
+      "cost": 1,
+      "source": "minecraft:dandelion"
     },
     {
       "id": "convert_table:growth/flower/poppy",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:poppy",
-      "cost": 1
+      "cost": 1,
+      "source": "minecraft:poppy"
     },
     {
       "id": "convert_table:growth/flower/blue_orchid",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:blue_orchid",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:blue_orchid"
     },
     {
       "id": "convert_table:growth/flower/allium",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:allium",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:allium"
     },
     {
       "id": "convert_table:growth/flower/azure_bluet",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:azure_bluet",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:azure_bluet"
     },
     {
       "id": "convert_table:growth/flower/red_tulip",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:red_tulip",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:red_tulip"
     },
     {
       "id": "convert_table:growth/flower/orange_tulip",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:orange_tulip",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:orange_tulip"
     },
     {
       "id": "convert_table:growth/flower/white_tulip",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:white_tulip",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:white_tulip"
     },
     {
       "id": "convert_table:growth/flower/pink_tulip",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:pink_tulip",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:pink_tulip"
     },
     {
       "id": "convert_table:growth/flower/oxeye_daisy",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:oxeye_daisy",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:oxeye_daisy"
     },
     {
       "id": "convert_table:growth/flower/cornflower",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:cornflower",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:cornflower"
     },
     {
       "id": "convert_table:growth/flower/lily_of_the_valley",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:lily_of_the_valley",
-      "cost": 3
+      "cost": 3,
+      "source": "minecraft:lily_of_the_valley"
     },
     {
       "id": "convert_table:growth/flower/sunflower",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:sunflower",
-      "cost": 3
+      "cost": 3,
+      "source": "minecraft:sunflower"
     },
     {
       "id": "convert_table:growth/flower/lilac",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:lilac",
-      "cost": 3
+      "cost": 3,
+      "source": "minecraft:lilac"
     },
     {
       "id": "convert_table:growth/flower/rose_bush",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:rose_bush",
-      "cost": 3
+      "cost": 3,
+      "source": "minecraft:rose_bush"
     },
     {
       "id": "convert_table:growth/flower/peony",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:peony",
-      "cost": 3
+      "cost": 3,
+      "source": "minecraft:peony"
     },
     {
       "id": "convert_table:growth/flower/cactus_flower",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:cactus_flower",
-      "cost": 3
+      "cost": 3,
+      "source": "minecraft:cactus_flower"
     },
     {
       "id": "convert_table:growth/flower/wildflowers",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:wildflowers",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:wildflowers"
     },
     {
       "id": "convert_table:growth/flower/pink_petals",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:pink_petals",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:pink_petals"
     },
     {
       "id": "convert_table:growth/mushroom/red",
       "catalyst": "minecraft:echo_shard",
       "output": "minecraft:red_mushroom",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:red_mushroom"
     },
     {
       "id": "convert_table:growth/mushroom/brown",
       "catalyst": "minecraft:echo_shard",
       "output": "minecraft:brown_mushroom",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:brown_mushroom"
     },
     {
       "id": "convert_table:growth/nether/crimson/fungus",
       "catalyst": "minecraft:crimson_fungus",
       "output": "minecraft:crimson_fungus",
-      "cost": 3
+      "cost": 3,
+      "source": "minecraft:crimson_fungus"
     },
     {
       "id": "convert_table:growth/nether/warped/fungus",
       "catalyst": "minecraft:warped_fungus",
       "output": "minecraft:warped_fungus",
-      "cost": 3
+      "cost": 3,
+      "source": "minecraft:warped_fungus"
     },
     {
       "id": "convert_table:growth/nether/crimson/roots",
       "catalyst": "minecraft:crimson_fungus",
       "output": "minecraft:crimson_roots",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:crimson_roots"
     },
     {
       "id": "convert_table:growth/nether/warped/roots",
       "catalyst": "minecraft:warped_fungus",
       "output": "minecraft:warped_roots",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:warped_roots"
     },
     {
       "id": "convert_table:growth/nether/sprouts",
       "catalyst": "minecraft:warped_fungus",
       "output": "minecraft:nether_sprouts",
-      "cost": 2
+      "cost": 2,
+      "source": "minecraft:nether_sprouts"
     },
     {
       "id": "convert_table:growth/stone/calcite/geode",
       "catalyst": "minecraft:amethyst_shard",
       "output": "minecraft:calcite",
-      "cost": 4
+      "cost": 4,
+      "source": "minecraft:calcite"
     }
   ]
 }

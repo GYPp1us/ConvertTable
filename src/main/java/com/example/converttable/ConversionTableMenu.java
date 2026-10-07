@@ -95,8 +95,8 @@ public final class ConversionTableMenu extends AbstractContainerMenu {
     }
     @Override public boolean clickMenuButton(Player player, int id) {
         if (table == null || !stillValid(player)) return false;
-        if(id==10)table.convert(false);
-        else if(id==11)table.setRunning(!table.running);
+        if(id==10)table.convert(false, player);
+        else if(id==11)table.setRunning(!table.running, player);
         else if(variant==0)return false;
         else if (id >= 0 && id <= 2) {table.cancelProcessing();table.inputMode = id;table.filterSource=null;}
         else if (id == 3) {table.cancelProcessing();table.matchMode = 1 - table.matchMode;table.filterSource=null;}

@@ -142,6 +142,9 @@ if (geode/'runtime_faces.json').exists():
     pedestal=json.loads((RES/'models/block/catalyst_pedestal.json').read_text())
     shared=set(crystal_model['textures'].values())
     assert set(pedestal['textures'].values())<=shared, 'Pedestal must share the current crystal-table materials'
+    pedestal_bounds=np.array([element[corner] for element in pedestal['elements'] for corner in ('from','to')])
+    assert np.allclose(pedestal_bounds.min(0),(2,0,2)) and np.allclose(pedestal_bounds.max(0),(14,8,14)), \
+        'Pedestal must retain its height with two-pixel footprint insets'
     for element in pedestal['elements']:
         for face in element['faces'].values():
             name=face['texture'].removeprefix('#')
@@ -149,16 +152,21 @@ if (geode/'runtime_faces.json').exists():
             assert (element.get('light_emission',0)>0)==crystal, 'Pedestal crystal emission differs from the geode'
         assert len(element['faces'])==1, 'Pedestal must use the common per-face material exporter'
     # Geometric quarter-turns must move the four asymmetric tips, not just UVs.
-    for label,model,texture,height,wanted in (
-            ('crystal_table',crystal_model,'#bud_silver',16,{(1,1),(14,1),(14,14),(1,14)}),
-            ('catalyst_pedestal',pedestal,'#bud_pink',8,{(1,1),(15,1),(15,15),(1,15)})):
+    for label,model,texture,height,footprint_scale,wanted in (
+            ('crystal_table',crystal_model,'#bud_silver',16,1,{(1,1),(14,1),(14,14),(1,14)}),
+            ('catalyst_pedestal',pedestal,'#bud_pink',8,.75,{(1,1),(15,1),(15,15),(1,15)})):
         tips=set()
         for element in model['elements']:
             face=element['faces'].get('up')
             if face is None or face['texture']!=texture or element['to'][1]!=height:continue
             assert element.get('light_emission',0)>0, f'{label}: corner tip lost emission'
-            for x in range(int(element['from'][0]),int(element['to'][0])):
-                for z in range(int(element['from'][2]),int(element['to'][2])):tips.add((x,z))
+            # Compare in the original voxel grid while allowing the pedestal's
+            # geometry-only shrink to retain its UVs and asymmetric corner tips.
+            lo=(np.array(element['from'])[[0,2]]-8)/footprint_scale+8
+            hi=(np.array(element['to'])[[0,2]]-8)/footprint_scale+8
+            assert np.allclose(lo,np.round(lo)) and np.allclose(hi,np.round(hi)), f'{label}: tip left its authored grid'
+            for x in range(round(lo[0]),round(hi[0])):
+                for z in range(round(lo[1]),round(hi[1])):tips.add((x,z))
         assert tips==wanted, f'{label}: corner buds must point to four different quadrants'
     print('catalyst_pedestal: shared geode materials and crystal emission OK')
 print(f'PASS: {total_textures} material sets and {total_faces} exported faces.')

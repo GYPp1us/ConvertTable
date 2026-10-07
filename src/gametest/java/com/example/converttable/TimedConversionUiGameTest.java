@@ -195,7 +195,8 @@ final class TimedConversionUiGameTest {
                 if (variant == 1) check(current.getItem(1).getCount() == 63
                     && current.phase == RecipeConfig.setting("end", "fuel_charge") - RecipeConfig.setting("end", "charge_per_batch"),
                     "End completion fee/phase incorrect");
-                else check(current.deaths == 9 && current.getItem(1).isEmpty(), "Sculk did not charge exactly one soul without fuel");
+                else check(current.deaths == 10 - RecipeConfig.setting("sculk", "ordinary_souls_per_batch")
+                    && current.getItem(1).isEmpty(), "Sculk completion soul fee incorrect");
             }
         });
     }
@@ -246,7 +247,7 @@ final class TimedConversionUiGameTest {
         context.waitFor(mc -> menu(mc).running(), 100);
         step(context, server, 1);
         context.waitFor(mc -> menu(mc).running() && !menu(mc).processing() && menu(mc).status() == 5
-            && menu(mc).souls() == 0 && menu(mc).soulCost() == 1, 100);
+            && menu(mc).souls() == 0 && menu(mc).soulCost() == RecipeConfig.setting("sculk", "ordinary_souls_per_batch"), 100);
         capture(context, "ui-timing-souls-waiting");
         step(context, server, 25);
         server.runOnServer(game -> {
@@ -261,7 +262,8 @@ final class TimedConversionUiGameTest {
         server.runOnServer(game -> check(container(game, INPUT).getItem(0).getCount() == 8,
             "Replenished souls caused premature conversion"));
         step(context, server, 10);
-        context.waitFor(mc -> menu(mc).running() && !menu(mc).processing() && menu(mc).souls() == 9, 100);
+        context.waitFor(mc -> menu(mc).running() && !menu(mc).processing()
+            && menu(mc).souls() == 10 - RecipeConfig.setting("sculk", "ordinary_souls_per_batch"), 100);
         server.runOnServer(game -> check(container(game, INPUT).getItem(0).isEmpty()
             && birchCount(container(game, OUTPUT)) == 8 && table(game).getItem(1).isEmpty(),
             "Soul replenishment did not resume continuous work without a start click"));
@@ -273,8 +275,8 @@ final class TimedConversionUiGameTest {
         float previousRate = server.computeOnServer(game -> game.tickRateManager().tickrate());
         boolean previousFrozen = server.computeOnServer(game -> game.tickRateManager().isFrozen());
         server.runOnServer(game -> {
-            check(RecipeConfig.enabled() && RecipeConfig.setting("sculk", "ordinary_souls_per_batch") == 1,
-                "Timing UI test requires enabled execution and the default one-soul ordinary fee");
+            check(RecipeConfig.enabled() && RecipeConfig.setting("sculk", "ordinary_souls_per_batch") == 3,
+                "Timing UI test requires enabled execution and the default three-soul ordinary fee");
             game.tickRateManager().setTickRate(20);
             game.tickRateManager().setFrozen(true);
         });

@@ -19,8 +19,9 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.phys.shapes.Shapes;
 
 public final class CatalystPedestalBlock extends BaseEntityBlock {
-    private static final VoxelShape BASE_SHAPE = box(0, 0, 0, 16, 8, 16);
-    private static final VoxelShape WITH_SAMPLE = Shapes.or(BASE_SHAPE, box(0, 8, 0, 16, 28, 16));
+    private static final VoxelShape BASE_SHAPE = box(2, 0, 2, 14, 8, 14);
+    // Enclose the tilted 8px projection throughout its rotation around (8, 20, 8).
+    private static final VoxelShape WITH_SAMPLE = Shapes.or(BASE_SHAPE, box(1, 14, 1, 15, 26, 15));
     public CatalystPedestalBlock(Properties properties) { super(properties); }
 
     @Override protected RenderShape getRenderShape(BlockState state) { return RenderShape.MODEL; }

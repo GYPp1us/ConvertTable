@@ -38,7 +38,7 @@ final class GrowthScreenGraphics {
         }
     }
 
-    static void meter(GuiGraphicsExtractor g, int x, int y, int width, int value, int maximum, int color) {
+    static void meter(GuiGraphicsExtractor g, int x, int y, int width, long value, long maximum, int color) {
         g.fill(x, y, x + width, y + 5, 0xff85818c);
         int fill = maximum <= 0 ? 0 : (int) Math.round(width * Math.clamp(value / (double) maximum, 0.0, 1.0));
         if (fill > 0) g.fill(x, y, x + fill, y + 5, color);
@@ -48,7 +48,7 @@ final class GrowthScreenGraphics {
 
     /** The moving leading edge follows synchronized work; it never advances on a client timer. */
     static void progress(GuiGraphicsExtractor g, int x, int y, int width, int height,
-                         int value, int maximum, int color) {
+                         long value, long maximum, int color) {
         g.fill(x, y, x + width, y + height, 0xffb2b0b6);
         int fill = maximum <= 0 ? 0 : (int) Math.round(width * Math.clamp(value / (double) maximum, 0.0, 1.0));
         if (fill > 0) g.fill(x, y, x + fill, y + height, color);
@@ -56,12 +56,20 @@ final class GrowthScreenGraphics {
         g.horizontalLine(x, x + width - 1, y + height, 0xffe1dfe4);
     }
 
-    static int percent(int value, int maximum) {
+    static int percent(long value, long maximum) {
         return maximum <= 0 ? 0 : (int) Math.floor(100.0 * Math.clamp(value / (double) maximum, 0.0, 1.0));
     }
 
-    static String factors(int units) {
-        return units % 20 == 0 ? Integer.toString(units / 20) : String.format(java.util.Locale.ROOT, "%.2f", units / 20.0);
+    static String factors(long units) {
+        return GrowthNumbers.factors(units);
+    }
+
+    static void quantity(GuiGraphicsExtractor g,net.minecraft.client.gui.Font font,Component label,String value,
+                         int x,int y,int width,int color) {
+        int labelWidth=font.width(label);
+        g.text(font,label,x,y,color,false);
+        String bounded=font.plainSubstrByWidth(value,Math.max(0,width-labelWidth-5));
+        g.text(font,bounded,x+width-font.width(bounded),y,color,false);
     }
 
     static boolean contains(int mx, int my, int x, int y, int w, int h) {

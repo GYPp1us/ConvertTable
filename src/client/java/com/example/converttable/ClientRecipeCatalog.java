@@ -11,11 +11,24 @@ public final class ClientRecipeCatalog {
     public static void listen(Runnable listener) {listeners.add(listener);}
     private static void update(RecipeCatalog catalog) {
         current=catalog;
+        notifyListeners();
+    }
+    private static void notifyListeners() {
         for(Runnable listener:listeners) listener.run();
+    }
+    public static void updateGrowth(String json) {
+        GrowthRecipes.applyRemoteCatalog(json);
+        notifyListeners();
     }
     public static void initialize() {
         ClientPlayNetworking.registerGlobalReceiver(RecipeSync.TYPE,(packet,context)->
             context.client().execute(()->update(RecipeCatalog.parse(packet.json()))));
-        ClientPlayConnectionEvents.DISCONNECT.register((handler,client)->update(RecipeCatalog.empty()));
+        ClientPlayNetworking.registerGlobalReceiver(GrowthSync.TYPE,(packet,context)->context.client().execute(()->{
+            updateGrowth(packet.json());
+        }));
+        ClientPlayConnectionEvents.DISCONNECT.register((handler,client)->{
+            GrowthRecipes.clearRemoteCatalog();
+            update(RecipeCatalog.empty());
+        });
     }
 }

@@ -1,0 +1,16 @@
+{
+  "criteria": {
+    "complete": { "trigger": "minecraft:tick" }
+  },
+  "display": {
+    "icon": { "id": "minecraft:amethyst_shard" },
+    "title": { "translate": "advancement.convert_table.root.title" },
+    "description": { "translate": "advancement.convert_table.root.description" },
+    "background": "minecraft:gui/advancements/backgrounds/stone",
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "requirements": [["complete"]]
+}

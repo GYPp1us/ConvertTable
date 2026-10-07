@@ -5,7 +5,7 @@ import { Workbook, SpreadsheetFile } from '@oai/artifact-tool';
 
 const [input, outputDir] = process.argv.slice(2);
 const data = JSON.parse(await fs.readFile(input, 'utf8'));
-const { conversion, growth, crafting, names } = data;
+const { conversion, growth, crafting, names, fishing } = data;
 const workbook = Workbook.create();
 const sheets = ['配方总览', '普通转换', '幽匿进阶', '触媒增殖', '方块合成'];
 for (const name of sheets) workbook.worksheets.add(name);
@@ -122,12 +122,13 @@ const growthRows = growth.recipes.map(recipe => {
   const segment = recipe.id.split('/')[1];
   const category = { wood: '木材', stone: '石材', nether: '下界', sand: '沙类', snow: '冰雪', soil: '泥土', color: '彩色方块', plant: '植物', flower: '花卉', mushroom: '蘑菇' }[segment] ?? segment;
   return [category, nameOf(recipe.catalyst), nameOf(recipe.output), recipe.cost,
-    recipe.id, recipe.catalyst, recipe.output];
+    recipe.id, recipe.catalyst, recipe.output, nameOf(recipe.source), 1, recipe.source];
 });
-const growing = setup(3, '触媒增殖', '木材用对应树苗或菌类；其他原料用紫水晶碎片、回响碎片等自然或魔法触媒。每次产出 1 件；触媒不消耗。放入触媒、选定产物后开启增殖；界面显示产速与下一件进度，产速 = 当前分配的生长因子/秒 ÷ 单件成本。',
+const growing = setup(3, '触媒增殖', '放入触媒和一件目标物品作源本，两者都不消耗；每次产出 1 件。小/中/大/成熟晶芽自然内涵量为 16/64、8/64、4/64、1/64；未成熟晶芽每秒抽取上限 1/64，方解石为 2/64。产速 = 分配的生长因子/秒 ÷ 单件成本。',
   'src/main/resources/data/convert_table/growth_recipes.json');
-table(growing, 3, ['分类', '触媒（不消耗）', '产物', '生长因子/件', '配方 ID', '触媒 ID', '产物 ID'],
-  growthRows, [14, 24, 26, 16, 63, 38, 46], 28);
+table(growing, 3, ['分类', '触媒（不消耗）', '产物', '生长因子/件', '配方 ID', '触媒 ID', '产物 ID', '源本（不消耗）', '源本数量', '源本 ID'],
+  growthRows, [14, 24, 26, 16, 63, 38, 46, 26, 12, 46], 28);
+growing.getRange(`I7:I${growthRows.length + 6}`).setNumberFormat('0');
 growing.getRange(`D7:D${growthRows.length + 6}`).setNumberFormat('0');
 growing.getRange(`D7:D${growthRows.length + 6}`).format.horizontalAlignment = 'center';
 
@@ -182,7 +183,7 @@ overview.getRange('A14:C19').values = [
   ['使用要点', '连续', '开启后材料与费用足够时自动开始下一项；输出堵塞时会保留完成进度并等待出料，交付时才扣费。'],
   ['使用要点', '进度', '单次操作固定用时：黑金 4 秒、末地 2 秒、幽匿 1 秒；界面显示进度动画。'],
   ['使用要点', '幽匿', `普通每批消耗 ${ordinarySculkSouls} 个可用灵魂；进阶按配方消耗可用灵魂，均不消耗相位。`],
-  ['使用要点', '增殖', '触媒永不消耗；界面显示当前产速和下一件进度；每条晶脉只接一座增殖台。'],
+  ['使用要点', '增殖', '触媒＋一件目标物品作源本，两者保留。晶脉没有范围、节点、母岩或总产速上限；多个增殖台共用供给。'],
   ['使用要点', '灵魂来源', '合格死亡的 1 XP = 32 灵魂；0 XP 不提供；默认无需玩家击杀；每台上限 4096。'],
 ];
 overview.getRange('A14:C19').format.font = { name: 'Arial', size: 11, color: '#1F2937' };
@@ -191,6 +192,51 @@ overview.getRange('A14:C19').format.verticalAlignment = 'center';
 overview.getRange('C14:C19').format.wrapText = true;
 overview.getRange('A15:C15').format.rowHeight = 54;
 overview.getRange('A19:C19').format.rowHeight = 54;
+overview.getRange('A18:C18').format.rowHeight = 54;
+
+const fishingUses = {
+  'convert_table:boughbound_reverie': '陆栖、飞行及自然生命；远古种子抽卡',
+  'convert_table:stillwater_palimpsest': '水栖生命塑形',
+  'convert_table:unbroken_cognizance': '村民与流浪商人塑形',
+  'convert_table:unwrought_facet': '灵异、亡灵与构造生命塑形',
+  'minecraft:amethyst_shard': '自然材料增殖的触媒；其他紫水晶用途',
+};
+overview.getRange('A21').values = [['钓鱼材料']];
+overview.getRange('A21').format.font = {name:'Arial',size:14,bold:true,color:colors[0]};
+overview.getRange('A22:G27').values = [
+  ['材料','获取池','用途','追加权重','参考钓获概率','最少数量','最多数量'],
+  ...fishing.entries.map(entry => [nameOf(entry.item),entry.table==='fish'?'鱼类':'宝藏',fishingUses[entry.item],entry.weight,null,entry.min,entry.max]),
+];
+overview.getRange('A22:G27').format.font = {name:'Arial',size:11,color:'#1F2937'};
+overview.getRange('A22:G27').format.verticalAlignment = 'center';
+overview.getRange('A22:G27').format.rowHeight = 48;
+overview.getRange('A22:C27').format.wrapText = true;
+overview.getRange('A22:G22').format.fill = colors[0];
+overview.getRange('A22:G22').format.font = {name:'Arial',size:11,bold:true,color:'#FFFFFF'};
+overview.getRange('D22:G22').format.wrapText = true;
+for (const [col,width] of [['D',14],['E',18],['F',12],['G',12]]) overview.getRange(`${col}22:${col}28`).format.columnWidth = width;
+overview.getRange('D23:D27').setNumberFormat('0');
+overview.getRange('E23:E27').setNumberFormat('0.00%');
+overview.getRange('F23:G27').setNumberFormat('0');
+overview.getRange('D23:G27').format.horizontalAlignment = 'right';
+overview.getRange('I22:L24').values = [
+  ['原版参考','分类概率','原分类权重','追加后总权重'],
+  ['鱼类',fishing.vanilla_reference.fish_chance,fishing.vanilla_reference.fish_weight,null],
+  ['宝藏',fishing.vanilla_reference.treasure_chance,fishing.vanilla_reference.treasure_weight,null],
+];
+overview.getRange('I22:L24').format.font = {name:'Arial',size:10,color:'#374151'};
+overview.getRange('I22:L24').format.columnWidth = 20;
+overview.getRange('I22:L24').format.rowHeight = 30;
+overview.getRange('J23:J24').setNumberFormat('0%');
+overview.getRange('K23:L24').setNumberFormat('0');
+overview.getRange('L23').formulas = [['=K23+SUMIFS(D23:D27,B23:B27,I23)']];
+overview.getRange('L24').formulas = [['=K24+SUMIFS(D23:D27,B23:B27,I24)']];
+for(let index=0;index<fishing.entries.length;index++) {
+  const row=index+23, reference=fishing.entries[index].table==='fish'?23:24;
+  overview.getRange(`E${row}`).formulas = [[`=$J$${reference}*D${row}/$L$${reference}`]];
+}
+overview.getRange('A29').values = [['概率按原版开放水域、无海眷计算；附魔和其他模组可改变实际钓获比例。宝藏仍受开放水域条件约束。']];
+overview.getRange('A29').format.font = {name:'Arial',size:10,italic:true,color:'#667085'};
 
 workbook.recalculate();
 const summary = await workbook.inspect({ kind: 'table', range: '配方总览!A6:C11', include: 'values,formulas', tableMaxRows: 6, tableMaxCols: 3, maxChars: 2500 });
@@ -203,7 +249,7 @@ const actual = overview.getRange('B7:B11').values.flat();
 if (JSON.stringify(actual) !== JSON.stringify(expected)) throw new Error(`Summary mismatch: ${JSON.stringify(actual)} != ${JSON.stringify(expected)}`);
 await fs.mkdir(outputDir, { recursive: true });
 // Preview full-width representative rows on every sheet; no extra workbook variants.
-const previews = [['A1:C19', 'overview'], ['A1:M11', 'ordinary'], ['A1:R15', 'advanced'], ['A1:G13', 'growth'], ['A1:F13', 'crafting']];
+const previews = [['A1:G29', 'overview'], ['A1:M11', 'ordinary'], ['A1:R15', 'advanced'], ['A1:J13', 'growth'], ['A1:F13', 'crafting']];
 for (let i = 0; i < sheets.length; i++) {
   const [range, label] = previews[i];
   const preview = await workbook.render({ sheetName: sheets[i], range, scale: 1.25, format: 'png' });

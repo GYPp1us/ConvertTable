@@ -18,9 +18,7 @@ import net.minecraft.world.level.storage.ValueOutput;
 
 /** Owns a physical crystal array and distributes its export budget once per second. */
 public final class CrystalTableBlockEntity extends BlockEntity implements MenuProvider {
-    private long lastScan = Long.MIN_VALUE;
-    private GrowthNetwork.Snapshot snapshot = GrowthNetwork.Snapshot.empty();
-    private int lastSpent;
+    private long lastSpent;
     private long cycleStart = Long.MIN_VALUE;
     private BlockPos nextPedestal;
 
@@ -33,20 +31,22 @@ public final class CrystalTableBlockEntity extends BlockEntity implements MenuPr
     }
 
     public GrowthNetwork.Snapshot snapshot() {
-        if (level != null && !level.isClientSide()
-                && (lastScan == Long.MIN_VALUE || level.getGameTime() - lastScan >= 20)) {
-            snapshot = GrowthNetwork.scan(level, worldPosition);
-            lastScan = level.getGameTime();
-        }
-        return snapshot;
+        return level == null ? GrowthNetwork.Snapshot.empty() : GrowthNetwork.scan(level, worldPosition);
     }
 
-    public void invalidateNetwork() { lastScan = Long.MIN_VALUE; }
-    public int lastSpent() { return lastSpent; }
-    public int progressTicks() { return level == null || cycleStart == Long.MIN_VALUE ? 0
-        : (int) Math.clamp(level.getGameTime() - cycleStart, 0L, 20L); }
+    public void invalidateNetwork() { if (level != null) GrowthNetwork.invalidate(level, worldPosition); }
+    private CrystalTableBlockEntity coordinator() {
+        BlockPos owner = snapshot().coordinator();
+        return owner != null && level.getBlockEntity(owner) instanceof CrystalTableBlockEntity table ? table : null;
+    }
+    public long lastSpent() { var owner = coordinator(); return owner == null ? 0 : owner.lastSpent; }
+    public int progressTicks() {
+        var owner = coordinator();
+        return owner == null || owner.cycleStart == Long.MIN_VALUE ? 0
+            : (int) Math.clamp(level.getGameTime() - owner.cycleStart, 0L, 20L);
+    }
     public boolean processing() {
-        return lastSpent > 0 && progressTicks() < 20 && snapshot().usable()
+        return lastSpent() > 0 && progressTicks() < 20 && snapshot().usable()
             && snapshot().pedestals().stream().anyMatch(pos -> level.getBlockEntity(pos)
                 instanceof CatalystPedestalBlockEntity pedestal && pedestal.processing());
     }
@@ -54,6 +54,7 @@ public final class CrystalTableBlockEntity extends BlockEntity implements MenuPr
 
     void produce() {
         GrowthNetwork.Snapshot network = snapshot();
+        if (!worldPosition.equals(network.coordinator()) || !GrowthNetwork.claimCycle(level, worldPosition)) return;
         List<CatalystPedestalBlockEntity> active = new ArrayList<>();
         for (BlockPos pos : network.pedestals()) {
             if (level.getBlockEntity(pos) instanceof CatalystPedestalBlockEntity pedestal
@@ -67,10 +68,11 @@ public final class CrystalTableBlockEntity extends BlockEntity implements MenuPr
                     .setValue(AmethystClusterBlock.FACING, bud.face())
                     .setValue(AmethystClusterBlock.WATERLOGGED, old.getValue(AmethystClusterBlock.WATERLOGGED)));
             }
-            invalidateNetwork();
             network = snapshot();
+            GrowthNetwork.Snapshot resetNetwork = network;
+            active.removeIf(pedestal -> !pedestal.prepareCycle(this, resetNetwork));
         }
-        int budget = network.usable() ? network.available() : 0;
+        long budget = network.usable() ? GrowthNetwork.takeBudget(level, network) : 0;
         int cursor = 0;
         if (nextPedestal != null) {
             for (int i = 0; i < active.size(); i++) {
@@ -78,12 +80,19 @@ public final class CrystalTableBlockEntity extends BlockEntity implements MenuPr
             }
         }
         var allocation = GrowthAllocation.divide(budget,
-            active.stream().mapToInt(CatalystPedestalBlockEntity::demand).toArray(), cursor);
+            active.stream().mapToLong(CatalystPedestalBlockEntity::demand).toArray(), cursor);
         if (allocation.spent() > 0) {
             // Advance only when a factor was assigned. Intermittent supply, idle seconds,
             // and a save/reload must not repeatedly favor the same first pedestal.
             nextPedestal = active.get(allocation.nextIndex()).getBlockPos().immutable();
             setChanged();
+            // Every source persists the same cursor so coordinator replacement retains fairness.
+            for (BlockPos source : network.sources()) {
+                if (level.getBlockEntity(source) instanceof CrystalTableBlockEntity other && other != this) {
+                    other.nextPedestal = nextPedestal;
+                    other.setChanged();
+                }
+            }
         }
         lastSpent = 0;
         for (int i = 0; i < active.size(); i++)
@@ -94,8 +103,7 @@ public final class CrystalTableBlockEntity extends BlockEntity implements MenuPr
     }
 
     public boolean owns(CatalystPedestalBlockEntity candidate) {
-        return level != null && snapshot().pedestals().contains(candidate.getBlockPos())
-            && GrowthNetwork.findSource(level, candidate.getBlockPos()) == this;
+        return level != null && GrowthNetwork.findSource(level, candidate.getBlockPos()) == this;
     }
 
     public boolean ownsAnyPedestal() {

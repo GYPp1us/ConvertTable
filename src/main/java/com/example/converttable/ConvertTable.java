@@ -15,6 +15,10 @@ public final class ConvertTable implements ModInitializer {
 	public void onInitialize() {
 		ConversionTables.initialize();
         GrowthBlocks.initialize();
+        GrowthNetwork.initialize();
+        CraftMaterials.initialize();
+        FishingLoot.initialize();
+        VersionGate.initialize();
         ConnectionRod.initialize();
         RecipeConfig.initialize();
         SculkDeathCharging.initialize();

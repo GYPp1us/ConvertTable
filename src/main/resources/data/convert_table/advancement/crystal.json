@@ -1,0 +1,17 @@
+{
+  "parent": "convert_table:amethyst",
+  "criteria": { "complete": { "trigger": "minecraft:impossible" } },
+  "display": {
+    "icon": {
+      "id": "convert_table:crystal_table",
+      "components": { "minecraft:item_model": "convert_table:advancement/crystal" }
+    },
+    "title": { "translate": "advancement.convert_table.crystal.title" },
+    "description": { "translate": "advancement.convert_table.crystal.description" },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "requirements": [["complete"]]
+}

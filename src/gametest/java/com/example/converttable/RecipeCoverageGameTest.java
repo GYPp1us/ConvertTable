@@ -225,6 +225,7 @@ final class RecipeCoverageGameTest {
                 scenario("growth id=" + recipe.id() + " input=" + itemId(recipe.catalyst()) + " output=" + itemId(recipe.output()), () -> {
                     pedestal.clearContent();
                     pedestal.setItem(0, recipe.catalyst().getDefaultInstance().copy());
+                    pedestal.setItem(CatalystPedestalBlockEntity.SOURCE_SLOT, new ItemStack(recipe.source()));
                     source.invalidateNetwork();
                     var network = source.snapshot();
                     check(network.usable() && network.available() == 1 && pedestal.crystal() == source,
@@ -235,7 +236,7 @@ final class RecipeCoverageGameTest {
                     check(menu.clickMenuButton(player, 0) && pedestal.running(), "growth menu did not start");
                     long produced = pedestal.producedTotal();
                     long start = (level.getGameTime() / 20 + 1) * 20;
-                    int duration = Math.multiplyExact(recipe.cost(), 20);
+                    int duration = Math.multiplyExact(recipe.cost(), GrowthUnits.TICK_UNITS);
                     for (int tick = 0; tick <= duration; tick++) {
                         worldData.setGameTime(start + tick);
                         // Both production tickers run; no produce/acceptGrowth/advanceGrowth shortcuts.
@@ -247,6 +248,7 @@ final class RecipeCoverageGameTest {
                         "growth failed at actual cost status=" + pedestal.status() + " progress=" + pedestal.progressUnits());
                     check(ItemStack.matches(new ItemStack(recipe.output()), pedestal.getItem(1)), "growth output wrong");
                     check(ItemStack.matches(recipe.catalyst().getDefaultInstance(), pedestal.getItem(0)), "growth consumed catalyst");
+                    check(ItemStack.matches(new ItemStack(recipe.source()), pedestal.getItem(CatalystPedestalBlockEntity.SOURCE_SLOT)), "growth consumed original");
                 });
             }
         } finally {

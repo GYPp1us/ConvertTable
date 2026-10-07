@@ -6,7 +6,9 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 public final class ConvertTableClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
+		ModItemTooltips.initialize();
 		ClientRecipeCatalog.initialize();
+        ClientVersionGate.initialize();
         GrowthPlacementHint.initialize();
         BlockEntityRenderers.register(ConversionTables.BLOCK_ENTITY, ConversionTableRenderer::new);
 		BlockEntityRenderers.register(GrowthBlocks.CATALYST_ENTITY, CatalystPedestalRenderer::new);

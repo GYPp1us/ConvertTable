@@ -33,7 +33,8 @@ public final class ConversionTables {
 		Registry.register(BuiltInRegistries.BLOCK, blockKey, block);
 		var itemKey = ResourceKey.create(Registries.ITEM, id);
 		Registry.register(BuiltInRegistries.ITEM, itemKey,
-			new BlockItem(block, new Item.Properties().setId(itemKey).useBlockDescriptionPrefix()));
+			new BlockItem(block, ModItemPresentation.apply(new Item.Properties().setId(itemKey)
+                .useBlockDescriptionPrefix(), variant + "_conversion_table", "block.convert_table." + variant + "_conversion_table")));
 		return block;
 	}
 

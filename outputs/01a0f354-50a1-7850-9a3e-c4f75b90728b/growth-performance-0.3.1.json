@@ -1,0 +1,52 @@
+{
+  "modVersion": "0.3.1",
+  "indexedNodes": 1000,
+  "mothers": 240,
+  "buds": 480,
+  "controllers": 4,
+  "activePedestals": 16,
+  "tickMeasurement": "START_SERVER_TICK to END_SERVER_TICK; excludes idle sleep",
+  "sampleOrder": "baseline-active-active-baseline; 60-tick warmup each, 220 requested ticks per window",
+  "baselineTick": {
+    "samples": 440,
+    "meanMs": 0.5669447727272727,
+    "p50Ms": 0.5345,
+    "p95Ms": 0.8108,
+    "p99Ms": 1.0114,
+    "maxMs": 1.981
+  },
+  "activeTick": {
+    "samples": 440,
+    "meanMs": 0.666443409090909,
+    "p50Ms": 0.6179,
+    "p95Ms": 0.9693,
+    "p99Ms": 1.534,
+    "maxMs": 1.9655
+  },
+  "meanDeltaMspt": 0.09949863636363632,
+  "oneThousandCachedQueryPairs": {
+    "samples": 100,
+    "meanMs": 0.874459,
+    "p50Ms": 0.644,
+    "p95Ms": 1.7109,
+    "p99Ms": 1.8201,
+    "maxMs": 1.9557
+  },
+  "physicalBudStageUpdateIncludingVanilla": {
+    "samples": 500,
+    "meanMs": 0.0109438,
+    "p50Ms": 0.0097,
+    "p95Ms": 0.0174,
+    "p99Ms": 0.022,
+    "maxMs": 0.0724
+  },
+  "invalidateAndFullRebuild": {
+    "samples": 80,
+    "meanMs": 4.71495,
+    "p50Ms": 4.6729,
+    "p95Ms": 5.8446,
+    "p99Ms": 6.9578,
+    "maxMs": 6.9578
+  },
+  "stableRebuilds": 0
+}

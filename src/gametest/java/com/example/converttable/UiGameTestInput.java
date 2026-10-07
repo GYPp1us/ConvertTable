@@ -11,13 +11,23 @@ final class UiGameTestInput {
     private UiGameTestInput() { }
 
     static void clickPanel(ClientGameTestContext context, int width, int height, int x, int y) {
+        click(context, panelPosition(context,width,height,x,y));
+    }
+
+    static void hoverPanel(ClientGameTestContext context,int width,int height,int x,int y) {
+        double[] position=panelPosition(context,width,height,x,y);
+        context.getInput().setCursorPos(position[0],position[1]);
+        context.waitTicks(3);
+    }
+
+    private static double[] panelPosition(ClientGameTestContext context,int width,int height,int x,int y) {
         double[] position = context.computeOnClient(mc -> {
             var screen = mc.gui.screen();
             var window = mc.getWindow();
             return new double[]{((screen.width - width) / 2 + x) * window.getScreenWidth() / (double) screen.width,
                 ((screen.height - height) / 2 + y) * window.getScreenHeight() / (double) screen.height};
         });
-        click(context, position);
+        return position;
     }
 
     static void clickTarget(ClientGameTestContext context, Item output) {

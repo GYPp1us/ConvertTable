@@ -26,34 +26,57 @@ import net.minecraft.world.item.Items;
 public final class GrowthRecipes {
     private static final String RESOURCE = "/data/convert_table/growth_recipes.json";
     private static final Catalog CATALOG = loadCatalog();
+    private static volatile Catalog remoteCatalog;
+    private static volatile long displayRevision;
 
     private GrowthRecipes() { }
 
     /** One recipe creates one output item after spending {@code cost} growth points. */
-    public record Recipe(Identifier id, Item catalyst, Item output, int cost) {
+    public record Recipe(Identifier id, Item catalyst, Item source, Item output, int cost) {
         public Recipe {
             Objects.requireNonNull(id, "id");
             Objects.requireNonNull(catalyst, "catalyst");
+            Objects.requireNonNull(source, "source");
             Objects.requireNonNull(output, "output");
-            if (catalyst == Items.AIR || output == Items.AIR)
+            if (catalyst == Items.AIR || source == Items.AIR || output == Items.AIR)
                 throw new IllegalArgumentException("Air cannot be a growth recipe item");
+            if (source != output) throw new IllegalArgumentException("Growth originals must match their output item");
             if (cost < 1) throw new IllegalArgumentException("Growth recipe cost must be at least 1");
         }
     }
 
     /** Returns this catalyst's targets in the same order as the bundled catalog. */
     public static List<Recipe> recipes(ItemStack catalyst) {
-        if (!isCatalyst(catalyst)) return List.of();
-        return CATALOG.byCatalyst().getOrDefault(catalyst.getItem(), List.of());
+        return recipes(catalyst, CATALOG);
+    }
+
+    /** Client menus and viewers use the server's catalogue after joining. */
+    public static List<Recipe> displayRecipes(ItemStack catalyst) {
+        return recipes(catalyst, remoteCatalog == null ? CATALOG : remoteCatalog);
+    }
+
+    private static List<Recipe> recipes(ItemStack catalyst, Catalog catalog) {
+        if (!bare(catalyst)) return List.of();
+        return catalog.byCatalyst().getOrDefault(catalyst.getItem(), List.of());
     }
 
     /** Component-bearing stacks are intentionally rejected to prevent copying custom items. */
     public static boolean isCatalyst(ItemStack catalyst) {
-        return catalyst != null
-            && !catalyst.isEmpty()
-            && catalyst.getItem() != Items.AIR
-            && catalyst.getComponentsPatch().isEmpty()
-            && CATALOG.byCatalyst().containsKey(catalyst.getItem());
+        return bare(catalyst) && CATALOG.byCatalyst().containsKey(catalyst.getItem());
+    }
+    public static boolean isDisplayCatalyst(ItemStack catalyst) { return !displayRecipes(catalyst).isEmpty(); }
+    private static boolean bare(ItemStack stack) {
+        return stack != null && !stack.isEmpty() && stack.getItem() != Items.AIR && stack.getComponentsPatch().isEmpty();
+    }
+    public static boolean matchesSource(Recipe recipe, ItemStack source) {
+        return recipe != null && bare(source) && source.is(recipe.source());
+    }
+    public static boolean isSource(ItemStack stack) { return isSource(stack, CATALOG); }
+    public static boolean isDisplaySource(ItemStack stack) {
+        return isSource(stack, remoteCatalog == null ? CATALOG : remoteCatalog);
+    }
+    private static boolean isSource(ItemStack stack, Catalog catalog) {
+        return bare(stack) && catalog.byId().values().stream().anyMatch(recipe -> stack.is(recipe.source()));
     }
 
     /** Returns the catalog entry with this stable identifier, or {@code null} when absent. */
@@ -64,6 +87,18 @@ public final class GrowthRecipes {
     /** Returns every valid recipe in bundled order for optional recipe viewers. */
     public static List<Recipe> allRecipes() {
         return List.copyOf(CATALOG.byId().values());
+    }
+    public static List<Recipe> allDisplayRecipes() {
+        return List.copyOf((remoteCatalog == null ? CATALOG : remoteCatalog).byId().values());
+    }
+    public static void applyRemoteCatalog(String json) { remoteCatalog = parseCatalog(json); displayRevision++; }
+    public static void clearRemoteCatalog() { remoteCatalog = null; displayRevision++; }
+    public static long displayRevision() { return displayRevision; }
+    public static String bundledJson() {
+        try (InputStream stream = GrowthRecipes.class.getResourceAsStream(RESOURCE)) {
+            if (stream == null) throw new IllegalStateException("Missing bundled growth recipes");
+            return new String(stream.readAllBytes(), StandardCharsets.UTF_8);
+        } catch (IOException error) { throw new IllegalStateException("Cannot read growth recipes", error); }
     }
 
     /**
@@ -77,17 +112,15 @@ public final class GrowthRecipes {
     }
 
     private static Catalog loadCatalog() {
+        return parseCatalog(bundledJson());
+    }
+    private static Catalog parseCatalog(String json) {
         Map<Item, List<Recipe>> byCatalyst = new LinkedHashMap<>();
         Map<Identifier, Recipe> byId = new LinkedHashMap<>();
         Set<Identifier> seenIds = new HashSet<>();
 
-        try (InputStream stream = GrowthRecipes.class.getResourceAsStream(RESOURCE)) {
-            if (stream == null) {
-                ConvertTable.LOGGER.error("Growth recipe catalog resource is missing: {}", RESOURCE);
-                return new Catalog(Map.of(), Map.of());
-            }
-
-            JsonElement root = JsonParser.parseReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
+        try {
+            JsonElement root = JsonParser.parseString(json);
             if (!root.isJsonObject()) {
                 ConvertTable.LOGGER.error("Growth recipe catalog must be a JSON object: {}", RESOURCE);
                 return new Catalog(Map.of(), Map.of());
@@ -95,8 +128,8 @@ public final class GrowthRecipes {
 
             JsonObject document = root.getAsJsonObject();
             int schema = readInteger(document.get("schema_version"));
-            if (schema != 1) {
-                ConvertTable.LOGGER.error("Unsupported growth recipe schema {} in {} (expected 1)",
+            if (schema != 1 && schema != 2) {
+                ConvertTable.LOGGER.error("Unsupported growth recipe schema {} in {} (expected 1 or 2)",
                     schema, RESOURCE);
                 return new Catalog(Map.of(), Map.of());
             }
@@ -139,6 +172,11 @@ public final class GrowthRecipes {
                         warn(index, id.toString(), "unknown output item '" + describe(object.get("output")) + "'");
                         continue;
                     }
+                    Item source = schema == 1 ? output : resolveItem(readIdentifier(object.get("source")));
+                    if (source != output) {
+                        warn(index, id.toString(), "original must be the output item");
+                        continue;
+                    }
                     int cost = readInteger(object.get("cost"));
                     if (cost < 1) {
                         warn(index, id.toString(), "cost must be at least 1 (got " + cost + ")");
@@ -151,14 +189,14 @@ public final class GrowthRecipes {
                         continue;
                     }
 
-                    Recipe recipe = new Recipe(id, catalyst, output, cost);
+                    Recipe recipe = new Recipe(id, catalyst, source, output, cost);
                     options.add(recipe);
                     byId.put(id, recipe);
                 } catch (IllegalArgumentException exception) {
                     warn(index, id.toString(), exception.getMessage());
                 }
             }
-        } catch (IOException | RuntimeException exception) {
+        } catch (RuntimeException exception) {
             ConvertTable.LOGGER.error("Could not load growth recipe catalog from {}", RESOURCE, exception);
             return new Catalog(Map.of(), Map.of());
         }

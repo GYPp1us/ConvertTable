@@ -45,6 +45,8 @@ final class GrowthClientGameTest {
             var server = world.getServer();
             server.runCommand("gamemode creative @a");
             server.runCommand("gamerule minecraft:random_tick_speed 0");
+            server.runOnServer(game -> RecipeConfigMigrationGameTest.run());
+            server.runOnServer(TableAdvancementsGameTest::verify);
             server.runOnServer(GrowthAllocationGameTest::verify);
             server.runCommand("time set noon");
             server.runCommand("fill -10 98 -10 10 99 10 polished_deepslate");
@@ -66,18 +68,19 @@ final class GrowthClientGameTest {
                 level.setBlockAndUpdate(pedestalPos, GrowthBlocks.CATALYST.defaultBlockState());
                 bud(level, mother, Direction.NORTH, Blocks.SMALL_AMETHYST_BUD);
                 var crystal = (CrystalTableBlockEntity) level.getBlockEntity(crystalPos);
-                check(crystal.snapshot().available() == 1, "Normal bud should export 1/s, not its internal 24");
+                check(crystal.snapshot().available() == 1, "Normal bud extraction limit must be independent of its contents");
                 level.setBlockAndUpdate(mother.east(), Blocks.CALCITE.defaultBlockState());
                 level.setBlockAndUpdate(conductor.below(), Blocks.SMOOTH_BASALT.defaultBlockState());
                 crystal.invalidateNetwork();
                 var network = crystal.snapshot();
-                check(network.available() == 2 && network.potential() == 25,
+                check(network.available() == 2 && network.potential() == 17,
                     "Calcite must export 2/s; basalt must add one internal point");
                 var pedestal = (CatalystPedestalBlockEntity) level.getBlockEntity(pedestalPos);
                 check(pedestal.crystal() == crystal, "Pedestal did not link through an amethyst conductor");
                 new CatalystPedestalMenu(99, game.getPlayerList().getPlayers().getFirst().getInventory(), pedestal).broadcastChanges();
                 pedestal.setItem(0, new ItemStack(Items.OAK_SAPLING));
-                check(!pedestal.recipes().isEmpty(), "Boat should offer its log recipe");
+                pedestal.setItem(CatalystPedestalBlockEntity.SOURCE_SLOT,new ItemStack(Items.OAK_LOG));
+                check(!pedestal.recipes().isEmpty(), "Sapling should offer its log recipe");
                 check(!pedestal.selectRecipe(99999), "Invalid target index was accepted");
                 check(pedestal.selectRecipe(target(pedestal, Items.OAK_LOG)), "Oak target was rejected");
                 var state = level.getBlockState(pedestalPos);
@@ -96,8 +99,11 @@ final class GrowthClientGameTest {
             server.runOnServer(game -> {
                 var level = game.overworld();
                 var pedestal = (CatalystPedestalBlockEntity) level.getBlockEntity(pedestalPos);
-                check(pedestal.producedTotal() >= 2 && pedestal.getItem(0).is(Items.OAK_SAPLING)
-                    && pedestal.getItem(0).getCount() == 1, "Production consumed the catalyst or produced no logs");
+                check(pedestal.producedTotal() == 0 && pedestal.progressUnits()>0 && pedestal.getItem(0).is(Items.OAK_SAPLING)
+                    && pedestal.getItem(0).getCount() == 1 && pedestal.sourceReady(), "Weak supply did not accrue fractional growth or consumed an input");
+                // Transfer fixture stock independently; coverage verifies every output through both tickers.
+                pedestal.setItem(1,new ItemStack(Items.OAK_LOG,2));
+                GrowthOutputLinks.flush(level,pedestalPos,pedestal);
                 check(((BarrelBlockEntity) level.getBlockEntity(pedestalPos.east())).getItem(0).is(Items.OAK_LOG),
                     "Adjacent output container did not receive logs");
                 var links = pedestal.outputLinks();
@@ -115,6 +121,7 @@ final class GrowthClientGameTest {
                 level.setBlockAndUpdate(secondPos, GrowthBlocks.CATALYST.defaultBlockState());
                 var second = (CatalystPedestalBlockEntity) level.getBlockEntity(secondPos);
                 second.setItem(0, new ItemStack(Items.BIRCH_SAPLING));
+                second.setItem(CatalystPedestalBlockEntity.SOURCE_SLOT,new ItemStack(Items.BIRCH_LOG));
                 second.selectRecipe(target(second, Items.BIRCH_LOG));
                 second.toggleRunning();
                 ((CrystalTableBlockEntity) level.getBlockEntity(crystalPos)).invalidateNetwork();
@@ -125,7 +132,7 @@ final class GrowthClientGameTest {
                 var first = (CatalystPedestalBlockEntity) level.getBlockEntity(pedestalPos);
                 var second = (CatalystPedestalBlockEntity) level.getBlockEntity(secondPos);
                 var crystal = (CrystalTableBlockEntity) level.getBlockEntity(crystalPos);
-                check(crystal.pedestalCount() == 2 && second.producedTotal() >= 1, "Multiple pedestals did not run");
+                check(crystal.pedestalCount() == 2 && second.progressUnits()>0 && second.producedTotal()==0, "Multiple pedestals did not accrue their fractional shares");
                 check(first.lastSpent() == 1 && second.lastSpent() == 1 && crystal.lastSpent() == 2,
                     "Pedestals duplicated the shared two-point budget");
                 second.toggleRunning();
@@ -143,6 +150,13 @@ final class GrowthClientGameTest {
             context.getInput().setCursorPos(0, 0);
             context.waitTicks(3);
             context.takeScreenshot(TestScreenshotOptions.of("growth-crystal-ui"));
+            int[][] helpPositions={{222,10},{246,10},{208,91},{208,71},{26,70},{208,111}};
+            String[] helpNames={"calcite","basalt","supply","factors","small-bud","allocation"};
+            for(int help=0;help<helpNames.length;help++) {
+                UiGameTestInput.hoverPanel(context,CrystalTableScreen.WIDTH,CrystalTableScreen.HEIGHT,
+                    helpPositions[help][0],helpPositions[help][1]);
+                context.takeScreenshot(TestScreenshotOptions.of("growth-help-"+helpNames[help]));
+            }
             context.runOnClient(mc -> mc.gui.screen().onClose());
             context.waitTicks(4);
             server.runOnServer(game -> game.getPlayerList().getPlayers().getFirst().openMenu(
@@ -169,7 +183,9 @@ final class GrowthClientGameTest {
             server.runOnServer(game -> {
                 var first=(CatalystPedestalBlockEntity)game.overworld().getBlockEntity(pedestalPos);
                 check(first.selectedRecipe().output()==selectedOutput,"Mouse target selection did not reach the growth server");
+                first.setItem(CatalystPedestalBlockEntity.SOURCE_SLOT,new ItemStack(selectedOutput));
             });
+            context.waitFor(mc->((CatalystPedestalMenu)mc.player.containerMenu).sourceReady(),100);
             UiGameTestInput.clickWidget(context,widget->widget.getMessage().getString().equals(GrowthScreenGraphics.tr("start").getString()));
             context.waitFor(mc -> ((CatalystPedestalMenu)mc.player.containerMenu).running(),100);
             UiGameTestInput.clickWidget(context,widget->widget.getMessage().getString().equals("<"));
@@ -196,6 +212,7 @@ final class GrowthClientGameTest {
                 check(first.getItem(0).isEmpty() && !first.running() && first.credit() == 0
                     && first.selectedRecipe() == null, "Shift-removing the catalyst did not pause and clear selection");
                 first.setItem(0, new ItemStack(Items.OAK_SAPLING));
+                first.setItem(CatalystPedestalBlockEntity.SOURCE_SLOT,new ItemStack(Items.OAK_LOG));
                 first.selectRecipe(target(first, Items.OAK_LOG));
                 first.toggleRunning();
                 bud(level, mother, Direction.UP, Blocks.AMETHYST_CLUSTER);
@@ -239,6 +256,7 @@ final class GrowthClientGameTest {
             server.runOnServer(game -> {
                 var pedestal=(CatalystPedestalBlockEntity)game.overworld().getBlockEntity(pedestalPos);
                 pedestal.setItem(0,new ItemStack(Items.OAK_SAPLING));
+                pedestal.setItem(CatalystPedestalBlockEntity.SOURCE_SLOT,new ItemStack(Items.OAK_LOG));
                 check(pedestal.selectRecipe(target(pedestal,Items.OAK_LOG)),"Restored sapling log target could not be selected");
                 check(pedestal.selectedRecipe()!=null && pedestal.selectedRecipe().output()==Items.OAK_LOG && !pedestal.running(),
                     "Valid catalyst did not recover after unsupported input");
@@ -299,11 +317,11 @@ final class GrowthClientGameTest {
                     new ItemStack(Items.CALCITE)), "Detached mother advertised a connection");
             });
             GrowthJeiGameTest.run(context);
-            ConvertTable.LOGGER.info("GROWTH_CLIENT_GAME_TEST_PASS: 1/2 export, internal growth factors, nonconsuming saplings, shared budgets, real mouse paged target selection, empty/unsupported/old-tool/component catalyst UI, save/load, explicit sided output and blocked mask, placement hint, growth drain and UI");
+            ItemTooltipGameTest.run(context);
+            ConvertTable.LOGGER.info("GROWTH_CLIENT_GAME_TEST_PASS: exact 1/64 export, fractional growth, reusable catalyst and original, shared budgets, real mouse paged target selection, empty/unsupported/old-tool/component catalyst UI, save/load, explicit sided output and blocked mask, placement hint, growth drain and UI");
         }
     }
     private static CrystalTableBlockEntity firstSource(net.minecraft.world.level.Level level, BlockPos pos) {
         return ((CatalystPedestalBlockEntity) level.getBlockEntity(pos)).crystal();
     }
 }
-

@@ -12,7 +12,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
 public final class CatalystPedestalMenu extends AbstractContainerMenu {
-    private static final int DEVICE_SLOTS = 10, DATA_SIZE = 26;
+    private static final int DEVICE_SLOTS = CatalystPedestalBlockEntity.INVENTORY_SIZE, DATA_SIZE = 27 * GrowthData.SIZE;
     private final Container storage;
     private final CatalystPedestalBlockEntity table;
     private final ContainerData data = new SimpleContainerData(DATA_SIZE);
@@ -30,48 +30,60 @@ public final class CatalystPedestalMenu extends AbstractContainerMenu {
         this.storage = storage;
         this.table = table;
         addSlot(new Slot(storage, 0, 8, 29) {
-            @Override public boolean mayPlace(ItemStack stack) { return GrowthRecipes.isCatalyst(stack); }
+            @Override public boolean mayPlace(ItemStack stack) {
+                return table == null ? GrowthRecipes.isDisplayCatalyst(stack) : GrowthRecipes.isCatalyst(stack);
+            }
             @Override public int getMaxStackSize() { return 1; }
         });
         for (int i = 1; i <= 9; i++)
             addSlot(new Slot(storage, i, 8 + (i - 1) * 18, 126) {
                 @Override public boolean mayPlace(ItemStack stack) { return false; }
             });
+        addSlot(new Slot(storage, CatalystPedestalBlockEntity.SOURCE_SLOT, 40, 29) {
+            @Override public boolean mayPlace(ItemStack stack) {
+                return table == null ? GrowthRecipes.isDisplaySource(stack) : GrowthRecipes.isSource(stack);
+            }
+            @Override public int getMaxStackSize() { return 1; }
+        });
         addStandardInventorySlots(inventory, 8, 156);
         addDataSlots(data);
         refresh();
     }
 
+    private void set(int index, long value) { GrowthData.set(data, index * GrowthData.SIZE, value); }
+    private long getLong(int index) { return GrowthData.get(data, index * GrowthData.SIZE); }
+    private int get(int index) { return (int) getLong(index); }
+
     private void refresh() {
         if (table == null) return;
-        data.set(0, table.running() ? 1 : 0);
-        data.set(1, table.status());
-        data.set(2, table.lastRate());
-        data.set(3, table.lastAvailable());
-        data.set(4, table.cost());
+        set(0, table.running() ? 1 : 0);
+        set(1, table.status());
+        set(2, table.lastRate());
+        set(3, table.lastAvailable());
+        set(4, table.cost());
         var crystal = table.crystal();
         var network = crystal == null ? GrowthNetwork.Snapshot.empty() : crystal.snapshot();
-        data.set(5, network.mothers());
-        data.set(6, network.count(1));
-        data.set(7, network.count(2));
-        data.set(8, network.count(3));
-        data.set(9, network.flags());
+        set(5, network.mothers());
+        set(6, network.count(1));
+        set(7, network.count(2));
+        set(8, network.count(3));
+        set(9, network.flags());
         int fill = 0;
         for (int i = 1; i <= 9; i++) fill += table.getItem(i).getCount();
-        data.set(10, fill);
-        data.set(11, table.credit());
-        data.set(12, table.lastSpent());
+        set(10, fill);
+        set(11, table.credit());
+        set(12, table.lastSpent());
         var recipe = table.selectedRecipe();
         // List.of()/List.copyOf() reject indexOf(null): empty and unsupported catalysts
         // are valid menu states, as is a multi-output catalyst awaiting a selection.
-        data.set(13, recipe == null ? 0 : table.recipes().indexOf(recipe) + 1);
+        set(13, recipe == null ? 0 : table.recipes().indexOf(recipe) + 1);
         var links = table.outputLinks();
-        data.set(14, links.containers());
-        data.set(15, Math.min(65535, links.freeSpace()));
-        data.set(16, links.directionMask());
-        data.set(17, links.blockedMask());
-        data.set(18, network.potential());
-        data.set(19, network.count(4));
+        set(14, links.containers());
+        set(15, links.freeSpace());
+        set(16, links.directionMask());
+        set(17, links.blockedMask());
+        set(18, network.potential());
+        set(19, network.count(4));
         int capacity = 0;
         ItemStack target = recipe == null ? ItemStack.EMPTY : new ItemStack(recipe.output());
         for (int i = 1; i <= 9; i++) {
@@ -79,42 +91,46 @@ public final class CatalystPedestalMenu extends AbstractContainerMenu {
             capacity += current.isEmpty() ? (target.isEmpty() ? 64 : target.getMaxStackSize())
                 : current.getMaxStackSize();
         }
-        data.set(20, capacity);
-        data.set(21, crystal == null ? 0 : 1);
-        data.set(22, table.progressUnits() & 0xffff);
-        data.set(23, table.progressUnits() >>> 16);
-        data.set(24, table.progressRate());
-        data.set(25, table.processing() ? 1 : 0);
+        set(20, capacity);
+        set(21, crystal == null ? 0 : 1);
+        set(22, table.progressUnits());
+        set(23, table.progressMaximum());
+        set(24, table.progressRate());
+        set(25, table.processing() ? 1 : 0);
+        set(26, table.sourceReady() ? 1 : 0);
     }
 
     @Override public void broadcastChanges() { refresh(); super.broadcastChanges(); }
-    public boolean running() { return data.get(0) != 0; }
-    public int status() { return data.get(1); }
-    public int producedPerSecond() { return data.get(2); }
-    public int availablePerSecond() { return data.get(3); }
-    public int cost() { return data.get(4); }
-    public int mothers() { return data.get(5); }
-    public int small() { return data.get(6); }
-    public int medium() { return data.get(7); }
-    public int large() { return data.get(8); }
-    public int flags() { return data.get(9); }
-    public int buffered() { return data.get(10); }
-    public int credit() { return data.get(11); }
-    public int spentPerSecond() { return data.get(12); }
-    public int selectedIndex() { return data.get(13) - 1; }
-    public int containerCount() { return data.get(14); }
-    public int freeSpace() { return data.get(15) & 0xffff; }
-    public int directionMask() { return data.get(16); }
-    public int blockedMask() { return data.get(17); }
-    public int potential() { return data.get(18); }
-    public int clusters() { return data.get(19); }
-    public int bufferCapacity() { return data.get(20); }
-    public boolean hasCrystal() { return data.get(21) != 0; }
-    public int progressUnits() { return (data.get(22) & 0xffff) | ((data.get(23) & 0x7fff) << 16); }
-    public int progressMaximum() { return (int) Math.min(Integer.MAX_VALUE, (long) cost() * 20); }
-    public int progressRate() { return data.get(24); }
-    public boolean processing() { return data.get(25) != 0; }
-    public List<GrowthRecipes.Recipe> recipes() { return GrowthRecipes.recipes(storage.getItem(0)); }
+    public boolean running() { return get(0) != 0; }
+    public int status() { return get(1); }
+    public int producedPerSecond() { return get(2); }
+    public long availablePerSecond() { return getLong(3); }
+    public int cost() { return get(4); }
+    public int mothers() { return get(5); }
+    public int small() { return get(6); }
+    public int medium() { return get(7); }
+    public int large() { return get(8); }
+    public int flags() { return get(9); }
+    public int buffered() { return get(10); }
+    public int credit() { return get(11); }
+    public long spentPerSecond() { return getLong(12); }
+    public int selectedIndex() { return get(13) - 1; }
+    public int containerCount() { return get(14); }
+    public int freeSpace() { return get(15); }
+    public int directionMask() { return get(16); }
+    public int blockedMask() { return get(17); }
+    public long potential() { return getLong(18); }
+    public int clusters() { return get(19); }
+    public int bufferCapacity() { return get(20); }
+    public boolean hasCrystal() { return get(21) != 0; }
+    public long progressUnits() { return getLong(22); }
+    public long progressMaximum() { return getLong(23); }
+    public long progressRate() { return getLong(24); }
+    public boolean processing() { return get(25) != 0; }
+    public boolean sourceReady() { return get(26) != 0; }
+    public List<GrowthRecipes.Recipe> recipes() {
+        return table == null ? GrowthRecipes.displayRecipes(storage.getItem(0)) : table.recipes();
+    }
     public GrowthRecipes.Recipe selectedRecipe() {
         var recipes = recipes();
         int selected = selectedIndex();
@@ -123,7 +139,7 @@ public final class CatalystPedestalMenu extends AbstractContainerMenu {
 
     @Override public boolean clickMenuButton(Player player, int id) {
         if (table == null || !stillValid(player)) return false;
-        if (id == 0) table.toggleRunning();
+        if (id == 0) table.toggleRunning(player);
         else if (id >= 1000 && id - 1000 < table.recipes().size()) {
             if (!table.selectRecipe(id - 1000)) return false;
         } else return false;
@@ -144,12 +160,20 @@ public final class CatalystPedestalMenu extends AbstractContainerMenu {
         if (index < DEVICE_SLOTS) {
             if (!moveItemStackTo(stack, DEVICE_SLOTS, slots.size(), true)) return ItemStack.EMPTY;
         } else {
-            if (!GrowthRecipes.isCatalyst(stack) || !storage.getItem(0).isEmpty()
-                    || !moveItemStackTo(stack, 0, 1, false)) return ItemStack.EMPTY;
+            int destination;
+            if (!storage.getItem(0).isEmpty() && GrowthRecipes.matchesSource(selectedRecipe(), stack)
+                    && storage.getItem(CatalystPedestalBlockEntity.SOURCE_SLOT).isEmpty()) {
+                destination = CatalystPedestalBlockEntity.SOURCE_SLOT;
+            } else if (slots.getFirst().mayPlace(stack) && storage.getItem(0).isEmpty()) {
+                destination = 0;
+            } else if (slots.get(CatalystPedestalBlockEntity.SOURCE_SLOT).mayPlace(stack)
+                    && storage.getItem(CatalystPedestalBlockEntity.SOURCE_SLOT).isEmpty()) {
+                destination = CatalystPedestalBlockEntity.SOURCE_SLOT;
+            } else return ItemStack.EMPTY;
+            if (!moveItemStackTo(stack, destination, destination + 1, false)) return ItemStack.EMPTY;
         }
         if (stack.isEmpty()) slot.setByPlayer(ItemStack.EMPTY); else slot.setChanged();
         slot.onTake(player, stack);
         return original;
     }
 }
-

@@ -14,7 +14,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.phys.Vec3;
 
-/** A full block output projection rotates above the reusable physical catalyst. */
+/** A half-size output projection rotates above the reusable physical catalyst. */
 public final class CatalystPedestalRenderer implements
         BlockEntityRenderer<CatalystPedestalBlockEntity, CatalystPedestalRenderer.State> {
     private final ItemModelResolver resolver;
@@ -60,8 +60,7 @@ public final class CatalystPedestalRenderer implements
         pose.rotateDegrees(Axis.YP, state.yaw);
         pose.rotateDegrees(Axis.XP, 15F);
         pose.rotateDegrees(Axis.ZP, 20F);
-        // Vanilla FIXED block item display is half-scale. Double it for a true 16px cube.
-        pose.scale(2F, 2F, 2F);
+        // Keep the vanilla FIXED scale: an 8px block, half the former projection size.
         state.sample.submit(pose, collector, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
         pose.popPose();
     }

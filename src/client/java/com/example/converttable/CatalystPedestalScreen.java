@@ -55,7 +55,7 @@ public final class CatalystPedestalScreen extends AbstractContainerScreen<Cataly
         var recipes = menu.recipes();
         page = Math.clamp(page, 0, Math.max(0, (recipes.size() - 1) / PAGE_SIZE));
         run.setMessage(tr(menu.running() ? "pause" : "start"));
-        run.active = menu.running() || menu.selectedRecipe() != null;
+        run.active = menu.running() || menu.selectedRecipe() != null && menu.sourceReady();
         previous.active = page > 0;
         next.active = (page + 1) * PAGE_SIZE < recipes.size();
         for (int i = 0; i < PAGE_SIZE; i++) {
@@ -86,18 +86,21 @@ public final class CatalystPedestalScreen extends AbstractContainerScreen<Cataly
         g.text(font, playerInventoryTitle, inventoryLabelX, inventoryLabelY, TEXT, false);
         var recipe = menu.selectedRecipe();
         label(g, recipe == null ? tr("choose_target") : new ItemStack(recipe.output()).getHoverName(),
-            32, 27, 115, TEXT, mouseX, mouseY);
-        g.text(font, tr("cost", menu.cost()), 32, 39, MUTED, false);
+            69, 27, 69, TEXT, mouseX, mouseY);
+        g.text(font, "+", 29, 33, TEXT, false);
+        g.text(font, tr("cost", GrowthNumbers.count(menu.cost())), 69, 39, MUTED, false);
         if (recipe != null) g.item(new ItemStack(recipe.output()), 151, 29);
         if (contains(mouseX - leftPos, mouseY - topPos, 5, 26, 23, 23) && menu.getSlot(0).getItem().isEmpty())
             g.setTooltipForNextFrame(font, tr("catalyst_help"), mouseX, mouseY);
-        double production=menu.processing()&&menu.cost()>0?menu.progressRate()/(double)menu.cost():0;
-        label(g, tr("production_short", String.format(java.util.Locale.ROOT,"%.1f",production)), 8, 49, 162, TEXT, mouseX, mouseY);
+        if (contains(mouseX - leftPos, mouseY - topPos, 37, 26, 23, 23))
+            g.setTooltipForNextFrame(font, tr("source_help"), mouseX, mouseY);
+        String productionText=GrowthNumbers.production(menu.processing()?menu.progressRate():0,menu.cost());
+        quantity(g,font,tr("production_label"),tr("item_rate_value",productionText).getString(),8,49,162,TEXT);
         if(contains(mouseX-leftPos,mouseY-topPos,8,49,162,10))
             g.setComponentTooltipForNextFrame(font,List.of(tr("production_help"),tr("completed_cycle",menu.producedPerSecond())),mouseX,mouseY);
-        label(g, tr("export_short", menu.availablePerSecond()), 8, 60, 162, MUTED, mouseX, mouseY);
+        quantity(g,font,tr("export_label"),tr("factor_rate_value",GrowthNumbers.rate(menu.availablePerSecond())).getString(),8,60,162,MUTED);
         meter(g, 8, 70, 162, menu.availablePerSecond(), (menu.small() + menu.medium() + menu.large()) * 2, EXPORT);
-        label(g, tr("used_short", menu.spentPerSecond()), 8, 78, 162, MUTED, mouseX, mouseY);
+        quantity(g,font,tr("used_label"),tr("factor_rate_value",GrowthNumbers.rate(menu.spentPerSecond())).getString(),8,78,162,MUTED);
         meter(g, 8, 88, 162, menu.spentPerSecond(), menu.availablePerSecond(), USED);
         if (contains(mouseX - leftPos, mouseY - topPos, 8, 60, 162, 34))
             g.setTooltipForNextFrame(font, tr("allocation_help"), mouseX, mouseY);
@@ -106,24 +109,25 @@ public final class CatalystPedestalScreen extends AbstractContainerScreen<Cataly
         g.centeredText(font, (page + 1) + " / " + Math.max(1, (menu.recipes().size() + PAGE_SIZE - 1) / PAGE_SIZE), 246, 87, MUTED);
         if (menu.recipes().isEmpty()) g.textWithWordWrap(font, tr("catalyst_help"), 192, 44, 114, MUTED, false);
         drawConnections(g, mouseX, mouseY);
-        Component nextProgress=recipe==null?tr("choose_target"):tr("next_item_short", factors(menu.progressUnits()),menu.cost());
+        Component nextProgress=recipe==null?tr("choose_target"):tr("next_item_short", factors(menu.progressUnits()),GrowthNumbers.count(menu.cost()));
         label(g, nextProgress, 188, 171, 124, TEXT, mouseX, mouseY);
         progress(g, 188, 183, 124, 5, menu.progressUnits(), menu.progressMaximum(), menu.status()==5?BLOCKED:PURPLE);
         if (contains(mouseX - leftPos, mouseY - topPos, 188, 170, 124, 20))
             g.setComponentTooltipForNextFrame(font,List.of(nextProgress,tr("next_item_progress",percent(menu.progressUnits(),menu.progressMaximum())),
                 tr("growth_progress_help"),tr("credit_help")), mouseX, mouseY);
-        label(g, tr("buffer_actual", menu.buffered(), menu.bufferCapacity()), 188, 194, 124, TEXT, mouseX, mouseY);
+        label(g, tr("buffer_actual", GrowthNumbers.count(menu.buffered()), GrowthNumbers.count(menu.bufferCapacity())), 188, 194, 124, TEXT, mouseX, mouseY);
         meter(g, 188, 205, 124, menu.buffered(), menu.bufferCapacity(), menu.buffered() >= menu.bufferCapacity() ? BLOCKED : USED);
         String status = switch (menu.status()) {
             case 1 -> "copying";
             case 2 -> "no_catalyst";
             case 3 -> "no_crystal";
-            case 4 -> "shared";
+            case 4 -> "network_changed";
             case 5 -> "full";
             case 6 -> "no_buds";
             case 7 -> "invalid_catalyst";
             case 8 -> "choose_target";
             case 9 -> "waiting_factors";
+            case 10 -> "no_source";
             default -> "idle";
         };
         label(g, tr(status), 188, 217, 124, menu.status() > 1 ? BLOCKED : MUTED, mouseX, mouseY);
@@ -145,8 +149,9 @@ public final class CatalystPedestalScreen extends AbstractContainerScreen<Cataly
                 g.setComponentTooltipForNextFrame(font, List.of(tr("direction." + directions[i]),
                     tr(blocked ? "link_blocked" : linked ? "link_ready" : "link_absent")), mouseX, mouseY);
         }
-        label(g, tr("containers_short", menu.containerCount()), 188, 145, 124, TEXT, mouseX, mouseY);
-        label(g, tr("space_short", menu.freeSpace()), 188, 157, 124, MUTED, mouseX, mouseY);
+        label(g, tr("containers_short", GrowthNumbers.count(menu.containerCount())), 188, 145, 124, TEXT, mouseX, mouseY);
+        label(g, tr("space_short", GrowthNumbers.count(menu.freeSpace())), 188, 157, 124, MUTED, mouseX, mouseY);
+        if(contains(mouseX-leftPos,mouseY-topPos,188,156,124,10))
+            g.setTooltipForNextFrame(font,tr("space_short",menu.freeSpace()),mouseX,mouseY);
     }
 }
-

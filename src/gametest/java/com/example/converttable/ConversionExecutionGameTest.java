@@ -123,7 +123,7 @@ final class ConversionExecutionGameTest {
         check(network.surfaces().containsKey(ground),"Flat vein bridge failed to connect sculk top edge");
         check(network.pixels()[16*33+18]==2,"Ground surface absent from X-Z projection");
         // Ticker performs real automatic conversion without requiring an open menu.
-        first.clearContent();first.phase=1;first.deaths=1;first.inputMode=0;target(first,Items.BIRCH_PLANKS);first.setItem(0,new ItemStack(Items.OAK_PLANKS));first.running=true;
+        first.clearContent();first.phase=1;first.deaths=RecipeConfig.setting("sculk","ordinary_souls_per_batch");first.inputMode=0;target(first,Items.BIRCH_PLANKS);first.setItem(0,new ItemStack(Items.OAK_PLANKS));first.running=true;
         ConvertTable.LOGGER.info("CONVERSION_EXECUTION_TEST_PASS: atomic costs, {} advanced recipes without phase fuel, remainders, random lock, nested data, explicit linked samples, real deaths, ownership, XZ projection and ticker",RecipeConfig.server().advanced().size());
     }
 }

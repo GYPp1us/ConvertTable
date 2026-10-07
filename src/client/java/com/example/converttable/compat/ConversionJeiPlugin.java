@@ -27,6 +27,8 @@ public final class ConversionJeiPlugin implements IModPlugin {
     private static IJeiRuntime runtime;
     public static IJeiRuntime activeRuntime() {return runtime;}
     private List<ViewerRecipe> registered=List.of();
+    private List<GrowthViewerRecipe> registeredGrowth=List.of();
+    private long growthRevision=Long.MIN_VALUE;
     public ConversionJeiPlugin() {ClientRecipeCatalog.listen(this::refresh);}
     @Override public Identifier getPluginUid() {return ConvertTable.id("jei");}
     @Override public void registerCategories(IRecipeCategoryRegistration registration) {
@@ -38,7 +40,8 @@ public final class ConversionJeiPlugin implements IModPlugin {
     @Override public void registerRecipes(IRecipeRegistration registration) {
         registered=ViewerRecipe.all();
         for(int i=0;i<4;i++)registration.addRecipes(TYPES.get(i),inCategory(registered,i));
-        var growth=GrowthViewerRecipe.all();
+        var growth=registeredGrowth=GrowthViewerRecipe.all();
+        growthRevision=GrowthRecipes.displayRevision();
         registration.addRecipes(GROWTH_TYPE,growth);
         ConvertTable.LOGGER.info("JEI growth recipes registered: {}",growth.size());
         ConvertTable.LOGGER.info("JEI conversion recipes registered: {}",registered.size());
@@ -48,16 +51,24 @@ public final class ConversionJeiPlugin implements IModPlugin {
         registration.addCraftingStation(GROWTH_TYPE,GrowthBlocks.CATALYST,GrowthBlocks.CRYSTAL);
     }
     @Override public void onRuntimeAvailable(IJeiRuntime value) {runtime=value;refresh();}
-    @Override public void onRuntimeUnavailable() {runtime=null;registered=List.of();}
+    @Override public void onRuntimeUnavailable() {runtime=null;registered=List.of();registeredGrowth=List.of();growthRevision=Long.MIN_VALUE;}
     private void refresh() {
         if(runtime==null)return;
         var fresh=ViewerRecipe.all();
-        if(fresh==registered)return;
-        for(int i=0;i<4;i++) {
+        if(fresh!=registered) {
+          for(int i=0;i<4;i++) {
             runtime.getRecipeManager().hideRecipes(TYPES.get(i),inCategory(registered,i));
             runtime.getRecipeManager().addRecipes(TYPES.get(i),inCategory(fresh,i));
+          }
+          registered=fresh;
         }
-        registered=fresh;
+        if(growthRevision!=GrowthRecipes.displayRevision()) {
+            var freshGrowth=GrowthViewerRecipe.all();
+            runtime.getRecipeManager().hideRecipes(GROWTH_TYPE,registeredGrowth);
+            runtime.getRecipeManager().addRecipes(GROWTH_TYPE,freshGrowth);
+            registeredGrowth=freshGrowth;
+            growthRevision=GrowthRecipes.displayRevision();
+        }
     }
     private static List<ViewerRecipe> inCategory(List<ViewerRecipe> all,int category) {
         return all.stream().filter(r->r.category()==category).toList();

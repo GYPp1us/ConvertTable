@@ -27,6 +27,7 @@ PLAN = ROOT / "规划/conversion_tables_26.3_v1.4.toml"
 DEFAULT = ROOT / "src/main/resources/convert_table/default_recipes.json"
 EXAMPLE = ROOT / "config/convert_table/recipes.json"
 GROWTH = ROOT / "src/main/resources/data/convert_table/growth_recipes.json"
+FISHING = ROOT / "src/main/resources/data/convert_table/fishing_materials.json"
 CRAFTING = ROOT / "src/main/resources/data/convert_table/recipe"
 NAMES = ROOT / "assets/tools/recipe_item_names.json"
 OUT = ROOT / "outputs/01a0f354-50a1-7850-9a3e-c4f75b90728b"
@@ -127,15 +128,16 @@ def validate(conversion, growth, crafts, names):
     require(expanded <= 50_000, "expanded viewer catalogue exceeds 50000")
     require(len(json.dumps(conversion, ensure_ascii=False, indent=2)) <= 250_000,
             "conversion JSON exceeds runtime character limit")
-    require(growth.get("schema_version") == 1, "growth schema_version must be 1")
+    require(growth.get("schema_version") == 2, "growth schema_version must be 2")
     seen, pairs = set(), set()
     for entry in growth["recipes"]:
         key = entry["id"]
         require(isinstance(key, str) and ID.fullmatch(key) and key not in seen,
                 f"invalid/duplicate growth ID: {key}")
         seen.add(key)
-        for field in ("catalyst", "output"):
+        for field in ("catalyst", "source", "output"):
             item(entry[field], names, f"{key}.{field}")
+        require(entry["source"] == entry["output"], f"{key}: original must match output")
         integer(entry["cost"], 1, 2_147_483_647, f"{key}.cost")
         pair = (entry["catalyst"], entry["output"])
         require(pair not in pairs, f"duplicate catalyst/output: {pair}")
@@ -162,7 +164,7 @@ def validate(conversion, growth, crafts, names):
 
 
 def source_hashes():
-    paths = [PLAN, DEFAULT, EXAMPLE, GROWTH, NAMES, ROOT / "gradle.properties",
+    paths = [PLAN, DEFAULT, EXAMPLE, GROWTH, FISHING, NAMES, ROOT / "gradle.properties",
              Path(__file__), ROOT / "assets/tools/export_recipe_config.py", BUILDER]
     paths += sorted(CRAFTING.glob("*.json"))
     return {str(path.relative_to(ROOT)).replace("\\", "/"): hashlib.sha256(path.read_bytes()).hexdigest()
@@ -205,8 +207,20 @@ def main():
     plan = tomllib.loads(PLAN.read_text(encoding="utf-8-sig"))
     conversion = export(plan)
     growth, names = read(GROWTH), read(NAMES)
+    fishing = read(FISHING)
     crafts = {path.name: read(path) for path in sorted(CRAFTING.glob("*.json"))}
     validate(conversion, growth, crafts, names)
+    require(fishing.get("schema_version") == 1, "fishing schema_version must be 1")
+    fishing_pairs = set()
+    for entry in fishing["entries"]:
+        require(entry["table"] in ("fish", "treasure"), "unknown fishing pool")
+        item(entry["item"], names, "fishing.item")
+        integer(entry["weight"], 1, 2_147_483_647, "fishing.weight")
+        integer(entry["min"], 1, 64, "fishing.min")
+        integer(entry["max"], entry["min"], 64, "fishing.max")
+        pair = (entry["table"], entry["item"])
+        require(pair not in fishing_pairs, f"duplicate fishing entry: {pair}")
+        fishing_pairs.add(pair)
     if args.find:
         matches = [entry for collection in (plan["group"], plan["recipe"], growth["recipes"])
                    for entry in collection if args.find.lower() in json.dumps(entry, ensure_ascii=False).lower()]
@@ -229,7 +243,7 @@ def main():
     for path in (DEFAULT, EXAMPLE):
         path.write_text(json.dumps(conversion, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     version = re.search(r"^version=(.+)$", (ROOT / "gradle.properties").read_text(), re.M).group(1).strip()
-    payload = {"version": version, "conversion": conversion, "growth": growth,
+    payload = {"version": version, "conversion": conversion, "growth": growth, "fishing": fishing,
                "crafting": crafts, "names": names, "counts": counts,
                "sources": source_hashes()}
     OUT.mkdir(parents=True, exist_ok=True)

@@ -182,12 +182,14 @@ final class ConversionTableUiGameTest {
             server.runOnServer(ConnectionRodGameTest::run);
             server.runOnServer(TimedConversionGameTest::run);
             server.runOnServer(RecipeCoverageGameTest::run);
+            server.runOnServer(FishingMaterialsGameTest::run);
             TimedConversionUiGameTest.run(context, server);
             server.runOnServer(SculkExperienceGameTest::run);
             server.runOnServer(game->ConversionExecutionGameTest.run(game));
             context.waitTicks(25);
             server.runOnServer(game->ConversionExecutionGameTest.verifyAutomatic(game));
             ConversionRecipeGameTest.viewers(context);
+            GrowthJeiGameTest.verifyServerSync(context,server);
             GrowthJeiGameTest.run(context);
             ConvertTable.LOGGER.info("CONVERSION_TABLE_UI_TEST_PASS: right-click, 3 screens, inventory persistence, no consumption, real mouse target/mode packets, explicit links, no sculk fuel slot, live removal, XZ projection with signed-short high bits");
         }

@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "convert_table:item/unwrought_facet",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -2375937
+      }
+    ]
+  }
+}

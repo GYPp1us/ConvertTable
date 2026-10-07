@@ -234,7 +234,8 @@ final class ConnectionRodGameTest {
         ConversionExecutionGameTest.target(machine, Items.BIRCH_PLANKS);
         machine.setItem(0, new ItemStack(Items.OAK_PLANKS, 5));
         check(ConversionExecutionGameTest.commit(machine,false) && count(destination, Items.BIRCH_PLANKS) == 5 && machine.phase == 0
-            && machine.deaths == 6 && machine.getItem(1).isEmpty(), "Sculk ordinary export did not consume exactly one soul or required fuel");
+            && machine.deaths == 7 - RecipeConfig.setting("sculk", "ordinary_souls_per_batch")
+            && machine.getItem(1).isEmpty(), "Sculk ordinary export soul fee or fuel incorrect");
 
         var random = RecipeConfig.server().advanced().stream().filter(RecipeCatalog.Advanced::random).findFirst().orElse(null);
         if (random == null) {

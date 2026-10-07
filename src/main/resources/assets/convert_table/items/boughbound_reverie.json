@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "convert_table:item/boughbound_reverie",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -4985162
+      }
+    ]
+  }
+}

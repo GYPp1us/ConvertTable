@@ -1,70 +1,76 @@
 package com.example.converttable;
 
 import java.util.HashMap;
+import java.util.Collections;
 import java.util.Map;
 import java.util.WeakHashMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 
-/**
- * Last production interval's extraction, indexed by the actual growth face.
- * This is transient world state; the next production tick recomputes it.
- */
+/** A face's extracted microfactors preserve the same physical growth ratios after the 1/64 change. */
 public final class GrowthDrain {
     private record Face(BlockPos mother, Direction direction) { }
     private record Entry(float chance, long untilTick) { }
-    private static final Map<Level, Map<Face, Entry>> BY_LEVEL = new WeakHashMap<>();
-
+    private static final class Drains {
+        final Map<Face, Entry> entries = new HashMap<>();
+        long lastPrune = Long.MIN_VALUE;
+    }
+    private static final Map<Level, Drains> BY_LEVEL = Collections.synchronizedMap(new WeakHashMap<>());
     private GrowthDrain() { }
 
-    public static void publish(Level level, GrowthNetwork.Snapshot network, int spent) {
+    public static void publish(Level level, GrowthNetwork.Snapshot network, long spent) {
         if (level == null || level.isClientSide()) return;
         var buds = network.buds();
-        int available = network.available();
-        int[] assigned = new int[buds.size()];
+        long available = network.available();
+        long[] assigned = new long[buds.size()];
+        spent = Math.clamp(spent, 0L, available);
         if (spent > 0 && available > 0) {
-            int counted = 0;
+            long counted = 0;
             for (int i = 0; i < buds.size(); i++) {
-                assigned[i] = (int) ((long) spent * buds.get(i).available() / available);
+                // available per face is at most two microfactors; a Java list bounds this product.
+                assigned[i] = spent * buds.get(i).available() / available;
                 counted += assigned[i];
             }
-            int cursor = (int) (level.getGameTime() / 20 % Math.max(1, buds.size()));
-            while (counted < spent) {
-                int i = cursor++ % buds.size();
+            int start = (int) (level.getGameTime() / 20 % buds.size());
+            // Proportional flooring leaves fewer than one remainder per face, independent of budget.
+            for (int offset = 0; counted < spent && offset < buds.size(); offset++) {
+                int i = (start + offset) % buds.size();
                 if (assigned[i] < buds.get(i).available()) { assigned[i]++; counted++; }
             }
         }
-        synchronized (BY_LEVEL) {
-            Map<Face, Entry> entries = BY_LEVEL.computeIfAbsent(level, ignored -> new HashMap<>());
-            long now = level.getGameTime();
-            entries.entrySet().removeIf(e -> e.getValue().untilTick() < now);
-            for (int i = 0; i < buds.size(); i++) {
-                GrowthNetwork.Bud bud = buds.get(i);
-                if (bud.stage() == 4 || bud.potential() <= 0) continue;
-                int basePotential = switch (bud.stage()) {
-                    case 1 -> 24;
-                    case 2 -> 16;
-                    case 3 -> 8;
-                    default -> 1;
-                };
-                float remainder = (bud.potential() - assigned[i]) / (float) basePotential;
-                float chance = Math.clamp(remainder * (bud.calcite() ? .8F : 1F), .15F, 1F);
-                Face face = new Face(bud.mother(), bud.face());
-                Entry sameTick = entries.get(face);
-                if (sameTick != null && sameTick.untilTick() == now + 30)
-                    chance = Math.min(chance, sameTick.chance());
-                entries.put(face, new Entry(chance, now + 30));
-            }
+        Drains drains = BY_LEVEL.computeIfAbsent(level, ignored -> new Drains());
+        long now = level.getGameTime();
+        if (drains.lastPrune != now) {
+            drains.entries.entrySet().removeIf(e -> e.getValue().untilTick() < now);
+            drains.lastPrune = now;
+        }
+        for (int i = 0; i < buds.size(); i++) {
+            GrowthNetwork.Bud bud = buds.get(i);
+            if (bud.stage() == 4 || bud.potential() <= 0) continue;
+            long basePotential = GrowthBudFactors.natural(bud.stage());
+            float remainder = (bud.potential() - assigned[i]) / (float) basePotential;
+            float chance = Math.clamp(remainder * (bud.calcite() ? .8F : 1F), .15F, 1F);
+            Face face = new Face(bud.mother(), bud.face());
+            Entry sameTick = drains.entries.get(face);
+            if (sameTick != null && sameTick.untilTick() == now + 30) chance = Math.min(chance, sameTick.chance());
+            drains.entries.put(face, new Entry(chance, now + 30));
         }
     }
 
+    static void clear(Level level, GrowthNetwork.Snapshot network) {
+        Drains drains = BY_LEVEL.get(level);
+        if (drains == null) return;
+        for (GrowthNetwork.Bud bud : network.buds()) drains.entries.remove(new Face(bud.mother(), bud.face()));
+    }
+
     public static float growthChance(Level level, BlockPos mother, Direction face) {
-        synchronized (BY_LEVEL) {
-            Map<Face, Entry> entries = BY_LEVEL.get(level);
-            if (entries == null) return 1F;
-            Entry entry = entries.get(new Face(mother, face));
-            return entry == null || entry.untilTick() < level.getGameTime() ? 1F : entry.chance();
-        }
+        Drains drains = BY_LEVEL.get(level);
+        if (drains == null) return 1F;
+        Face key = new Face(mother, face);
+        Entry entry = drains.entries.get(key);
+        if (entry == null) return 1F;
+        if (entry.untilTick() < level.getGameTime()) { drains.entries.remove(key); return 1F; }
+        return entry.chance();
     }
 }

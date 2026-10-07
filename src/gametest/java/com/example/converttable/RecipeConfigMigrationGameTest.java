@@ -99,6 +99,38 @@ final class RecipeConfigMigrationGameTest {
             temporary = Files.createTempDirectory("convert-table-config-migration-");
             upgrades(temporary, "released-default", legacyText, bundled);
             upgrades(temporary, "format-and-key-order", "\r\n   " + reordered(legacy) + "\n\n", bundled);
+            byte[] v020;
+            try(var stream=RecipeConfigMigrationGameTest.class.getResourceAsStream("/convert_table/recipes-0.2.0.fixture.json")) {
+                check(stream!=null,"Published 0.2.0 fixture missing");
+                v020=stream.readAllBytes();
+            }
+            check(RecipeConfigMigration.sha256(v020).equals(RecipeConfigMigration.V020_JSON_SHA256),"0.2.0 fixture hash differs from release");
+            String v020text=new String(v020,StandardCharsets.UTF_8);
+            var v020json=JsonParser.parseString(v020text).getAsJsonObject();
+            upgrades(temporary,"released-0.2.0",v020text,bundled);
+            upgrades(temporary,"reordered-0.2.0","\n"+reordered(v020json)+"\n",bundled);
+            altered(temporary,"custom-0.2.0",v020json,bundled,json->json.getAsJsonObject("settings").getAsJsonObject("sculk").addProperty("ordinary_souls_per_batch",7));
+            altered(temporary,"disabled-0.2.0",v020json,bundled,json->json.getAsJsonArray("advanced").get(0).getAsJsonObject().addProperty("enabled",false));
+            altered(temporary,"removed-0.2.0",v020json,bundled,json->json.getAsJsonArray("advanced").remove(0));
+            byte[] v030;
+            try (var stream = RecipeConfigMigrationGameTest.class.getResourceAsStream("/convert_table/recipes-0.3.0.fixture.json")) {
+                check(stream != null, "Published 0.3.0 fixture missing");
+                v030 = stream.readAllBytes();
+            }
+            check(RecipeConfigMigration.sha256(v030).equals(RecipeConfigMigration.V030_JSON_SHA256),
+                "0.3.0 fixture hash differs from release");
+            String v030text = new String(v030, StandardCharsets.UTF_8);
+            check(RecipeConfigMigration.fingerprint(v030text).equals(RecipeConfigMigration.V030_DEFAULT_SHA256),
+                "0.3.0 canonical fingerprint differs from release");
+            var v030json = JsonParser.parseString(v030text).getAsJsonObject();
+            upgrades(temporary, "released-0.3.0", v030text, bundled);
+            upgrades(temporary, "reordered-0.3.0", "\n" + reordered(v030json) + "\n", bundled);
+            altered(temporary, "custom-0.3.0", v030json, bundled,
+                json -> json.getAsJsonObject("settings").getAsJsonObject("sculk").addProperty("ordinary_souls_per_batch", 7));
+            altered(temporary, "disabled-0.3.0", v030json, bundled,
+                json -> json.getAsJsonArray("advanced").get(0).getAsJsonObject().addProperty("enabled", false));
+            altered(temporary, "removed-0.3.0", v030json, bundled,
+                json -> json.getAsJsonArray("advanced").remove(0));
             preserves(temporary, "already-current", bundled, bundled);
             altered(temporary, "custom-setting", legacy, bundled,
                 json -> json.getAsJsonObject("settings").getAsJsonObject("piglin").addProperty("cost_n", 2));

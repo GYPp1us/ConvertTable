@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "convert_table:item/unbroken_cognizance",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -860755
+      }
+    ]
+  }
+}

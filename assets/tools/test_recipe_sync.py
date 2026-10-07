@@ -107,7 +107,7 @@ class RecipeSyncTest(unittest.TestCase):
         self.validate(conversion=conversion)
         conversion["settings"]["sculk"]["advanced_charge_per_operation"] = 12
         self.validate(conversion=conversion)
-        self.assertEqual(conversion["settings"]["sculk"]["ordinary_souls_per_batch"], 1)
+        self.assertEqual(conversion["settings"]["sculk"]["ordinary_souls_per_batch"], 3)
         for value in (0, -1, 4097, 1.5, True):
             with self.subTest(ordinary_souls_per_batch=value):
                 invalid = copy.deepcopy(self.conversion)

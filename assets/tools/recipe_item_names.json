@@ -1374,7 +1374,7 @@
   "minecraft:water_cauldron": "装有水的炼药锅",
   "minecraft:weeping_vines_plant": "垂泪藤植株",
   "minecraft:wet_sponge": "湿海绵",
-  "minecraft:wheat": "小麦植株",
+  "minecraft:wheat": "小麦",
   "minecraft:white_candle_cake": "插上白色蜡烛的蛋糕",
   "minecraft:wither_skeleton_wall_skull": "墙上的凋灵骷髅头颅",
   "minecraft:yellow_candle_cake": "插上黄色蜡烛的蛋糕",
@@ -2071,5 +2071,9 @@
   "farmersdelight:rice_roll_medley_block": "寿司拼盘",
   "farmersdelight:dog_food": "狗粮",
   "farmersdelight:horse_feed": "马食",
-  "convert_table:connection_rod": "连接棒"
+  "convert_table:connection_rod": "连接棒",
+  "convert_table:boughbound_reverie": "Boughbound Reverie",
+  "convert_table:stillwater_palimpsest": "Stillwater Palimpsest",
+  "convert_table:unbroken_cognizance": "Unbroken Cognizance",
+  "convert_table:unwrought_facet": "The Unwrought Facet"
 }

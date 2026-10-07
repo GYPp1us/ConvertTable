@@ -52,7 +52,8 @@ public final class GrowthBlocks {
     private static void registerItem(net.minecraft.resources.Identifier id, net.minecraft.world.level.block.Block block) {
         var key = ResourceKey.create(Registries.ITEM, id);
         Registry.register(BuiltInRegistries.ITEM, key,
-            new BlockItem(block, new Item.Properties().setId(key).useBlockDescriptionPrefix()));
+            new BlockItem(block, ModItemPresentation.apply(new Item.Properties().setId(key)
+                .useBlockDescriptionPrefix(), id.getPath(), "block.convert_table." + id.getPath())));
     }
 
     public static void initialize() {

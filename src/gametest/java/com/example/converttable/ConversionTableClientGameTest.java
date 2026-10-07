@@ -16,6 +16,9 @@ import net.minecraft.world.level.block.Blocks;
 public final class ConversionTableClientGameTest implements FabricClientGameTest {
     @Override
     public void runTest(ClientGameTestContext context) {
+        if (Boolean.getBoolean("convert_table.performanceTest")) { GrowthPerformanceGameTest.run(context); return; }
+        if (Boolean.getBoolean("convert_table.tooltipTest")) { ItemTooltipGameTest.runStandalone(context); return; }
+        if (Boolean.getBoolean("convert_table.versionGateTest")) { VersionGateGameTest.run(context); return; }
         if (Boolean.getBoolean("convert_table.growthTest")) { GrowthClientGameTest.run(context); return; }
         if (Boolean.getBoolean("convert_table.uiTest")) { ConversionTableUiGameTest.run(context); return; }
         context.runOnClient(mc -> {

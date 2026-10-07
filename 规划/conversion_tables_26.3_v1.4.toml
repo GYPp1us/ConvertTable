@@ -1,7 +1,7 @@
 # Canonical ordinary/advanced recipe source. Exported to runtime JSON by sync_recipes.py.
 # The mod loads the exported JSON, not this TOML. ui/network/rules draft metadata is not executable.
 # Conversion operation durations are code constants, not editable recipe settings: piglin 4 s, end 2 s, sculk 1 s.
-# Death costs retain v1.3 numbers provisionally; they need gameplay balancing.
+# Soul costs: spawn-egg life shaping x4, item conversions (including fish revival) x3 relative to v0.2.0.
 # Conversion Table data; compact canonical source for coding/LLM edits.
 # Item format in arrays/recipe fields: "minecraft_id|中文名".
 # group.tier: piglin => Piglin+End+Sculk; end => End+Sculk; sculk => Sculk only.
@@ -9,7 +9,7 @@
 
 [meta]
 mc = "26.3"
-version = "1.6"
+version = "0.3.1"
 schema = 2
 
 [piglin]
@@ -33,9 +33,9 @@ inherits_end = true
 # Sculk ordinary and advanced conversions do not consume phase fuel.
 advanced_charge_per_operation = 0
 # Ordinary sculk conversions spend this many available souls per successful batch.
-ordinary_souls_per_batch = 1
+ordinary_souls_per_batch = 3
 advanced_cost = "death_count"
-death_cost_balance = "draft_preserve_previous_numeric_costs"
+death_cost_balance = "life_x4_conversion_x3_from_v0.2.0"
 # Legacy field retained and validated for compatibility; runtime ignores it. Available souls use each eligible mob's XP reward times the fixed code multiplier 32 (1 XP = 32 souls).
 death_count_per_mob = 1
 death_count_capacity = 4096
@@ -78,7 +78,7 @@ container_display = "input_output_counts"
 linked_container_limit_counts_both_roles = true
 contents_mode_requires_explicit_selection = true
 piglin_target_selector = false
-piglin_progress_bar = false
+piglin_progress_bar = true
 sculk_projection_axis = "Y"
 sculk_projection_plane = "XZ"
 sculk_projection_style = "minimal_2d_grid"
@@ -1004,7 +1004,7 @@ input = "water_bucket|水桶"
 input_n = 1
 output = "lava_bucket|熔岩桶"
 output_n = 1
-deaths = 32
+deaths = 96
 auto = true
 unlock = "幽匿台"
 note = "空岛核心；不要求先持有岩浆。"
@@ -1017,7 +1017,7 @@ input = "lava_bucket|熔岩桶"
 input_n = 1
 output = "water_bucket|水桶"
 output_n = 1
-deaths = 8
+deaths = 24
 auto = true
 unlock = "幽匿台"
 note = "反向成本较低。"
@@ -1030,7 +1030,7 @@ input = "sand|沙子"
 input_n = 8
 output = "gravel|沙砾"
 output_n = 8
-deaths = 6
+deaths = 18
 auto = true
 unlock = "幽匿台"
 note = "服务特殊生存，不进入普通建筑组。"
@@ -1043,7 +1043,7 @@ input = "gravel|沙砾"
 input_n = 8
 output = "sand|沙子"
 output_n = 8
-deaths = 6
+deaths = 18
 auto = true
 unlock = "幽匿台"
 
@@ -1055,7 +1055,7 @@ input = "dirt|泥土"
 input_n = 8
 output = "sand|沙子"
 output_n = 8
-deaths = 8
+deaths = 24
 auto = true
 unlock = "幽匿台"
 
@@ -1067,7 +1067,7 @@ input = "sand|沙子"
 input_n = 8
 output = "dirt|泥土"
 output_n = 8
-deaths = 8
+deaths = 24
 auto = true
 unlock = "幽匿台"
 
@@ -1081,7 +1081,7 @@ catalyst = "amethyst_shard|紫水晶碎片"
 catalyst_n = 1
 output = "tinted_glass|遮光玻璃"
 output_n = 4
-deaths = 10
+deaths = 30
 auto = true
 unlock = "已获得紫水晶"
 note = "功能差异较大，故不放普通玻璃组。"
@@ -1096,7 +1096,7 @@ catalyst = "echo_shard|回响碎片"
 catalyst_n = 1
 output = "crying_obsidian|哭泣的黑曜石"
 output_n = 1
-deaths = 16
+deaths = 48
 auto = true
 unlock = "远古城市"
 note = "给特殊地图稳定获取哭泣黑曜石。"
@@ -1111,7 +1111,7 @@ catalyst = "water_bucket|水桶"
 catalyst_n = 1
 output = "same_species_coral_block|同种活珊瑚块"
 output_n = 8
-deaths = 18
+deaths = 54
 auto = true
 unlock = "已获得对应死珊瑚"
 note = "按同种类映射；桶返还。"
@@ -1126,7 +1126,7 @@ catalyst = "water_bucket|水桶"
 catalyst_n = 1
 output = "same_species_coral|同种活珊瑚"
 output_n = 8
-deaths = 14
+deaths = 42
 auto = true
 unlock = "已获得对应死珊瑚"
 
@@ -1140,7 +1140,7 @@ catalyst = "water_bucket|水桶"
 catalyst_n = 1
 output = "same_species_coral_fan|同种活珊瑚扇"
 output_n = 8
-deaths = 14
+deaths = 42
 auto = true
 unlock = "已获得对应死珊瑚扇"
 
@@ -1152,7 +1152,7 @@ input = "string|线"
 input_n = 9
 output = "cobweb|蜘蛛网"
 output_n = 1
-deaths = 8
+deaths = 24
 auto = true
 unlock = "幽匿台"
 note = "纯建材/陷阱补全。"
@@ -1167,7 +1167,7 @@ catalyst = "moss_block|苔藓块"
 catalyst_n = 8
 output = "spore_blossom|孢子花"
 output_n = 2
-deaths = 16
+deaths = 48
 auto = true
 unlock = "先获得孢子花"
 note = "解决不可再生装饰材。"
@@ -1182,7 +1182,7 @@ catalyst = "wither_skeleton_skull|凋灵骷髅头颅"
 catalyst_n = 1
 output = "wither_rose|凋灵玫瑰"
 output_n = 1
-deaths = 24
+deaths = 72
 auto = false
 unlock = "已进入下界要塞"
 note = "用真实原版物品替代旧表的虚构样本。"
@@ -1197,7 +1197,7 @@ catalyst = "amethyst_shard|紫水晶碎片"
 catalyst_n = 16
 output = "budding_amethyst|紫水晶母岩"
 output_n = 1
-deaths = 64
+deaths = 192
 auto = false
 unlock = "已发现紫晶洞"
 note = "强功能块，默认仅手动。"
@@ -1212,7 +1212,7 @@ catalyst = "bucket|桶"
 catalyst_n = 1
 output = "powder_snow_bucket|细雪桶"
 output_n = 1
-deaths = 20
+deaths = 60
 auto = true
 unlock = "幽匿台"
 note = "为无降雪环境提供细雪。"
@@ -1221,13 +1221,13 @@ note = "为无降雪环境提供细雪。"
 id = "ADV-017"
 cat = "生命塑形"
 name = "鸡刷怪蛋"
-input = "egg|鸡蛋"
+input = "convert_table:boughbound_reverie|Boughbound Reverie"
 input_n = 1
-catalyst = "feather|羽毛"
-catalyst_n = 8
+catalyst = "wheat_seeds|小麦种子"
+catalyst_n = 16
 output = "chicken_spawn_egg|鸡刷怪蛋"
 output_n = 1
-deaths = 12
+deaths = 48
 auto = false
 unlock = "白名单"
 note = "鸡蛋 + 生物样本 + 死亡计数。"
@@ -1236,13 +1236,13 @@ note = "鸡蛋 + 生物样本 + 死亡计数。"
 id = "ADV-018"
 cat = "生命塑形"
 name = "牛刷怪蛋"
-input = "egg|鸡蛋"
+input = "convert_table:boughbound_reverie|Boughbound Reverie"
 input_n = 1
-catalyst = "leather|皮革"
-catalyst_n = 8
+catalyst = "wheat|小麦"
+catalyst_n = 16
 output = "cow_spawn_egg|牛刷怪蛋"
 output_n = 1
-deaths = 16
+deaths = 64
 auto = false
 unlock = "白名单"
 
@@ -1250,13 +1250,13 @@ unlock = "白名单"
 id = "ADV-019"
 cat = "生命塑形"
 name = "猪刷怪蛋"
-input = "egg|鸡蛋"
+input = "convert_table:boughbound_reverie|Boughbound Reverie"
 input_n = 1
-catalyst = "porkchop|生猪排"
-catalyst_n = 8
+catalyst = "carrot|胡萝卜"
+catalyst_n = 16
 output = "pig_spawn_egg|猪刷怪蛋"
 output_n = 1
-deaths = 16
+deaths = 64
 auto = false
 unlock = "白名单"
 
@@ -1264,13 +1264,13 @@ unlock = "白名单"
 id = "ADV-020"
 cat = "生命塑形"
 name = "羊刷怪蛋"
-input = "egg|鸡蛋"
+input = "convert_table:boughbound_reverie|Boughbound Reverie"
 input_n = 1
-catalyst = "white_wool|白色羊毛"
-catalyst_n = 8
+catalyst = "wheat|小麦"
+catalyst_n = 16
 output = "sheep_spawn_egg|绵羊刷怪蛋"
 output_n = 1
-deaths = 16
+deaths = 64
 auto = false
 unlock = "白名单"
 note = "任意羊毛可通过 ingredient tag 接受。"
@@ -1279,13 +1279,13 @@ note = "任意羊毛可通过 ingredient tag 接受。"
 id = "ADV-021"
 cat = "生命塑形"
 name = "兔刷怪蛋"
-input = "egg|鸡蛋"
+input = "convert_table:boughbound_reverie|Boughbound Reverie"
 input_n = 1
-catalyst = "rabbit_hide|兔子皮"
-catalyst_n = 4
+catalyst = "dandelion|蒲公英"
+catalyst_n = 8
 output = "rabbit_spawn_egg|兔子刷怪蛋"
 output_n = 1
-deaths = 16
+deaths = 64
 auto = false
 unlock = "白名单"
 
@@ -1293,13 +1293,13 @@ unlock = "白名单"
 id = "ADV-022"
 cat = "生命塑形"
 name = "蜜蜂刷怪蛋"
-input = "egg|鸡蛋"
+input = "convert_table:boughbound_reverie|Boughbound Reverie"
 input_n = 1
-catalyst = "honeycomb|蜜脾"
+catalyst = "flowering_azalea|盛开的杜鹃花丛"
 catalyst_n = 8
 output = "bee_spawn_egg|蜜蜂刷怪蛋"
 output_n = 1
-deaths = 20
+deaths = 80
 auto = false
 unlock = "白名单"
 
@@ -1307,13 +1307,13 @@ unlock = "白名单"
 id = "ADV-023"
 cat = "生命塑形"
 name = "青蛙刷怪蛋"
-input = "egg|鸡蛋"
+input = "convert_table:boughbound_reverie|Boughbound Reverie"
 input_n = 1
 catalyst = "slime_ball|黏液球"
 catalyst_n = 8
 output = "frog_spawn_egg|青蛙刷怪蛋"
 output_n = 1
-deaths = 20
+deaths = 80
 auto = false
 unlock = "白名单"
 
@@ -1321,13 +1321,13 @@ unlock = "白名单"
 id = "ADV-024"
 cat = "生命塑形"
 name = "海龟刷怪蛋"
-input = "egg|鸡蛋"
+input = "convert_table:stillwater_palimpsest|Stillwater Palimpsest"
 input_n = 1
-catalyst = "turtle_scute|海龟鳞甲"
-catalyst_n = 4
+catalyst = "seagrass|海草"
+catalyst_n = 16
 output = "turtle_spawn_egg|海龟刷怪蛋"
 output_n = 1
-deaths = 24
+deaths = 96
 auto = false
 unlock = "白名单"
 
@@ -1335,13 +1335,13 @@ unlock = "白名单"
 id = "ADV-025"
 cat = "生命塑形"
 name = "山羊刷怪蛋"
-input = "egg|鸡蛋"
+input = "convert_table:boughbound_reverie|Boughbound Reverie"
 input_n = 1
-catalyst = "goat_horn|山羊角"
-catalyst_n = 1
+catalyst = "hay_block|干草捆"
+catalyst_n = 4
 output = "goat_spawn_egg|山羊刷怪蛋"
 output_n = 1
-deaths = 24
+deaths = 96
 auto = false
 unlock = "白名单"
 
@@ -1349,13 +1349,13 @@ unlock = "白名单"
 id = "ADV-026"
 cat = "生命塑形"
 name = "骆驼刷怪蛋"
-input = "egg|鸡蛋"
+input = "convert_table:boughbound_reverie|Boughbound Reverie"
 input_n = 1
 catalyst = "cactus|仙人掌"
 catalyst_n = 16
 output = "camel_spawn_egg|骆驼刷怪蛋"
 output_n = 1
-deaths = 24
+deaths = 96
 auto = false
 unlock = "白名单"
 
@@ -1363,13 +1363,13 @@ unlock = "白名单"
 id = "ADV-027"
 cat = "生命塑形"
 name = "狼刷怪蛋"
-input = "egg|鸡蛋"
+input = "convert_table:boughbound_reverie|Boughbound Reverie"
 input_n = 1
 catalyst = "bone|骨头"
 catalyst_n = 16
 output = "wolf_spawn_egg|狼刷怪蛋"
 output_n = 1
-deaths = 24
+deaths = 96
 auto = false
 unlock = "白名单"
 
@@ -1377,13 +1377,13 @@ unlock = "白名单"
 id = "ADV-028"
 cat = "生命塑形"
 name = "猫刷怪蛋"
-input = "egg|鸡蛋"
+input = "convert_table:boughbound_reverie|Boughbound Reverie"
 input_n = 1
 catalyst = "cod|生鳕鱼"
 catalyst_n = 16
 output = "cat_spawn_egg|猫刷怪蛋"
 output_n = 1
-deaths = 24
+deaths = 96
 auto = false
 unlock = "白名单"
 
@@ -1391,13 +1391,13 @@ unlock = "白名单"
 id = "ADV-029"
 cat = "生命塑形"
 name = "蘑菇牛刷怪蛋"
-input = "egg|鸡蛋"
-input_n = 1
+input = "convert_table:boughbound_reverie|Boughbound Reverie"
+input_n = 2
 catalyst = "red_mushroom|红色蘑菇"
 catalyst_n = 16
 output = "mooshroom_spawn_egg|哞菇刷怪蛋"
 output_n = 1
-deaths = 28
+deaths = 112
 auto = false
 unlock = "白名单"
 
@@ -1405,13 +1405,13 @@ unlock = "白名单"
 id = "ADV-030"
 cat = "生命塑形"
 name = "僵尸刷怪蛋"
-input = "egg|鸡蛋"
-input_n = 1
+input = "convert_table:unwrought_facet|The Unwrought Facet"
+input_n = 2
 catalyst = "rotten_flesh|腐肉"
 catalyst_n = 16
 output = "zombie_spawn_egg|僵尸刷怪蛋"
 output_n = 1
-deaths = 24
+deaths = 96
 auto = false
 unlock = "白名单"
 
@@ -1419,13 +1419,13 @@ unlock = "白名单"
 id = "ADV-031"
 cat = "生命塑形"
 name = "骷髅刷怪蛋"
-input = "egg|鸡蛋"
-input_n = 1
+input = "convert_table:unwrought_facet|The Unwrought Facet"
+input_n = 2
 catalyst = "bone|骨头"
 catalyst_n = 24
 output = "skeleton_spawn_egg|骷髅刷怪蛋"
 output_n = 1
-deaths = 24
+deaths = 96
 auto = false
 unlock = "白名单"
 
@@ -1433,13 +1433,13 @@ unlock = "白名单"
 id = "ADV-032"
 cat = "生命塑形"
 name = "蜘蛛刷怪蛋"
-input = "egg|鸡蛋"
-input_n = 1
+input = "convert_table:boughbound_reverie|Boughbound Reverie"
+input_n = 2
 catalyst = "string|线"
 catalyst_n = 24
 output = "spider_spawn_egg|蜘蛛刷怪蛋"
 output_n = 1
-deaths = 24
+deaths = 96
 auto = false
 unlock = "白名单"
 
@@ -1447,13 +1447,13 @@ unlock = "白名单"
 id = "ADV-033"
 cat = "生命塑形"
 name = "苦力怕刷怪蛋"
-input = "egg|鸡蛋"
-input_n = 1
+input = "convert_table:unwrought_facet|The Unwrought Facet"
+input_n = 4
 catalyst = "gunpowder|火药"
 catalyst_n = 16
 output = "creeper_spawn_egg|苦力怕刷怪蛋"
 output_n = 1
-deaths = 32
+deaths = 128
 auto = false
 unlock = "白名单"
 
@@ -1461,13 +1461,13 @@ unlock = "白名单"
 id = "ADV-034"
 cat = "生命塑形"
 name = "末影人刷怪蛋"
-input = "egg|鸡蛋"
-input_n = 1
+input = "convert_table:unwrought_facet|The Unwrought Facet"
+input_n = 4
 catalyst = "ender_pearl|末影珍珠"
 catalyst_n = 8
 output = "enderman_spawn_egg|末影人刷怪蛋"
 output_n = 1
-deaths = 32
+deaths = 128
 auto = false
 unlock = "白名单"
 
@@ -1475,13 +1475,13 @@ unlock = "白名单"
 id = "ADV-035"
 cat = "生命塑形"
 name = "烈焰人刷怪蛋"
-input = "egg|鸡蛋"
-input_n = 1
+input = "convert_table:unwrought_facet|The Unwrought Facet"
+input_n = 4
 catalyst = "blaze_rod|烈焰棒"
 catalyst_n = 8
 output = "blaze_spawn_egg|烈焰人刷怪蛋"
 output_n = 1
-deaths = 32
+deaths = 128
 auto = false
 unlock = "白名单"
 
@@ -1489,13 +1489,13 @@ unlock = "白名单"
 id = "ADV-036"
 cat = "生命塑形"
 name = "史莱姆刷怪蛋"
-input = "egg|鸡蛋"
-input_n = 1
+input = "convert_table:unwrought_facet|The Unwrought Facet"
+input_n = 2
 catalyst = "slime_ball|黏液球"
 catalyst_n = 16
 output = "slime_spawn_egg|史莱姆刷怪蛋"
 output_n = 1
-deaths = 28
+deaths = 112
 auto = false
 unlock = "白名单"
 
@@ -1503,13 +1503,13 @@ unlock = "白名单"
 id = "ADV-037"
 cat = "生命塑形"
 name = "岩浆怪刷怪蛋"
-input = "egg|鸡蛋"
-input_n = 1
+input = "convert_table:unwrought_facet|The Unwrought Facet"
+input_n = 4
 catalyst = "magma_cream|岩浆膏"
 catalyst_n = 8
 output = "magma_cube_spawn_egg|岩浆怪刷怪蛋"
 output_n = 1
-deaths = 32
+deaths = 128
 auto = false
 unlock = "白名单"
 
@@ -1517,13 +1517,13 @@ unlock = "白名单"
 id = "ADV-038"
 cat = "生命塑形"
 name = "守卫者刷怪蛋"
-input = "egg|鸡蛋"
-input_n = 1
+input = "convert_table:stillwater_palimpsest|Stillwater Palimpsest"
+input_n = 4
 catalyst = "prismarine_shard|海晶碎片"
 catalyst_n = 16
 output = "guardian_spawn_egg|守卫者刷怪蛋"
 output_n = 1
-deaths = 36
+deaths = 144
 auto = false
 unlock = "白名单"
 
@@ -1531,13 +1531,13 @@ unlock = "白名单"
 id = "ADV-039"
 cat = "生命塑形"
 name = "潜影贝刷怪蛋"
-input = "egg|鸡蛋"
-input_n = 1
+input = "convert_table:unwrought_facet|The Unwrought Facet"
+input_n = 4
 catalyst = "shulker_shell|潜影壳"
 catalyst_n = 4
 output = "shulker_spawn_egg|潜影贝刷怪蛋"
 output_n = 1
-deaths = 48
+deaths = 192
 auto = false
 unlock = "白名单"
 
@@ -1545,13 +1545,13 @@ unlock = "白名单"
 id = "ADV-040"
 cat = "生命塑形"
 name = "硫磺史莱姆刷怪蛋"
-input = "egg|鸡蛋"
-input_n = 1
+input = "convert_table:unwrought_facet|The Unwrought Facet"
+input_n = 4
 catalyst = "sulfur|硫磺"
 catalyst_n = 16
 output = "sulfur_cube_spawn_egg|硫磺史莱姆刷怪蛋"
 output_n = 1
-deaths = 36
+deaths = 144
 auto = false
 unlock = "26.2 白名单"
 note = "26.2新增。"
@@ -1564,7 +1564,7 @@ input = "wheat_seeds|小麦种子"
 input_n = 16
 output = "farmersdelight:cabbage_seeds|卷心菜种子"
 output_n = 1
-deaths = 8
+deaths = 24
 auto = true
 catalyst = "bone_meal|骨粉"
 catalyst_n = 1
@@ -1578,7 +1578,7 @@ input = "slime_ball|黏液球"
 input_n = 1
 output = "magma_cream|岩浆膏"
 output_n = 1
-deaths = 2
+deaths = 6
 auto = true
 
 [[recipe]]
@@ -1589,7 +1589,7 @@ input = "magma_cream|岩浆膏"
 input_n = 1
 output = "slime_ball|黏液球"
 output_n = 1
-deaths = 2
+deaths = 6
 auto = true
 
 [[recipe]]
@@ -1600,7 +1600,7 @@ input = "oak_log|橡木原木"
 input_n = 1
 output = "oak_sapling|橡树树苗"
 output_n = 1
-deaths = 4
+deaths = 12
 auto = true
 
 [[recipe]]
@@ -1611,7 +1611,7 @@ input = "oak_wood|橡木"
 input_n = 1
 output = "oak_sapling|橡树树苗"
 output_n = 1
-deaths = 4
+deaths = 12
 auto = true
 
 [[recipe]]
@@ -1622,7 +1622,7 @@ input = "spruce_log|云杉原木"
 input_n = 1
 output = "spruce_sapling|云杉树苗"
 output_n = 1
-deaths = 4
+deaths = 12
 auto = true
 
 [[recipe]]
@@ -1633,7 +1633,7 @@ input = "spruce_wood|云杉木"
 input_n = 1
 output = "spruce_sapling|云杉树苗"
 output_n = 1
-deaths = 4
+deaths = 12
 auto = true
 
 [[recipe]]
@@ -1644,7 +1644,7 @@ input = "birch_log|白桦原木"
 input_n = 1
 output = "birch_sapling|白桦树苗"
 output_n = 1
-deaths = 4
+deaths = 12
 auto = true
 
 [[recipe]]
@@ -1655,7 +1655,7 @@ input = "birch_wood|白桦木"
 input_n = 1
 output = "birch_sapling|白桦树苗"
 output_n = 1
-deaths = 4
+deaths = 12
 auto = true
 
 [[recipe]]
@@ -1666,7 +1666,7 @@ input = "jungle_log|丛林原木"
 input_n = 1
 output = "jungle_sapling|丛林树苗"
 output_n = 1
-deaths = 4
+deaths = 12
 auto = true
 
 [[recipe]]
@@ -1677,7 +1677,7 @@ input = "jungle_wood|丛林木"
 input_n = 1
 output = "jungle_sapling|丛林树苗"
 output_n = 1
-deaths = 4
+deaths = 12
 auto = true
 
 [[recipe]]
@@ -1688,7 +1688,7 @@ input = "acacia_log|金合欢原木"
 input_n = 1
 output = "acacia_sapling|金合欢树苗"
 output_n = 1
-deaths = 4
+deaths = 12
 auto = true
 
 [[recipe]]
@@ -1699,7 +1699,7 @@ input = "acacia_wood|金合欢木"
 input_n = 1
 output = "acacia_sapling|金合欢树苗"
 output_n = 1
-deaths = 4
+deaths = 12
 auto = true
 
 [[recipe]]
@@ -1710,7 +1710,7 @@ input = "dark_oak_log|深色橡木原木"
 input_n = 1
 output = "dark_oak_sapling|深色橡树树苗"
 output_n = 1
-deaths = 4
+deaths = 12
 auto = true
 
 [[recipe]]
@@ -1721,7 +1721,7 @@ input = "dark_oak_wood|深色橡木"
 input_n = 1
 output = "dark_oak_sapling|深色橡树树苗"
 output_n = 1
-deaths = 4
+deaths = 12
 auto = true
 
 [[recipe]]
@@ -1732,7 +1732,7 @@ input = "mangrove_log|红树原木"
 input_n = 1
 output = "mangrove_propagule|红树胎生苗"
 output_n = 1
-deaths = 4
+deaths = 12
 auto = true
 
 [[recipe]]
@@ -1743,7 +1743,7 @@ input = "mangrove_wood|红树木"
 input_n = 1
 output = "mangrove_propagule|红树胎生苗"
 output_n = 1
-deaths = 4
+deaths = 12
 auto = true
 
 [[recipe]]
@@ -1754,7 +1754,7 @@ input = "cherry_log|樱花原木"
 input_n = 1
 output = "cherry_sapling|樱花树苗"
 output_n = 1
-deaths = 4
+deaths = 12
 auto = true
 
 [[recipe]]
@@ -1765,7 +1765,7 @@ input = "cherry_wood|樱花木"
 input_n = 1
 output = "cherry_sapling|樱花树苗"
 output_n = 1
-deaths = 4
+deaths = 12
 auto = true
 
 [[recipe]]
@@ -1776,7 +1776,7 @@ input = "pale_oak_log|苍白橡木原木"
 input_n = 1
 output = "pale_oak_sapling|苍白橡树树苗"
 output_n = 1
-deaths = 4
+deaths = 12
 auto = true
 
 [[recipe]]
@@ -1787,7 +1787,7 @@ input = "pale_oak_wood|苍白橡木"
 input_n = 1
 output = "pale_oak_sapling|苍白橡树树苗"
 output_n = 1
-deaths = 4
+deaths = 12
 auto = true
 
 [[recipe]]
@@ -1798,7 +1798,7 @@ input = "poplar_log|杨木原木"
 input_n = 1
 output = "poplar_sapling|杨树树苗"
 output_n = 1
-deaths = 4
+deaths = 12
 auto = true
 
 [[recipe]]
@@ -1809,7 +1809,7 @@ input = "poplar_wood|杨木"
 input_n = 1
 output = "poplar_sapling|杨树树苗"
 output_n = 1
-deaths = 4
+deaths = 12
 auto = true
 
 [[recipe]]
@@ -1820,7 +1820,7 @@ input = "crimson_stem"
 input_n = 1
 output = "crimson_fungus"
 output_n = 1
-deaths = 4
+deaths = 12
 auto = true
 
 [[recipe]]
@@ -1831,7 +1831,7 @@ input = "crimson_hyphae"
 input_n = 1
 output = "crimson_fungus"
 output_n = 1
-deaths = 4
+deaths = 12
 auto = true
 
 [[recipe]]
@@ -1842,7 +1842,7 @@ input = "warped_stem"
 input_n = 1
 output = "warped_fungus"
 output_n = 1
-deaths = 4
+deaths = 12
 auto = true
 
 [[recipe]]
@@ -1853,7 +1853,7 @@ input = "warped_hyphae"
 input_n = 1
 output = "warped_fungus"
 output_n = 1
-deaths = 4
+deaths = 12
 auto = true
 
 [[recipe]]
@@ -1864,7 +1864,7 @@ input = "cod|生鳕鱼"
 input_n = 1
 output = "cod_bucket|鳕鱼桶"
 output_n = 1
-deaths = 8
+deaths = 24
 auto = true
 catalyst = "water_bucket|水桶"
 catalyst_n = 1
@@ -1877,7 +1877,7 @@ input = "salmon|生鲑鱼"
 input_n = 1
 output = "salmon_bucket|鲑鱼桶"
 output_n = 1
-deaths = 8
+deaths = 24
 auto = true
 catalyst = "water_bucket|水桶"
 catalyst_n = 1
@@ -1890,7 +1890,7 @@ input = "tropical_fish|热带鱼"
 input_n = 1
 output = "tropical_fish_bucket|热带鱼桶"
 output_n = 1
-deaths = 8
+deaths = 24
 auto = true
 catalyst = "water_bucket|水桶"
 catalyst_n = 1
@@ -1903,7 +1903,499 @@ input = "pufferfish|河豚"
 input_n = 1
 output = "pufferfish_bucket|河豚桶"
 output_n = 1
-deaths = 8
+deaths = 24
 auto = true
 catalyst = "water_bucket|水桶"
 catalyst_n = 1
+
+[[recipe]]
+id = "FORM-ALLAY"
+cat = "生命塑形"
+name = "悦灵塑形"
+input = "convert_table:unwrought_facet|The Unwrought Facet"
+input_n = 2
+catalyst = "amethyst_shard|紫水晶碎片"
+catalyst_n = 4
+output = "allay_spawn_egg|悦灵刷怪蛋"
+output_n = 1
+deaths = 256
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-ARMADILLO"
+cat = "生命塑形"
+name = "犰狳塑形"
+input = "convert_table:boughbound_reverie|Boughbound Reverie"
+input_n = 1
+catalyst = "spider_eye|蜘蛛眼"
+catalyst_n = 8
+output = "armadillo_spawn_egg|犰狳刷怪蛋"
+output_n = 1
+deaths = 96
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-AXOLOTL"
+cat = "生命塑形"
+name = "美西螈塑形"
+input = "convert_table:stillwater_palimpsest|Stillwater Palimpsest"
+input_n = 2
+catalyst = "clay_ball|黏土球"
+catalyst_n = 16
+output = "axolotl_spawn_egg|美西螈刷怪蛋"
+output_n = 1
+deaths = 128
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-BAT"
+cat = "生命塑形"
+name = "蝙蝠塑形"
+input = "convert_table:boughbound_reverie|Boughbound Reverie"
+input_n = 1
+catalyst = "brown_mushroom|棕色蘑菇"
+catalyst_n = 16
+output = "bat_spawn_egg|蝙蝠刷怪蛋"
+output_n = 1
+deaths = 64
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-COD"
+cat = "生命塑形"
+name = "鳕鱼塑形"
+input = "convert_table:stillwater_palimpsest|Stillwater Palimpsest"
+input_n = 1
+catalyst = "seagrass|海草"
+catalyst_n = 16
+output = "cod_spawn_egg|鳕鱼刷怪蛋"
+output_n = 1
+deaths = 64
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-SALMON"
+cat = "生命塑形"
+name = "鲑鱼塑形"
+input = "convert_table:stillwater_palimpsest|Stillwater Palimpsest"
+input_n = 1
+catalyst = "seagrass|海草"
+catalyst_n = 16
+output = "salmon_spawn_egg|鲑鱼刷怪蛋"
+output_n = 1
+deaths = 64
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-TROPICAL-FISH"
+cat = "生命塑形"
+name = "热带鱼塑形"
+input = "convert_table:stillwater_palimpsest|Stillwater Palimpsest"
+input_n = 1
+catalyst = "seagrass|海草"
+catalyst_n = 16
+output = "tropical_fish_spawn_egg|热带鱼刷怪蛋"
+output_n = 1
+deaths = 80
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-PUFFERFISH"
+cat = "生命塑形"
+name = "河豚塑形"
+input = "convert_table:stillwater_palimpsest|Stillwater Palimpsest"
+input_n = 1
+catalyst = "kelp|海带"
+catalyst_n = 16
+output = "pufferfish_spawn_egg|河豚刷怪蛋"
+output_n = 1
+deaths = 80
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-COPPER-GOLEM"
+cat = "生命塑形"
+name = "铜傀儡塑形"
+input = "convert_table:unwrought_facet|The Unwrought Facet"
+input_n = 1
+catalyst = "redstone|红石粉"
+catalyst_n = 16
+output = "copper_golem_spawn_egg|铜傀儡刷怪蛋"
+output_n = 1
+deaths = 192
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-DOLPHIN"
+cat = "生命塑形"
+name = "海豚塑形"
+input = "convert_table:stillwater_palimpsest|Stillwater Palimpsest"
+input_n = 2
+catalyst = "kelp|海带"
+catalyst_n = 32
+output = "dolphin_spawn_egg|海豚刷怪蛋"
+output_n = 1
+deaths = 128
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-DONKEY"
+cat = "生命塑形"
+name = "驴塑形"
+input = "convert_table:boughbound_reverie|Boughbound Reverie"
+input_n = 1
+catalyst = "hay_block|干草捆"
+catalyst_n = 4
+output = "donkey_spawn_egg|驴刷怪蛋"
+output_n = 1
+deaths = 96
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-FOX"
+cat = "生命塑形"
+name = "狐狸塑形"
+input = "convert_table:boughbound_reverie|Boughbound Reverie"
+input_n = 1
+catalyst = "sweet_berries|甜浆果"
+catalyst_n = 16
+output = "fox_spawn_egg|狐狸刷怪蛋"
+output_n = 1
+deaths = 96
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-HAPPY-GHAST"
+cat = "生命塑形"
+name = "快乐恶魂塑形"
+input = "convert_table:unwrought_facet|The Unwrought Facet"
+input_n = 2
+catalyst = "snow_block|雪块"
+catalyst_n = 16
+output = "happy_ghast_spawn_egg|快乐恶魂刷怪蛋"
+output_n = 1
+deaths = 384
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-HORSE"
+cat = "生命塑形"
+name = "马塑形"
+input = "convert_table:boughbound_reverie|Boughbound Reverie"
+input_n = 1
+catalyst = "hay_block|干草捆"
+catalyst_n = 8
+output = "horse_spawn_egg|马刷怪蛋"
+output_n = 1
+deaths = 96
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-IRON-GOLEM"
+cat = "生命塑形"
+name = "铁傀儡塑形"
+input = "convert_table:unwrought_facet|The Unwrought Facet"
+input_n = 2
+catalyst = "redstone|红石粉"
+catalyst_n = 32
+output = "iron_golem_spawn_egg|铁傀儡刷怪蛋"
+output_n = 1
+deaths = 256
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-LLAMA"
+cat = "生命塑形"
+name = "羊驼塑形"
+input = "convert_table:boughbound_reverie|Boughbound Reverie"
+input_n = 1
+catalyst = "hay_block|干草捆"
+catalyst_n = 8
+output = "llama_spawn_egg|羊驼刷怪蛋"
+output_n = 1
+deaths = 112
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-MULE"
+cat = "生命塑形"
+name = "骡塑形"
+input = "convert_table:boughbound_reverie|Boughbound Reverie"
+input_n = 2
+catalyst = "hay_block|干草捆"
+catalyst_n = 8
+output = "mule_spawn_egg|骡刷怪蛋"
+output_n = 1
+deaths = 128
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-NAUTILUS"
+cat = "生命塑形"
+name = "鹦鹉螺塑形"
+input = "convert_table:stillwater_palimpsest|Stillwater Palimpsest"
+input_n = 2
+catalyst = "kelp|海带"
+catalyst_n = 32
+output = "nautilus_spawn_egg|鹦鹉螺刷怪蛋"
+output_n = 1
+deaths = 128
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-OCELOT"
+cat = "生命塑形"
+name = "豹猫塑形"
+input = "convert_table:boughbound_reverie|Boughbound Reverie"
+input_n = 1
+catalyst = "salmon|生鲑鱼"
+catalyst_n = 16
+output = "ocelot_spawn_egg|豹猫刷怪蛋"
+output_n = 1
+deaths = 96
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-PANDA"
+cat = "生命塑形"
+name = "熊猫塑形"
+input = "convert_table:boughbound_reverie|Boughbound Reverie"
+input_n = 2
+catalyst = "bamboo|竹子"
+catalyst_n = 32
+output = "panda_spawn_egg|熊猫刷怪蛋"
+output_n = 1
+deaths = 128
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-PARROT"
+cat = "生命塑形"
+name = "鹦鹉塑形"
+input = "convert_table:boughbound_reverie|Boughbound Reverie"
+input_n = 2
+catalyst = "wheat_seeds|小麦种子"
+catalyst_n = 32
+output = "parrot_spawn_egg|鹦鹉刷怪蛋"
+output_n = 1
+deaths = 128
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-POLAR-BEAR"
+cat = "生命塑形"
+name = "北极熊塑形"
+input = "convert_table:boughbound_reverie|Boughbound Reverie"
+input_n = 2
+catalyst = "snow_block|雪块"
+catalyst_n = 16
+output = "polar_bear_spawn_egg|北极熊刷怪蛋"
+output_n = 1
+deaths = 160
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-SKELETON-HORSE"
+cat = "生命塑形"
+name = "骷髅马塑形"
+input = "convert_table:unwrought_facet|The Unwrought Facet"
+input_n = 2
+catalyst = "moss_block|苔藓块"
+catalyst_n = 32
+output = "skeleton_horse_spawn_egg|骷髅马刷怪蛋"
+output_n = 1
+deaths = 128
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-SNIFFER"
+cat = "生命塑形"
+name = "嗅探兽塑形"
+input = "convert_table:boughbound_reverie|Boughbound Reverie"
+input_n = 4
+catalyst = "moss_block|苔藓块"
+catalyst_n = 32
+output = "sniffer_spawn_egg|嗅探兽刷怪蛋"
+output_n = 1
+deaths = 256
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-SNOW-GOLEM"
+cat = "生命塑形"
+name = "雪傀儡塑形"
+input = "convert_table:unwrought_facet|The Unwrought Facet"
+input_n = 1
+catalyst = "carved_pumpkin|雕刻南瓜"
+catalyst_n = 1
+output = "snow_golem_spawn_egg|雪傀儡刷怪蛋"
+output_n = 1
+deaths = 128
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-SQUID"
+cat = "生命塑形"
+name = "鱿鱼塑形"
+input = "convert_table:stillwater_palimpsest|Stillwater Palimpsest"
+input_n = 1
+catalyst = "kelp|海带"
+catalyst_n = 16
+output = "squid_spawn_egg|鱿鱼刷怪蛋"
+output_n = 1
+deaths = 64
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-GLOW-SQUID"
+cat = "生命塑形"
+name = "发光鱿鱼塑形"
+input = "convert_table:stillwater_palimpsest|Stillwater Palimpsest"
+input_n = 1
+catalyst = "glow_lichen|发光地衣"
+catalyst_n = 16
+output = "glow_squid_spawn_egg|发光鱿鱼刷怪蛋"
+output_n = 1
+deaths = 80
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-STRIDER"
+cat = "生命塑形"
+name = "炽足兽塑形"
+input = "convert_table:boughbound_reverie|Boughbound Reverie"
+input_n = 1
+catalyst = "warped_fungus|诡异菌"
+catalyst_n = 16
+output = "strider_spawn_egg|炽足兽刷怪蛋"
+output_n = 1
+deaths = 96
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-TADPOLE"
+cat = "生命塑形"
+name = "蝌蚪塑形"
+input = "convert_table:stillwater_palimpsest|Stillwater Palimpsest"
+input_n = 1
+catalyst = "slime_ball|黏液球"
+catalyst_n = 4
+output = "tadpole_spawn_egg|蝌蚪刷怪蛋"
+output_n = 1
+deaths = 64
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-TRADER-LLAMA"
+cat = "生命塑形"
+name = "行商羊驼塑形"
+input = "convert_table:boughbound_reverie|Boughbound Reverie"
+input_n = 1
+catalyst = "hay_block|干草捆"
+catalyst_n = 8
+output = "trader_llama_spawn_egg|行商羊驼刷怪蛋"
+output_n = 1
+deaths = 128
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-VILLAGER"
+cat = "生命塑形"
+name = "村民塑形"
+input = "convert_table:unbroken_cognizance|Unbroken Cognizance"
+input_n = 1
+catalyst = "wheat|小麦"
+catalyst_n = 32
+output = "villager_spawn_egg|村民刷怪蛋"
+output_n = 1
+deaths = 256
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-WANDERING-TRADER"
+cat = "生命塑形"
+name = "流浪商人塑形"
+input = "convert_table:unbroken_cognizance|Unbroken Cognizance"
+input_n = 1
+catalyst = "melon_slice|西瓜片"
+catalyst_n = 32
+output = "wandering_trader_spawn_egg|流浪商人刷怪蛋"
+output_n = 1
+deaths = 256
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "FORM-ZOMBIE-HORSE"
+cat = "生命塑形"
+name = "僵尸马塑形"
+input = "convert_table:unwrought_facet|The Unwrought Facet"
+input_n = 2
+catalyst = "brown_mushroom|棕色蘑菇"
+catalyst_n = 32
+output = "zombie_horse_spawn_egg|僵尸马刷怪蛋"
+output_n = 1
+deaths = 128
+auto = false
+unlock = "友善生物塑形；投入槽手动"
+
+[[recipe]]
+id = "SEED-VANILLA-CROPS"
+cat = "种子抽卡"
+name = "原版作物种子抽卡"
+input = "wheat_seeds|小麦种子"
+input_n = 16
+catalyst = "bone_meal|骨粉"
+catalyst_n = 4
+output = "pumpkin_seeds|南瓜种子"
+output_n = 1
+deaths = 24
+auto = true
+unlock = "普通原版播种物等概率抽卡"
+outputs = ["wheat_seeds|小麦种子", "pumpkin_seeds|南瓜种子", "melon_seeds|西瓜种子", "beetroot_seeds|甜菜种子", "carrot|胡萝卜", "potato|马铃薯"]
+
+[[recipe]]
+id = "SEED-ANCIENT-CROPS"
+cat = "种子抽卡"
+name = "远古作物种子抽卡"
+input = "wheat_seeds|小麦种子"
+input_n = 32
+catalyst = "convert_table:boughbound_reverie|Boughbound Reverie"
+catalyst_n = 1
+output = "torchflower_seeds|火把花种子"
+output_n = 1
+deaths = 96
+auto = false
+unlock = "远古播种物等概率抽卡；投入槽手动"
+outputs = ["torchflower_seeds|火把花种子", "pitcher_pod|瓶子草荚果"]

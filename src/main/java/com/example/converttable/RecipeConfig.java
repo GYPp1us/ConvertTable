@@ -34,8 +34,12 @@ public final class RecipeConfig {
     }
     public static void initialize() {
         PayloadTypeRegistry.clientboundPlay().register(RecipeSync.TYPE,RecipeSync.CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(GrowthSync.TYPE,GrowthSync.CODEC);
         ServerLifecycleEvents.SERVER_STARTING.register(game->load());
-        ServerPlayConnectionEvents.JOIN.register((handler,sender,game)->sender.sendPacket(new RecipeSync(serverJson)));
+        ServerPlayConnectionEvents.JOIN.register((handler,sender,game)->{
+            sender.sendPacket(new RecipeSync(serverJson));
+            sender.sendPacket(new GrowthSync(GrowthRecipes.bundledJson()));
+        });
         ServerLifecycleEvents.SERVER_STOPPED.register(game->{server=RecipeCatalog.empty();serverJson="";});
     }
     public static void load() {
@@ -51,9 +55,8 @@ public final class RecipeConfig {
             if(migration.migrated()) {
                 String version=FabricLoader.getInstance().getModContainer("convert_table")
                     .map(mod->mod.getMetadata().getVersion().getFriendlyString()).orElse("bundled defaults");
-                ConvertTable.LOGGER.info("Upgraded untouched 1.5.2 recipe defaults to {}; backup: {}; source JAR SHA-256: {}; source JSON SHA-256: {}; canonical SHA-256: {}",
-                    version,migration.backup(),RecipeConfigMigration.SOURCE_JAR_SHA256,RecipeConfigMigration.SOURCE_JSON_SHA256,
-                    RecipeConfigMigration.RELEASED_DEFAULT_SHA256);
+                ConvertTable.LOGGER.info("Upgraded untouched {} recipe defaults to {}; backup: {}; source JAR SHA-256: {}; source JSON SHA-256: {}; canonical SHA-256: {}",
+                    migration.sourceVersion(),version,migration.backup(),migration.sourceJarHash(),migration.sourceJsonHash(),migration.fingerprint());
             }
             ConvertTable.LOGGER.info("Conversion catalogue: {} groups, {} advanced entries; execution enabled: {}",parsed.groups().size(),parsed.advanced().size(),enabled());
             if(!parsed.unavailable().isEmpty())ConvertTable.LOGGER.warn("Unavailable item IDs excluded: {}",parsed.unavailable());

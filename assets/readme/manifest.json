@@ -1,8 +1,8 @@
 {
   "renderer": "assets/tools/render_readme.py",
   "source": "jar",
-  "jar": "build\\libs\\convert-table-0.2.0.jar",
-  "jar_sha256": "463a4b86e819ea1dbedc79c61a96a42c8e8aabeaf1017a49ff0c6f6d86bf7152",
+  "jar": "build\\libs\\convert-table-0.3.1.jar",
+  "jar_sha256": "00aeae4277cf3cecc2d704f1b2a77176d0a6cc3ea8822fdbab236943510c8302",
   "render_settings": {
     "size": 512,
     "frames": 24,
@@ -15,7 +15,7 @@
     "assets/convert_table/conversion_table/end.json": "d55acd1737cd8c96407e79e820ed5f49698ef784fac5863b776d24d37235e9a9",
     "assets/convert_table/conversion_table/sculk.json": "f6d765ed7b6094b3653d06101f6a2ba050409377347359b7d29f1ac693ef886a",
     "assets/convert_table/models/block/black_gold.json": "09d10c70a09e3bf336b859465a21da5bf5e12a7adf3ff7b0c368e383c3877241",
-    "assets/convert_table/models/block/catalyst_pedestal.json": "7e7b7b28d4b34a927b223d093bf08429c5c225ef9aadb155ae350fb734684494",
+    "assets/convert_table/models/block/catalyst_pedestal.json": "4e8987d08487007de9c73a2cf4477c116dad2de9673ed2664504e873e1211bc9",
     "assets/convert_table/models/block/crystal_table.json": "d2e67b824931714935580ff08e791fd0703204e2084bf8376166e6a962ddd10c",
     "assets/convert_table/models/block/end.json": "c14346d4b09f0692cd535f9ed402b5456019333db95a814c08ad1bfa7cf7dd07",
     "assets/convert_table/models/block/sculk.json": "7bfe291d0adf08074e640cb8a71ac111a6c20bc40065898aa355d67aa8bfdc24",
@@ -67,6 +67,48 @@
     "assets/convert_table/textures/block/sculk/tabletop.png": "b07002eea01de091224a5abd90f2454c06f69b9fa46643a11004451c6f126802"
   },
   "outputs": {
+    "black_gold.png": {
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "9a57a4fd83faaab2a5d2bd40b1e08e6295672296bbc4bf7b63a333dd45876d03"
+    },
+    "end.png": {
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "296fd887b131ca8accea39981e576a5c905383b3ab1c0daf0ba9a52df8306127"
+    },
+    "sculk.png": {
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "55fe59af5fc4b16e295856a62944bb972411e6626ca345ed5380fed39ae1f89d"
+    },
+    "crystal_table.png": {
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "80bcf2e3e6652820b5a6144e2b788866df22a2ffe38e5ec945caf514d5ac7478"
+    },
+    "catalyst_pedestal.png": {
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "192b6a3a93747ff54ab95857a955e24b6475c4d534775c409ae89f346cb6613e"
+    },
+    "banner.png": {
+      "size": [
+        1600,
+        420
+      ],
+      "sha256": "9c40e80475315b3e7fa7581af166e3d731c87eabd1abe0c49542dc216d213024"
+    },
     "black_gold.gif": {
       "frames": 24,
       "frame_size": [
@@ -106,13 +148,6 @@
       ],
       "sha256": "106ebdb76860b264503e5449436d4d6455596f7c7f4209dd842c1b64f7c68635"
     },
-    "black_gold.png": {
-      "size": [
-        512,
-        512
-      ],
-      "sha256": "9a57a4fd83faaab2a5d2bd40b1e08e6295672296bbc4bf7b63a333dd45876d03"
-    },
     "end.gif": {
       "frames": 24,
       "frame_size": [
@@ -151,13 +186,6 @@
         "rotor"
       ],
       "sha256": "597af382120500455864e169a3e2d01af407cd4326b428a8faa12169fac68332"
-    },
-    "end.png": {
-      "size": [
-        512,
-        512
-      ],
-      "sha256": "296fd887b131ca8accea39981e576a5c905383b3ab1c0daf0ba9a52df8306127"
     },
     "sculk.gif": {
       "frames": 24,
@@ -201,34 +229,6 @@
         "floating_satellite_4"
       ],
       "sha256": "e5f923276dfa3baa2c698d07966afbdc39ac91b6af920a3ca2b605e7f584e638"
-    },
-    "sculk.png": {
-      "size": [
-        512,
-        512
-      ],
-      "sha256": "55fe59af5fc4b16e295856a62944bb972411e6626ca345ed5380fed39ae1f89d"
-    },
-    "crystal_table.png": {
-      "size": [
-        512,
-        512
-      ],
-      "sha256": "80bcf2e3e6652820b5a6144e2b788866df22a2ffe38e5ec945caf514d5ac7478"
-    },
-    "catalyst_pedestal.png": {
-      "size": [
-        512,
-        512
-      ],
-      "sha256": "e3ab6f03f2d2b4016dfe51cc4d4a728671702c02deecfb1f27322734f7fd0a57"
-    },
-    "banner.png": {
-      "size": [
-        1600,
-        420
-      ],
-      "sha256": "5e8a8cc918ab425d2233b33b1058c24cf4a4fc4438367259dfc226979feebda7"
     }
   }
 }

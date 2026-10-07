@@ -20,7 +20,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 /** Two left clicks bind input; two right clicks bind output. */
 public final class ConnectionRod {
     public static final Item ITEM = Registry.register(BuiltInRegistries.ITEM, ConvertTable.id("connection_rod"),
-        new Item(new Item.Properties().setId(ResourceKey.create(Registries.ITEM, ConvertTable.id("connection_rod"))).stacksTo(1)
+        new Item(ModItemPresentation.apply(new Item.Properties().setId(ResourceKey.create(Registries.ITEM, ConvertTable.id("connection_rod"))).stacksTo(1),
+            "connection_rod", "item.convert_table.connection_rod")
             .component(DataComponents.LORE, new net.minecraft.world.item.component.ItemLore(java.util.List.of(
                 Component.translatable("item.convert_table.connection_rod.input_help").withStyle(net.minecraft.ChatFormatting.GREEN),
                 Component.translatable("item.convert_table.connection_rod.output_help").withStyle(net.minecraft.ChatFormatting.GOLD),

@@ -1,4 +1,4 @@
-"""Rebuild the 16px low catalyst pedestal from the ivory/basalt concept."""
+"""Rebuild the 12px-wide low catalyst pedestal from the ivory/basalt concept."""
 from __future__ import annotations
 
 import json
@@ -12,6 +12,11 @@ ROOT = Path(__file__).resolve().parents[3]
 OUT = ROOT / "src/main/resources/assets/convert_table/models/block/catalyst_pedestal.json"
 sys.path.insert(0, str(ROOT / "assets/tools"))
 from export_refined_assets import FACE_CORNERS, clipped_faces, model_element
+
+# Inset the original 16px footprint by two model pixels on every side. Keep
+# authored UVs and heights unchanged, including the four corner crystal tips.
+FOOTPRINT_INSET = 2
+FOOTPRINT_SCALE = (16 - 2 * FOOTPRINT_INSET) / 16
 
 # Use the current geode stone set, including its native color clusters and PBR
 # channels; the former unprefixed maps are archived authoring materials.
@@ -37,7 +42,8 @@ def cube(frm, to, texture):
     for side, corners in FACE_CORNERS.items():
         points = [tuple(to[i] if bit else frm[i] for i, bit in enumerate(corner))
                   for corner in corners]
-        # Same block-space, one-texel-per-voxel mapping as publish_geode.py.
+        # Author UVs on the original one-texel-per-voxel grid, before shrinking
+        # geometry below, so the shared geode textures and emission stay intact.
         uv = []
         for x, y, z in points:
             if side in ("up", "down"):
@@ -86,6 +92,13 @@ for x in (0, 13):
         for _ in range(turns):
             tip_x, tip_z = 1 - tip_z, tip_x
         cube((cx + tip_x, 7, cz + tip_z), (cx + tip_x + 1, 8, cz + tip_z + 1), "bud_pink")
+
+# Scale only emitted geometry after UV clipping and material segmentation.
+# This preserves every texture sample while centering the 12px body at (8, 8).
+for element in elements:
+    for corner in ("from", "to"):
+        for axis in (0, 2):
+            element[corner][axis] = 8 + (element[corner][axis] - 8) * FOOTPRINT_SCALE
 
 model = {
     "parent": "minecraft:block/block",

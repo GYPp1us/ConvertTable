@@ -1,0 +1,17 @@
+{
+  "parent": "convert_table:root",
+  "criteria": { "complete": { "trigger": "minecraft:impossible" } },
+  "display": {
+    "icon": {
+      "id": "convert_table:black_gold_conversion_table",
+      "components": { "minecraft:item_model": "convert_table:advancement/black_gold" }
+    },
+    "title": { "translate": "advancement.convert_table.black_gold.title" },
+    "description": { "translate": "advancement.convert_table.black_gold.description" },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "requirements": [["complete"]]
+}

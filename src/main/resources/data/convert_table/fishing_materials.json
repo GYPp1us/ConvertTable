@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "vanilla_reference": {
+    "fish_weight": 100,
+    "fish_chance": 0.85,
+    "treasure_weight": 6,
+    "treasure_chance": 0.05
+  },
+  "entries": [
+    {
+      "table": "fish",
+      "item": "convert_table:boughbound_reverie",
+      "weight": 8,
+      "min": 1,
+      "max": 1
+    },
+    {
+      "table": "fish",
+      "item": "convert_table:stillwater_palimpsest",
+      "weight": 6,
+      "min": 1,
+      "max": 1
+    },
+    {
+      "table": "fish",
+      "item": "convert_table:unbroken_cognizance",
+      "weight": 2,
+      "min": 1,
+      "max": 1
+    },
+    {
+      "table": "fish",
+      "item": "convert_table:unwrought_facet",
+      "weight": 4,
+      "min": 1,
+      "max": 1
+    },
+    {
+      "table": "treasure",
+      "item": "minecraft:amethyst_shard",
+      "weight": 1,
+      "min": 1,
+      "max": 3
+    }
+  ]
+}

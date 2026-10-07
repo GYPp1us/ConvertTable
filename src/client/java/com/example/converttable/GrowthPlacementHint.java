@@ -2,6 +2,7 @@ package com.example.converttable;
 
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientChunkEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -25,6 +26,8 @@ public final class GrowthPlacementHint {
     private GrowthPlacementHint() { }
 
     public static void initialize() {
+        ClientChunkEvents.CHUNK_LOAD.register((level, chunk) -> GrowthNetwork.invalidateChunk(level, chunk.getPos()));
+        ClientChunkEvents.CHUNK_UNLOAD.register((level, chunk) -> GrowthNetwork.invalidateChunk(level, chunk.getPos()));
         HudElementRegistry.attachElementAfter(VanillaHudElements.CROSSHAIR, ConvertTable.id("growth_placement"),
             (g, delta) -> {
                 Minecraft mc = Minecraft.getInstance();

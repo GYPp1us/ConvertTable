@@ -10,7 +10,7 @@ The current Fabric resources contain three conversion tables plus the crystal ta
 | Crystal | `geode_prototype/scene.json` | `geode_prototype/mother_rock_geode_16px.bbmodel` |
 | Catalyst pedestal | `concepts/catalyst_table/build_pedestal_model.py` | Low, code-native Minecraft cuboid model |
 
-The three conversion tables and crystal table have native 16×16 textures, editable Blender/Blockbench projects and renders. The catalyst pedestal reuses the crystal table's material set and is generated as a 28-cuboid low plinth. These renders document the art; they are not shader-pack validation. Older `blockbench/`, `textures/`, `previews/` and `manifest.json` are archived first-pass assets and are not used by the game.
+The three conversion tables and crystal table have native 16×16 textures, editable Blender/Blockbench projects and renders. The catalyst pedestal reuses the crystal table's material set and is generated as a low plinth with a centered 12×12 footprint and unchanged 8-pixel height. These renders document the art; they are not shader-pack validation. Older `blockbench/`, `textures/`, `previews/` and `manifest.json` are archived first-pass assets and are not used by the game.
 
 ## Publish current art
 
@@ -69,7 +69,7 @@ to GIF's 10 ms resolution and distributed so each loop keeps the full period.
 After building, render from the exact JAR that will be distributed:
 
 ```powershell
-python assets/tools/render_readme.py --jar build/libs/convert-table-0.2.0.jar
+python assets/tools/render_readme.py --jar build/libs/convert-table-0.3.1.jar
 ```
 
 For a quick render from the current source resources before a build, omit `--jar`.
@@ -86,10 +86,22 @@ Black gold has solid gold inward returns, a snout-shaped two-depth relief and or
 
 ## 1.5 catalyst interaction
 
-`concepts/catalyst_table/growth_interaction_ui_v3.png` combines actual 26.3 crystal and catalyst screens with the world placement hint. The crosshair hint uses code-defined flat 12px glyphs: a crystal plinth, paired export arrows and a growth arrow. The updated crystal model and aligned pedestal materials are republished by `tools/build_assets.py`. Pedestal rendering shows the selected output at full block size, with the nonconsuming catalyst in the mineral well. The growth recipe catalog is bundled under `data/convert_table/growth_recipes.json`.
+`concepts/catalyst_table/growth_interaction_ui_v3.png` is an archived interaction illustration. Current screens include the source sample and fractional growth. The crosshair hint uses code-defined flat 12px glyphs: a crystal plinth, paired export arrows and a growth arrow. The updated crystal model and aligned pedestal materials are republished by `tools/build_assets.py`. Pedestal rendering shows the selected output at half its previous size, with the nonconsuming catalyst in the mineral well. The growth recipe catalog is bundled under `data/convert_table/growth_recipes.json`.
+
+## 0.3 pedestal and relics
+
+`concepts/catalyst_table/build_pedestal_model.py` scales X/Z around the block center by 0.75, moving each edge inward two model pixels. The footprint is 12×12 with unchanged 8-pixel height. Y, UVs, stone textures and crystal emission remain unchanged. The collision follows the base; the selection shape includes the rotated corner buds. The floating output renderer uses scale 1 instead of 2.
+
+The four fishing relics use the native 16px sprite `textures/item/life_seed.png`, generated reproducibly by `tools/build_life_seed_icon.py`, with four opaque ARGB tint variants in their item models. In both language files their names stay English and each carries one original Chinese poetry line.
 
 ## 1.6 material corrections
 
 Black-gold relief returns use the original opaque pixel unless that face lies on the actual outer block boundary. Validation compares every exposed source texel with static, item and animated exports. End uses `ring_glow` for its moving ring, with labPBR emission and full block/sky light in the dynamic renderer. The catalyst pedestal shares `geode_*` materials with the crystal table and splits its crystal faces by pixel emission.
 
 The crystal table and pedestal corner buds use 0/90/180/270-degree baked geometry rotations, matching the sculk table's four-quadrant arrangement. Each tip points toward its own outer corner; root positions, stone bodies and shared crystal materials remain fixed. The crystal-table generator rotates the northwest voxel template around the block center, while the pedestal rotates each bud around its existing local 2×2 root center.
+
+## 0.3.1 tooltip skins and advancement icons
+
+Run `python assets/tools/build_advancement_art.py` to reproduce the four 32px achievement icons and five native tooltip skins. Icons have item-model overrides under `advancement/`; no extra gameplay items are registered. Tooltips use 100px nine-slice GUI sprites: background border 9, frame border 10 with `stretch_inner`. Keep ornaments outside the text area and verify narrow, wide and multiline tooltips in Minecraft.
+
+The dark background and category-colored borders are inspired by [Enigmatic Legacy's official tooltip handler](https://github.com/Aizistral-Studios/Enigmatic-Legacy/blob/1.20.X/src/main/java/com/aizistral/enigmaticlegacy/handlers/EnigmaticEventHandler.java). All pixels and drawing code are original to this project.

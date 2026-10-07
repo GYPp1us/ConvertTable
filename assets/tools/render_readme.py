@@ -3,7 +3,7 @@
 
 Run from the repository root, optionally pointing at the freshly built mod jar:
 
-    python assets/tools/render_readme.py --jar build/libs/convert-table-1.6.0.jar
+    python assets/tools/render_readme.py --jar build/libs/convert-table-0.3.1.jar
 
 The small orthographic rasterizer handles vanilla block-model faces, alpha cutouts,
 the format-2 animated quads and their position/rotation tracks. It intentionally

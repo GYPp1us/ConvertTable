@@ -8,23 +8,23 @@
 
 Turn building materials into the styles you need, or produce blocks continuously with an amethyst network.
 
-Version **v0.2.0** supports **Minecraft Java 26.3 / Fabric**. All five blocks can be crafted at a crafting table or found in the **Functional Blocks** creative tab.
+Version **v0.3.1** supports **Minecraft Java 26.3 / Fabric**. All five blocks can be crafted at a crafting table or found in the **Functional Blocks** creative tab.
 
 ## Install
 
-Download the mod JAR for 26.3 from [Releases](https://github.com/GYPp1us/ConvertTable/releases/latest). Put it in `mods` with [Fabric API](https://modrinth.com/mod/fabric-api). Use Fabric Loader 0.19.5 or newer and Java 25. Install the same mod version on both sides for multiplayer. Do not install the `-sources` file.
+Download the mod JAR for 26.3 from [Releases](https://github.com/GYPp1us/ConvertTable/releases/latest). Put it in `mods` with [Fabric API](https://modrinth.com/mod/fabric-api). Use Fabric Loader 0.19.5 or newer and Java 25. Multiplayer requires the same mod version on both sides; a missing or different client version is rejected before entering the world. Remove the old version when updating and keep only one enabled mod file. Do not install the `-sources` file.
 
 ## Choose a block
 
 | Black Gold Conversion Table | End Conversion Table | Sculk Conversion Table |
 | :---: | :---: | :---: |
 | ![Black Gold Conversion Table](assets/readme/black_gold.gif) | ![End Conversion Table](assets/readme/end.gif) | ![Sculk Conversion Table](assets/readme/sculk.gif) |
-| Spend gold nuggets for a random different material in the same group | Spend chorus fruit charge to choose the output | Ordinary batches spend 1 available soul; advanced recipes use their listed soul cost |
+| Spend gold nuggets for a random different material in the same group | Spend chorus fruit charge to choose the output | Ordinary batches spend 3 available souls; advanced recipes use their listed soul cost |
 
 | Budding Crystal Table | Catalyst Pedestal |
 | :---: | :---: |
 | ![Budding Crystal Table](assets/readme/crystal_table.png) | ![Catalyst Pedestal](assets/readme/catalyst_pedestal.png) |
-| Export growth factors from connected amethyst buds | Produce a selected block using factors; keep the catalyst |
+| Export growth factors from connected amethyst buds | Insert a catalyst and one target item as an original sample; keep both while producing |
 
 ## Black gold: random conversion
 
@@ -42,7 +42,7 @@ The default cost is **1 gold nugget per batch**. Recipes set the batch limit; pa
 2. Find and click the target on the right.
 3. Click **Start batch** or turn **Auto** on. Once enabled, material in the device slot or linked input containers starts the next eligible batch automatically, without another click.
 
-End supports all ordinary black gold groups and additional groups. Ordinary conversions remain **1:1**. By default, each chorus fruit supplies **16 phase charge**, and each batch costs **1 charge**. Costs are paid only when a conversion succeeds. On the sculk table, these ordinary groups cost **1 available soul per batch**.
+End supports all ordinary black gold groups and additional groups. Ordinary conversions remain **1:1**. By default, each chorus fruit supplies **16 phase charge**, and each batch costs **1 charge**. Costs are paid only when a conversion succeeds. On the sculk table, these ordinary groups cost **3 available souls per batch**.
 
 ### Link containers and process shulker boxes
 
@@ -65,9 +65,26 @@ Shulker boxes retain their names and untouched contents. Boxes inside boxes are 
 
 ## Sculk: collect available souls for conversions
 
-Each ordinary batch costs **1 available soul** and no phase. Advanced recipes spend the soul amount listed for that recipe. Insert the required main material and any specified **catalyst material**, select the output, and convert. Catalyst materials are consumed. Empty buckets and other remainders go to the **remainder slot**. Some recipes need no catalyst or remainder; recipes with an outcome pool choose one listed result at equal odds.
+Each ordinary batch costs **3 available souls** and no phase. Advanced recipes spend the soul amount listed for that recipe. Insert the required main material and any specified **catalyst material**, select the output, and convert. Catalyst materials are consumed. Empty buckets and other remainders go to the **remainder slot**. Some recipes need no catalyst or remainder; recipes with an outcome pool choose one listed result at equal odds.
 
 Advanced conversions spend the **available souls** shown by the table, without phase charge or player experience. **Manual only** recipes require the device input slot and a button click. They cannot run continuously or process container contents. On upgraded worlds, old phase fuel in the sculk table's fuel slot drops to the ground.
+
+### Life shaping and seed draws
+
+Fishing yields four shaping materials. Their names stay in English, with one line of Chinese lore. Place the material in the sculk table's input slot, add the listed plant, food or mineral reagent, select a spawn egg, and convert manually. Both materials are consumed. Shaping cannot run continuously and does not require obtaining the target creature's own drops first.
+
+| Fishing material | Main use | Lore |
+| :--- | :--- | :--- |
+| Boughbound Reverie | Land, flying and natural life; ancient seed draws | 枝节蔓生叶繁茂，百兽长栖息 |
+| Stillwater Palimpsest | Aquatic life | 雪泥洗濯发与肤，明镜无风波 |
+| Unbroken Cognizance | Villagers and wandering traders | 一日发蒙生灵智，代代相连结 |
+| The Unwrought Facet | Spectral, undead and constructed life | 泥土血肉皆不容，百相映其中 |
+
+Shaping covers current vanilla friendly creatures. Find exact materials, amounts and soul fees in the screen, JEI or workbook.
+
+A standard crop draw spends **16 wheat seeds + 4 bone meal + 24 available souls** for one equally likely wheat seed, pumpkin seed, melon seed, beetroot seed, carrot or potato. Auto is supported. An ancient crop draw spends **32 wheat seeds + 1 Boughbound Reverie + 96 available souls** for one equally likely torchflower seed or pitcher pod; it is manual only.
+
+The four shaping materials share the normal fish category of fishing catches. Amethyst shards can also be caught as treasure, yielding 1–3 shards and requiring vanilla open-water conditions. Other mods or server changes may alter fishing results.
 
 ### Collect available souls
 
@@ -87,15 +104,15 @@ The **Range** tab in the sculk table screen shows a top-down X–Z network map. 
 
 Connect **budding amethyst** to the crystal table with **amethyst blocks**, touching face to face. Leave room for buds to grow on the budding amethyst. The buds export growth factors for the whole network.
 
-Use **one crystal table per network**, with at most **8 budding amethyst blocks**. Conductors and budding amethyst must be within **8 blocks** of the table by combined axis distance. The entire network is limited to **128 positions, including the table**. Only loaded areas are processed. Exceeding the limits or connecting a second crystal table stops production.
+There is no fixed distance, node-count or budding-amethyst limit. Only loaded areas participate. Multiple crystal tables may share a network and its bud-generated factors; extra tables do not create extra output. Unloaded sections resume participating when loaded again.
 
-### 2. Attach the pedestal and insert a catalyst
+### 2. Attach the pedestal and insert a catalyst and original sample
 
-Place a **catalyst pedestal** directly beside the crystal table, an amethyst block, or budding amethyst. Open it, insert a supported ordinary catalyst, select the output, and click **Start growth**. Click **Pause growth** to stop. A catalyst may have several targets, so select the intended output in the screen. The pedestal displays the live production rate as growth proceeds.
+Place a **catalyst pedestal** directly beside the crystal table, an amethyst block, or budding amethyst. Open it and insert **one catalyst + one target item as the original sample** in the two left slots. Choose the matching target and click **Start growth**. Oak-log production, for example, requires an oak sapling catalyst and an oak-log sample. A missing or wrong sample disables Start and shows a message. Click **Pause growth** to stop.
 
 For example, an **oak sapling** can catalyze oak logs, oak saplings, or oak leaves; mangrove uses a propagule. Nether stems and plants use their matching fungi, and bamboo uses bamboo as its catalyst. Growth targets include basic logs, saplings, leaves, soil and stone, common flowers, and plants; stripped logs, planks, sandstone, glass, and other processed forms are excluded. Saplings, fungi, and magical catalysts such as amethyst shards, echo shards, hearts of the sea, and ender pearls are reusable, and no tools are required.
 
-The catalyst is **never consumed**. Renamed, enchanted, or otherwise customized items cannot serve as catalysts. Multiple pedestals share the network's factors. The screen shows the current production rate and progress toward the next item. The rate is the growth-factor rate currently allocated to that pedestal divided by the selected item's factor cost, so it can be fractional. Pausing keeps partial progress; changing the target clears the current partial progress. Completed output stays.
+The catalyst and original sample are **never consumed** and must remain in their slots. Renamed, enchanted or customized items cannot serve as either. Eligible running pedestals share factors as evenly as possible; paused or full pedestals do not take a share. The screen shows current output rate and next-item progress, including slow fractional growth. Pausing keeps partial progress; replacing the catalyst, sample or target clears it. Completed output stays.
 
 ### 3. Collect output
 
@@ -103,19 +120,23 @@ Output first enters the pedestal's **9 output slots**, then moves into container
 
 ### 4. Increase production
 
-- Each immature bud exports up to **1 growth factor per second** by default.
-- Place **calcite** against any connected budding amethyst or amethyst conductor to raise the export limit to **2 factors per second** for immature buds throughout the network.
-- Similarly placed **smooth basalt** increases the buds' internal growth factors. The crystal table screen shows stored factors separately from the current production rate.
+- Each immature bud has an extraction limit of **1/64 growth factor per second**.
+- Place **calcite** against budding amethyst to raise that mother's extraction limit to **2/64 factors per second** without changing its contents. Against a connected amethyst conductor, it affects the whole vein.
+- **Smooth basalt** adds **1/64** to each immature bud's contents without raising its extraction limit. Beside budding amethyst it affects that mother; beside a connected amethyst conductor it affects the whole vein. Matching boosts do not stack.
 - Mature clusters export no growth factors. In a usable network with at least one valid running pedestal, mature clusters are reseeded into small buds.
 
 Holding a pedestal, calcite, or smooth basalt while aiming at a usable network position displays a placement hint beside the crosshair.
+
+Small, medium, large buds and mature clusters naturally contain **16/64, 8/64, 4/64 and 1/64** growth factors. Contents describe the factors held in a bud; the extraction limit describes how much the vein can draw each second. Immature buds allow **1/64 factor/s**; mature clusters allow 0.
+
+There is no fixed total production-rate limit; expand with more active budding amethyst and buds. The crystal table shows bud counts by stage. Hover supply or contents to see the current sources and calculation; the two boost blocks at the top right explain their effects and placement.
 
 ## Hopper automation
 
 | Block | Insert | Extract |
 | :--- | :--- | :--- |
 | Conversion table | Material from above; fuel or sculk catalyst materials from the sides | Output and remainders from below |
-| Catalyst pedestal | One valid catalyst from above | Output from the sides or below; linked output containers receive production |
+| Catalyst pedestal | One valid catalyst and one original sample from above | Output from the sides or below; linked output containers receive production |
 
 Turn **Auto** on for conversion tables or click **Start growth** on pedestals. With Auto on, a table starts each eligible job automatically when its input and costs are ready, including material in linked input containers. Missing resources pause work. If output is blocked, the job still progresses to completion and waits there until delivery is possible; materials and costs are charged on delivery. Ordinary batches can shrink to fit free output space. The sculk table's side accepts catalyst materials only, so supply only what the recipe needs.
 
@@ -136,14 +157,16 @@ Each recipe produces **1 item**. `·` means an empty slot.
 
 ## Recipes and troubleshooting
 
-The complete default [recipe workbook](outputs/01a0f354-50a1-7850-9a3e-c4f75b90728b/ConvertTable配方.xlsx) contains **107 ordinary groups, 83 advanced sculk recipes, 105 growth recipes using 19 catalysts**, and six crafting recipes. The workbook's item names are in Chinese.
+The complete default [recipe workbook](outputs/01a0f354-50a1-7850-9a3e-c4f75b90728b/ConvertTable配方.xlsx) contains **107 ordinary groups, 118 advanced sculk recipes, 105 growth recipes using 19 catalysts**, and six crafting recipes. Its overview also lists fishing materials. Vanilla item names are in Chinese.
 
 Some Farmer's Delight conversion groups and the seed-draw advanced recipe require Farmer's Delight to be installed. The workbook still lists these optional-mod recipes.
 
 Optionally install **JEI or REI** for 26.3 to browse conversion recipes and uses. JEI also shows the crystal table and catalyst pedestal growth recipes. View growth targets in the pedestal screen or workbook. Servers can change conversion recipes; the in-game catalogue determines the available materials and costs.
 
-**New recipes are missing after an update:** install the same new mod version on both the client and server. Unchanged 0.1.1 (formerly 1.5.2) default recipes are backed up and updated automatically; customized recipes are preserved, so the server administrator must add the new recipes and restart. In JEI, press **U** over a catalyst or workstation item, or **R** over an output, to find growth recipes.
+**New recipes are missing after an update:** keep only the same new mod version enabled on both sides. Unchanged 0.1.1 (formerly 1.5.2) 0.2.0 and 0.3.0 defaults are backed up and updated automatically; customized recipes are preserved, so the administrator must add new recipes and restart. Multiplayer growth recipes follow the server catalogue. In JEI, press **U** over a catalyst, original sample or workstation, or **R** over an output.
 
 **Conversion does nothing:** read the screen's status and check the target, material, fuel, catalyst material, available souls, and space in output and remainder slots. Use device slots for manual-only recipes.
 
-**No growth output:** check that Growth is enabled, the catalyst is valid, a target is selected, and the network has connected budding amethyst with buds. Check network limits and remove any second crystal table. Finally, clear full output slots or containers linked with the Connection Rod.
+**No growth output:** check that Growth is enabled, both catalyst and original sample match the selected target, and connected budding amethyst has buds in loaded chunks. For slow growth, watch the next-item progress. Clear full output slots or linked containers. Existing pedestals need a sample and must be restarted after updating.
+
+The advancement page guides conversion and amethyst discovery. The three conversion achievements are visible; the crystal achievement follows the amethyst guide and is revealed by successful proliferation. Craft completion earns an achievement without waiting for container delivery.
