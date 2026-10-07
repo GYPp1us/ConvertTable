@@ -38,7 +38,7 @@ public final class CatalystPedestalBlockEntity extends BaseContainerBlockEntity 
     private Identifier selectedId;
     private int credit, lastRate, status;
     private long lastAvailable, lastSpent, cycleAllocation;
-    // 64 microfactors/factor and twenty ticks/second retain even the smallest supply.
+    // Microfactors and twenty ticks/second retain even the smallest supply.
     private int fraction, cycleElapsed;
     private long cycleStart = Long.MIN_VALUE;
     private CrystalTableBlockEntity cycleOwner;
@@ -154,7 +154,8 @@ public final class CatalystPedestalBlockEntity extends BaseContainerBlockEntity 
 
     private long remainingDemand(int room, int cost) {
         long units = (long) room * cost * GrowthUnits.TICK_UNITS - progressUnits();
-        return Math.max(0L, (units + 19) / 20);
+        long perSecond = (long) GrowthUnits.UNITS_PER_MICRO_TICK * 20;
+        return Math.max(0L, (units + perSecond - 1) / perSecond);
     }
 
     long acceptGrowth(long allocation, long available) {
@@ -189,7 +190,7 @@ public final class CatalystPedestalBlockEntity extends BaseContainerBlockEntity 
         int elapsed = (int) Math.clamp(now - cycleStart, 0L, 20L);
         int delta = elapsed - cycleElapsed;
         if (delta <= 0) return;
-        long units = progressUnits() + cycleAllocation * delta;
+        long units = progressUnits() + cycleAllocation * delta * GrowthUnits.UNITS_PER_MICRO_TICK;
         long costUnits = (long) recipe.cost() * GrowthUnits.TICK_UNITS;
         int copies = (int) Math.min(units / costUnits, room);
         // Check the physical network again at the actual output transaction, never copy after disconnection.
@@ -332,7 +333,7 @@ public final class CatalystPedestalBlockEntity extends BaseContainerBlockEntity 
         output.putBoolean("Running", running);
         output.putInt("Credit", credit);
         output.putInt("GrowthFraction", fraction);
-        output.putInt("GrowthProgressScale", GrowthUnits.DIVISOR);
+        output.putInt("GrowthProgressScale", GrowthUnits.STORAGE_DIVISOR);
         output.putLong("ProducedTotal", producedTotal);
         if (selectedId != null) output.putString("SelectedRecipe", selectedId.toString());
     }
@@ -348,9 +349,8 @@ public final class CatalystPedestalBlockEntity extends BaseContainerBlockEntity 
         var recipe = selectedRecipe();
         running = input.getBooleanOr("Running", false) && recipe != null && sourceReady();
         credit = recipe == null ? 0 : Math.clamp(input.getIntOr("Credit", 0), 0, recipe.cost() - 1);
-        int savedFraction = Math.clamp(input.getIntOr("GrowthFraction", 0), 0, GrowthUnits.TICK_UNITS - 1);
-        fraction = recipe == null ? 0 : input.getIntOr("GrowthProgressScale", 1) == 1
-            ? Math.min(GrowthUnits.TICK_UNITS - 1, savedFraction * GrowthUnits.DIVISOR) : savedFraction;
+        fraction = recipe == null ? 0 : GrowthUnits.restoreFraction(input.getIntOr("GrowthFraction", 0),
+            input.getIntOr("GrowthProgressScale", 1));
         stopCycle(); // Future factors have not been earned yet and must be allocated again after reload.
         producedTotal = Math.max(0L, input.getLongOr("ProducedTotal", 0L));
     }

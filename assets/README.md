@@ -69,7 +69,7 @@ to GIF's 10 ms resolution and distributed so each loop keeps the full period.
 After building, render from the exact JAR that will be distributed:
 
 ```powershell
-python assets/tools/render_readme.py --jar build/libs/convert-table-0.3.1.jar
+python assets/tools/render_readme.py --jar build/libs/convert-table-0.3.2.jar
 ```
 
 For a quick render from the current source resources before a build, omit `--jar`.

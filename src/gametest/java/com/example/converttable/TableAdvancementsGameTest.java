@@ -68,6 +68,7 @@ final class TableAdvancementsGameTest {
 
         var placed = new ArrayList<BlockPos>();
         var origin = new BlockPos(0, 180, 0);
+        long growthStart = level.getGameTime();
         try {
             placed.add(origin);
             level.setBlockAndUpdate(origin, GrowthBlocks.CRYSTAL.defaultBlockState());
@@ -90,14 +91,24 @@ final class TableAdvancementsGameTest {
                 if (pedestal.recipes().get(index).output() == Items.OAK_LOG) pedestal.selectRecipe(index);
             pedestal.toggleRunning(player);
             check(source.snapshot().available() == 128 && pedestal.cost() == 2,
-                "Growth fixture must provide exactly two factors per second from physical calcite-boosted buds");
+                "Growth fixture must provide 128 microfactors per second from physical calcite-boosted buds");
+            for (int cycle = 0; cycle < 15; cycle++) {
+                server.getWorldData().overworldData().setGameTime(growthStart + cycle * 20);
+                source.produce();
+                pedestal.advanceGrowth(level.getGameTime() + 20);
+                check(!done(player, "crystal") && pedestal.producedTotal() == 0, "Partial factors earned an advancement");
+            }
+            server.getWorldData().overworldData().setGameTime(growthStart + 300);
             source.produce();
-            pedestal.advanceGrowth(level.getGameTime() + 19);
+            pedestal.advanceGrowth(level.getGameTime() + 12);
             check(!done(player, "crystal") && pedestal.producedTotal() == 0, "Growth achievement fired before an item was synthesized");
-            pedestal.advanceGrowth(level.getGameTime() + 20);
+            pedestal.advanceGrowth(level.getGameTime() + 13);
             check(done(player, "crystal") && pedestal.producedTotal() == 1 && pedestal.getItem(1).is(Items.OAK_LOG),
                 "Actual growth synthesis failed to earn credit before container extraction");
-        } finally { for (var pos : placed) level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState()); }
+        } finally {
+            for (var pos : placed) level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+            server.getWorldData().overworldData().setGameTime(growthStart);
+        }
         ConvertTable.LOGGER.info("TABLE_ADVANCEMENT_TEST_PASS: six native entries, hidden discovery and illustrated icon; three validated timed syntheses before blocked delivery; real physical crystal production; explicit persistent operators");
     }
 }

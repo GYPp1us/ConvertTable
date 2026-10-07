@@ -109,6 +109,17 @@ final class GrowthPerformanceGameTest {
                 }
                 check(source.snapshot() == network && GrowthNetwork.rebuildCount(level) == rebuilds,
                     "Ordinary bud growth rebuilt the indexed topology");
+                var mineral = new BlockPos(4, 130, -1);
+                var mineralUpdates = new ArrayList<Long>();
+                for (int update = 0; update < 600; update++) {
+                    long start = System.nanoTime();
+                    level.setBlockAndUpdate(mineral, (update % 2 == 0 ? Blocks.CALCITE : Blocks.AIR).defaultBlockState());
+                    check(source.snapshot().available() == (update % 2 == 0 ? 1440 : 960),
+                        "Stacked mineral change did not refresh the whole vein");
+                    if (update >= 100) mineralUpdates.add(System.nanoTime() - start);
+                }
+                check(source.snapshot() == network && GrowthNetwork.rebuildCount(level) == rebuilds,
+                    "Global mineral count changes rebuilt topology");
                 var rebuildTimings = new ArrayList<Long>();
                 for (int rebuild = 0; rebuild < 100; rebuild++) {
                     long start = System.nanoTime();
@@ -128,10 +139,11 @@ final class GrowthPerformanceGameTest {
                 body.addProperty("meanDeltaMspt", activeStats.meanMs() - baselineStats.meanMs());
                 body.add("oneThousandCachedQueryPairs", gson.toJsonTree(stats(queries)));
                 body.add("physicalBudStageUpdateIncludingVanilla", gson.toJsonTree(stats(updates)));
+                body.add("stackedGlobalMineralUpdateIncludingVanilla", gson.toJsonTree(stats(mineralUpdates)));
                 body.add("invalidateAndFullRebuild", gson.toJsonTree(stats(rebuildTimings)));
                 body.addProperty("stableRebuilds", 0);
                 try {
-                    Path report = Path.of("../../reports/0.3.1/growth-performance.json").toAbsolutePath().normalize();
+                    Path report = Path.of("../../reports/0.3.2/growth-performance.json").toAbsolutePath().normalize();
                     Files.createDirectories(report.getParent()); Files.writeString(report, gson.toJson(body));
                     ConvertTable.LOGGER.info("GROWTH_PERFORMANCE_1K_RESULT: {}", gson.toJson(body).replace('\n', ' '));
                 } catch (java.io.IOException error) { throw new AssertionError("Cannot save performance report", error); }

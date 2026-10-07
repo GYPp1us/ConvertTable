@@ -8,7 +8,7 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.item.ItemStack;
 
 public final class CrystalTableMenu extends AbstractContainerMenu {
-    private static final int DATA_SIZE = 15 * GrowthData.SIZE;
+    private static final int DATA_SIZE = 21 * GrowthData.SIZE;
     private final CrystalTableBlockEntity table;
     private final ContainerData data = new SimpleContainerData(DATA_SIZE);
 
@@ -42,6 +42,8 @@ public final class CrystalTableMenu extends AbstractContainerMenu {
         put(12, snapshot.basaltMothers());
         put(13, table.progressTicks());
         put(14, table.processing() ? 1 : 0);
+        put(15,snapshot.growthMean());put(16,snapshot.growthMin());put(17,snapshot.growthMax());
+        for(int stage=1;stage<=3;stage++) put(17+stage,snapshot.stageGrowth(stage));
     }
 
     @Override public void broadcastChanges() { refresh(); super.broadcastChanges(); }
@@ -63,6 +65,10 @@ public final class CrystalTableMenu extends AbstractContainerMenu {
     public int totalTicks() { return 20; }
     public long progressRate() { return spent(); }
     public boolean processing() { return get(14) != 0; }
+    public long growthMean() { return get(15); }
+    public long growthMin() { return get(16); }
+    public long growthMax() { return get(17); }
+    public long stageGrowth(int stage) { return stage>=1&&stage<=3?get(17+stage):0; }
 
     @Override public boolean stillValid(Player player) {
         return table == null || (!table.isRemoved()

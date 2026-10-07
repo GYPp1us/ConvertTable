@@ -236,7 +236,7 @@ final class RecipeCoverageGameTest {
                     check(menu.clickMenuButton(player, 0) && pedestal.running(), "growth menu did not start");
                     long produced = pedestal.producedTotal();
                     long start = (level.getGameTime() / 20 + 1) * 20;
-                    int duration = Math.multiplyExact(recipe.cost(), GrowthUnits.TICK_UNITS);
+                    int duration = Math.multiplyExact(recipe.cost(), GrowthUnits.DIVISOR * 20);
                     for (int tick = 0; tick <= duration; tick++) {
                         worldData.setGameTime(start + tick);
                         // Both production tickers run; no produce/acceptGrowth/advanceGrowth shortcuts.

@@ -46,6 +46,7 @@ final class GrowthClientGameTest {
             server.runCommand("gamemode creative @a");
             server.runCommand("gamerule minecraft:random_tick_speed 0");
             server.runOnServer(game -> RecipeConfigMigrationGameTest.run());
+            server.runOnServer(RecipeCoverageGameTest::run);
             server.runOnServer(TableAdvancementsGameTest::verify);
             server.runOnServer(GrowthAllocationGameTest::verify);
             server.runCommand("time set noon");
@@ -146,12 +147,13 @@ final class GrowthClientGameTest {
             server.runOnServer(game -> game.getPlayerList().getPlayers().getFirst().openMenu(
                 (CrystalTableBlockEntity) game.overworld().getBlockEntity(crystalPos)));
             context.waitFor(mc -> mc.gui.screen() instanceof CrystalTableScreen
-                && ((CrystalTableMenu) mc.player.containerMenu).rate() == 6, 100);
+                && ((CrystalTableMenu) mc.player.containerMenu).rate() == 6
+                && ((CrystalTableMenu) mc.player.containerMenu).growthMean() > 0, 100);
             context.getInput().setCursorPos(0, 0);
             context.waitTicks(3);
             context.takeScreenshot(TestScreenshotOptions.of("growth-crystal-ui"));
-            int[][] helpPositions={{222,10},{246,10},{208,91},{208,71},{26,70},{208,111}};
-            String[] helpNames={"calcite","basalt","supply","factors","small-bud","allocation"};
+            int[][] helpPositions={{222,10},{246,10},{208,94},{208,74},{26,70},{208,114},{208,61}};
+            String[] helpNames={"calcite","basalt","supply","factors","small-bud","allocation","growth-speed"};
             for(int help=0;help<helpNames.length;help++) {
                 UiGameTestInput.hoverPanel(context,CrystalTableScreen.WIDTH,CrystalTableScreen.HEIGHT,
                     helpPositions[help][0],helpPositions[help][1]);
@@ -318,7 +320,7 @@ final class GrowthClientGameTest {
             });
             GrowthJeiGameTest.run(context);
             ItemTooltipGameTest.run(context);
-            ConvertTable.LOGGER.info("GROWTH_CLIENT_GAME_TEST_PASS: exact 1/64 export, fractional growth, reusable catalyst and original, shared budgets, real mouse paged target selection, empty/unsupported/old-tool/component catalyst UI, save/load, explicit sided output and blocked mask, placement hint, growth drain and UI");
+            ConvertTable.LOGGER.info("GROWTH_CLIENT_GAME_TEST_PASS: exact 1/1000 export, fractional growth, reusable catalyst and original, shared budgets, real mouse paged target selection, empty/unsupported/old-tool/component catalyst UI, save/load, explicit sided output and blocked mask, placement hint, growth drain and UI");
         }
     }
     private static CrystalTableBlockEntity firstSource(net.minecraft.world.level.Level level, BlockPos pos) {

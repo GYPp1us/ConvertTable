@@ -124,7 +124,7 @@ const growthRows = growth.recipes.map(recipe => {
   return [category, nameOf(recipe.catalyst), nameOf(recipe.output), recipe.cost,
     recipe.id, recipe.catalyst, recipe.output, nameOf(recipe.source), 1, recipe.source];
 });
-const growing = setup(3, '触媒增殖', '放入触媒和一件目标物品作源本，两者都不消耗；每次产出 1 件。小/中/大/成熟晶芽自然内涵量为 16/64、8/64、4/64、1/64；未成熟晶芽每秒抽取上限 1/64，方解石为 2/64。产速 = 分配的生长因子/秒 ÷ 单件成本。',
+const growing = setup(3, '触媒增殖', '放入触媒和一件目标物品作源本，两者都不消耗；每次产出 1 件。小/中/大/成熟晶芽自然内涵量为 16/1000、8/1000、4/1000、1/1000；每个未成熟晶芽基础供给 1/1000 因子/秒；每块方解石再加 1/1000，可叠加。产速 = 分配的生长因子/秒 ÷ 单件成本。',
   'src/main/resources/data/convert_table/growth_recipes.json');
 table(growing, 3, ['分类', '触媒（不消耗）', '产物', '生长因子/件', '配方 ID', '触媒 ID', '产物 ID', '源本（不消耗）', '源本数量', '源本 ID'],
   growthRows, [14, 24, 26, 16, 63, 38, 46, 26, 12, 46], 28);

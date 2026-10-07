@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "source_plan": "26.3-v0.3.1",
+  "source_plan": "26.3-v0.3.2",
   "execution_enabled": true,
   "settings": {
     "piglin": {

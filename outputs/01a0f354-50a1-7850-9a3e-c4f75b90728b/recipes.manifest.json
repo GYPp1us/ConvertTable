@@ -1,5 +1,5 @@
 {
-  "version": "0.3.1",
+  "version": "0.3.2",
   "counts": {
     "groups": 107,
     "advanced": 118,
@@ -8,16 +8,16 @@
     "crafting": 6
   },
   "sources": {
-    "规划/conversion_tables_26.3_v1.4.toml": "a1cbc4bec2223dd79c7c79ce06ac063907eb0076aabc5680e9cb557f7b6a18e4",
-    "src/main/resources/convert_table/default_recipes.json": "25edb7646654e6b87aca0b0676e0f2c7b05c1bdd9d919cbcd0e4235288db986f",
-    "config/convert_table/recipes.json": "25edb7646654e6b87aca0b0676e0f2c7b05c1bdd9d919cbcd0e4235288db986f",
+    "规划/conversion_tables_26.3_v1.4.toml": "83433ae66f8cc677d15f53bb97a1ea664994b8d1bedef526e84ff1bf0c1aaa9f",
+    "src/main/resources/convert_table/default_recipes.json": "de11abe23a4047989b62701bb250f4f0914cbcebaee967ccde4c42306882c596",
+    "config/convert_table/recipes.json": "de11abe23a4047989b62701bb250f4f0914cbcebaee967ccde4c42306882c596",
     "src/main/resources/data/convert_table/growth_recipes.json": "356fc84d966c9a11ad91bc8f52cc9e487c7b7abf75f64793cf60c5f2786ec094",
     "src/main/resources/data/convert_table/fishing_materials.json": "7ad5c3dde4aa5c2681befd4b2711e9190577334cd00a554d93c2ba0452b05c21",
     "assets/tools/recipe_item_names.json": "2a685134f065efd9b52946e7d6451ddafb3c2a6995a056dd6772372e39e80d52",
-    "gradle.properties": "01465e189684d67b74d703d4de41ccb61c14f1a277ed4032aae3d6a10c848113",
+    "gradle.properties": "e750b79a0bbbb5ebe26161c6db76df050c254d6a360e904068509bec623d8922",
     "assets/tools/sync_recipes.py": "fc48b5148e02bdc548e11c07c9d6f85b273ef206f7379605d45b1c32c816eb67",
     "assets/tools/export_recipe_config.py": "6bf34f3a7cd7c6314531fc1edbe3ed990e1f32b22fdb992026e17fa220cdb597",
-    "assets/tools/build_recipe_workbook.mjs": "a53f11d94bb31428c3480d981a6ffc3033a287f52d7509f21634fa59c6151768",
+    "assets/tools/build_recipe_workbook.mjs": "e46def096668ea4363e64eb49b02a66dbf4ddbff5bcccf9d219c65ddedbbf7f3",
     "src/main/resources/data/convert_table/recipe/black_gold_conversion_table.json": "16febebf6b7be28c2ad666bdbd2fa04b9a5abca27464e4e71a4d083aed2af18f",
     "src/main/resources/data/convert_table/recipe/catalyst_pedestal.json": "56b2b9872c7b963d60d98c80daefad37d4e03d82cdb34d78cae0fbd0079f7867",
     "src/main/resources/data/convert_table/recipe/connection_rod.json": "825134ccad725cb3cb0ce6f15b33509f591af79125f590f458de3a9e7abde4d5",
@@ -25,5 +25,5 @@
     "src/main/resources/data/convert_table/recipe/end_conversion_table.json": "cd333847fb7015b786fd37cbd25d2c6cdec74833fc3cf3455607fff3e40821a0",
     "src/main/resources/data/convert_table/recipe/sculk_conversion_table.json": "a1cc3757c62d0f4084655bb8fef2d538387fc99eca820d3d59184fa162c97bd7"
   },
-  "workbook_sha256": "ebc33ab5012d33e3b1f30f62578b926b9bfa68b64da417a486c223adb3f767eb"
+  "workbook_sha256": "4acc954a80c5ee617f45b6b7c2baba15b179c6b18c1308483481720073a08b3c"
 }

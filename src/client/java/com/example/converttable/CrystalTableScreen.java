@@ -51,27 +51,32 @@ public final class CrystalTableScreen extends AbstractContainerScreen<CrystalTab
                 tip(g, stageHelp(i, counts[i]), mouseX, mouseY);
         }
         quantity(g,font,tr("mothers_label"),GrowthNumbers.count(menu.mothers()),166,27,94,TEXT);
-        if (contains(mouseX-leftPos, mouseY-topPos, 166, 26, 94, 12))
+        if (contains(mouseX-leftPos, mouseY-topPos, 166, 26, 94, 10))
             tip(g, List.of(tr("mothers_short", menu.mothers()), tr("mother_help")), mouseX, mouseY);
-        quantity(g,font,tr("conductors_label"),GrowthNumbers.count(menu.conductors()),166,39,94,TEXT);
-        if (contains(mouseX-leftPos, mouseY-topPos, 166, 38, 94, 12))
+        quantity(g,font,tr("conductors_label"),GrowthNumbers.count(menu.conductors()),166,37,94,TEXT);
+        if (contains(mouseX-leftPos, mouseY-topPos, 166, 36, 94, 10))
             tip(g, List.of(tr("conductors_short", menu.conductors()), tr("conductor_help")), mouseX, mouseY);
-        quantity(g,font,tr("pedestals_label"),GrowthNumbers.count(menu.pedestals()),166,51,94,TEXT);
-        if (contains(mouseX-leftPos, mouseY-topPos, 166, 50, 94, 12))
+        quantity(g,font,tr("pedestals_label"),GrowthNumbers.count(menu.pedestals()),166,47,94,TEXT);
+        if (contains(mouseX-leftPos, mouseY-topPos, 166, 46, 94, 10))
             tip(g, List.of(tr("pedestals_short", menu.pedestals()), tr("pedestal_help")), mouseX, mouseY);
-        quantity(g,font,tr("intrinsic_label"),GrowthNumbers.rate(menu.potential()),166,66,94,TEXT);
+        quantity(g,font,tr("growth_label"),activeBuds()==0?"—":GrowthNumbers.speed(menu.growthMean()),166,57,94,TEXT);
+        if(contains(mouseX-leftPos,mouseY-topPos,166,56,94,10)) tip(g,List.of(
+            tr("growth_current",GrowthNumbers.speed(menu.growthMean())),
+            tr("growth_range",GrowthNumbers.speed(menu.growthMin()),GrowthNumbers.speed(menu.growthMax())),
+            tr("growth_speed_help")),mouseX,mouseY);
+        quantity(g,font,tr("intrinsic_label"),GrowthNumbers.rate(menu.potential()),166,69,94,TEXT);
         long growingBuds = (long) menu.small() + menu.medium() + menu.large();
-        meter(g,166,77,94,menu.potential(),growingBuds*GrowthBudFactors.contained(1,true)
-            +menu.clusters()*GrowthBudFactors.natural(4),PURPLE);
-        quantity(g,font,tr("export_label"),GrowthNumbers.rate(menu.rate()),166,86,94,TEXT);
-        meter(g, 166, 97, 94, menu.rate(), growingBuds * 2, EXPORT);
-        quantity(g,font,tr("used_label"),GrowthNumbers.rate(menu.spent()),166,106,94,TEXT);
-        meter(g, 166, 117, 94, menu.spent(), menu.rate(), USED);
-        if (contains(mouseX-leftPos, mouseY-topPos, 166, 65, 94, 18))
+        meter(g,166,80,94,menu.potential(),growingBuds*GrowthBudFactors.natural(1)
+            +menu.clusters()*GrowthBudFactors.natural(4)+basaltUses(),PURPLE);
+        quantity(g,font,tr("export_label"),GrowthNumbers.rate(menu.rate()),166,89,94,TEXT);
+        meter(g, 166, 100, 94, menu.rate(), Math.max(growingBuds,menu.rate()), EXPORT);
+        quantity(g,font,tr("used_label"),GrowthNumbers.rate(menu.spent()),166,109,94,TEXT);
+        meter(g, 166, 120, 94, menu.spent(), menu.rate(), USED);
+        if (contains(mouseX-leftPos, mouseY-topPos, 166, 68, 94, 18))
             tip(g, intrinsicHelp(), mouseX, mouseY);
-        if (contains(mouseX-leftPos, mouseY-topPos, 166, 85, 94, 18))
+        if (contains(mouseX-leftPos, mouseY-topPos, 166, 88, 94, 18))
             tip(g, supplyHelp(), mouseX, mouseY);
-        if (contains(mouseX-leftPos, mouseY-topPos, 166, 105, 94, 18))
+        if (contains(mouseX-leftPos, mouseY-topPos, 166, 108, 94, 18))
             tip(g, List.of(tr("used_short", GrowthNumbers.rate(menu.spent())),
                 tr("allocation_source"), tr("allocation_unused", GrowthNumbers.rate(Math.max(0,menu.rate()-menu.spent()))),
                 tr("allocation_recipients")), mouseX, mouseY);
@@ -89,41 +94,40 @@ public final class CrystalTableScreen extends AbstractContainerScreen<CrystalTab
     }
 
     private long activeBuds() { return (long)menu.small()+menu.medium()+menu.large(); }
-    private long calciteBuds() { return Math.clamp(menu.rate()-activeBuds(),0L,activeBuds()); }
+    private long calciteUses() { return Math.max(0L,menu.rate()-activeBuds()); }
     private long baseFactors() {
         return menu.small()*GrowthBudFactors.natural(1)+menu.medium()*GrowthBudFactors.natural(2)
             +menu.large()*GrowthBudFactors.natural(3)+menu.clusters()*GrowthBudFactors.natural(4);
     }
-    private long basaltBuds() { return Math.clamp(menu.potential()-baseFactors(),0L,activeBuds()); }
+    private long basaltUses() { return Math.max(0L,menu.potential()-baseFactors()); }
 
     private List<Component> stageHelp(int stage,int count) {
         long natural=GrowthBudFactors.natural(stage+1);
         if(stage==3) return List.of(new ItemStack(STAGES[stage]).getHoverName(),tr("stage_count",count),
             tr("stage_contents",natural,GrowthUnits.DIVISOR),tr("cluster_help"));
         return List.of(new ItemStack(STAGES[stage]).getHoverName(),tr("stage_count",count),
-            tr("stage_factors",natural,GrowthUnits.DIVISOR,GrowthUnits.DIVISOR),tr("stage_boosts"));
+            tr("stage_factors",natural,GrowthUnits.DIVISOR,GrowthUnits.DIVISOR),tr("stage_boosts"),
+            tr("stage_growth",GrowthNumbers.speed(menu.stageGrowth(stage+1))));
     }
     private List<Component> intrinsicHelp() {
         return List.of(tr("intrinsic_short",GrowthNumbers.rate(menu.potential())),
             tr("intrinsic_source"),tr("intrinsic_base",menu.small(),GrowthBudFactors.natural(1),
                 menu.medium(),GrowthBudFactors.natural(2),menu.large(),GrowthBudFactors.natural(3),
                 menu.clusters(),GrowthBudFactors.natural(4),GrowthUnits.DIVISOR),
-            tr("intrinsic_basalt",basaltBuds(),GrowthUnits.DIVISOR));
+            tr("intrinsic_basalt",basaltUses(),GrowthUnits.DIVISOR));
     }
     private List<Component> supplyHelp() {
-        long boosted=calciteBuds(),ordinary=activeBuds()-boosted;
         return List.of(tr("export_short",GrowthNumbers.rate(menu.rate())),tr("supply_source"),
-            tr("supply_formula",ordinary,GrowthBudFactors.extractionLimit(1,false),
-                boosted,GrowthBudFactors.extractionLimit(1,true),GrowthUnits.DIVISOR,GrowthNumbers.rate(menu.rate())),
+            tr("supply_formula",activeBuds(),calciteUses(),GrowthUnits.DIVISOR,GrowthNumbers.rate(menu.rate())),
             tr("supply_loaded"));
     }
     private List<Component> calciteHelp() {
-        return List.of(tr("calcite_title"),tr("calcite_effect",GrowthUnits.DIVISOR,GrowthUnits.DIVISOR),tr("boost_placement"),
-            tr("boost_coverage",menu.calciteMothers(),calciteBuds()));
+        return List.of(tr("calcite_title"),tr("calcite_effect",GrowthUnits.DIVISOR),tr("boost_placement"),
+            tr("boost_coverage",menu.calciteMothers(),calciteUses()));
     }
     private List<Component> basaltHelp() {
         return List.of(tr("basalt_title"),tr("basalt_effect",GrowthUnits.DIVISOR),tr("boost_placement"),
-            tr("boost_coverage",menu.basaltMothers(),basaltBuds()));
+            tr("boost_coverage",menu.basaltMothers(),basaltUses()));
     }
     private void arrayIcon(GuiGraphicsExtractor g,Item item,int x,List<Component> help,int mx,int my) {
         g.fill(x-1,1,x+17,19,0xffaaa6af);

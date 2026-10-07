@@ -9,7 +9,8 @@ final class GrowthNumbers {
     private static final String[] SUFFIXES={"","k","M","G","T","P","E"};
     private GrowthNumbers() { }
     static String rate(long value) { return decimal(BigDecimal.valueOf(value).divide(BigDecimal.valueOf(GrowthUnits.DIVISOR))); }
-    static String factors(long value) { return decimal(BigDecimal.valueOf(value).divide(BigDecimal.valueOf(GrowthUnits.TICK_UNITS)),false); }
+    static String factors(long value) { return decimal(BigDecimal.valueOf(value).divide(BigDecimal.valueOf(GrowthUnits.TICK_UNITS))); }
+    static String speed(long millionths) { return decimal(BigDecimal.valueOf(millionths).divide(BigDecimal.valueOf(10000)))+"%"; }
     static String production(long rate,int cost) {
         return cost<=0?"0.000":decimal(BigDecimal.valueOf(rate).divide(
             BigDecimal.valueOf((long)GrowthUnits.DIVISOR*cost),12,RoundingMode.HALF_UP));

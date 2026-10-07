@@ -1,8 +1,8 @@
 {
   "renderer": "assets/tools/render_readme.py",
   "source": "jar",
-  "jar": "build\\libs\\convert-table-0.3.1.jar",
-  "jar_sha256": "00aeae4277cf3cecc2d704f1b2a77176d0a6cc3ea8822fdbab236943510c8302",
+  "jar": "build\\libs\\convert-table-0.3.2.jar",
+  "jar_sha256": "572843d9c0bb4586b7b2cea7df269d1b85504cbbb7ed7afee8079cc8b9f10b18",
   "render_settings": {
     "size": 512,
     "frames": 24,

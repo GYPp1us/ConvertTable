@@ -1,0 +1,60 @@
+{
+  "modVersion": "0.3.2",
+  "indexedNodes": 1000,
+  "mothers": 240,
+  "buds": 480,
+  "controllers": 4,
+  "activePedestals": 16,
+  "tickMeasurement": "START_SERVER_TICK to END_SERVER_TICK; excludes idle sleep",
+  "sampleOrder": "baseline-active-active-baseline; 60-tick warmup each, 220 requested ticks per window",
+  "baselineTick": {
+    "samples": 440,
+    "meanMs": 0.5997815909090909,
+    "p50Ms": 0.5638,
+    "p95Ms": 0.8793,
+    "p99Ms": 1.0842,
+    "maxMs": 2.0114
+  },
+  "activeTick": {
+    "samples": 440,
+    "meanMs": 0.6977436363636363,
+    "p50Ms": 0.6509,
+    "p95Ms": 1.0737,
+    "p99Ms": 1.8422,
+    "maxMs": 2.1763
+  },
+  "meanDeltaMspt": 0.09796204545454545,
+  "oneThousandCachedQueryPairs": {
+    "samples": 100,
+    "meanMs": 0.940057,
+    "p50Ms": 0.8429,
+    "p95Ms": 1.5265,
+    "p99Ms": 1.747,
+    "maxMs": 1.7875
+  },
+  "physicalBudStageUpdateIncludingVanilla": {
+    "samples": 500,
+    "meanMs": 0.010174200000000001,
+    "p50Ms": 0.0091,
+    "p95Ms": 0.0148,
+    "p99Ms": 0.02,
+    "maxMs": 0.0644
+  },
+  "stackedGlobalMineralUpdateIncludingVanilla": {
+    "samples": 500,
+    "meanMs": 0.2577236,
+    "p50Ms": 0.2579,
+    "p95Ms": 0.3643,
+    "p99Ms": 0.4131,
+    "maxMs": 0.5596
+  },
+  "invalidateAndFullRebuild": {
+    "samples": 80,
+    "meanMs": 4.613035,
+    "p50Ms": 4.4266,
+    "p95Ms": 5.9981,
+    "p99Ms": 6.6311,
+    "maxMs": 6.6311
+  },
+  "stableRebuilds": 0
+}

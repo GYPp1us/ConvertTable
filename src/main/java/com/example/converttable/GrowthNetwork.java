@@ -29,7 +29,7 @@ public final class GrowthNetwork {
         Set.of(), List.of(), List.of(), 0, 0, 0, 0, 0, 0);
     private static boolean initialized;
 
-    /** All quantities are microfactors per second: 64 microfactors equal one growth factor. */
+    /** Contents and extraction use microfactors: 1000 microfactors equal one growth factor. */
     public record Bud(BlockPos mother, BlockPos pos, Direction face, int stage,
                       long potential, long available, boolean calcite, boolean basalt) { }
     /** Stable topology identity with incrementally sampled buds and mineral contacts. */
@@ -43,6 +43,8 @@ public final class GrowthNetwork {
         private final ArrayList<BlockPos> pedestals;
         private final List<BlockPos> sources;
         private long available, potential;
+        private long growthMean=1_000_000, growthMin=1_000_000, growthMax=1_000_000;
+        private final long[] stageGrowth={1_000_000,1_000_000,1_000_000};
         private long coordinatorInterval=Long.MIN_VALUE;
         private BlockPos effectiveCoordinator;
         private final int[] stages;
@@ -70,6 +72,16 @@ public final class GrowthNetwork {
         public List<BlockPos> sources() { return sources; }
         public long available() { return available; }
         public long potential() { return potential; }
+        public long growthMean() { return growthMean; }
+        public long growthMin() { return growthMin; }
+        public long growthMax() { return growthMax; }
+        public long stageGrowth(int stage) { return stage>=1 && stage<=3 ? stageGrowth[stage-1] : 0; }
+        void recordGrowth(double sum,int count,double min,double max,double[] sums,int[] counts) {
+            growthMean=count==0?0:Math.round(sum/count*1_000_000);
+            growthMin=count==0?0:Math.round(min*1_000_000);
+            growthMax=count==0?0:Math.round(max*1_000_000);
+            for(int stage=0;stage<3;stage++) stageGrowth[stage]=counts[stage]==0?0:Math.round(sums[stage]/counts[stage]*1_000_000);
+        }
         private void bud(Bud next) {
             Integer index=budSlots.get(next.pos());
             if (index == null) {
@@ -105,7 +117,12 @@ public final class GrowthNetwork {
             for(BlockPos source:sources) if(level.shouldTickBlocksAt(source)) { effectiveCoordinator=source;break; }
         }
     }
-    private record Contact(boolean calcite, boolean basalt) { }
+    private record Contact(Set<BlockPos> calcite, Set<BlockPos> basalt) { }
+    private static long contactCount(Set<BlockPos> local, Set<BlockPos> global) {
+        long count=global.size();
+        for(BlockPos pos:local) if(!global.contains(pos)) count++;
+        return count;
+    }
     // Identity hashing is essential: hashing a component's whole node set at every dependency
     // insertion would turn the linear rebuild into quadratic work.
     private static final class Component {
@@ -138,11 +155,12 @@ public final class GrowthNetwork {
                 snapshot.pedestal(pos.immutable(),after.is(GrowthBlocks.CATALYST));
             if (!(mineral(before) || mineral(after))) return;
             boolean oldCalcite=!calciteTouches.isEmpty(), oldBasalt=!basaltTouches.isEmpty();
+            boolean hadCalcite=calciteTouches.contains(pos), hadBasalt=basaltTouches.contains(pos);
             boolean touches=false;
             for(Direction side:FACES) touches|=conductors.contains(pos.relative(side));
             if(touches && after.is(Blocks.CALCITE)) calciteTouches.add(pos.immutable()); else calciteTouches.remove(pos);
             if(touches && after.is(Blocks.SMOOTH_BASALT)) basaltTouches.add(pos.immutable()); else basaltTouches.remove(pos);
-            boolean globalChanged=oldCalcite!=!calciteTouches.isEmpty() || oldBasalt!=!basaltTouches.isEmpty();
+            boolean globalChanged=hadCalcite!=calciteTouches.contains(pos) || hadBasalt!=basaltTouches.contains(pos);
             if(globalChanged) {
                 for(BlockPos mother:localContacts.keySet()) refreshMother(level,mother,oldCalcite,oldBasalt);
             } else {
@@ -154,8 +172,8 @@ public final class GrowthNetwork {
         }
         private void refreshMother(Level level, BlockPos mother, boolean oldCalcite, boolean oldBasalt) {
             Contact old=localContacts.get(mother), next=localContact(level,mother);
-            boolean beforeCalcite=old.calcite()||oldCalcite, beforeBasalt=old.basalt()||oldBasalt;
-            boolean afterCalcite=next.calcite()||!calciteTouches.isEmpty(), afterBasalt=next.basalt()||!basaltTouches.isEmpty();
+            boolean beforeCalcite=!old.calcite().isEmpty()||oldCalcite, beforeBasalt=!old.basalt().isEmpty()||oldBasalt;
+            boolean afterCalcite=!next.calcite().isEmpty()||!calciteTouches.isEmpty(), afterBasalt=!next.basalt().isEmpty()||!basaltTouches.isEmpty();
             snapshot.calciteMothers+=(afterCalcite?1:0)-(beforeCalcite?1:0);
             snapshot.basaltMothers+=(afterBasalt?1:0)-(beforeBasalt?1:0);
             localContacts.put(mother,next);
@@ -166,9 +184,9 @@ public final class GrowthNetwork {
             int stage=level.hasChunkAt(pos)?stage(level.getBlockState(pos),face):0;
             Integer priorSlot=snapshot.budSlots.get(pos);
             if(stage==0 && priorSlot!=null && !snapshot.buds.get(priorSlot).mother().equals(mother)) return;
-            boolean calcite=local.calcite()||!calciteTouches.isEmpty(), basalt=local.basalt()||!basaltTouches.isEmpty();
+            long calcite=contactCount(local.calcite(),calciteTouches), basalt=contactCount(local.basalt(),basaltTouches);
             long potential=GrowthBudFactors.contained(stage,basalt), available=GrowthBudFactors.extractionLimit(stage,calcite);
-            snapshot.bud(new Bud(mother,pos,face,stage,potential,available,calcite,basalt));
+            snapshot.bud(new Bud(mother,pos,face,stage,potential,available,calcite>0,basalt>0));
         }
     }
     private static final class Cache {
@@ -287,7 +305,6 @@ public final class GrowthNetwork {
         Set<BlockPos> pedestals = new HashSet<>();
         Map<BlockPos, Contact> motherContacts = new HashMap<>();
         Set<BlockPos> calciteTouches=new HashSet<>(), basaltTouches=new HashSet<>();
-        boolean calciteConductors = false, basaltConductors = false;
         int flags = 0;
         nodes.add(start.immutable());
         queue.add(start.immutable());
@@ -300,21 +317,20 @@ public final class GrowthNetwork {
             if (mother) mothers.add(from);
             else if (conductor) conductors.add(from);
             else if (current.is(GrowthBlocks.CRYSTAL)) sources.add(from);
-            boolean calcite = false, basalt = false;
+            Set<BlockPos> localCalcite = new HashSet<>(), localBasalt = new HashSet<>();
             for (Direction side : FACES) {
                 BlockPos next = from.relative(side).immutable();
                 dependencies.add(next);
                 if (!level.hasChunkAt(next)) { flags |= UNKNOWN; continue; }
                 BlockState state = level.getBlockState(next);
-                calcite |= state.is(Blocks.CALCITE);
-                basalt |= state.is(Blocks.SMOOTH_BASALT);
+                if(state.is(Blocks.CALCITE)) localCalcite.add(next);
+                if(state.is(Blocks.SMOOTH_BASALT)) localBasalt.add(next);
                 if(conductor && state.is(Blocks.CALCITE)) calciteTouches.add(next);
                 if(conductor && state.is(Blocks.SMOOTH_BASALT)) basaltTouches.add(next);
                 if (state.is(GrowthBlocks.CATALYST)) pedestals.add(next);
                 if (isNode(state) && nodes.add(next)) queue.addLast(next);
             }
-            if (mother) motherContacts.put(from, new Contact(calcite, basalt));
-            if (conductor) { calciteConductors |= calcite; basaltConductors |= basalt; }
+            if (mother) motherContacts.put(from, new Contact(Set.copyOf(localCalcite), Set.copyOf(localBasalt)));
         }
         mothers.sort(POSITION_ORDER);
         sources.sort(POSITION_ORDER);
@@ -324,10 +340,10 @@ public final class GrowthNetwork {
         int[] counts = new int[4];
         for (BlockPos mother : mothers) {
             Contact local = motherContacts.get(mother);
-            boolean calcite = local.calcite() || calciteConductors;
-            boolean basalt = local.basalt() || basaltConductors;
-            if (calcite) calciteCount++;
-            if (basalt) basaltCount++;
+            long calcite = contactCount(local.calcite(), calciteTouches);
+            long basalt = contactCount(local.basalt(), basaltTouches);
+            if (calcite>0) calciteCount++;
+            if (basalt>0) basaltCount++;
             for (Direction side : FACES) {
                 BlockPos budPos = mother.relative(side);
                 if (!level.hasChunkAt(budPos)) continue;
@@ -335,7 +351,7 @@ public final class GrowthNetwork {
                 if (stage == 0) continue;
                 long potential = GrowthBudFactors.contained(stage,basalt);
                 long available = GrowthBudFactors.extractionLimit(stage,calcite);
-                buds.add(new Bud(mother, budPos.immutable(), side, stage, potential, available, calcite, basalt));
+                buds.add(new Bud(mother, budPos.immutable(), side, stage, potential, available, calcite>0, basalt>0));
                 counts[stage - 1]++;
                 potentialTotal += potential;
                 availableTotal += available;
@@ -360,14 +376,15 @@ public final class GrowthNetwork {
     }
     private static boolean mineral(BlockState state) { return state.is(Blocks.CALCITE)||state.is(Blocks.SMOOTH_BASALT); }
     private static Contact localContact(Level level,BlockPos mother) {
-        boolean calcite=false,basalt=false;
+        Set<BlockPos> calcite=new HashSet<>(),basalt=new HashSet<>();
         for(Direction face:FACES) {
             BlockPos pos=mother.relative(face);
             if(!level.hasChunkAt(pos)) continue;
             BlockState state=level.getBlockState(pos);
-            calcite|=state.is(Blocks.CALCITE); basalt|=state.is(Blocks.SMOOTH_BASALT);
+            if(state.is(Blocks.CALCITE)) calcite.add(pos.immutable());
+            if(state.is(Blocks.SMOOTH_BASALT)) basalt.add(pos.immutable());
         }
-        return new Contact(calcite,basalt);
+        return new Contact(Set.copyOf(calcite),Set.copyOf(basalt));
     }
     private static boolean relevant(BlockState state) {
         return isNode(state) || state.is(GrowthBlocks.CATALYST) || state.is(Blocks.CALCITE)

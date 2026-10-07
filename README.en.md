@@ -8,7 +8,7 @@
 
 Turn building materials into the styles you need, or produce blocks continuously with an amethyst network.
 
-Version **v0.3.1** supports **Minecraft Java 26.3 / Fabric**. All five blocks can be crafted at a crafting table or found in the **Functional Blocks** creative tab.
+Version **v0.3.2** supports **Minecraft Java 26.3 / Fabric**. All five blocks can be crafted at a crafting table or found in the **Functional Blocks** creative tab.
 
 ## Install
 
@@ -120,14 +120,16 @@ Output first enters the pedestal's **9 output slots**, then moves into container
 
 ### 4. Increase production
 
-- Each immature bud has an extraction limit of **1/64 growth factor per second**.
-- Place **calcite** against budding amethyst to raise that mother's extraction limit to **2/64 factors per second** without changing its contents. Against a connected amethyst conductor, it affects the whole vein.
-- **Smooth basalt** adds **1/64** to each immature bud's contents without raising its extraction limit. Beside budding amethyst it affects that mother; beside a connected amethyst conductor it affects the whole vein. Matching boosts do not stack.
+- Each immature bud has an extraction limit of **1/1000 growth factor per second**.
+- Each **calcite block** beside budding amethyst adds **1/1000 factor per second** to that mother's immature buds' extraction limits without changing their contents. Against a connected amethyst conductor, it affects the whole vein.
+- Each **smooth basalt block** adds **1/1000** to each immature bud's contents without raising its extraction limit. Beside budding amethyst it affects that mother; beside a connected amethyst conductor it affects the whole vein. Both bonuses stack by distinct block; each block counts once.
 - Mature clusters export no growth factors. In a usable network with at least one valid running pedestal, mature clusters are reseeded into small buds.
+
+The screen shows current natural bud growth relative to vanilla. Extraction slows growth to a minimum of 15%; higher contents reduce the slowdown.
 
 Holding a pedestal, calcite, or smooth basalt while aiming at a usable network position displays a placement hint beside the crosshair.
 
-Small, medium, large buds and mature clusters naturally contain **16/64, 8/64, 4/64 and 1/64** growth factors. Contents describe the factors held in a bud; the extraction limit describes how much the vein can draw each second. Immature buds allow **1/64 factor/s**; mature clusters allow 0.
+Small, medium, large buds and mature clusters naturally contain **16/1000, 8/1000, 4/1000 and 1/1000** growth factors. Contents describe the factors held in a bud; the extraction limit describes how much the vein can draw each second. Immature buds allow **1/1000 factor/s**; mature clusters allow 0.
 
 There is no fixed total production-rate limit; expand with more active budding amethyst and buds. The crystal table shows bud counts by stage. Hover supply or contents to see the current sources and calculation; the two boost blocks at the top right explain their effects and placement.
 
@@ -163,7 +165,7 @@ Some Farmer's Delight conversion groups and the seed-draw advanced recipe requir
 
 Optionally install **JEI or REI** for 26.3 to browse conversion recipes and uses. JEI also shows the crystal table and catalyst pedestal growth recipes. View growth targets in the pedestal screen or workbook. Servers can change conversion recipes; the in-game catalogue determines the available materials and costs.
 
-**New recipes are missing after an update:** keep only the same new mod version enabled on both sides. Unchanged 0.1.1 (formerly 1.5.2) 0.2.0 and 0.3.0 defaults are backed up and updated automatically; customized recipes are preserved, so the administrator must add new recipes and restart. Multiplayer growth recipes follow the server catalogue. In JEI, press **U** over a catalyst, original sample or workstation, or **R** over an output.
+**New recipes are missing after an update:** keep only the same new mod version enabled on both sides. Unchanged 0.1.1 (formerly 1.5.2) 0.2.0, 0.3.0 and 0.3.1 defaults are backed up and updated automatically; customized recipes are preserved, so the administrator must add new recipes and restart. Multiplayer growth recipes follow the server catalogue. In JEI, press **U** over a catalyst, original sample or workstation, or **R** over an output.
 
 **Conversion does nothing:** read the screen's status and check the target, material, fuel, catalyst material, available souls, and space in output and remainder slots. Use device slots for manual-only recipes.
 

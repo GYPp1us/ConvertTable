@@ -27,11 +27,14 @@ final class RecipeConfigMigration {
     static final String V020_DEFAULT_SHA256 = "f6fed35a32dc62fc7281faf368da305f8f79b77c89f3ef2a663328edb85e8f9d";
     static final String V030_JSON_SHA256 = "79d4e2a5ffb7c4badf520dd4be0dbd80caa2354537287dcb146a10953a4fbcd1";
     static final String V030_DEFAULT_SHA256 = "f018be335fbe2a7a2e33c160a8b3c7bbfbc91c691e5dac1ae342b3279bc1d47f";
+    static final String V031_JSON_SHA256 = "25edb7646654e6b87aca0b0676e0f2c7b05c1bdd9d919cbcd0e4235288db986f";
+    static final String V031_DEFAULT_SHA256 = "02e078401c300a4e17501ebd3c7b5cde6a3fd80ad2a41239dd31d6b8fec0364b";
     private record Released(String version, String jarHash, String jsonHash) { }
     private static final Map<String, Released> RELEASES = Map.of(
         RELEASED_DEFAULT_SHA256, new Released("1.5.2", SOURCE_JAR_SHA256, SOURCE_JSON_SHA256),
         V020_DEFAULT_SHA256, new Released("0.2.0", "463a4b86e819ea1dbedc79c61a96a42c8e8aabeaf1017a49ff0c6f6d86bf7152", V020_JSON_SHA256),
-        V030_DEFAULT_SHA256, new Released("0.3.0", "aca60a0633b861267bbd920ffc62db6c9fac7365f49d670c3d9e1a3eda530af5", V030_JSON_SHA256));
+        V030_DEFAULT_SHA256, new Released("0.3.0", "aca60a0633b861267bbd920ffc62db6c9fac7365f49d670c3d9e1a3eda530af5", V030_JSON_SHA256),
+        V031_DEFAULT_SHA256, new Released("0.3.1", "00aeae4277cf3cecc2d704f1b2a77176d0a6cc3ea8822fdbab236943510c8302", V031_JSON_SHA256));
 
     record Result(String json, Path backup, String sourceVersion, String sourceJarHash, String sourceJsonHash, String fingerprint) {
         Result(String json, Path backup) { this(json,backup,null,null,null,null); }

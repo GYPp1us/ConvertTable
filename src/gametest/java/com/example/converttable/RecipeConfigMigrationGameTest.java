@@ -131,6 +131,25 @@ final class RecipeConfigMigrationGameTest {
                 json -> json.getAsJsonArray("advanced").get(0).getAsJsonObject().addProperty("enabled", false));
             altered(temporary, "removed-0.3.0", v030json, bundled,
                 json -> json.getAsJsonArray("advanced").remove(0));
+            byte[] v031;
+            try (var input = RecipeConfigMigrationGameTest.class.getResourceAsStream("/convert_table/recipes-0.3.1.fixture.json")) {
+                check(input != null, "0.3.1 migration fixture missing");
+                v031 = input.readAllBytes();
+            }
+            check(RecipeConfigMigration.sha256(v031).equals(RecipeConfigMigration.V031_JSON_SHA256),
+                "0.3.1 fixture differs from the published resource");
+            String v031text = new String(v031, StandardCharsets.UTF_8);
+            check(RecipeConfigMigration.fingerprint(v031text).equals(RecipeConfigMigration.V031_DEFAULT_SHA256),
+                "0.3.1 canonical fingerprint differs from release");
+            var v031json = JsonParser.parseString(v031text).getAsJsonObject();
+            upgrades(temporary, "released-0.3.1", v031text, bundled);
+            upgrades(temporary, "reordered-0.3.1", "\n" + reordered(v031json) + "\n", bundled);
+            altered(temporary, "custom-0.3.1", v031json, bundled,
+                json -> json.getAsJsonObject("settings").getAsJsonObject("sculk").addProperty("ordinary_souls_per_batch", 7));
+            altered(temporary, "disabled-0.3.1", v031json, bundled,
+                json -> json.getAsJsonArray("advanced").get(0).getAsJsonObject().addProperty("enabled", false));
+            altered(temporary, "removed-0.3.1", v031json, bundled,
+                json -> json.getAsJsonArray("advanced").remove(0));
             preserves(temporary, "already-current", bundled, bundled);
             altered(temporary, "custom-setting", legacy, bundled,
                 json -> json.getAsJsonObject("settings").getAsJsonObject("piglin").addProperty("cost_n", 2));

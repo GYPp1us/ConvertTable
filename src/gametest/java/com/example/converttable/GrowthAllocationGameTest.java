@@ -72,25 +72,35 @@ final class GrowthAllocationGameTest {
             check(growing.progressUnits() == 0 && growing.producedTotal() == 0,
                 "Allocating microfactors produced an item instantly");
             growing.advanceGrowth(level.getGameTime() + 10);
-            check(growing.progressUnits() == 10 && growing.credit() == 0 && growing.producedTotal() == 0,
-                "One microfactor/second did not earn exactly 1/128 factor in ten ticks");
+            check(growing.progressUnits() == 10 * GrowthUnits.UNITS_PER_MICRO_TICK && growing.credit() == 0 && growing.producedTotal() == 0,
+                "One microfactor/second did not earn exactly 1/2000 factor in ten ticks");
             var halfSave = growing.saveWithFullMetadata(game.registryAccess());
             var halfCopy = (CatalystPedestalBlockEntity) BlockEntity.loadStatic(positions.getFirst(),
                 level.getBlockState(positions.getFirst()), halfSave, game.registryAccess());
-            check(halfCopy != null && halfCopy.progressUnits() == 10 && !halfCopy.processing(),
+            check(halfCopy != null && halfCopy.progressUnits() == 10 * GrowthUnits.UNITS_PER_MICRO_TICK && !halfCopy.processing(),
                 "Reload lost fractional microfactor progress or recreated unearned factors");
             growing.advanceGrowth(level.getGameTime() + 20);
-            check(source.lastSpent() == 1 && growing.progressUnits() == 20 && growing.credit() == 0,
+            check(source.lastSpent() == 1 && growing.progressUnits() == 20 * GrowthUnits.UNITS_PER_MICRO_TICK && growing.credit() == 0,
                 "One microfactor was not assigned intact or incorrectly became a whole factor");
             source.produce();
-            check(growing.progressUnits() == 20, "A second controller transaction reused the same physical second");
+            check(growing.progressUnits() == 20 * GrowthUnits.UNITS_PER_MICRO_TICK, "A second controller transaction reused the same physical second");
             ((ServerLevelData) level.getLevelData()).setGameTime(level.getGameTime() + 20);
 
             var pedestalSave = growing.saveWithFullMetadata(game.registryAccess());
             var pedestalCopy = (CatalystPedestalBlockEntity) BlockEntity.loadStatic(positions.getFirst(),
                 level.getBlockState(positions.getFirst()), pedestalSave, game.registryAccess());
-            check(pedestalCopy != null && pedestalCopy.progressUnits() == 20 && pedestalCopy.running()
+            check(pedestalCopy != null && pedestalCopy.progressUnits() == 20 * GrowthUnits.UNITS_PER_MICRO_TICK && pedestalCopy.running()
                 && pedestalCopy.selectedRecipe().id().equals(costly.id()), "Partial credit did not survive save/load");
+            for (int scale : new int[]{1, 64}) {
+                var legacy = pedestalSave.copy();
+                legacy.putInt("GrowthProgressScale", scale);
+                legacy.putInt("GrowthFraction", scale * 20 - 1);
+                legacy.putInt("Credit", 1);
+                var legacyCopy = (CatalystPedestalBlockEntity) BlockEntity.loadStatic(positions.getFirst(),
+                    level.getBlockState(positions.getFirst()), legacy, game.registryAccess());
+                check(legacyCopy.progressUnits() == GrowthUnits.TICK_UNITS
+                    + GrowthUnits.restoreFraction(scale * 20 - 1, scale), "Native legacy save lost earned credit");
+            }
 
             level.setBlockAndUpdate(mother.north(), Blocks.AIR.defaultBlockState());
             for (int i = 0; i < 4; i++) fullCycle(source, pedestals);
@@ -104,7 +114,7 @@ final class GrowthAllocationGameTest {
             fullCycle(source, pedestals);
             fullCycle(source, pedestals);
             for (var pedestal : pedestals)
-                check(pedestal.progressUnits() == 20 && pedestal.producedTotal() == 0,
+                check(pedestal.progressUnits() == 20 * GrowthUnits.UNITS_PER_MICRO_TICK && pedestal.producedTotal() == 0,
                     "Intermittent factors or a reloaded source repeatedly favored one pedestal");
 
             configure(pedestals.getFirst(), cheap);
@@ -115,7 +125,7 @@ final class GrowthAllocationGameTest {
                 var pedestal = pedestals.get(i);
                 long gained = (pedestal.producedTotal() - produced[i]) * pedestal.cost() * GrowthUnits.TICK_UNITS
                     + pedestal.progressUnits() - progress[i];
-                check(gained == 40, "Different item costs changed the microfactor share: " + gained);
+                check(gained == 40 * GrowthUnits.UNITS_PER_MICRO_TICK, "Different item costs changed the microfactor share: " + gained);
             }
 
             var first = pedestals.getFirst();
@@ -150,7 +160,7 @@ final class GrowthAllocationGameTest {
             check(paused.progressUnits() == earned && !paused.processing(),
                 "A detached pedestal earned from a stale allocated budget");
 
-            // The actual ticker threshold is cost * 1280: all sixty-four fractional shares survive.
+            // The actual ticker threshold is cost * TICK_UNITS: all fractional shares survive.
             level.setBlockAndUpdate(conductor, Blocks.AMETHYST_BLOCK.defaultBlockState());
             level.setBlockAndUpdate(mother.east(), Blocks.AIR.defaultBlockState());
             configure(paused, cheap);
@@ -161,12 +171,13 @@ final class GrowthAllocationGameTest {
             for (int interval = 0; interval < cheap.cost() * GrowthUnits.DIVISOR; interval++) {
                 fullCycle(source, pedestals);
                 if (interval + 1 < cheap.cost() * GrowthUnits.DIVISOR)
-                    check(paused.producedTotal() == before, "A 1/64 source completed before its full factor cost");
+                    check(paused.producedTotal() == before, "A 1/1000 source completed before its full factor cost");
             }
             check(paused.producedTotal() == before + 1 && paused.progressUnits() == 0,
-                "Exact 1/64 production failed to accumulate into one output without rounding loss");
+                "Exact 1/1000 production failed to accumulate into one output without rounding loss");
             verifyIndexedNetwork(level, cheap);
-            ConvertTable.LOGGER.info("GROWTH_ALLOCATION_TEST_PASS: exact 1/64 production, bulk fairness, rotating saved cursor, pause/detach, unbounded loaded component cache, multi-controller budget and long menu data");
+            GrowthStackGameTest.verify(game);
+            ConvertTable.LOGGER.info("GROWTH_ALLOCATION_TEST_PASS: exact 1/1000 production, bulk fairness, rotating saved cursor, pause/detach, unbounded loaded component cache, multi-controller budget and long menu data");
         } finally {
             for (BlockPos pos : placed) level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
             ((ServerLevelData) level.getLevelData()).setGameTime(originalTime);
@@ -205,6 +216,14 @@ final class GrowthAllocationGameTest {
     }
 
     private static void verifyMenuNumbers() {
+        check(GrowthUnits.restoreFraction(19, 1) == 152000
+            && GrowthUnits.restoreFraction(1, 64) == 125
+            && GrowthUnits.restoreFraction(1279, 64) == 159875
+            && GrowthUnits.restoreFraction(19999, 1000) == 159992
+            && GrowthUnits.restoreFraction(159999, 8000) == 159999,
+            "Released fractional progress was not migrated exactly");
+        check(GrowthDrain.share(Long.MAX_VALUE - 1, Long.MAX_VALUE - 2, Long.MAX_VALUE) == Long.MAX_VALUE - 3,
+            "Large proportional drain overflowed");
         SimpleContainerData values = new SimpleContainerData(4);
         long[] cases = {0, 32768, 65535, 65536, Integer.MAX_VALUE, 4_000_000_001L, Long.MAX_VALUE};
         for (long number : cases) {
@@ -213,7 +232,7 @@ final class GrowthAllocationGameTest {
             for (int i = 0; i < 4; i++) values.set(i, (short) values.get(i));
             check(GrowthData.get(values, 0) == number, "Menu clipped a long growth number: " + number);
         }
-        check(GrowthUnits.rate(1).equals("0.015625") && GrowthUnits.factors(10).equals("0.0078125"),
+        check(GrowthUnits.rate(1).equals("0.001") && GrowthUnits.factors(10).equals("0.0000625"),
             "Microfactor display rounded away real fractional growth");
     }
 

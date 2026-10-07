@@ -4,11 +4,12 @@ import java.util.HashMap;
 import java.util.Collections;
 import java.util.Map;
 import java.util.WeakHashMap;
+import java.math.BigInteger;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 
-/** A face's extracted microfactors preserve the same physical growth ratios after the 1/64 change. */
+/** Actual extraction preserves the existing natural-growth slowdown, independent of factor units. */
 public final class GrowthDrain {
     private record Face(BlockPos mother, Direction direction) { }
     private record Entry(float chance, long untilTick) { }
@@ -28,8 +29,8 @@ public final class GrowthDrain {
         if (spent > 0 && available > 0) {
             long counted = 0;
             for (int i = 0; i < buds.size(); i++) {
-                // available per face is at most two microfactors; a Java list bounds this product.
-                assigned[i] = spent * buds.get(i).available() / available;
+                long weight=buds.get(i).available();
+                assigned[i] = share(spent,weight,available);
                 counted += assigned[i];
             }
             int start = (int) (level.getGameTime() / 20 % buds.size());
@@ -45,6 +46,10 @@ public final class GrowthDrain {
             drains.entries.entrySet().removeIf(e -> e.getValue().untilTick() < now);
             drains.lastPrune = now;
         }
+        double sum=0,min=1,max=0;
+        int active=0;
+        double[] stageSums=new double[3];
+        int[] stageCounts=new int[3];
         for (int i = 0; i < buds.size(); i++) {
             GrowthNetwork.Bud bud = buds.get(i);
             if (bud.stage() == 4 || bud.potential() <= 0) continue;
@@ -55,7 +60,18 @@ public final class GrowthDrain {
             Entry sameTick = drains.entries.get(face);
             if (sameTick != null && sameTick.untilTick() == now + 30) chance = Math.min(chance, sameTick.chance());
             drains.entries.put(face, new Entry(chance, now + 30));
+            sum+=chance;active++;min=Math.min(min,chance);max=Math.max(max,chance);
+            stageSums[bud.stage()-1]+=chance;stageCounts[bud.stage()-1]++;
         }
+        network.recordGrowth(sum,active,min,max,stageSums,stageCounts);
+    }
+
+    static long share(long spent,long weight,long total) {
+        if(spent==0 || weight==0)return 0;
+        if(spent==total)return weight;
+        if(spent<=Long.MAX_VALUE/weight)return spent*weight/total;
+        return BigInteger.valueOf(spent).multiply(BigInteger.valueOf(weight))
+            .divide(BigInteger.valueOf(total)).longValueExact();
     }
 
     static void clear(Level level, GrowthNetwork.Snapshot network) {

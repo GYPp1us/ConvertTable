@@ -26,15 +26,17 @@ final class VersionGateGameTest {
             try(var connection=server.connect()) {
                 server.runOnServer(game->check(game.getPlayerList().getPlayerCount()==1,"Matching mod could not join"));
             }
-            context.runOnClient(mc->{
-                ClientConfigurationNetworking.unregisterGlobalReceiver(VersionGate.Query.TYPE);
-                ClientConfigurationNetworking.registerGlobalReceiver(VersionGate.Query.TYPE,(query,reply)->
-                    reply.responseSender().sendPacket(new VersionGate.Reply("0.2.0")));
-            });
-            reject(context,server,"Version mismatch");
+            for (String oldVersion : new String[]{"0.3.1", "0.2.0"}) {
+                context.runOnClient(mc->{
+                    ClientConfigurationNetworking.unregisterGlobalReceiver(VersionGate.Query.TYPE);
+                    ClientConfigurationNetworking.registerGlobalReceiver(VersionGate.Query.TYPE,(query,reply)->
+                        reply.responseSender().sendPacket(new VersionGate.Reply(oldVersion)));
+                });
+                reject(context,server,"Version mismatch");
+            }
             context.runOnClient(mc->ClientConfigurationNetworking.unregisterGlobalReceiver(VersionGate.Query.TYPE));
             reject(context,server,"Client mod missing or outdated");
-            ConvertTable.LOGGER.info("VERSION_GATE_TEST_PASS: real dedicated configuration accepts {}, rejects 0.2.0 and missing handshake before player/world admission",VersionGate.version());
+            ConvertTable.LOGGER.info("VERSION_GATE_TEST_PASS: real dedicated configuration accepts {}, rejects 0.3.1, 0.2.0 and missing handshake before player/world admission",VersionGate.version());
         } finally {
             context.runOnClient(mc->{
                 ClientConfigurationNetworking.unregisterGlobalReceiver(VersionGate.Query.TYPE);
